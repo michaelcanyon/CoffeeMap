@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Infrastructures.IRepositories
 {
-    interface ITagRepository: IBaseRepository<Tag>
+   public interface ITagRepository: IBaseRepository<Tag>
     {
     }
 }

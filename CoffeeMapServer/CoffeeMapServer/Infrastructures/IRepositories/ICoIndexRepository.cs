@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Infrastructures.IRepositories
 {
-    interface ICoIndexRepository: IBaseRepository<CoIndex>
+   public interface ICoIndexRepository: IBaseRepository<CoIndex>
     {
     }
 }

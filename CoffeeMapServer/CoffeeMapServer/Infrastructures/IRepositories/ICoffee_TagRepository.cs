@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Infrastructures.IRepositories
 {
-    interface ICoffee_TagRepository: IBaseRepository<Coffee_Tag>
+   public interface ICoffee_TagRepository: IBaseRepository<Coffee_Tag>
     {
     }
 }
