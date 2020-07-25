@@ -10,7 +10,7 @@ namespace CoffeeMapServer.Models
     {
         [Required]
         public string Title { get; set; }
-        public byte[] Picture { get; set; }
+        public object Picture { get; set; }
         [Required]
         public string Description { get; set; }
         [Required]

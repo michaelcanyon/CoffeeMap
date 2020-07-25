@@ -19,15 +19,13 @@ namespace CoffeeMapServer
             _roasterRepository = roasterRepository;
         }
         [HttpGet]
-        [Route("GetRoasters")]
+        [Route("Roasters")]
         public async Task<IActionResult> GetRoasters()
         {
             try
             {
-                var roasters= await _roasterRepository.GetList();
-                ViewData["RoastersList"] = roasters;
+                ViewData["RoastersList"] = await _roasterRepository.GetList();
                 return View();
-                //return Ok(roasters);
 
             }
             catch (Exception e)
@@ -89,10 +87,8 @@ namespace CoffeeMapServer
         {
             try
             {
-                var roaster= await _roasterRepository.GetSingle(roasterId);
-                ViewData["SingleRoaster"] = roaster;
+                ViewData["SingleRoaster"] = await _roasterRepository.GetSingle(roasterId);
                 return View();
-                //return Ok(roaster);
             }
             catch (Exception e)
             {
