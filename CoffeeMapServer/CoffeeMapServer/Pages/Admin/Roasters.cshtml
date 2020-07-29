@@ -1,0 +1,40 @@
+﻿@page
+@model CoffeeMapServer.Views.Admin.RoastersModel
+<section class="content-header">
+    <h1>
+        Roasters
+    </h1>
+</section>
+<!-- Main content -->
+<section class="content container-fluid">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Name
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <a asp-page="AddRoaster">Create roaster note</a>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var i in Model.roasters)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(item => i.Id)</td>
+                    <td>@Html.DisplayFor(item => i.Name)</td>
+                    <td>
+                        <a asp-page="EditRoaster" asp-route-id="@i.Id">Edit</a>
+                        <a asp-page="DeleteRoaster" asp-route-id="@i.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>

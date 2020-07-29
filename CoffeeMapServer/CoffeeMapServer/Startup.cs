@@ -33,6 +33,7 @@ namespace CoffeeMapServer
             services.AddControllersWithViews();
             services.AddDbContext<CoffeeDbContext>(options => options.UseSqlServer(connection));
             services.AddCors();
+            services.AddRazorPages();
             services.AddTransient<IRoasterRepository, RoasterRepository>();
             services.AddSwaggerGen();
             services.AddSwaggerGen(c =>
@@ -49,19 +50,18 @@ namespace CoffeeMapServer
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseRouting();
-            app.UseSwagger();
+            app.UseRouting();   
             app.UseStaticFiles();
 
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
-            // specifying the Swagger JSON endpoint.
+            //Enable middleware to serve swagger - ui(HTML, JS, CSS, etc.),
+             //specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapRazorPages();
             });
 
         }

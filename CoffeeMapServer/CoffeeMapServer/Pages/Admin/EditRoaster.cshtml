@@ -1,0 +1,21 @@
+﻿@page "{id:int}"
+@model CoffeeMapServer.Views.Admin.EditRoasterModel
+<section class="content-header">
+    <h1>
+        Update roaster
+    </h1>
+</section>
+<!-- Main content -->
+<section class="content container-fluid">
+    <form method="post">
+        <div class="form-group">
+            <label for="Id">Id</label>
+            <input type="text" class="form-control" asp-for="@Model.roaster.Id" value="@Model.roaster.Id">
+        </div>
+        <div class="form-group">
+            <label for="Name">Name</label>
+            <input type="text" class="form-control" asp-for="@Model.roaster.Name" value="@Model.roaster.Name">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</section>
