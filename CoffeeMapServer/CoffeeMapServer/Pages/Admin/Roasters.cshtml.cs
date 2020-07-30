@@ -24,10 +24,6 @@ namespace CoffeeMapServer.Views.Admin
         {
             roasters = await RoasterRepository.GetList();
         }
-        public IActionResult OnPostCreate()
-        {
-           return RedirectToPage("");
-        }
 
     }
 }

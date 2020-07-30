@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 
 namespace CoffeeMapServer.Models.Intermediary_models
 {
-    public class Coffee_Tag : Entity
+    public class RoasterAddress: Entity
     {
         [Required]
-        public int Cofee_NodeId { get; set; }
-
+        public int RoasterId { get; set; }
         [Required]
-        public int TagId { get; set; }
+        public int AddressId { get; set; }
     }
 }

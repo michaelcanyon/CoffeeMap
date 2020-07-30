@@ -41,8 +41,17 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         {
             SqlParameter paramid = new SqlParameter("@id", entity.Id);
             SqlParameter name = new SqlParameter("@name", entity.Name);
-            await DbContext.Database.ExecuteSqlRawAsync("UPDATE Roasters SET Name=@name WHERE Id=@id"
-                , paramid, name);
+            SqlParameter officeId = new SqlParameter("@officeId", entity.OfficeAddressId);
+            SqlParameter email = new SqlParameter("@email", entity.ContactEmail);
+            SqlParameter phone = new SqlParameter("@phone", entity.ContactNumber);
+            SqlParameter website = new SqlParameter("@website", entity.WebSiteLink);
+            SqlParameter instagram = new SqlParameter("@instagram", entity.InstagramProfileLink);
+            SqlParameter vk = new SqlParameter("@vk", entity.VkProfileLink);
+            SqlParameter telegram = new SqlParameter("@telegram", entity.TelegramProfileLink);
+
+            await DbContext.Database.ExecuteSqlRawAsync("UPDATE Roasters SET Name=@name, OfficeAddressId=@officeId, ContactEmail=@email" +
+                ", ContactNumber=@phone, WebSiteLink=@website, InstagramProfileLink=@instagram, VkProfileLink=@vk, TelegramProfileLink=@telegram WHERE Id=@id"
+                , paramid, name, officeId, email, phone, website, instagram, vk, telegram);
             await DbContext.SaveChangesAsync();
 
         }

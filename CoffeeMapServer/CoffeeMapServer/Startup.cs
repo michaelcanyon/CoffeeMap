@@ -35,6 +35,7 @@ namespace CoffeeMapServer
             services.AddCors();
             services.AddRazorPages();
             services.AddTransient<IRoasterRepository, RoasterRepository>();
+            services.AddTransient<IAddessRepository, AddressRepository>();
             services.AddSwaggerGen();
             services.AddSwaggerGen(c =>
             {

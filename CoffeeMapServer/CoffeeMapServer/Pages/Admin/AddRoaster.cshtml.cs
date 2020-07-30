@@ -12,17 +12,38 @@ namespace CoffeeMapServer.Views.Admin
     public class AddRoasterModel : PageModel
     {
         private readonly IRoasterRepository roasterRepository;
+        private readonly IAddessRepository addessRepository;
 
         [BindProperty]
         public Roaster roaster { get; set; }
-        public AddRoasterModel(IRoasterRepository repository) 
+
+        [BindProperty]
+        public Address address { get; set; }
+        public AddRoasterModel(IRoasterRepository repository, IAddessRepository addrRepository) 
         {
             roasterRepository = repository;
+            addessRepository = addrRepository;
+
         }
         public async Task<IActionResult> OnPostAsync()
         {
+            if (roaster.ContactEmail == null)
+                roaster.ContactEmail = "none";
+            if(roaster.InstagramProfileLink==null)
+                roaster.InstagramProfileLink = "none";
+            if (roaster.WebSiteLink == null)
+                roaster.WebSiteLink = "none";
+            if (roaster.VkProfileLink == null)
+                roaster.VkProfileLink = "none";
+            if (roaster.TelegramProfileLink == null)
+                roaster.TelegramProfileLink = "none";
+
+            await addessRepository.Create(address);
+            var addr = await addessRepository.GetSingle(address);
+            roaster.OfficeAddressId = addr.Id;
             await roasterRepository.Create(roaster);
             return RedirectToPage("Roasters");
+
         }
     }
 }
