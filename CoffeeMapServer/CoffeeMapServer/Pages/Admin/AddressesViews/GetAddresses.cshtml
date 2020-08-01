@@ -1,0 +1,44 @@
+﻿@page
+@model CoffeeMapServer.Views.Admin.Addresses.GetAddressesModel
+<section class="content-header">
+    <h1>
+        Addresses
+    </h1>
+</section>
+<!-- Main content -->
+<section class="content container-fluid">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Address
+                </th>
+                <th>
+                    Opening hours
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <a asp-page="AddAddress">Create address note</a>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var i in Model.addresses)
+            {
+            <tr>
+                <td>@Html.DisplayFor(item => i.Id)</td>
+                <td>@Html.DisplayFor(item => i.AddressStr)</td>
+                <td>@Html.DisplayFor(item => i.OpeningHours)</td>
+                <td>
+                    <a asp-page="UpdateAddress" asp-route-id="@i.Id">Edit|</a>
+                    <a asp-page="DeleteAddress" asp-route-id="@i.Id">Delete|</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</section>

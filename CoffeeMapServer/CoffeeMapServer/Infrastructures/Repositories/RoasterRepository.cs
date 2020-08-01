@@ -59,5 +59,11 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         {
             return await DbContext.Roasters.ToListAsync();
         }
+        public async Task<Roaster> GetSingleByAddressId(int addressId)
+        {
+            SqlParameter paramid = new SqlParameter("@id", addressId);
+            var list = await DbContext.Roasters.FromSqlRaw("SELECT * FROM Roasters WHERE OfficeAddressId=@id", paramid).ToListAsync();
+            return list.Count() > 0 ? list.First() : null;
+        }
     }
 }

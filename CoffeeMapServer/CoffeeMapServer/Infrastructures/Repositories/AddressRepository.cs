@@ -42,7 +42,7 @@ namespace CoffeeMapServer.Infrastructures.Repositories
             SqlParameter paramid = new SqlParameter("@id", entity.Id);
             SqlParameter address = new SqlParameter("@address", entity.AddressStr);
             SqlParameter hours = new SqlParameter("@hours", entity.OpeningHours);
-            await DbContext.Database.ExecuteSqlRawAsync("UPDATE Addresses SET AddressStr=@address, OpeningHours=@hours WHERE Id=@id"
+             await DbContext.Database.ExecuteSqlRawAsync("UPDATE Addresses SET AddressStr=@address, OpeningHours=@hours WHERE Id=@id"
                 , paramid, address, hours);
             await DbContext.SaveChangesAsync();
 

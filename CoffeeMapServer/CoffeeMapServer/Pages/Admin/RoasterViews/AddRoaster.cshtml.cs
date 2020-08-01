@@ -7,7 +7,7 @@ using CoffeeMapServer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace CoffeeMapServer.Views.Admin
+namespace CoffeeMapServer.Views.Admin.RoasterViews
 {
     public class AddRoasterModel : PageModel
     {
@@ -37,6 +37,8 @@ namespace CoffeeMapServer.Views.Admin
                 roaster.VkProfileLink = "none";
             if (roaster.TelegramProfileLink == null)
                 roaster.TelegramProfileLink = "none";
+            if (address.OpeningHours == null)
+                address.OpeningHours = "none";
 
             await addessRepository.Create(address);
             var addr = await addessRepository.GetSingle(address);

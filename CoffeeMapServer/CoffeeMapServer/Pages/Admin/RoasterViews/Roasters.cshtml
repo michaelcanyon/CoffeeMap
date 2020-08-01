@@ -1,5 +1,5 @@
 ﻿@page
-@model CoffeeMapServer.Views.Admin.RoastersModel
+@model CoffeeMapServer.Views.Admin.RoasterViews.RoastersModel
 <section class="content-header">
     <h1>
         Roasters
@@ -47,22 +47,23 @@
         <tbody>
             @foreach (var i in Model.roasters)
             {
-            <tr>
-                <td>@Html.DisplayFor(item => i.Id)</td>
-                <td>@Html.DisplayFor(item => i.Name)</td>
-                <td>@Html.DisplayFor(item => i.OfficeAddressId)</td>
-                <td>@Html.DisplayFor(item => i.ContactNumber)</td>
-                <td>@Html.DisplayFor(item => i.ContactEmail)</td>
-                <td>@Html.DisplayFor(item => i.InstagramProfileLink)</td>
-                <td>@Html.DisplayFor(item => i.TelegramProfileLink)</td>
-                <td>@Html.DisplayFor(item => i.VkProfileLink)</td>
-                <td>@Html.DisplayFor(item => i.WebSiteLink)</td>
-                <td>
-                    <a asp-page="EditRoaster" asp-route-id="@i.Id">Edit|</a>
-                    <a asp-page="DeleteRoaster" asp-route-id="@i.Id">Delete|</a>
-                </td>
-            </tr>
+                <tr>
+                    <td>@Html.DisplayFor(item => i.Id)</td>
+                    <td>@Html.DisplayFor(item => i.Name)</td>
+                    <td>@Html.DisplayFor(item => i.OfficeAddressId)</td>
+                    <td>@Html.DisplayFor(item => i.ContactNumber)</td>
+                    <td>@Html.DisplayFor(item => i.ContactEmail)</td>
+                    <td>@Html.DisplayFor(item => i.InstagramProfileLink)</td>
+                    <td>@Html.DisplayFor(item => i.TelegramProfileLink)</td>
+                    <td>@Html.DisplayFor(item => i.VkProfileLink)</td>
+                    <td>@Html.DisplayFor(item => i.WebSiteLink)</td>
+                    <td>
+                        <a asp-page="EditRoaster" asp-route-id="@i.Id">Edit|</a>
+                        <a asp-page="DeleteRoaster" asp-route-id="@i.Id">Delete|</a>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
 </section>
+
