@@ -1,0 +1,104 @@
+﻿@page
+@model CoffeeMapServer.Pages.Admin.RoasterAddress.RoasterAddressConnModel
+@section scripts{
+    <script type="text/javascript" src="~/dist/jquery-1.8.3.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="~/dist/jquery.maskedInput.js"></script>
+    <script src="~/bower_components/jquery-3.5.1.js" type="text/css">
+    </script>
+    <script>
+            $(document).ready(function () {
+                $("#filtrationbar").click(function () {
+                    $("#filtration").toggle(500);
+                });
+            });
+    </script>
+}
+<section class="content-header">
+    <h1>
+        Roaster-Address connection creation page
+    </h1>
+</section>
+<!-- Main content -->
+<section class="content container-fluid">
+    <br />
+    <form method="post">
+        <label>Address id</label>
+        <input type="text" class="form-control" asp-for="@Model.insertAddressId" required>
+        <label>Roaster id</label>
+        <input type="text" class="form-control" asp-for="@Model.insertRoasterId" required>
+        <button type="submit" class="btn btn-primary">Create Connection</button>
+    </form>
+    <br />
+    <form method="get" id="filtration" style="display:none;">
+        <h4>
+            Roasters
+        </h4>
+        <label for="id">Id</label>
+        <input type="text" class="form-control" asp-for="@Model.idFilter">
+        <label for="name">Name</label>
+        <input type="text" maxlength="30" class="form-control" asp-for="@Model.nameFilter">
+        <br />
+        <h4>
+            Addresses
+        </h4>
+        <label for="id">Id</label>
+        <input type="text" class="form-control" asp-for="@Model.addressIdFilter">
+        <label for="name">Address</label>
+        <input type="text" maxlength="30" class="form-control" asp-for="@Model.addressStrFilter">
+        <br />
+        <button type="submit" class="btn btn-primary">Filter notes</button>
+    </form>
+    <br />
+    <button id="filtrationbar" class="btn btn-primary">Filtration</button>
+    <br />
+    <h4>
+        Roasters
+    </h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Name
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.roasters != null)
+            foreach (var i in Model.roasters)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(item => i.Id)</td>
+                    <td>@Html.DisplayFor(item => i.Name)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <h4>
+        Addresses
+    </h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    OfficeAddressId
+                </th>
+                <th>
+                    Address
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.addresses != null)
+            foreach (var g in Model.addresses)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(item => g.Id)</td>
+                    <td>@Html.DisplayFor(item => g.AddressStr)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>

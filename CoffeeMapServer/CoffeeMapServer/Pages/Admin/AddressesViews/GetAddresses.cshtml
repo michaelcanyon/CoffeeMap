@@ -1,5 +1,18 @@
 ﻿@page
 @model CoffeeMapServer.Views.Admin.Addresses.GetAddressesModel
+@section scripts{
+    <script type="text/javascript" src="~/dist/jquery-1.8.3.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="~/dist/jquery.maskedInput.js"></script>
+    <script src="~/bower_components/jquery-3.5.1.js" type="text/css">
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#filtrationbar").click(function () {
+                $("#filtration").toggle(500);
+            });
+        });
+    </script>
+}
 <section class="content-header">
     <h1>
         Addresses
@@ -7,6 +20,20 @@
 </section>
 <!-- Main content -->
 <section class="content container-fluid">
+    <form method="get" id="filtration" style="display:none;">
+        <label for="id">Id</label>
+        <input type="text" class="form-control" asp-for="@Model.addressIdFilter">
+        <label for="name">Address</label>
+        <input type="text" maxlength="30" class="form-control" asp-for="@Model.addressStrFilter">
+        <label for="addressid">Opening hours</label>
+        <input type="text" class="form-control" asp-for="@Model.openingHoursFilter">
+        <br />
+        <button type="submit" class="btn btn-primary">Filter notes</button>
+    </form>
+    <br />
+    <button id="filtrationbar" class="btn btn-primary">Filtration</button>
+    <br />
+    <a asp-page="AddAddress">Create address note</a>
     <table class="table">
         <thead>
             <tr>
@@ -20,24 +47,19 @@
                     Opening hours
                 </th>
             </tr>
-            <tr>
-                <td>
-                    <a asp-page="AddAddress">Create address note</a>
-                </td>
-            </tr>
         </thead>
         <tbody>
             @foreach (var i in Model.addresses)
             {
-            <tr>
-                <td>@Html.DisplayFor(item => i.Id)</td>
-                <td>@Html.DisplayFor(item => i.AddressStr)</td>
-                <td>@Html.DisplayFor(item => i.OpeningHours)</td>
-                <td>
-                    <a asp-page="UpdateAddress" asp-route-id="@i.Id">Edit|</a>
-                    <a asp-page="DeleteAddress" asp-route-id="@i.Id">Delete|</a>
-                </td>
-            </tr>
+                <tr>
+                    <td>@Html.DisplayFor(item => i.Id)</td>
+                    <td>@Html.DisplayFor(item => i.AddressStr)</td>
+                    <td>@Html.DisplayFor(item => i.OpeningHours)</td>
+                    <td>
+                        <a asp-page="UpdateAddress" asp-route-id="@i.Id">Edit|</a>
+                        <a asp-page="DeleteAddress" asp-route-id="@i.Id">Delete|</a>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
