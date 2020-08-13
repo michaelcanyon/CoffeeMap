@@ -1,4 +1,4 @@
-﻿using CoffeeMapServer.Models.Intermediary_models;
+﻿using CoffeeMapServer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Infrastructures.IRepositories
 {
-    public interface IRoasterAddressRepository : IBaseRepository<RoasterAddress>
+    public interface ITagRepository: IBaseRepository<Tag>
     {
+        public Task<Tag> GetSingle(string title);
     }
 }

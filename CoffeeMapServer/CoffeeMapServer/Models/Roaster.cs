@@ -22,9 +22,10 @@ namespace CoffeeMapServer.Models
         public string VkProfileLink { get; set; }
         public string InstagramProfileLink { get; set; }
         public string TelegramProfileLink { get; set; }
+        public string[] RoatersTags { get; set; }
 
         //public byte[] Picture { get; set; }
-        //public string Description { get; set; }
+        public string Description { get; set; }
 
     }
 }

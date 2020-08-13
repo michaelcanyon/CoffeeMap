@@ -12,7 +12,8 @@ namespace CoffeeMapServer.EF
     {
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Roaster> Roasters { get; set; }
-        public DbSet<RoasterAddress> RoasterAddresses { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<RoasterTag> RoasterTags { get; set; }
         public CoffeeDbContext(DbContextOptions<CoffeeDbContext> options) : base(options)
         {
             Database.EnsureCreated();

@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Models.Intermediary_models
 {
-    public class RoasterAddress: Entity
+    public class RoasterTag:Entity
     {
         [Required]
         public int RoasterId { get; set; }
         [Required]
-        public int AddressId { get; set; }
+        public int TagId { get; set; }
     }
+
 }

@@ -65,5 +65,21 @@ namespace CoffeeMapServer.Infrastructures.Repositories
             var list = await DbContext.Roasters.FromSqlRaw("SELECT * FROM Roasters WHERE OfficeAddressId=@id", paramid).ToListAsync();
             return list.Count() > 0 ? list.First() : null;
         }
+
+        public async Task<Roaster> GetRoasterId(Roaster entity)
+        {
+            SqlParameter name = new SqlParameter("@name", entity.Name);
+            SqlParameter officeId = new SqlParameter("@officeId", entity.OfficeAddressId);
+            SqlParameter email = new SqlParameter("@email", entity.ContactEmail);
+            SqlParameter phone = new SqlParameter("@phone", entity.ContactNumber);
+            SqlParameter website = new SqlParameter("@website", entity.WebSiteLink);
+            SqlParameter instagram = new SqlParameter("@instagram", entity.InstagramProfileLink);
+            SqlParameter vk = new SqlParameter("@vk", entity.VkProfileLink);
+            SqlParameter telegram = new SqlParameter("@telegram", entity.TelegramProfileLink);
+           var _roasters= await DbContext.Roasters.FromSqlRaw("SELECT * FROM Roasters WHERE Name=@name AND OfficeAddressId=@officeId AND ContactEmail=@email" +
+                "AND ContactNumber=@phone AND WebSiteLink=@website AND InstagramProfileLink=@instagram AND VkProfileLink=@vk AND TelegramProfileLink=@telegram"
+                , name, officeId, email, phone, website, instagram, vk, telegram).ToListAsync();
+            return _roasters.Count() >= 1 ? _roasters.First() :null;
+        } 
     }
 }
