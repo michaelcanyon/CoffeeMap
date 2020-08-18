@@ -9,6 +9,7 @@ namespace CoffeeMapServer.Infrastructures.IRepositories
     public interface IRoasterRepository: IBaseRepository<Roaster>
     {
         public Task<Roaster> GetSingleByAddressId(int addressId);
-        public Task<Roaster> GetRoasterId(Roaster roaster);
+        public Task<Roaster> GetRoaster(Roaster roaster);
+        public Task<Roaster> GetRoasterByName(string name);
     }
 }

@@ -21,8 +21,11 @@ namespace CoffeeMapServer.Views.Admin.Addresses
         {
             await addessRepository.Delete(Convert.ToInt32(id));
            var roaster= await roasterRepository.GetSingleByAddressId(Convert.ToInt32(id));
-            roaster.OfficeAddressId = 900000000;
-            await roasterRepository.Update(roaster);
+            if (roaster != null)
+            {
+                roaster.OfficeAddressId = 900000000;
+                await roasterRepository.Update(roaster);
+            }
             return RedirectToPage("GetAddresses");
         }
     }

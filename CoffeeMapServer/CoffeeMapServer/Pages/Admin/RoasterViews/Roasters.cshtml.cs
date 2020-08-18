@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
+using CoffeeMapServer.Models.Intermediary_models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -13,9 +14,14 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
     public class RoastersModel : PageModel
     {
         private readonly IRoasterRepository RoasterRepository;
+        private readonly IRoasterTagRepository RoasterTagRepository;
+        private readonly ITagRepository TagRepository;
         public List<Roaster> roasters { get; set; }
+        public List<RoasterTag> roasterTags { get; set; }
 
-        [BindProperty(SupportsGet =true)]
+        public List<Tag> tags { get; set; }
+
+        [BindProperty(SupportsGet = true)]
         public string idFilter { get; set; }
         [BindProperty(SupportsGet = true)]
         public string nameFilter { get; set; }
@@ -33,9 +39,14 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
         public string VkProfileFilter { get; set; }
         [BindProperty(SupportsGet = true)]
         public string WebSiteFilter { get; set; }
-        public RoastersModel(IRoasterRepository roasterRepository)
+
+        [BindProperty(SupportsGet = true)]
+        public string TagString { get; set; }
+        public RoastersModel(IRoasterRepository roasterRepository, IRoasterTagRepository roasterTagRepository, ITagRepository tagRepository)
         {
             RoasterRepository = roasterRepository;
+            RoasterTagRepository = roasterTagRepository;
+            TagRepository = tagRepository;
         }
 
         [BindProperty]
@@ -43,6 +54,8 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
         public async Task OnGetAsync()
         {
             roasters = await RoasterRepository.GetList();
+            roasterTags = await RoasterTagRepository.GetList();
+            tags = await TagRepository.GetList();
             if (!string.IsNullOrEmpty(idFilter))
                 roasters = roasters.Where(s => s.Id.Equals(Convert.ToInt32(idFilter))).ToList();
             if (!string.IsNullOrEmpty(nameFilter))
@@ -59,6 +72,17 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
                 roasters = roasters.Where(s => s.VkProfileLink.Contains(VkProfileFilter)).ToList();
             if (!string.IsNullOrEmpty(TelegramProfileFilter))
                 roasters = roasters.Where(s => s.TelegramProfileLink.Contains(TelegramProfileFilter)).ToList();
+            if (!string.IsNullOrEmpty(TagString))
+            {
+                var tagsArr = TagString.Split(" ");
+                foreach (var i in tagsArr)
+                {
+                    if (i == "")
+                        continue;
+                    tags = tags.Where(tag => tag.TagTitle.Contains(i)).ToList();
+                }
+            }
+
         }
 
     }

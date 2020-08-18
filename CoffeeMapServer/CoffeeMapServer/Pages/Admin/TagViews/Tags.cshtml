@@ -1,0 +1,41 @@
+﻿@page
+@model CoffeeMapServer.Pages.Admin.TagViews.TagsModel
+@section scripts{
+    <script type="text/javascript" src="~/dist/jquery-1.8.3.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="~/dist/jquery.maskedInput.js"></script>
+}
+<section class="content-header">
+    <h1>
+        Tags
+    </h1>
+</section>
+<!-- Main content -->
+<section class="content container-fluid">
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Tag name
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var i in Model.tags)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(item => i.Id)</td>
+                    <td>@Html.DisplayFor(item => i.TagTitle)</td>
+                    <td>
+                        <a asp-page="EditTag" asp-route-id="@i.Id">Edit|</a>
+                        <a asp-page="DeleteTag" asp-route-id="@i.Id">Delete|</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>
+

@@ -23,7 +23,11 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
         public Roaster roaster { get; set; }
 
         [BindProperty]
-        public string tagPart { get; set; }
+        public string tags { get; set; }
+
+        [BindProperty]
+        public string deletableTags { get; set; }
+
 
         public List<string> tagsList = new List<string>();
         public List<string> DeletableTagsList = new List<string>();
@@ -53,24 +57,43 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
                 roaster.WebSiteLink = null;
             return Page();
         }
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostProcessAsync()
         {
-            Tag currentTag;
-            if(DeletableTagsList.Count()>0)
-            foreach (var i in DeletableTagsList)
+            if (tags!=null && tags.Length > 0)
             {
-                currentTag= await tagRepository.GetSingle(i);
-                await roasterTagRepository.Delete(roaster.Id, currentTag.Id);
+                var addTagsList = tags.Split("#");
+                foreach (var i in addTagsList)
+                    if (!tagsList.Contains(i))
+                        tagsList.Add(i);
+                if (tagsList.Contains(""))
+                    tagsList.Remove("");
             }
+
+            if(deletableTags!=null && deletableTags.Length>0)
+            DeletableTagsList.AddRange(deletableTags.Split("#"));
+            if (DeletableTagsList.Count() > 0)
+                if (DeletableTagsList.Contains(""))
+                    DeletableTagsList.Remove("");
+                foreach (var i in DeletableTagsList)
+                {
+                    var currentTag = await tagRepository.GetSingle(i);
+                    await roasterTagRepository.Delete(roaster.Id, currentTag.Id);
+                }
+
+            var pairs =await roasterTagRepository.GetPairsByRoasterId(roaster.Id);
             foreach (var i in tagsList)
             {
-                currentTag = null;
+                Tag currentTag;
                 currentTag = await tagRepository.GetSingle(i);
+
                 if (currentTag == null)
-                { 
-                    await tagRepository.Create(currentTag);
+                {
+                    await tagRepository.Create(new Tag { TagTitle = i });
                   currentTag = await tagRepository.GetSingle(i);
                 }
+
+                var buffRoasterTags = pairs.Where(item => item.TagId == currentTag.Id);
+                if (buffRoasterTags.Count()==0)
                 await roasterTagRepository.Create(new RoasterTag { RoasterId=roaster.Id, TagId=currentTag.Id});      
             }
             if (roaster.ContactEmail == null)
@@ -85,15 +108,6 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
                 roaster.TelegramProfileLink = "none";
             await roasterRepository.Update(roaster);
             return RedirectToPage("Roasters");
-        }
-        public void OnPostDeleteTag()
-        {
-            tagsList.Remove(tagPart);
-            DeletableTagsList.Add(tagPart);
-        }
-        public void OnPostAddTag()
-        {
-            tagsList.Add(tagPart);
         }
     }
 }

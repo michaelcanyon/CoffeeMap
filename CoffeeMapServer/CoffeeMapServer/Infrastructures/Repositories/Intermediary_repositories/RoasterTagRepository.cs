@@ -34,10 +34,9 @@ namespace CoffeeMapServer.Infrastructures.Repositories.Intermediary_repositories
         {
             SqlParameter _roasterId = new SqlParameter("@roasterId", roasterId);
             SqlParameter _tagId = new SqlParameter("@tagId", TagId);
-            await context.Database.ExecuteSqlRawAsync("DELETE FROM RoasterTags WHERE RoasterId=@roasterId, TagId=@tagId", roasterId, TagId);
+            await context.Database.ExecuteSqlRawAsync("DELETE FROM RoasterTags WHERE RoasterId=@roasterId AND TagId=@tagId", _roasterId, _tagId);
             await context.SaveChangesAsync();
         }
-
         public async Task<List<RoasterTag>> GetList()
         {
             return await context.RoasterTags.ToListAsync();
@@ -46,7 +45,7 @@ namespace CoffeeMapServer.Infrastructures.Repositories.Intermediary_repositories
         public async Task<RoasterTag> GetSingle(int id)
         {
             SqlParameter noteId = new SqlParameter("@noteId", id);
-            var RoasterTag = await context.RoasterTags.FromSqlRaw("SELECT * FROM RoasterTags WHERE Id=@noteId").ToListAsync();
+            var RoasterTag = await context.RoasterTags.FromSqlRaw("SELECT * FROM RoasterTags WHERE Id=@noteId", noteId).ToListAsync();
             return RoasterTag.Count() >= 1 ? RoasterTag.First() : null;
         }
 
@@ -55,14 +54,20 @@ namespace CoffeeMapServer.Infrastructures.Repositories.Intermediary_repositories
             SqlParameter noteId = new SqlParameter("@noteId", entity.Id);
             SqlParameter roasterId = new SqlParameter("@roasterId", entity.RoasterId);
             SqlParameter tagId = new SqlParameter("@tagId", entity.TagId);
-            await context.Database.ExecuteSqlRawAsync("UPDATE RoasterTags SET RoasterId=@roasterId, TagId=@tagId WHERE Id=@noteId");
+            await context.Database.ExecuteSqlRawAsync("UPDATE RoasterTags SET RoasterId=@roasterId, TagId=@tagId WHERE Id=@noteId",noteId, roasterId, tagId);
             await context.SaveChangesAsync();
         }
         public async Task<List<RoasterTag>> GetPairsByRoasterId(int roasterId)
         {
             SqlParameter _roasterId = new SqlParameter("@roasterId", roasterId);
-           return await context.RoasterTags.FromSqlRaw("SELECT * FROM RoasterTags WHERE RoasterID=@roasterId").ToListAsync();
+           return await context.RoasterTags.FromSqlRaw("SELECT * FROM RoasterTags WHERE RoasterId=@roasterId", _roasterId).ToListAsync();
             
         }
+        public async Task<List<RoasterTag>> GetPairsByTagId(int id)
+        {
+            SqlParameter _tagId = new SqlParameter("@tagId", id);
+            return await context.RoasterTags.FromSqlRaw("SELECT * FROM RoasterTags WHERE TagId=@tagId", _tagId).ToListAsync();
+        }
+
     }
 }

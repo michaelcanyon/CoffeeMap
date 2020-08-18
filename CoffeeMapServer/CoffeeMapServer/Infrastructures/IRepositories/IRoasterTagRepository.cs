@@ -10,6 +10,7 @@ namespace CoffeeMapServer.Infrastructures.IRepositories
    public interface IRoasterTagRepository: IBaseRepository<RoasterTag>
     {
         public Task<List<RoasterTag>> GetPairsByRoasterId(int roasterId);
+        public Task<List<RoasterTag>> GetPairsByTagId(int tagId);
         public Task Delete(int roasterId, int tagId);
     }
 }

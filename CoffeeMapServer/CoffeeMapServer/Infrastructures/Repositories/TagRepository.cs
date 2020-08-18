@@ -53,7 +53,7 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         public async Task<Tag> GetSingle(string title) 
         {
             SqlParameter tagTitle = new SqlParameter("@tagTitle", title);
-            var tags = await DbContext.Tags.FromSqlRaw("SELECT * FROM Tags WHERE TagTitle=@tagTitle").ToListAsync();
+            var tags = await DbContext.Tags.FromSqlRaw("SELECT * FROM Tags WHERE TagTitle=@tagTitle", tagTitle).ToListAsync();
             return tags.Count() >= 1 ? tags.First() : null;
         }
     }

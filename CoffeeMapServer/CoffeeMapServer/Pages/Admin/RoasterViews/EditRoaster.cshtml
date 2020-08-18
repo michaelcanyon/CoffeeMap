@@ -9,6 +9,34 @@
             $("#contactnumber").mask('+9-(999)-999-99-99');
         });
     </script>
+    <script>
+        function AddTag()
+        {
+            var newTag = document.getElementById('TagPart').value;
+            if (newTag != "") {
+                var newElement = document.createElement("li");
+                newElement.innerHTML = newTag;
+                document.getElementById("tagList").appendChild(newElement);
+                document.getElementById("addTags").value += newTag+"#";
+            }
+
+        }
+        function DeleteTag() {
+            var newTag = document.getElementById('TagPart').value;
+            if (newTag != "") {
+                var children = document.getElementById("tagList").childNodes;
+                for (var i in children) {
+                    if (i.value == newTag)
+                    {
+                        var del = i;
+                        del.remove();
+                    }
+                }
+                document.getElementById("deleteTags").value += newTag + "#";
+            }
+
+        }
+    </script>
 }
 <section class="content-header">
     <h1>
@@ -29,6 +57,22 @@
             <input type="text" id="contactnumber" pattern="+7-([0-9]){3}-[0-9]{3}-[0-9]{2}-[0-9]{2}" class="form-control" asp-for="@Model.roaster.ContactNumber" required>
             <label for="mail">Email</label>
             <input type="text" id="email" class="form-control" asp-for="@Model.roaster.ContactEmail">
+            <label>Tags:</label>
+            <ul id="tagList">
+                @if (Model.tagsList.Count > 0)
+                {
+                    foreach (var i in Model.tagsList)
+                    {
+                        <li>@i</li>
+                    }
+                }
+            </ul>
+            <label>Add/Remove Tag:</label>
+            <input type="hidden" id="addTags" value="" asp-for="@Model.tags">
+            <input type="hidden" id="deleteTags" value="" asp-for="@Model.deletableTags">
+            <input type="Text" class="form-control" id="TagPart">
+            <button type="button" onclick="AddTag()">Add Tag</button>
+            <button type="button" onclick="DeleteTag()">Delete Tag</button>
             <label for="address">addressId</label>
             <input type="number" class="form-control" asp-for="@Model.roaster.OfficeAddressId" required>
             <label for="website">Web-site link</label>
@@ -40,6 +84,6 @@
             <label for="telegram">Telegram link</label>
             <input type="text" class="form-control" asp-for="@Model.roaster.TelegramProfileLink">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" asp-page-handler="Process" class="btn btn-primary">Submit</button>
     </form>
 </section>

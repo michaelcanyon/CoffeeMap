@@ -25,9 +25,7 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
         public Address address { get; set; }
 
         [BindProperty]
-        public string tagPart { get; set; }
-
-        private StringBuilder tags = new StringBuilder();
+        public string tags { get; set; }
 
         public AddRoasterModel(IRoasterRepository repository, IAddessRepository addrRepository, ITagRepository tagsRepository, IRoasterTagRepository roasterTagsRepository)
         {
@@ -39,6 +37,8 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
         }
         public async Task<IActionResult> OnPostAsync()
         {
+            if (roasterRepository.GetRoasterByName(roaster.Name) != null)
+                return RedirectToPage("Roasters");
             string[] tags_array;
             if (roaster.ContactEmail == null)
                 roaster.ContactEmail = "none";
@@ -54,38 +54,38 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
                 address.OpeningHours = "none";
             if (tags.Length == 0)
             {
-                tags.AppendFormat("none");
-                tags_array = tags.ToString().Split("#");
+                tags="none";
+                tags_array = tags.Split("#");
             }
             else
             { // TODO: допиши добавление в таблицу тегов
-                tags_array = tags.ToString().Split("#");
+                tags_array = tags.Split("#");
                 foreach (var i in tags_array)
                 {
-                    if (tagRepository.GetSingle(i) != null)
-                        await tagRepository.Create(new Tag { TagTitle = i });
+                    if (i == "")
+                        continue;
+                    if ((await tagRepository.GetSingle(i)) == null)
+                         await tagRepository.Create(new Tag { TagTitle = i });
                 }
             }
             List<Tag> _localTags = new List<Tag>();
             foreach (var i in tags_array)
             {
-                _localTags.Add( await tagRepository.GetSingle(i));
+                if (i == "")
+                    continue;
+                _localTags.Add(await tagRepository.GetSingle(i));
             }
             await addessRepository.Create(address);
             var addr = await addessRepository.GetSingle(address);
             roaster.OfficeAddressId = addr.Id;
             await roasterRepository.Create(roaster);
-            var roasterId = (await roasterRepository.GetRoasterId(roaster)).Id;
+            var roasterId = (await roasterRepository.GetRoaster(roaster)).Id;
             foreach (var i in _localTags)
             {
                await roasterTagRepository.Create(new RoasterTag { RoasterId = roasterId, TagId = i.Id });
             }
             return RedirectToPage("Roasters");
 
-        }
-        public void OnPostAddTag()
-        {
-            tags.AppendFormat(tagPart, "#");
         }
     }
 }

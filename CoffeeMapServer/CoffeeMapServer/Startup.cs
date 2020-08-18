@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Infrastructures.Repositories;
 using Microsoft.OpenApi.Models;
+using CoffeeMapServer.Infrastructures.Repositories.Intermediary_repositories;
 
 namespace CoffeeMapServer
 {
@@ -36,6 +37,8 @@ namespace CoffeeMapServer
             services.AddRazorPages();
             services.AddTransient<IRoasterRepository, RoasterRepository>();
             services.AddTransient<IAddessRepository, AddressRepository>();
+            services.AddTransient<ITagRepository, TagRepository>();
+            services.AddTransient<IRoasterTagRepository, RoasterTagRepository>();
             services.AddSwaggerGen();
             services.AddSwaggerGen(c =>
             {
