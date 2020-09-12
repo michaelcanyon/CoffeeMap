@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CoffeeMapServer.EF;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -15,6 +12,13 @@ using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Infrastructures.Repositories;
 using Microsoft.OpenApi.Models;
 using CoffeeMapServer.Infrastructures.Repositories.Intermediary_repositories;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using CoffeeMapServer.Infrastructures;
+using Microsoft.AspNetCore.CookiePolicy;
+using System.Threading.Tasks;
 
 namespace CoffeeMapServer
 {
@@ -29,21 +33,59 @@ namespace CoffeeMapServer
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            IConfigurationSection connString =  Configuration.GetSection("ConnectionString");
+            IConfigurationSection connString = Configuration.GetSection("ConnectionString");
             string connection = connString.GetSection("Connection").Value;
-            services.AddControllersWithViews();
+            // services.AddRazorPages();
+            //services.AddSwaggerGen();
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+            //});
             services.AddDbContext<CoffeeDbContext>(options => options.UseSqlServer(connection));
-            services.AddCors();
-            services.AddRazorPages();
             services.AddTransient<IRoasterRepository, RoasterRepository>();
             services.AddTransient<IAddessRepository, AddressRepository>();
             services.AddTransient<ITagRepository, TagRepository>();
             services.AddTransient<IRoasterTagRepository, RoasterTagRepository>();
-            services.AddSwaggerGen();
-            services.AddSwaggerGen(c =>
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    // укзывает, будет ли валидироваться издатель при валидации токена
+                    ValidateIssuer = true,
+                    // строка, представляющая издателя
+                    ValidIssuer = AuthOptions.ISSUER,
+
+                    // будет ли валидироваться потребитель токена
+                    ValidateAudience = true,
+                    // установка потребителя токена
+                    ValidAudience = AuthOptions.AUDIENCE,
+                    // будет ли валидироваться время существования
+                    ValidateLifetime = true,
+
+                    // установка ключа безопасности
+                    IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+                    // валидация ключа безопасности
+                    ValidateIssuerSigningKey = true,
+                };
             });
+            services.AddAuthorization(config =>
+            {
+                config.AddPolicy(Policies.Admin, Policies.AdminPolicy());
+                config.AddPolicy(Policies.Master, Policies.MasterPolicy());
+            });
+            services.AddRazorPages().AddRazorPagesOptions(options =>
+            {
+                options.Conventions.AuthorizeFolder("/Admin/AddressesViews/");
+                options.Conventions.AuthorizeFolder("/Admin/RoasterViews/");
+                options.Conventions.AuthorizeFolder("/Admin/RoasterAddress/");
+                options.Conventions.AuthorizeFolder("/Admin/TagViews/");
+                // options.Conventions.AllowAnonymousToPage("/Admin/AuthorizationViews/Login");
+            });
+            //services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,19 +95,44 @@ namespace CoffeeMapServer
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseRouting();   
+            app.UseHttpsRedirection();
+            app.UseRouting();
             app.UseStaticFiles();
-
-            //Enable middleware to serve swagger - ui(HTML, JS, CSS, etc.),
-             //specifying the Swagger JSON endpoint.
-            app.UseSwaggerUI(c =>
+            app.UseStatusCodePages(async context =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                var response = context.HttpContext.Response;
+                if (response.StatusCode == (int)System.Net.HttpStatusCode.Unauthorized ||
+                response.StatusCode == (int)System.Net.HttpStatusCode.Forbidden)
+                    response.Redirect("/api/Login");
             });
+            // prepare token to insert into cookie
+            //app.UseSwagger();
+            app.Use(async (context, next) =>
+            {
+                var token = context.Request.Cookies[".AspNetCore.Meta.Metadta"];
+                if (!string.IsNullOrEmpty(token))
+                    context.Request.Headers.Append("Authorization", "Bearer " + token);
+
+                await next();
+            });
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.UseCookiePolicy(new CookiePolicyOptions
+            {
+                //   MinimumSameSitePolicy = SameSiteMode.Strict,
+                HttpOnly = HttpOnlyPolicy.Always,
+                //Secure = CookieSecurePolicy.Always
+            });
+            //Enable middleware to serve swagger - ui(HTML, JS, CSS, etc.),
+            //specifying the Swagger JSON endpoint.
+            //app.UseSwaggerUI(c =>
+            //{
+            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            //});
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllers();
             });
 
         }
