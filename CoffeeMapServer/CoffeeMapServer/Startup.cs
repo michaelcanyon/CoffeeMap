@@ -35,12 +35,8 @@ namespace CoffeeMapServer
         {
             IConfigurationSection connString = Configuration.GetSection("ConnectionString");
             string connection = connString.GetSection("Connection").Value;
-            // services.AddRazorPages();
-            //services.AddSwaggerGen();
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
-            //});
+            services.AddRazorPages();
+            services.AddControllersWithViews();
             services.AddDbContext<CoffeeDbContext>(options => options.UseSqlServer(connection));
             services.AddTransient<IRoasterRepository, RoasterRepository>();
             services.AddTransient<IAddessRepository, AddressRepository>();
@@ -86,6 +82,11 @@ namespace CoffeeMapServer
                 // options.Conventions.AllowAnonymousToPage("/Admin/AuthorizationViews/Login");
             });
             //services.AddMvc();
+            services.AddSwaggerGen();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -95,7 +96,7 @@ namespace CoffeeMapServer
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseRouting();
             app.UseStaticFiles();
             app.UseStatusCodePages(async context =>
@@ -106,7 +107,7 @@ namespace CoffeeMapServer
                     response.Redirect("/api/Login");
             });
             // prepare token to insert into cookie
-            //app.UseSwagger();
+            app.UseSwagger();
             app.Use(async (context, next) =>
             {
                 var token = context.Request.Cookies[".AspNetCore.Meta.Metadta"];
@@ -125,10 +126,10 @@ namespace CoffeeMapServer
             });
             //Enable middleware to serve swagger - ui(HTML, JS, CSS, etc.),
             //specifying the Swagger JSON endpoint.
-            //app.UseSwaggerUI(c =>
-            //{
-            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            //});
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();

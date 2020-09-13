@@ -46,7 +46,19 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         {
             SqlParameter _username = new SqlParameter("@username", username);
             SqlParameter _password = new SqlParameter("@password", password);
-            var user = dbContext.Users.FromSqlRaw("SELECT * FROM Users WHERE Login=@username AND Password=@password", _username, _password).ToList();
+            var user =await dbContext.Users.FromSqlRaw("SELECT * FROM Users WHERE Login=@username AND Password=@password", _username, _password).ToListAsync();
+            return user.Count() > 0 ? user.First() : null;
+        }
+        public async Task<User> GetSingle(string username)
+        {
+            SqlParameter _username = new SqlParameter("@username", username);
+            var user = await dbContext.Users.FromSqlRaw("SELECT * FROM Users WHERE Login=@username", _username).ToListAsync();
+            return user.Count() > 0 ? user.First() : null;
+        }
+        public async Task<User> GetSingleByMail(string email)
+        {
+            SqlParameter _email = new SqlParameter("@email", email);
+            var user = await dbContext.Users.FromSqlRaw("SELECT * FROM Users WHERE Email=@email", _email).ToListAsync();
             return user.Count() > 0 ? user.First() : null;
         }
         public async Task Update(User entity)
