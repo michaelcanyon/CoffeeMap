@@ -4,13 +4,16 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using CoffeeMapServer.Infrastructures;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CoffeeMapServer.Pages.Admin.UserViews
 {
+    [Authorize(Policy = Policies.Master)]
     public class AddUserModel : PageModel
     {
         private readonly IUserRepository _userRepository;
@@ -20,17 +23,21 @@ namespace CoffeeMapServer.Pages.Admin.UserViews
         }
         [BindProperty]
         public User user { get; set; }
-        public async Task<IActionResult> OnPost()
+        public int ErrorStatusCode { get; set; }
+        public async Task<IActionResult> OnPostAsync()
         {
             User userV = await _userRepository.GetSingle(user.Login);
             if (userV != null)
-                return RedirectToPage("AddUser");
+                return RedirectToPage("AddUser", 601);
             userV = await _userRepository.GetSingleByMail(user.Email);
             if (userV != null)
-                return RedirectToPage("AddUser");
-            user.Password= CoffeeMapServer.Encryptions.Sha1Hash.GetHash(user.Password);
+                return RedirectToPage("AddUser", 602);
             await _userRepository.Create(user);
             return RedirectToPage("Users");
+        }
+        public void OnGet(int StatusCode)
+        {
+            ErrorStatusCode = StatusCode;           
         }
     }
 }

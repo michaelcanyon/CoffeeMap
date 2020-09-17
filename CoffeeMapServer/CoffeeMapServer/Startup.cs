@@ -122,7 +122,7 @@ namespace CoffeeMapServer
             {
                 //   MinimumSameSitePolicy = SameSiteMode.Strict,
                 HttpOnly = HttpOnlyPolicy.Always,
-                //Secure = CookieSecurePolicy.Always
+                Secure = CookieSecurePolicy.Always
             });
             //Enable middleware to serve swagger - ui(HTML, JS, CSS, etc.),
             //specifying the Swagger JSON endpoint.

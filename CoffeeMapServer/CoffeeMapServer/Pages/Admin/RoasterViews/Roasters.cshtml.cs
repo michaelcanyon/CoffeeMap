@@ -51,8 +51,12 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
 
         [BindProperty]
         public int roasterId { get; set; }
+        public string role { get; set; }
+        public string nickname { get; set; }
         public async Task OnGetAsync()
         {
+            nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.nickname"].ToString();
+            role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
             roasters = await RoasterRepository.GetList();
             roasterTags = await RoasterTagRepository.GetList();
             tags = await TagRepository.GetList();

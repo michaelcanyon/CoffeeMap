@@ -36,8 +36,12 @@ namespace CoffeeMapServer.Pages.Admin.RoasterAddress
         public string insertRoasterId { get; set; }
         [BindProperty(SupportsGet = true)]
         public string insertAddressId { get; set; }
+        public string role { get; set; }
+        public string nickname { get; set; }
         public async Task OnGetAsync()
         {
+            nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.nickname"].ToString();
+            role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
             addresses = await addessRepository.GetList();
             roasters = await roasterRepository.GetList();
             if (!string.IsNullOrEmpty(addressIdFilter))

@@ -8,9 +8,9 @@ namespace CoffeeMapServer.Encryptions
         public static string GetHash(string password)
         {
             var sha = new SHA1CryptoServiceProvider();
-            var passwordByte = Encoding.ASCII.GetBytes(password);
+            var passwordByte = Encoding.UTF8.GetBytes(password);
             var hash = sha.ComputeHash(passwordByte);
-            return ASCIIEncoding.ASCII.GetString(hash);
+            return System.BitConverter.ToString(hash);
         }
     }
 }

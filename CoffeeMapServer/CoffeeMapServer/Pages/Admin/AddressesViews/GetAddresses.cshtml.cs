@@ -27,8 +27,12 @@ namespace CoffeeMapServer.Views.Admin.Addresses
 
         [BindProperty]
         public int addressId { get; set; }
+        public string role { get; set; }
+        public string nickname { get; set; }
         public async Task OnGetAsync()
         {
+            nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.nickname"].ToString();
+            role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
             addresses = await addressRepository.GetList();
             if (!string.IsNullOrEmpty(addressIdFilter))
                 addresses = addresses.Where(n => n.Id.Equals(Convert.ToInt32(addressIdFilter))).ToList();

@@ -1,16 +1,19 @@
 ﻿@page
 @model CoffeeMapServer.Pages.Admin.RoasterAddress.RoasterAddressConnModel
+@{
+
+    @if (Model.role == "Master")
+        Layout = "_MasterLayout";
+}
 @section scripts{
-    <script type="text/javascript" src="~/dist/jquery-1.8.3.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="~/bower_components/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="~/dist/jquery.maskedInput.js"></script>
-    <script src="~/bower_components/jquery-3.5.1.js" type="text/css">
-    </script>
     <script>
-            $(document).ready(function () {
-                $("#filtrationbar").click(function () {
-                    $("#filtration").toggle(500);
-                });
+        $(document).ready(function () {
+            $("#filtrationbar").click(function () {
+                $("#filtration").toggle(500);
             });
+        });
     </script>
 }
 <section class="content-header">
@@ -67,13 +70,13 @@
         </thead>
         <tbody>
             @if (Model.roasters != null)
-            foreach (var i in Model.roasters)
-            {
-                <tr>
-                    <td>@Html.DisplayFor(item => i.Id)</td>
-                    <td>@Html.DisplayFor(item => i.Name)</td>
-                </tr>
-            }
+                foreach (var i in Model.roasters)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(item => i.Id)</td>
+                        <td>@Html.DisplayFor(item => i.Name)</td>
+                    </tr>
+                }
         </tbody>
     </table>
     <h4>
@@ -92,13 +95,13 @@
         </thead>
         <tbody>
             @if (Model.addresses != null)
-            foreach (var g in Model.addresses)
-            {
-                <tr>
-                    <td>@Html.DisplayFor(item => g.Id)</td>
-                    <td>@Html.DisplayFor(item => g.AddressStr)</td>
-                </tr>
-            }
+                foreach (var g in Model.addresses)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(item => g.Id)</td>
+                        <td>@Html.DisplayFor(item => g.AddressStr)</td>
+                    </tr>
+                }
         </tbody>
     </table>
 </section>

@@ -16,9 +16,16 @@ namespace CoffeeMapServer.Pages.Admin.AddressesViews
 
         [BindProperty]
         public Address address { get; set; }
+        public string role { get; set; }
+        public string nickname { get; set; }
         public AddAddressModel(IAddessRepository addrRepository)
         {
             addessRepository = addrRepository;
+        }
+        public async Task OnGetAsync()
+        {
+            nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.nickname"].ToString();
+            role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
         }
         public async Task<IActionResult> OnPostAsync()
         {

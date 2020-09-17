@@ -42,11 +42,13 @@ namespace CoffeeMapServer.Controllers
             var token =await Token(login.Email, login.Password);
             if (token == null)
                 return View();
-            HttpContext.Response.Cookies.Append(".AspNetCore.Meta.Metadta", token,
-        new CookieOptions
-        {
-            MaxAge = TimeSpan.FromMinutes(30)
-        });
+            var userSample =await userRepository.GetSingle(login.Email, login.Password);
+            HttpContext.Response.Cookies.Append(".AspNetCore.Meta.Metadta", token);
+            HttpContext.Response.Cookies.Append(".AspNetCore.Meta.Metadta.id", userSample.Id.ToString());
+            HttpContext.Response.Cookies.Append(".AspNetCore.Meta.Metadta.nickname", userSample.Login);
+            HttpContext.Response.Cookies.Append(".AspNetCore.Meta.Metadta.role", userSample.role);
+            HttpContext.Response.Cookies.Append(".AspNetCore.Meta.Metadta.hash", userSample.Password);
+            //return userSample.role == "Master" ? RedirectToPage("HomeMaster") : RedirectToPage("Home");
             return View();
         }
         //[Authorize(Roles = "admin")]
@@ -70,7 +72,6 @@ namespace CoffeeMapServer.Controllers
                     expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
                     signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
-
             return encodedJwt;
         }
         private async Task<ClaimsIdentity> GetIdentity(string username, string password)
@@ -82,11 +83,12 @@ namespace CoffeeMapServer.Controllers
             var claims = new List<Claim>
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login),
+                new Claim("role", user.role),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
 
             };
             ClaimsIdentity claimsIdentity =
-                new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+                new ClaimsIdentity(claims, "Token");
             return claimsIdentity;
         }
     }

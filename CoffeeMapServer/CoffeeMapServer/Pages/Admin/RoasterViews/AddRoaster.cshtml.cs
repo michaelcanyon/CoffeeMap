@@ -26,7 +26,8 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
 
         [BindProperty]
         public string tags { get; set; }
-
+        public string role { get; set; }
+        public string nickname { get; set; }
         public AddRoasterModel(IRoasterRepository repository, IAddessRepository addrRepository, ITagRepository tagsRepository, IRoasterTagRepository roasterTagsRepository)
         {
             roasterRepository = repository;
@@ -34,6 +35,11 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
             tagRepository = tagsRepository;
             roasterTagRepository = roasterTagsRepository;
 
+        }
+        public async Task OnGetAsync()
+        {
+            nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.nickname"].ToString();
+            role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
         }
         public async Task<IActionResult> OnPostAsync()
         {

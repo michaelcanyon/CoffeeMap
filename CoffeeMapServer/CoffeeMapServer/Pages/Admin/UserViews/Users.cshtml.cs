@@ -6,9 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
+using Microsoft.AspNetCore.Authorization;
+using CoffeeMapServer.Infrastructures;
 
 namespace CoffeeMapServer.Pages.Admin.UserViews
 {
+    [Authorize(Policy = Policies.Master)]
     public class UsersModel : PageModel
     {
         private readonly IUserRepository _userRepository;
@@ -26,7 +29,7 @@ namespace CoffeeMapServer.Pages.Admin.UserViews
             _userRepository = userRepository;
         
         }
-        public async Task OnGet()
+        public async Task OnGetAsync()
         {
             users = await _userRepository.GetList();
             if (!string.IsNullOrEmpty(idFilter))

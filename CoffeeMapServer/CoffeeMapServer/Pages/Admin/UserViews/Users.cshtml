@@ -1,10 +1,8 @@
 ﻿@page
 @model CoffeeMapServer.Pages.Admin.UserViews.UsersModel
 @section scripts{
-    <script type="text/javascript" src="~/dist/jquery-1.8.3.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="~/bower_components/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="~/dist/jquery.maskedInput.js"></script>
-    <script src="~/bower_components/jquery-3.5.1.js" type="text/css">
-    </script>
     <script>
         $(document).ready(function () {
             $("#filtrationbar").click(function () {
@@ -12,6 +10,9 @@
             });
         });
     </script>
+}
+@{
+    Layout = "_MasterLayout";
 }
 <section class="content-header">
     <h1>
@@ -64,7 +65,6 @@
                     <td>@Html.DisplayFor(item => i.Email)</td>
                     <td>@Html.DisplayFor(item => i.role)</td>
                     <td>
-                        <a asp-page="EditRole" asp-route-id="@i.Id">Edit|</a>
                         <a asp-page="DeleteUser" asp-route-id="@i.Id">Delete|</a>
                     </td>
                 </tr>

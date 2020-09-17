@@ -1,5 +1,12 @@
 ﻿@page
 @model CoffeeMapServer.Pages.Admin.UserViews.AddUserModel
+@section scripts{
+    <script type="text/javascript" src="~/bower_components/jquery/dist/jquery.js"></script>
+
+}
+@{
+        Layout = "_MasterLayout";
+}
 <section class="content-header">
     <h1>
         Create roaster note
@@ -17,7 +24,6 @@
             <label for="password">Password</label>
             <input type="password" minlength="10" class="form-control" asp-for="@Model.user.Password" required>
             <label for="role">Role</label>
-            <input type="password" minlength="10" class="form-control" asp-for="@Model.user.Password" required>
             <select asp-for="@Model.user.role">
                 <option value="Admin">Admin</option>
                 <option value="Master">Master</option>
@@ -25,4 +31,12 @@
         </div>
         <button type="submit" class="btn btn-primary">Create</button>
     </form>
+    @if (Model.ErrorStatusCode.Equals(601))
+    {
+        <span style="color:red;">Such login is already exist</span>
+    }
+    else if (Model.ErrorStatusCode.Equals(602))
+    {
+        <span style="color:red;">Such email is already exist</span>
+    }
 </section>

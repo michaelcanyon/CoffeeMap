@@ -46,7 +46,7 @@
                                 <!-- The user image in the navbar-->
                                 <img src="~/dist/img/admin.png" class="user-image" alt="User Image">
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                <span class="hidden-xs" id="User_Name">Admin</span>
+                                <span class="hidden-xs">Master</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
@@ -68,10 +68,10 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a class="btn btn-default btn-flat" asp-page="/Admin/Account/EditAccount">Edit profile</a>
+                                        <a asp-page="/Admin/Account/EditAccount" class="btn btn-default btn-flat" >Edit account</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a class="btn btn-default btn-flat" asp-page="/Admin/Account/Logout">Sign out</a>
+                                        <a asp-page="/Admin/Account/Logout" class="btn btn-default btn-flat" >Sign out</a>
                                     </div>
                                 </li>
                             </ul>
@@ -90,7 +90,7 @@
                         <img src="~/dist/img/admin.png" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p id="User_Name1">Admin</p>
+                        <p>Master</p>
                         <!-- Status -->
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
@@ -114,6 +114,7 @@
                     <li class="active"><a asp-page="/Admin/RoasterViews/Roasters"><i class="fa fa-link"></i> <span>Roasters</span></a></li>
                     <li><a asp-page="/Admin/AddressesViews/GetAddresses"><i class="fa fa-link"></i> <span>Addresses</span></a></li>
                     <li><a asp-page="/Admin/TagViews/Tags"><i class="fa fa-link"></i> <span>Tags</span></a></li>
+                    <li><a asp-page="/Admin/UserViews/Users"><i class="fa fa-link"></i> <span>Users</span></a></li>
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-link"></i>
@@ -126,9 +127,11 @@
                             <li><a asp-page="/Admin/AddressesViews/GetAddresses">Addresses</a></li>
                             <li><a asp-page="/Admin/TagViews/Tags">Tags</a></li>
                             <li><a asp-page="/Admin/RoasterAddress/RoasterAddressConn">Entity connections creator</a></li>
+                            <li><a asp-page="/Admin/UserViews/Users">Users</a></li>
                         </ul>
                     </li>
                 </ul>
+
                 <!-- /.sidebar-menu -->
             </section>
             <!-- /.sidebar -->

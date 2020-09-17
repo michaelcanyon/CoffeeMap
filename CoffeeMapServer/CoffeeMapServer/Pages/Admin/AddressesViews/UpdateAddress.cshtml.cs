@@ -15,12 +15,16 @@ namespace CoffeeMapServer.Views.Admin.Addresses
 
         [BindProperty]
         public Address address { get; set; }
+        public string role { get; set; }
+        public string nickname { get; set; }
         public UpdateAddressModel(IAddessRepository repository)
         {
             addressRepository = repository;
         }
         public async Task<IActionResult> OnGet(int? id)
         {
+            nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.nickname"].ToString();
+            role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
             address = await addressRepository.GetSingle(Convert.ToInt32(id));
             if (address.OpeningHours == "none")
                 address.OpeningHours = null;

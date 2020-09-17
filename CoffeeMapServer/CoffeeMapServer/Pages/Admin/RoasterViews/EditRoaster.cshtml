@@ -1,8 +1,13 @@
 ﻿@page "{id:int}"
 @model CoffeeMapServer.Views.Admin.RoasterViews.EditRoasterModel
+@{
+
+    @if (Model.role == "Master")
+        Layout = "_MasterLayout";
+}
 @section scripts{
-    <script type="text/javascript" src="~/dist/jquery-1.8.3.min.js" charset="utf-8"></script>
     <script type="text/javascript" src="~/dist/jquery.maskedInput.js"></script>
+    <script type="text/javascript" src="~/bower_components/jquery/dist/jquery.js"></script>
     <script>
         $(function () {
 
@@ -10,14 +15,13 @@
         });
     </script>
     <script>
-        function AddTag()
-        {
+        function AddTag() {
             var newTag = document.getElementById('TagPart').value;
             if (newTag != "") {
                 var newElement = document.createElement("li");
                 newElement.innerHTML = newTag;
                 document.getElementById("tagList").appendChild(newElement);
-                document.getElementById("addTags").value += newTag+"#";
+                document.getElementById("addTags").value += newTag + "#";
             }
 
         }
@@ -26,8 +30,7 @@
             if (newTag != "") {
                 var children = document.getElementById("tagList").childNodes;
                 for (var i in children) {
-                    if (i.value == newTag)
-                    {
+                    if (i.value == newTag) {
                         var del = i;
                         del.remove();
                     }

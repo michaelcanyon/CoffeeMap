@@ -19,6 +19,7 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         }
         public async Task Create(User entity)
         {
+            entity.Password = CoffeeMapServer.Encryptions.Sha1Hash.GetHash(entity.Password);
             await dbContext.Users.AddAsync(entity);
             await dbContext.SaveChangesAsync();
         }
@@ -45,7 +46,8 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         public async Task<User> GetSingle(string username, string password)
         {
             SqlParameter _username = new SqlParameter("@username", username);
-            SqlParameter _password = new SqlParameter("@password", password);
+            var passwordHash = CoffeeMapServer.Encryptions.Sha1Hash.GetHash(password);
+            SqlParameter _password = new SqlParameter("@password", passwordHash);
             var user =await dbContext.Users.FromSqlRaw("SELECT * FROM Users WHERE Login=@username AND Password=@password", _username, _password).ToListAsync();
             return user.Count() > 0 ? user.First() : null;
         }
@@ -63,11 +65,13 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         }
         public async Task Update(User entity)
         {
+            string hash = CoffeeMapServer.Encryptions.Sha1Hash.GetHash(entity.Password);
             SqlParameter _id = new SqlParameter("@id", entity.Id);
             SqlParameter _login = new SqlParameter("@nickname", entity.Login);
             SqlParameter _email = new SqlParameter("@email", entity.Email);
-            SqlParameter _password = new SqlParameter("@password", entity.Password);
-            await dbContext.Database.ExecuteSqlRawAsync("UPDATE Users SET Login=@nickname, Email=@email, Password=@password WHERE Id=@id", _login, _email, _password, _id);
+            SqlParameter _password = new SqlParameter("@passwordHash", hash);
+
+            await dbContext.Database.ExecuteSqlRawAsync("UPDATE Users SET Login=@nickname, Email=@email, Password=@passwordHash WHERE Id=@id", _login, _email, _password, _id);
             await dbContext.SaveChangesAsync();
 
         }

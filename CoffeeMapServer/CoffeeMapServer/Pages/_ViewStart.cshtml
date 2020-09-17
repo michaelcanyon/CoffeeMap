@@ -1,3 +1,10 @@
 ﻿@{
     Layout = "_Layout";
 }
+@section scripts{
+    <script>
+    document.getElementById("User_Name").nodeValue =@Model.nickname;
+    document.getElementById("User_Name1").nodeValue=@Model.nickname;
+    </script>
+
+}

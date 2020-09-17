@@ -1,4 +1,44 @@
 ﻿@page
 @model CoffeeMapServer.Pages.Admin.Account.EditAccountModel
 @{
+
+    @if (Model.role == "Master")
+        Layout = "_MasterLayout";
 }
+@{
+}
+<script type="text/javascript" src="~/bower_components/jquery/dist/jquery.js"></script>
+<script>
+    $('#password, #confirm_password').on('keyup', function () {
+        if ($('#new_password').val() == $('#confirmation').val()) {
+            $('#message').html('Everything`s good:)').css('color', 'green');
+        } else
+            $('#message').html('Passwords aren`t matching').css('color', 'red');
+    });
+</script>
+<section class="content-header">
+    <h1>
+        Update roaster
+    </h1>
+</section>
+<!-- Main content -->
+<section class="content container-fluid">
+    <form method="post">
+        <div class="form-group">
+            <input type="hidden" class="form-control" asp-for="@Model.user.Id" value="@Model.user.Id">
+            <input type="hidden" class="form-control" asp-for="@Model.user.Login" value="@Model.user.Login">
+        </div>
+        <div class="form-group">
+            <label for="mail">Email</label>
+            <input type="text" id="email" class="form-control" asp-for="@Model.user.Email">
+            <label for="old_password">Old Passsword</label>
+            <input type="text" id="old_password" class="form-control" asp-for="@Model.user.Password" value="">
+            <label for="new_password">New Password</label>
+            <input type="text" id="new_password" class="form-control" asp-for="@Model.newPassword">
+            <h6 id="message"></h6>
+            <label for="passwordConfirmation">Password Confirmation</label>
+            <input type="text" id="confirmation" class="form-control">
+        </div>
+        <button type="submit" asp-page-handler="Process" class="btn btn-primary">Submit</button>
+    </form>
+</section>

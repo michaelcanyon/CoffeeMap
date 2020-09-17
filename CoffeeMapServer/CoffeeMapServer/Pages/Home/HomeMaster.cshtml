@@ -1,10 +1,5 @@
 ﻿@page
-@model CoffeeMapServer.Pages.Admin.Home.HomeMasterModel
+@model CoffeeMapServer.Pages.Home.HomeMasterModel
 @{
+    Layout = "_MasterLayout";
 }
-<script>
-    var list = document.getElementById("TableList");
-    var elem = document.createElement("li");
-    elem.value = "<a asp-page= '/Admin/RoasterAddress/RoasterAddressConn'>Entity connections creator</a>";
-    list.appendChild(elem);
-</script>

@@ -1,11 +1,16 @@
 ﻿@page
 @model CoffeeMapServer.Pages.Admin.AddressesViews.AddAddressModel
+@{
+
+    @if (Model.role == "Master")
+        Layout = "_MasterLayout";
+}
 @section scripts{
-    <script type="text/javascript" src="~/dist/jquery-1.8.3.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="~/bower_components/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="~/dist/jquery.maskedInput.js"></script>
     <script>
         $(function () {
-            $("#hours").mask('AA-AA 00:00-00:00', { 'translation': { A: { pattern: /[а-я]/ } }, 0: {pattern: /[0-9]/}});
+            $("#hours").mask('AA-AA 00:00-00:00', { 'translation': { A: { pattern: /[а-я]/ } }, 0: { pattern: /[0-9]/ } });
         });
     </script>
 }

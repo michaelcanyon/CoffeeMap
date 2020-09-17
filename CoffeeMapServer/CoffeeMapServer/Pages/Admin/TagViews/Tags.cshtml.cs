@@ -15,12 +15,16 @@ namespace CoffeeMapServer.Pages.Admin.TagViews
         private readonly ITagRepository TagRepository;
 
         public List<Tag> tags { get; set; }
+        public string nickname { get; set; }
+        public string role { get; set; }
         public TagsModel(ITagRepository tagRepository)
         {
             TagRepository = tagRepository;
         }
         public async Task OnGetAsync()
         {
+            role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
+            nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.nickname"].ToString();
             tags = await TagRepository.GetList();
         }
     }
