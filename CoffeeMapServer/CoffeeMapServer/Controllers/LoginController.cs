@@ -18,7 +18,7 @@ using Microsoft.IdentityModel.Tokens;
 namespace CoffeeMapServer.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class LoginController : Controller
     {
         private readonly IConfiguration config;
@@ -32,6 +32,11 @@ namespace CoffeeMapServer.Controllers
         [AllowAnonymous]
         public IActionResult Login()
         {
+            HttpContext.Response.Cookies.Append(".AspNetCore.Meta.Metadta", "");
+            HttpContext.Response.Cookies.Append(".AspNetCore.Meta.Metadta.id", "");
+            HttpContext.Response.Cookies.Append(".AspNetCore.Meta.Metadta.nickname", "");
+            HttpContext.Response.Cookies.Append(".AspNetCore.Meta.Metadta.role", "");
+            HttpContext.Response.Cookies.Append(".AspNetCore.Meta.Metadta.hash", "");
             return View();
         }
         [HttpPost]
@@ -48,8 +53,7 @@ namespace CoffeeMapServer.Controllers
             HttpContext.Response.Cookies.Append(".AspNetCore.Meta.Metadta.nickname", userSample.Login);
             HttpContext.Response.Cookies.Append(".AspNetCore.Meta.Metadta.role", userSample.role);
             HttpContext.Response.Cookies.Append(".AspNetCore.Meta.Metadta.hash", userSample.Password);
-            //return userSample.role == "Master" ? RedirectToPage("HomeMaster") : RedirectToPage("Home");
-            return View();
+            return userSample.role == "Master" ? Redirect("~/Home/HomeMaster") : Redirect("~/Home/Home");
         }
         //[Authorize(Roles = "admin")]
         //[Route("getrole")]

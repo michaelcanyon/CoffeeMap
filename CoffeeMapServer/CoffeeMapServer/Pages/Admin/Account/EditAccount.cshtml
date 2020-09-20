@@ -5,17 +5,18 @@
     @if (Model.role == "Master")
         Layout = "_MasterLayout";
 }
-@{
+@section scripts{
+
+    <script type="text/javascript" src="~/dist/jquery-3.5.1.js"></script>
+    <script>
+        $('#password, #confirm_password').on('keyup', function () {
+            if ($('#new_password').val() == $('#confirmation').val()) {
+                $('#message').html('Everything`s good:)').css('color', 'green');
+            } else
+                $('#message').html('Passwords aren`t matching').css('color', 'red');
+        });
+    </script>
 }
-<script type="text/javascript" src="~/bower_components/jquery/dist/jquery.js"></script>
-<script>
-    $('#password, #confirm_password').on('keyup', function () {
-        if ($('#new_password').val() == $('#confirmation').val()) {
-            $('#message').html('Everything`s good:)').css('color', 'green');
-        } else
-            $('#message').html('Passwords aren`t matching').css('color', 'red');
-    });
-</script>
 <section class="content-header">
     <h1>
         Update roaster

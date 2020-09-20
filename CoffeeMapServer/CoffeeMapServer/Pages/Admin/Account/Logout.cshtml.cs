@@ -16,7 +16,7 @@ namespace CoffeeMapServer.Pages.Admin.Account
             HttpContext.Response.Cookies.Append(".AspNetCore.Meta.Metadta.nickname", "");
             HttpContext.Response.Cookies.Append(".AspNetCore.Meta.Metadta.role", "");
             HttpContext.Response.Cookies.Append(".AspNetCore.Meta.Metadta.hash", "");
-            return Redirect("/api/Login");
+            return Redirect("~/Login");
         }
     }
 }

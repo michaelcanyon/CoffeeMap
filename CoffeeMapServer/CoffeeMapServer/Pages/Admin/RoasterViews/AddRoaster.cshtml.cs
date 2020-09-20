@@ -43,8 +43,10 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
         }
         public async Task<IActionResult> OnPostAsync()
         {
-            if (roasterRepository.GetRoasterByName(roaster.Name) != null)
+            if (await roasterRepository.GetRoasterByName(roaster.Name) != null)
+            {
                 return RedirectToPage("Roasters");
+            }
             string[] tags_array;
             if (roaster.ContactEmail == null)
                 roaster.ContactEmail = "none";
@@ -60,7 +62,7 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
                 address.OpeningHours = "none";
             if (tags.Length == 0)
             {
-                tags="none";
+                tags = "none";
                 tags_array = tags.Split("#");
             }
             else
@@ -71,7 +73,7 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
                     if (i == "")
                         continue;
                     if ((await tagRepository.GetSingle(i)) == null)
-                         await tagRepository.Create(new Tag { TagTitle = i });
+                        await tagRepository.Create(new Tag { TagTitle = i });
                 }
             }
             List<Tag> _localTags = new List<Tag>();
@@ -88,7 +90,7 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
             var roasterId = (await roasterRepository.GetRoaster(roaster)).Id;
             foreach (var i in _localTags)
             {
-               await roasterTagRepository.Create(new RoasterTag { RoasterId = roasterId, TagId = i.Id });
+                await roasterTagRepository.Create(new RoasterTag { RoasterId = roasterId, TagId = i.Id });
             }
             return RedirectToPage("Roasters");
 

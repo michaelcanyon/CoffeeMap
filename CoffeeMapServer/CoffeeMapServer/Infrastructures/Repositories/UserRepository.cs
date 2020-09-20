@@ -65,11 +65,11 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         }
         public async Task Update(User entity)
         {
-            string hash = CoffeeMapServer.Encryptions.Sha1Hash.GetHash(entity.Password);
+            entity.Password = CoffeeMapServer.Encryptions.Sha1Hash.GetHash(entity.Password);
             SqlParameter _id = new SqlParameter("@id", entity.Id);
             SqlParameter _login = new SqlParameter("@nickname", entity.Login);
             SqlParameter _email = new SqlParameter("@email", entity.Email);
-            SqlParameter _password = new SqlParameter("@passwordHash", hash);
+            SqlParameter _password = new SqlParameter("@passwordHash", entity.Password);
 
             await dbContext.Database.ExecuteSqlRawAsync("UPDATE Users SET Login=@nickname, Email=@email, Password=@passwordHash WHERE Id=@id", _login, _email, _password, _id);
             await dbContext.SaveChangesAsync();

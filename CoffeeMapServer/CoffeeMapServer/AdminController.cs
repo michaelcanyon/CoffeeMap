@@ -27,8 +27,7 @@ namespace CoffeeMapServer
             {
                 var roasters = await _roasterRepository.GetList();
                 ViewData["RoastersList"] = roasters;
-                return View(roasters);
-                //return Ok(roasters);
+                return Ok(roasters);
 
             }
             catch (Exception e)

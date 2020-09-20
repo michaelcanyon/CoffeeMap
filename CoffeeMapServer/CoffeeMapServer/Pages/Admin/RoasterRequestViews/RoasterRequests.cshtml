@@ -1,0 +1,86 @@
+﻿@page
+@model CoffeeMapServer.Pages.Admin.RoasterRequestViews.RoasterRequestsModel
+@{
+
+    @if (Model.role == "Master")
+        Layout = "_MasterLayout";
+}
+@section scripts{
+    <script type="text/javascript" src="~/dist/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="~/dist/jquery.maskedInput.js"></script>
+}
+<section class="content-header">
+    <h1>
+        Roaster Requests
+    </h1>
+</section>
+<section class="content container-fluid">
+    <form asp-page-handler="DeleteAll" method="post">
+        <button type="submit" class="btn btn-primary">Delete All Requests</button>
+    </form>
+</section>
+<!-- Main content -->
+<section class="content container-fluid">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    ContactNumber
+                </th>
+                <th>
+                    Tags String
+                </th>
+                <th>
+                    ContactEmail
+                </th>
+                <th>
+                    InstagramProfileLink
+                </th>
+                <th>
+                    TelegramProfileLink
+                </th>
+                <th>
+                    VkProfileLink
+                </th>
+                <th>
+                    WebSiteLink
+                </th>
+                <th>
+                    Address string
+                </th>
+                <th>
+                    Opening hours
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var i in Model.roasterRequests)
+            {
+            <tr>
+                <td>@Html.DisplayFor(item => i.Id)</td>
+                <td>@Html.DisplayFor(item => i.Name)</td>
+                <td>@Html.DisplayFor(item => i.ContactNumber)</td>
+                <td>@Html.DisplayFor(item => i.TagString)</td>
+                <td>@Html.DisplayFor(item => i.ContactEmail)</td>
+                <td>@Html.DisplayFor(item => i.InstagramProfileLink)</td>
+                <td>@Html.DisplayFor(item => i.TelegramProfileLink)</td>
+                <td>@Html.DisplayFor(item => i.VkProfileLink)</td>
+                <td>@Html.DisplayFor(item => i.WebSiteLink)</td>
+                <td>@Html.DisplayFor(item => i.AddressStr)</td>
+                <td>@Html.DisplayFor(item => i.OpeningHours)</td>
+                <td>
+                    <a asp-page="EditRoasterRequest" asp-route-id="@i.Id">Edit|</a>
+                    <a asp-page="DeleteRoasterRequest" asp-route-id="@i.Id">Delete|</a>
+                    <a asp-page="CreateRoasterNote" asp-route-id="@i.Id">|Bind with Roasters</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</section>
