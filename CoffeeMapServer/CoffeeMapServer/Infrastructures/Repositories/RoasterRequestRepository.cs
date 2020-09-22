@@ -29,7 +29,6 @@ namespace CoffeeMapServer.Infrastructures.Repositories
                 throw new Exception("RoasterRequest repository create method failed to complete");
             }
         }
-
         public async Task Delete(int id)
         {
             try
@@ -43,7 +42,17 @@ namespace CoffeeMapServer.Infrastructures.Repositories
                 throw new Exception("RoasterRequest repository delete method failed to complete");
             }
         }
-
+        public async Task DeleteAll()
+        {
+            try
+            {
+                await DbContext.Database.ExecuteSqlRawAsync("DELETE FROM RoasterRequests");
+            }
+            catch
+            {
+                throw new Exception("RoasterRequest repository DeleteAll method failed to complete");
+            }
+        }
         public async Task<RoasterRequest> GetSingle(int id)
         {
             try
@@ -60,11 +69,20 @@ namespace CoffeeMapServer.Infrastructures.Repositories
 
         public async Task Update(RoasterRequest entity)
         {
+            if (string.IsNullOrEmpty(entity.WebSiteLink))
+                entity.WebSiteLink = "none";
+            if (string.IsNullOrEmpty(entity.VkProfileLink))
+                entity.VkProfileLink = "none";
+            if (string.IsNullOrEmpty(entity.InstagramProfileLink))
+                entity.InstagramProfileLink = "none";
+            if (string.IsNullOrEmpty(entity.TelegramProfileLink))
+                entity.TelegramProfileLink = "none";
             try
             {
                 SqlParameter paramid = new SqlParameter("@id", entity.Id);
                 SqlParameter name = new SqlParameter("@name", entity.Name);
                 SqlParameter email = new SqlParameter("@email", entity.ContactEmail);
+                SqlParameter tags = new SqlParameter("@tags", entity.TagString);
                 SqlParameter phone = new SqlParameter("@phone", entity.ContactNumber);
                 SqlParameter website = new SqlParameter("@website", entity.WebSiteLink);
                 SqlParameter instagram = new SqlParameter("@instagram", entity.InstagramProfileLink);
@@ -73,10 +91,10 @@ namespace CoffeeMapServer.Infrastructures.Repositories
                 SqlParameter address = new SqlParameter("@address", entity.AddressStr);
                 SqlParameter openingHours = new SqlParameter("@openingHours", entity.OpeningHours);
 
-                await DbContext.Database.ExecuteSqlRawAsync("UPDATE RoasterRequests SET Name=@name, ContactEmail=@email" +
-                    ", ContactNumber=@phone, WebSiteLink=@website, InstagramProfileLink=@instagram, VkProfileLink=@vk," +
-                    " TelegramProfileLink=@telegram, AddressStr=address, OpeningHours=@openingHours WHERE Id=@id"
-                    , paramid, name, email, phone, website, instagram, vk, telegram, address,openingHours);
+                await DbContext.Database.ExecuteSqlRawAsync("UPDATE RoasterRequests SET Name=@name, ContactEmail=@email," +
+                    " ContactNumber=@phone, WebSiteLink=@website, InstagramProfileLink=@instagram, VkProfileLink=@vk," +
+                    " TelegramProfileLink=@telegram, AddressStr=@address, OpeningHours=@openingHours, TagString=@tags WHERE Id=@id"
+                    , paramid, name, email, phone, website, instagram, vk, telegram, address,openingHours, tags);
                 await DbContext.SaveChangesAsync();
             }
             catch
@@ -92,16 +110,6 @@ namespace CoffeeMapServer.Infrastructures.Repositories
                 return await DbContext.RoasterRequests.ToListAsync();
             }
             catch { return null; }
-        }
-        public async Task DeleteAll(List<RoasterRequest> entities)
-        {
-            try
-            {
-               await DbContext.Database.ExecuteSqlRawAsync("DELETE FROM RoasterRequests");
-            }
-            catch {
-                throw new Exception("RoasterRequest repository DeleteAll method failed to complete");
-            }
         }
     }
 }

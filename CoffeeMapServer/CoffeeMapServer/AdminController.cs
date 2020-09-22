@@ -14,10 +14,13 @@ namespace CoffeeMapServer
     {
         private readonly IRoasterRepository _roasterRepository;
         private readonly IUserRepository _userRepository;
-        public AdminController(IRoasterRepository roasterRepository, IUserRepository userRepository)
+        private readonly IRoasterRequestRepository _roasterRequestRepository;
+        public AdminController(IRoasterRepository roasterRepository, IUserRepository userRepository,
+            IRoasterRequestRepository roasterRequestRepository)
         {
             _roasterRepository = roasterRepository;
             _userRepository = userRepository;
+            _roasterRequestRepository = roasterRequestRepository;
         }
         [HttpGet]
         [Route("GetRoasters")]
@@ -151,6 +154,70 @@ namespace CoffeeMapServer
                 return null;
             }
 
+        }
+        [HttpGet]
+        [Route("GetRoasterRequests")]
+        [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        public async Task<List<RoasterRequest>> GetRoasterRequests()
+        {
+            try
+            {
+                return await _roasterRequestRepository.GetList();            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+        }
+        [HttpGet]
+        [Route("GetSingleRoasterRequest")]
+        [ProducesResponseType(typeof(RoasterRequest), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        public async Task<RoasterRequest> GetSingleRoasterRequest(int id)
+        {
+            try
+            {
+                return await _roasterRequestRepository.GetSingle(id);
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+        }
+        [HttpPost]
+        [Route("AddRoasterRequest")]
+        [ProducesResponseType(typeof(RoasterRequest), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> AddRoasterRequest([FromBody]RoasterRequest roasterRequest)
+        {
+            try
+            {
+                await _roasterRequestRepository.Create(roasterRequest);
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest("Unable to delete row! Wrong RoasterRequest format!");
+               
+            }
+        }
+        [HttpDelete]
+        [Route("DeleteRoasterRequest")]
+        [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> DeleteRoasterRequest(int id)
+        {
+            try
+            {
+                await _roasterRequestRepository.Delete(id);
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest("Unable to delete row! Wrong RoasterRequest format!");
+            }
         }
     }
 }

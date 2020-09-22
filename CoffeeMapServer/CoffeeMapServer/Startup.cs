@@ -43,6 +43,7 @@ namespace CoffeeMapServer
             services.AddTransient<ITagRepository, TagRepository>();
             services.AddTransient<IRoasterTagRepository, RoasterTagRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IRoasterRequestRepository, RoasterRequestRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
             {

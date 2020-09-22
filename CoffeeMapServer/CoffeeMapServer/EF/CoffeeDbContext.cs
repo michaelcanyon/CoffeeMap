@@ -18,7 +18,7 @@ namespace CoffeeMapServer.EF
         public DbSet<RoasterRequest> RoasterRequests { get; set; }
         public CoffeeDbContext(DbContextOptions<CoffeeDbContext> options) : base(options)
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
 
     }

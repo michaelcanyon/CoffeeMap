@@ -12,6 +12,7 @@
         $(function () {
 
             $("#contactnumber").mask('+9-(999)-999-99-99');
+            $("#hours").mask('AA-AA 00:00-00:00', { 'translation': { A: { pattern: /[а-я]/ } }, 0: { pattern: /[0-9]/ } });
         });
     </script>
 }
@@ -35,7 +36,7 @@
             <label for="mail">Email</label>
             <input type="text" id="email" class="form-control" asp-for="@Model.request.ContactEmail">
             <label>Tags String</label>
-            <input type="number" class="form-control" asp-for="@Model.request.TagString" required>
+            <input type="text" class="form-control" asp-for="@Model.request.TagString" required>
             <label for="website">Web-site link</label>
             <input type="text" pattern="[A-Za-zА-Яа-яЁё]{,}.[A-Za-zА-Яа-яЁё]{,10}" class="form-control" asp-for="@Model.request.WebSiteLink">
             <label for="instagram">instagram link</label>
@@ -46,8 +47,8 @@
             <input type="text" class="form-control" asp-for="@Model.request.TelegramProfileLink">
             <label for="addressString">Address String</label>
             <input type="text" class="form-control" asp-for="@Model.request.AddressStr">
-            <label for="openingHours">Telegram link</label>
-            <input type="text" class="form-control" asp-for="@Model.request.OpeningHours">
+            <label for="openingHours">Opening hours</label>
+            <input type="text" class="form-control" id="hours" asp-for="@Model.request.OpeningHours">
         </div>
         <button type="submit" asp-page-handler="Process" class="btn btn-primary">Submit</button>
     </form>
