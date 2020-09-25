@@ -19,6 +19,7 @@ using System.Text;
 using CoffeeMapServer.Infrastructures;
 using Microsoft.AspNetCore.CookiePolicy;
 using System.Threading.Tasks;
+using CoffeeMapServer.Services;
 
 namespace CoffeeMapServer
 {
@@ -44,6 +45,7 @@ namespace CoffeeMapServer
             services.AddTransient<IRoasterTagRepository, RoasterTagRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IRoasterRequestRepository, RoasterRequestRepository>();
+            services.AddTransient<IRoasterService, RoasterService>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
             {

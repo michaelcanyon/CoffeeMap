@@ -27,14 +27,16 @@ namespace CoffeeMapServer.Controllers
             var roasters = await _roasterService.GetRoasters();
             return Ok(roasters);
         }
+
         [HttpGet]
         [ProducesResponseType(typeof(RoasterInfoModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> RoasterInfo(int id)
+        public async Task<IActionResult> RoasterInfoById(int id)
         {
             var roaster = await _roasterService.GetSingleRoaster(id);
             return Ok(roaster);
         }
+
         [HttpPost]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
