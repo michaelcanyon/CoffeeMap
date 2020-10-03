@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeeMapServer.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class RoastersController : ControllerBase
     {
@@ -19,7 +19,9 @@ namespace CoffeeMapServer.Controllers
         {
             _roasterService = roasterService;
         }
+        
         [HttpGet]
+        [Route("All")]
         [ProducesResponseType(typeof(List<Roaster>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> RoastersInfo()
@@ -29,6 +31,7 @@ namespace CoffeeMapServer.Controllers
         }
 
         [HttpGet]
+        [Route("Single")]
         [ProducesResponseType(typeof(RoasterInfoModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> RoasterInfoById(int id)
@@ -38,9 +41,10 @@ namespace CoffeeMapServer.Controllers
         }
 
         [HttpPost]
+        [Route("Post")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Roaster([FromBody]RoasterRequest roasterRequest)
+        public async Task<IActionResult> Roaster([FromBody] RoasterRequest roasterRequest)
         {
             await _roasterService.PostRoasterRequest(roasterRequest);
             return Ok();

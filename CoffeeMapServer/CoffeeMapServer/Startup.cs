@@ -105,8 +105,7 @@ namespace CoffeeMapServer
             app.UseStatusCodePages(async context =>
             {
                 var response = context.HttpContext.Response;
-                if (response.StatusCode == (int)System.Net.HttpStatusCode.Unauthorized ||
-                response.StatusCode == (int)System.Net.HttpStatusCode.Forbidden)
+                if (response.StatusCode == (int)System.Net.HttpStatusCode.Unauthorized)
                     response.Redirect("/Login");
             });
             // prepare token to insert into cookie

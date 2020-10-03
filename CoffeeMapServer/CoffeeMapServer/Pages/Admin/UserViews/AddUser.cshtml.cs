@@ -28,10 +28,15 @@ namespace CoffeeMapServer.Pages.Admin.UserViews
         {
             User userV = await _userRepository.GetSingle(user.Login);
             if (userV != null)
-                return RedirectToPage("AddUser", 601);
+            {
+                return RedirectToPage("AddUser");
+            }
             userV = await _userRepository.GetSingleByMail(user.Email);
             if (userV != null)
-                return RedirectToPage("AddUser", 602);
+            {
+                return RedirectToPage("AddUser"); 
+            
+            }
             await _userRepository.Create(user);
             return RedirectToPage("Users");
         }

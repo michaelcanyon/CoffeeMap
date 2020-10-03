@@ -55,13 +55,7 @@ namespace CoffeeMapServer.Controllers
             HttpContext.Response.Cookies.Append(".AspNetCore.Meta.Metadta.hash", userSample.Password);
             return userSample.role == "Master" ? Redirect("~/Home/HomeMaster") : Redirect("~/Home/Home");
         }
-        //[Authorize(Roles = "admin")]
-        //[Route("getrole")]
-        //public IActionResult GetRole()
-        //{
-        //    return Ok("Ваша роль: администратор");
-        //}
-        // [HttpPost("/token")]
+
         private async Task<string> Token(string username, string password)
         {
             var identity = await GetIdentity(username, password);
