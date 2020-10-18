@@ -1,0 +1,56 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Philosopher&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,200;0,400;0,500;0,800;1,200&display=swap');
+
+body {
+    height: auto;
+}
+
+.header-text {
+    font-family: 'Philosopher', sans-serif;
+    display: block;
+    font-size: 50px;
+
+    @media (min-width: 768px) {
+        .navbar-brand.abs {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            text-align: center;
+        }
+    }
+}
+
+.nav-link {
+    text-decoration: none;
+    font-family: 'Philosopher', sans-serif;
+    font-size: 20px;
+}
+
+.nav_button {
+    display: inline-block;
+    margin: 0px 25px 0px 25px;
+    padding: 20px 0px 20x 25px;
+    border-radius: 20px 20px 20px 0px;
+    border-bottom: none;
+    transition: 0.8s;
+    color: blue;
+}
+
+    .nav_button :hover {
+        background: #CDD0D4;
+        transition: 0.8s;
+    }
+
+button:hover {
+    border-bottom: none;
+    background: #CDD0D4;
+    transition: 0.4s;
+}
+
+button:focus {
+    box-shadow: none;
+    border: none;
+    outline: none !important;
+}

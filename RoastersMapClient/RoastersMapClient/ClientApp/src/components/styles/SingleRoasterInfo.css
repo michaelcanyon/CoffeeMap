@@ -1,0 +1,380 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Philosopher&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,200;0,400;0,500;0,800;1,200&display=swap');
+
+body {
+    min-width: 250px;
+}
+
+.header-text {
+    font-family: 'Philosopher', sans-serif;
+    display: block;
+    font-size: 50px;
+}
+@media (min-width: 768px) {
+    .navbar-brand.abs {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        text-align: center;
+    }
+}
+
+.nav-link {
+    text-decoration: none;
+    font-family: 'Philosopher', sans-serif;
+    font-size: 20px;
+}
+.nav_button {
+    display: inline-block;
+    margin: 0px 25px 0px 25px;
+    padding: 20px 0px 0px 25px;
+    border-radius: 20px 20px 20px 0px;
+    border-bottom: none;
+    transition: 0.8s;
+    color: blue;
+}
+
+    .nav_button :hover {
+        background: #CDD0D4;
+        transition: 0.8s;
+    }
+
+button:hover {
+    border-bottom: none;
+    background: #CDD0D4;
+    transition: 0.4s;
+}
+
+button:focus {
+    box-shadow: none;
+    border: none;
+    outline: none !important;
+}
+
+.row-no-padding {
+}
+
+.footer-span {
+    float: left;
+    font-size: 15px;
+}
+
+.footer-block {
+    position: relative;
+    width: 90%;
+    border-top: 0.5px solid #d9d9d9;
+    margin:auto;
+    
+}
+.footerText_block {
+    position: relative;
+    width: 70%;
+    left: 25px;
+    height:100%;
+}
+@media (max-width:765px) {
+    .footer-block {
+        margin-bottom: 40px;
+    }
+
+    .fixed-button {
+        visibility: visible !important;
+    }
+}
+
+.copyright {
+    float: left;
+}
+
+.fixed-button {
+    visibility: hidden !important;
+}
+
+.map-button {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    outline: none;
+    border: none;
+    font-family: 'Philosopher', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.mapimage {
+    width: 100%;
+    margin-right: 0px;
+}
+
+.invisibility {
+    display: none;
+}
+
+.mobile-visibility {
+    visibility: visible !important;
+}
+
+.Logo-image {
+    position: relative;
+    width: 100%;
+}
+
+.backToList_button {
+    background: #f2f2f2;
+    height: 50px;
+    width: 100%;
+}
+
+    .backToList_button a {
+        display: block;
+        height: 50px;
+        outline: none;
+        border: none;
+        font-family: 'Philosopher', sans-serif;
+        font-weight: bold;
+        color: black;
+        font-size: 20px;
+        transition: 0.5s;
+        padding-left: 5%;
+        padding-top: 10px;
+    }
+@media(max-width:765px) {
+    .backToList_button a{ 
+        padding-left:10%;
+    }
+}
+        .backToList_button a:hover {
+            background: #d9d9d9;
+            transition: 0.5s;
+            text-decoration: none;
+            color: black;
+        }
+
+.Roaster_title {
+    position: relative;
+    font-family: 'Fira Sans Condensed', sans-serif;
+    font-weight: bold;
+    width: 90%;
+    margin: auto;
+    font-size: 25px;
+    display: block;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-top: 20px;
+}
+
+    .Roaster_title span {
+        position: relative;
+    }
+.Left-Bar_RoasterInformation {
+position:relative;
+width:95%;
+margin-left:5%;
+
+}
+
+.Roaster_description {
+    position: relative;
+    margin: auto;
+    display: block;
+    width: 90%;
+    border-bottom: 0.5px solid #d9d9d9;
+    font-family: 'Fira Sans Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-align: left;
+}
+
+.Tags_container {
+    position: relative;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    border-bottom: 0.5px solid #d9d9d9;
+    margin-top: 10px;
+    padding-bottom: 20px;
+}
+
+    .Tags_container span {
+        position: relative;
+        font-family: 'Philosopher', sans-serif;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+.tag_list {
+    display: block;
+    width: 100%;
+    margin: auto;
+    font-family: 'Philosopher', sans-serif;
+    font-size: 17px;
+    position: relative;
+    margin-top: 10px;
+    margin-left: 30px;
+    list-style: none;
+    font-weight: bold;
+}
+
+    .tag_list li {
+        padding-bottom: 3px;
+    }
+
+.Contacts_container {
+    position: relative;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid #d9d9d9;
+}
+
+    .Contacts_container span {
+        position: relative;
+        font-family: 'Philosopher', sans-serif;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+.Contact_list {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 0px;
+    list-style: none;
+    font-weight: bold;
+}
+
+    .Contact_list span {
+        font-size: 0.8em;
+    }
+
+    .Contact_list li {
+        padding-bottom: 20px;
+    }
+
+.roaster_breakWordContacts {
+    display: inline-block;
+    position: relative;
+    width: 60%;
+    word-wrap: break-word;
+}
+
+.icon_image {
+    position: relative;
+    top: 2px;
+    right: 7px;
+    display: inline-block;
+    background-image: url(https://www.flaticon.com/svg/static/icons/svg/723/723427.svg);
+    height: 15px;
+    width: 15px;
+}
+
+.phoneIcon_image {
+    position: relative;
+    display: inline-block;
+    top: 13px;
+    right: 15px;
+    background-image: url(https://www.flaticon.com/svg/static/icons/svg/15/15874.svg);
+    height: 35px;
+    width: 35px;
+}
+
+.mailIcon_image {
+    position: relative;
+    display: inline-block;
+    top: 13px;
+    right: 15px;
+    background-image: url(https://www.flaticon.com/svg/static/icons/svg/646/646094.svg);
+    height: 35px;
+    width: 35px;
+}
+
+.address_container {
+    position: relative;
+    width: 90%;
+    border-bottom: 1px solid #d9d9d9;
+    margin: auto;
+}
+
+.address_header {
+    position: relative;
+    font-family: 'Philosopher', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    top: 9px;
+    padding-bottom: 10px;
+}
+
+.address_string {
+    position: relative;
+    margin: auto;
+    margin-top: 20px;
+    margin-left: 35px;
+    padding-bottom: 15px;
+    font-family: 'Philosopher', sans-serif;
+}
+
+    .address_string div {
+        display: inline-block;
+    }
+
+.roasterLocationIcon {
+    position: relative;
+    display: inline-block;
+    background-image: url(https://www.flaticon.com/svg/static/icons/svg/1004/1004325.svg);
+    width: 35px;
+    height: 35px;
+    right: 10px;
+}
+
+.Roaster_locationString {
+    position: relative;
+    width: 70%;
+    word-wrap: break-word;
+    font-size: 15px;
+    color: black;
+}
+
+.openingHours_string {
+    color: grey;
+}
+
+.SocialNetworks_block {
+    position: relative;
+    width: 90%;
+    height: 120px;
+    margin: auto;
+    padding-bottom: 50px;
+}
+
+.social_header {
+    position: relative;
+    font-family: 'Philosopher', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    top: 10px;
+}
+
+.SocialNetworks_block img {
+    position: relative;
+    height: 55%;
+}
+
+.socialNetwork_icons {
+    position: relative;
+    display: inline-block;
+    width: 80%;
+    height: 100%;
+    margin-left: 19px;
+    margin-top: 30px;
+}
+.socialNetwork_icons img{
+    padding-right:5px;
+
+}
+
