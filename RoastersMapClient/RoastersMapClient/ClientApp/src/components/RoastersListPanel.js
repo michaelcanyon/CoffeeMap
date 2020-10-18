@@ -3,7 +3,6 @@ import './styles/RoastersListPanel.css';
 import { Map } from './Map';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import axios from 'axios';
-
 export class RoastersListPanel extends Component {
     constructor(props) {
         super(props);
@@ -16,8 +15,8 @@ export class RoastersListPanel extends Component {
         };
     }
     componentDidMount() {
-
-
+        this.addResizeEvent();
+        this.getRoasters();
     }
     render() {
         return (
@@ -44,25 +43,12 @@ export class RoastersListPanel extends Component {
                         </div>
                         <div className="Left-Bar_Roasters-List">
                             <div className="Left-Bar_RoastersList">
-                                <div><a href="#">Обжарщик 1</a></div>
-                                <div><a href="#">Обжарщик 2</a></div>
-                                <div><a href="#">Roaster 32</a></div>
-                                <div><a href="#">Roaster 32</a></div>
-                                <div><a href="#">Roaster 32</a></div>
-                                <div><a href="#">Roaster 32</a></div>
-                                <div><a href="#">Roaster 32</a></div>
-                                <div><a href="#">Roaster 32</a></div>
-                                <div><a href="#">Roaster 32</a></div>
-                                <div><a href="#">Обжарщик 2</a></div>
-                                <div><a href="#">Обжарщик 2</a></div>
-                                <div><a href="#">Обжарщик 2</a></div>
-                                <div><a href="#">Обжарщик 2</a></div>
-                                <div><a href="#">Обжарщик 2</a></div>
-                                <div><a href="#">Обжарщик 2</a></div>
-                                <div><a href="#">Обжарщик 2</a></div>
-                                <div><a href="#">Обжарщик 2</a></div>
-                                <div><a href="#">Обжарщик 2</a></div>
-
+                                {
+                                    this.state.data.map(
+                                        (roaster) =>
+                                            (
+                                                <div><a onClick={this.redirectToSingle(roaster.id)}>{roaster.name}</a></div>
+                                            ))}
                             </div>
                         </div>
                         <div className="footer-block">
@@ -83,7 +69,22 @@ export class RoastersListPanel extends Component {
     }
     getRoasters() {
         this.setState({ isLoading: true });
-        axios.get
+        axios.get("URILocalhostbulshit/123/...")
+            .then(result = this.setState(
+                {
+                    data: result.data,
+                    isLoading: false
+                }
+            ))
+            .catch(error => this.setState(
+                {
+                    error,
+                    isLoading: false
+                }
+            ));
+    }
+    redirectToSingle(id) {
+        return <Redirect to={"/SingleRoasterInfo/" + id} />
     }
     addResizeEvent() {
         window.addEventListener('resize', this.updateDimensions);

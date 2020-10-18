@@ -3,11 +3,16 @@ import { Map } from './Map';
 import './styles/SingleRoasterInfo.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import { Animated } from 'react-animated-css';
+import axios from 'axios';
 
 export class SingleRoasterInfo extends Component {
     state = {
         mapButton: false,
-        desktop: false
+        desktop: false,
+        roasterId: this.props.match.params.id,
+        roaster: [],
+        isLoading: false,
+        error: null
 
     };
     render() {
@@ -22,56 +27,49 @@ export class SingleRoasterInfo extends Component {
                         <div><img className="Logo-image" src="https://cdn.the-village.ru/the-village.ru/post_image-image/0PSvW6yyK9DQKKWAxLggiA.jpg"></img>
                             <div className="Logo-text"><span className="Logo-text-style"></span></div>
                         </div>
-                        <div className="Left-Bar_RoasterInformation">
-                            <div className="Roaster_title">
-                                <span>Новый Лучший Обжарщик</span>
-                            </div>
-                            <div className="Roaster_description">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            </p></div>
-                            <div className="Tags_container">
-                                <span>Теги:</span>
-                                <ul className="tag_list">
-                                    <li>
-                                        <div className="icon_image"></div>
-                                Тег номер 1
-                              </li>
-                                    <li><div className="icon_image"></div>
-                                тег 2</li>
-                                    <li><div className="icon_image"></div>
-                                новый3</li>
-                                    <li><div className="icon_image"></div>
-                                anytag</li>
-                                    <li>
-                                        <div className="icon_image"></div>
-                                The newest tag</li>
-                                </ul>
-                            </div>
-                            <div className="Contacts_container">
-                                <span>Контакты: </span>
-                                <ul className="Contact_list">
-                                    <li><div className="phoneIcon_image"></div><div className="roaster_breakWordContacts" id="roaster_number"><span>+7-929-(386)-29-19</span></div></li>
-                                    <li><div className="mailIcon_image"></div><div className="roaster_breakWordContacts" id="roaster_mail"><span>newBest123Ro_aster@gmail.com</span></div></li>
-                                </ul>
-                            </div>
-                            <div className="address_container">
-                                <span className="address_header">Адрес: </span><br></br>
-                                <div className="address_string"><div className="roasterLocationIcon"></div><div className="Roaster_locationString"><span>г.Москва, ул.Свободы, д.25, к1</span><br></br><span className="openingHours_string">
-                                    пн-пт, 10:00-19:00
-                              </span></div>
+                        {this.state.roaster.map((fields) => (
+                            <div className="Left-Bar_RoasterInformation">
+                                <div className="Roaster_title">
+                                    <span>{fields.roaster.name}</span>
+                                </div>
+                                <div className="Roaster_description">
+                                    <p>{fields.roaster.description}</p></div>
+                                < div className="Tags_container">
+                                    <span>Теги:</span>
+                                    <ul className="tag_list">
+                                        {fields.tags.map((tag) =>
+                                            (
+                                                <li>
+                                                    <div className="icon_image"></div>
+                                                    {tag.tagTitle}
+                                                </li>
+                                            ))}
+                                    </ul>
+                                </div>
+                                <div className="Contacts_container">
+                                    <span>Контакты: </span>
+                                    <ul className="Contact_list">
+                                        <li><div className="phoneIcon_image"></div><div className="roaster_breakWordContacts" id="roaster_number"><span>{fields.roaster.contactNumber}</span></div></li>
+                                        <li><div className="mailIcon_image"></div><div className="roaster_breakWordContacts" id="roaster_mail"><span>{fields.roaster.contactEmail}</span></div></li>
+                                    </ul>
+                                </div>
+                                <div className="address_container">
+                                    <span className="address_header">Адрес: </span><br></br>
+                                    <div className="address_string"><div className="roasterLocationIcon"></div><div className="Roaster_locationString"><span>{fields.address.addressStr}</span><br></br>
+                                        <span className="openingHours_string">{fields.address.openingHours}</span></div>
+                                    </div>
+                                </div>
+                                <div className="SocialNetworks_block">
+                                    <div className="social_header">Ссылки: </div>
+                                    <div className="socialNetwork_icons">
+                                        <a href={fields.roaster.telegramProfileLink}><img src="https://www.flaticon.com/svg/static/icons/svg/123/123726.svg"></img></a>
+                                        <a href={fields.roaster.instagramProfileLink}><img src="https://www.flaticon.com/svg/static/icons/svg/123/123739.svg"></img></a>
+                                        <a href={fields.roaster.vkProfileLink}><img src="https://www.flaticon.com/svg/static/icons/svg/121/121507.svg"></img></a>
+                                        <a href={fields.roaster.webSiteLink}><img src="https://www.flaticon.com/svg/static/icons/svg/288/288888.svg"></img></a>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="SocialNetworks_block">
-                                <div className="social_header">Ссылки: </div>
-                                <div className="socialNetwork_icons">
-                                    <a href="#"><img src="https://www.flaticon.com/svg/static/icons/svg/123/123726.svg"></img></a>
-                                    <a href="#"><img src="https://www.flaticon.com/svg/static/icons/svg/123/123739.svg"></img></a>
-                                    <a href="#"><img src="https://www.flaticon.com/svg/static/icons/svg/121/121507.svg"></img></a>
-                                    <a href="#"><img src="https://www.flaticon.com/svg/static/icons/svg/288/288888.svg"></img></a>
-                                </div>
-                            </div>
-
-                        </div>
+                        ))}
                         <div className="footer-block">
                             <div class="footerText_block">
                                 <span className="footer-span">Карта обжарщиков</span><br></br>
@@ -81,12 +79,26 @@ export class SingleRoasterInfo extends Component {
                     </div>
                     <div className={this.getStylesForMap()}>
                         <Map />
-                        <img className="mapimage sticky-top" src="https://docs.microsoft.com/ru-ru/azure/azure-maps/media/migrate-google-maps-web-app/google-maps-marker.png"></img>        
-                            </div>
+                        <img className="mapimage sticky-top" src="https://docs.microsoft.com/ru-ru/azure/azure-maps/media/migrate-google-maps-web-app/google-maps-marker.png"></img>
+                    </div>
                     <div className={this.getStylesForMapButton()} id="mapButtonDiv"><button id="mapButton" className="map-button" type="button" onClick={this.toggleMap}>Карта</button></div>
                 </div>
             </div>
         );
+    }
+    getRoasterInfo() {
+        this.setState({ isLoading: true });
+        axios.get("https://localhost:5001/Roasters/Single?id=" + this.state.roasterId)
+            .then(result = this.setState({
+                roaster: result.data,
+                isLoading: false
+            })).catch(
+                error => this.setState(
+                    {
+                        error,
+                        isLoading: false
+                    }
+                ));
     }
     getStylesForMapButton() {
         if (this.state.desktop)
