@@ -54,7 +54,7 @@ namespace RoastersMapClient
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
+                    pattern: "{controller}/{action=Index}/RoastersListPanel");
             });
 
             app.UseSpa(spa =>

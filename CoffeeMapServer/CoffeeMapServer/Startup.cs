@@ -37,6 +37,7 @@ namespace CoffeeMapServer
             IConfigurationSection connString = Configuration.GetSection("ConnectionString");
             string connection = connString.GetSection("Connection").Value;
             services.AddRazorPages();
+            services.AddCors();
             services.AddControllersWithViews();
             services.AddDbContext<CoffeeDbContext>(options => options.UseSqlServer(connection));
             services.AddTransient<IRoasterRepository, RoasterRepository>();
@@ -101,6 +102,7 @@ namespace CoffeeMapServer
             }
             //app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseCors(origin => origin.AllowAnyOrigin());
             app.UseStaticFiles();
             app.UseStatusCodePages(async context =>
             {

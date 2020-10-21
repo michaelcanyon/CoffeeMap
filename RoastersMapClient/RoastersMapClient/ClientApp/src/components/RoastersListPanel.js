@@ -3,6 +3,7 @@ import './styles/RoastersListPanel.css';
 import { Map } from './Map';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import axios from 'axios';
+import { Redirect } from "react-router-dom";
 export class RoastersListPanel extends Component {
     constructor(props) {
         super(props);
@@ -11,7 +12,8 @@ export class RoastersListPanel extends Component {
             desktop: false,
             data: [],
             isLoading: false,
-            error: null
+            error: null, 
+            redirect:false,
         };
     }
     componentDidMount() {
@@ -45,9 +47,9 @@ export class RoastersListPanel extends Component {
                             <div className="Left-Bar_RoastersList">
                                 {
                                     this.state.data.map(
-                                        (roaster) =>
+                                        roaster =>
                                             (
-                                                <div><a onClick={this.redirectToSingle(roaster.id)}>{roaster.name}</a></div>
+                                                <div><a href={this.redirectToSingle(roaster.id)}>{roaster.name}</a></div>
                                             ))}
                             </div>
                         </div>
@@ -69,22 +71,25 @@ export class RoastersListPanel extends Component {
     }
     getRoasters() {
         this.setState({ isLoading: true });
-        axios.get("URILocalhostbulshit/123/...")
-            .then(result = this.setState(
+        axios.get("https://localhost:5001/Roasters/All")
+            .then(result => this.setState(
                 {
                     data: result.data,
                     isLoading: false
                 }
             ))
-            .catch(error => this.setState(
-                {
-                    error,
-                    isLoading: false
-                }
-            ));
+            .catch(error => {
+                this.setState(
+                    {
+                        error,
+                        isLoading: false
+
+                    });
+                console.log(error);
+            });
     }
     redirectToSingle(id) {
-        return <Redirect to={"/SingleRoasterInfo/" + id} />
+        return "https://localhost:5010/SingleRoasterInfo/" + id;  
     }
     addResizeEvent() {
         window.addEventListener('resize', this.updateDimensions);
