@@ -66,7 +66,7 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
                 tags_array = tags.Split("#");
             }
             else
-            { // TODO: допиши добавление в таблицу тегов
+            { 
                 tags_array = tags.Split("#");
                 foreach (var i in tags_array)
                 {

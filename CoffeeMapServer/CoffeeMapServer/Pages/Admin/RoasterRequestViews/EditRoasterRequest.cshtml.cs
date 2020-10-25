@@ -14,15 +14,17 @@ namespace CoffeeMapServer.Pages.Admin.RoasterRequestViews
         private readonly IRoasterRequestRepository _roasterRequestRepository;
         [BindProperty]
         public RoasterRequest request { get; set; }
+        public Guid guid { get; set; }
         public string role { get; set; }
         public EditRoasterRequestModel(IRoasterRequestRepository roasterRequestRepository)
         {
             _roasterRequestRepository = roasterRequestRepository;
         }
-        public async Task OnGetAsync(int? id)
+        public async Task OnGetAsync(Guid id)
         {
+            guid = id;
             role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
-            request = await _roasterRequestRepository.GetSingle(Convert.ToInt32(id));
+            request = await _roasterRequestRepository.GetSingle(guid);
         }
         public async Task<IActionResult> OnPostProcessAsync()
         {

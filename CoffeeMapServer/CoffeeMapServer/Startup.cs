@@ -47,42 +47,15 @@ namespace CoffeeMapServer
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IRoasterRequestRepository, RoasterRequestRepository>();
             services.AddTransient<IRoasterService, RoasterService>();
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
-            {
-                options.RequireHttpsMetadata = false;
-                options.SaveToken = true;
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    // укзывает, будет ли валидироваться издатель при валидации токена
-                    ValidateIssuer = true,
-                    // строка, представляющая издателя
-                    ValidIssuer = AuthOptions.ISSUER,
-
-                    // будет ли валидироваться потребитель токена
-                    ValidateAudience = true,
-                    // установка потребителя токена
-                    ValidAudience = AuthOptions.AUDIENCE,
-                    // будет ли валидироваться время существования
-                    ValidateLifetime = true,
-
-                    // установка ключа безопасности
-                    IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
-                    // валидация ключа безопасности
-                    ValidateIssuerSigningKey = true,
-                };
-            });
-            services.AddAuthorization(config =>
-            {
-                config.AddPolicy(Policies.Admin, Policies.AdminPolicy());
-                config.AddPolicy(Policies.Master, Policies.MasterPolicy());
-            });
+            services.ConfigureAuth();
             services.AddRazorPages().AddRazorPagesOptions(options =>
             {
                 options.Conventions.AuthorizeFolder("/Admin/AddressesViews/");
                 options.Conventions.AuthorizeFolder("/Admin/RoasterViews/");
                 options.Conventions.AuthorizeFolder("/Admin/RoasterAddress/");
                 options.Conventions.AuthorizeFolder("/Admin/TagViews/");
+                options.Conventions.AuthorizeFolder("/Admin/Account/");
+                options.Conventions.AuthorizeFolder("/Admin/RoasterRequestViews/");
                 // options.Conventions.AllowAnonymousToPage("/Admin/AuthorizationViews/Login");
             });
             //services.AddMvc();

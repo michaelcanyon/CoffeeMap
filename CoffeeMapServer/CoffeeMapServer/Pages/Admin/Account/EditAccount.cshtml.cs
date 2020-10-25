@@ -22,20 +22,15 @@ namespace CoffeeMapServer.Pages.Admin.Account
         [BindProperty]
         public string newPassword { get; set; }
         public string role { get; set; }
-        public string hash { get; set; }
         public async Task OnGetAsync()
         {
             role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
-            hash = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.hash"].ToString();
             var id = Convert.ToInt32(HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.id"].ToString());
             user = await _userRepository.GetSingle(id);
-            if (user.Password != passwordHash)
-                 RedirectToPage("Home");
         }
         public async Task<IActionResult> OnPostAsync()
         {
             var getUser= await _userRepository.GetSingle(user.Id);
-            var hashss = CoffeeMapServer.Encryptions.Sha1Hash.GetHash(user.Password);
             if (CoffeeMapServer.Encryptions.Sha1Hash.GetHash(user.Password) != getUser.Password)
                     return RedirectToPage("EditAccount");
             getUser.Password= newPassword != null ? newPassword : user.Password;

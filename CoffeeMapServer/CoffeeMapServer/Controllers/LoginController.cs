@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using CoffeeMapServer.EF;
+﻿using CoffeeMapServer.Encryptions;
 using CoffeeMapServer.Infrastructures.IRepositories;
-using CoffeeMapServer.Models;
+using CoffeeMapServer.Services.Interfaces;
 using CoffeeMapServer.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
+using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Controllers
 {
@@ -21,73 +13,35 @@ namespace CoffeeMapServer.Controllers
     [Route("[controller]")]
     public class LoginController : Controller
     {
-        private readonly IConfiguration config;
         private readonly IUserRepository userRepository;
-        public LoginController(IUserRepository repository, IConfiguration configuration)
+        private readonly IIdentityGeneratorService _identityGeneratorService;
+
+        public LoginController(IUserRepository repository, IIdentityGeneratorService identityGeneratorService)
         {
             userRepository = repository;
-            config = configuration;
+            _identityGeneratorService = identityGeneratorService;
         }
+
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Login()
+        public async Task<IActionResult> Login()
         {
-            HttpContext.Response.Cookies.Append(".AspNetCore.Meta.Metadta", "");
-            HttpContext.Response.Cookies.Append(".AspNetCore.Meta.Metadta.id", "");
-            HttpContext.Response.Cookies.Append(".AspNetCore.Meta.Metadta.nickname", "");
-            HttpContext.Response.Cookies.Append(".AspNetCore.Meta.Metadta.role", "");
-            HttpContext.Response.Cookies.Append(".AspNetCore.Meta.Metadta.hash", "");
+            await QueryCookiesEditor.ClearCookies(HttpContext);
             return View();
         }
+
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Login([FromForm]LoginModel login)
+        public async Task<IActionResult> Login([FromForm] LoginViewModel login)
         {
-            IActionResult responce = Unauthorized();
-            var token =await Token(login.Email, login.Password);
-            if (token == null)
+            var identity =await _identityGeneratorService.GetIdentity(login.Email, login.Password);
+            if (identity == null)
                 return View();
-            var userSample =await userRepository.GetSingle(login.Email, login.Password);
-            HttpContext.Response.Cookies.Append(".AspNetCore.Meta.Metadta", token);
-            HttpContext.Response.Cookies.Append(".AspNetCore.Meta.Metadta.id", userSample.Id.ToString());
-            HttpContext.Response.Cookies.Append(".AspNetCore.Meta.Metadta.nickname", userSample.Login);
-            HttpContext.Response.Cookies.Append(".AspNetCore.Meta.Metadta.role", userSample.role);
-            HttpContext.Response.Cookies.Append(".AspNetCore.Meta.Metadta.hash", userSample.Password);
+            var token = await TokenGenerator.GenerateToken(identity);
+            var userSample = await userRepository.GetSingle(login.Email, login.Password);
+            await QueryCookiesEditor.SetUserCookies(userSample, token, HttpContext);
             return userSample.role == "Master" ? Redirect("~/Home/HomeMaster") : Redirect("~/Home/Home");
         }
 
-        private async Task<string> Token(string username, string password)
-        {
-            var identity = await GetIdentity(username, password);
-            if(identity==null)
-                return null;
-            // создаем JWT-токен
-            var jwt = new JwtSecurityToken(
-                    issuer: AuthOptions.ISSUER,
-                    audience: AuthOptions.AUDIENCE,
-                    notBefore: DateTime.UtcNow,
-                    claims: identity.Claims,
-                    expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
-                    signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
-            var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
-            return encodedJwt;
-        }
-        private async Task<ClaimsIdentity> GetIdentity(string username, string password)
-        {
-            var user =await userRepository.GetSingle(username, password);
-            if (user == null)
-                return null;
-            //the last one claim ???
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login),
-                new Claim("role", user.role),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-
-            };
-            ClaimsIdentity claimsIdentity =
-                new ClaimsIdentity(claims, "Token");
-            return claimsIdentity;
-        }
     }
 }

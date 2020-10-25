@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CoffeeMapServer.Models;
-using CoffeeMapServer.Services;
+﻿using CoffeeMapServer.Models;
+using CoffeeMapServer.Services.Interfaces;
 using CoffeeMapServer.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Controllers
 {
@@ -19,7 +17,7 @@ namespace CoffeeMapServer.Controllers
         {
             _roasterService = roasterService;
         }
-        
+
         [HttpGet]
         [Route("All")]
         [ProducesResponseType(typeof(List<Roaster>), StatusCodes.Status200OK)]
@@ -32,7 +30,7 @@ namespace CoffeeMapServer.Controllers
 
         [HttpGet]
         [Route("Single")]
-        [ProducesResponseType(typeof(RoasterInfoModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(RoasterInfoViewModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> RoasterInfoById(int id)
         {
@@ -41,12 +39,11 @@ namespace CoffeeMapServer.Controllers
         }
 
         [HttpPost]
-        [Route("Post")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Roaster([FromBody] RoasterRequest roasterRequest)
         {
-            await _roasterService.PostRoasterRequest(roasterRequest);
+            await _roasterService.SendRoasterRequest(roasterRequest);
             return Ok();
         }
 

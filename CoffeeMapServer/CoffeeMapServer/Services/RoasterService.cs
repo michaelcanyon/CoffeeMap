@@ -1,10 +1,8 @@
 ﻿using CoffeeMapServer.Infrastructures.IRepositories;
-using CoffeeMapServer.Infrastructures.Repositories;
 using CoffeeMapServer.Models;
+using CoffeeMapServer.Services.Interfaces;
 using CoffeeMapServer.ViewModels;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Services
@@ -16,8 +14,12 @@ namespace CoffeeMapServer.Services
         private readonly IRoasterTagRepository _roasterTagRepository;
         private readonly IAddessRepository _addressRepository;
         private readonly IRoasterRequestRepository _roasterRequestRepository;
-        public RoasterService(IRoasterRepository roasterRepository, ITagRepository tagRepository,
-            IAddessRepository addressRepository, IRoasterTagRepository roasterTagRepository, IRoasterRequestRepository roasterRequestRepository)
+
+        public RoasterService(IRoasterRepository roasterRepository,
+                              ITagRepository tagRepository,
+                              IAddessRepository addressRepository,
+                              IRoasterTagRepository roasterTagRepository,
+                              IRoasterRequestRepository roasterRequestRepository)
         {
             _roasterRepository = roasterRepository;
             _tagRepository = tagRepository;
@@ -25,26 +27,22 @@ namespace CoffeeMapServer.Services
             _addressRepository = addressRepository;
             _roasterRequestRepository = roasterRequestRepository;
         }
+
         public async Task<List<Roaster>> GetRoasters()
-        {
-            var roasters = await _roasterRepository.GetList();
-            return roasters;
-        }
+            => await _roasterRepository.GetList();
 
-        public async Task<RoasterInfoModel> GetSingleRoaster(int id)
+        public async Task<RoasterInfoViewModel> GetSingleRoaster(int id)
         {
-            RoasterInfoModel roasterInfo = new RoasterInfoModel();
-            roasterInfo.roaster = await _roasterRepository.GetSingle(id);
-            roasterInfo.address = await _addressRepository.GetSingle(roasterInfo.roaster.OfficeAddressId);
-            var roasterTagsId = await _roasterTagRepository.GetPairsByRoasterId(roasterInfo.roaster.Id);
+            var roaster = await _roasterRepository.GetSingle(id);
+            var roasterAddress = await _addressRepository.GetSingle(roaster.OfficeAddressId);
+            var roasterTagsId = await _roasterTagRepository.GetPairsByRoasterId(roaster.Id);
+            List<Tag> tags = new List<Tag>();
             foreach (var item in roasterTagsId)
-                roasterInfo.tags.Add(await _tagRepository.GetSingle(item.TagId));
-            return roasterInfo;
+                tags.Add(await _tagRepository.GetSingle(item.TagId));
+            return new RoasterInfoViewModel(roaster, roasterAddress, tags);
         }
 
-        public async Task PostRoasterRequest(RoasterRequest roasterRequest)
-        {
-            await _roasterRequestRepository.Create(roasterRequest);
-        }
+        public async Task SendRoasterRequest(RoasterRequest roasterRequest)
+            => await _roasterRequestRepository.Create(roasterRequest);
     }
 }

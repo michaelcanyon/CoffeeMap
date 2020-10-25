@@ -2,7 +2,7 @@
 
 namespace CoffeeMapServer.ViewModels
 {
-    public class LoginModel
+    public class LoginViewModel
     {
         [Required(ErrorMessage = "Не указан email")]
         public string Email { get; set; }
