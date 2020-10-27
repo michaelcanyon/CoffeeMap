@@ -2,7 +2,7 @@
 @model CoffeeMapServer.Views.Admin.Addresses.GetAddressesModel
 @{
 
-    @if (Model.role == "Master")
+    @if (Model.Role == "Master")
         Layout = "_MasterLayout";
 }
 @section scripts{
@@ -28,11 +28,11 @@
 <section class="content container-fluid">
     <form method="get" id="filtration" style="display:none;">
         <label for="id">Id</label>
-        <input type="text" class="form-control" asp-for="@Model.addressIdFilter">
+        <input type="text" class="form-control" asp-for="@Model.AddressIdFilter">
         <label for="name">Address</label>
-        <input type="text" maxlength="30" class="form-control" asp-for="@Model.addressStrFilter">
+        <input type="text" maxlength="30" class="form-control" asp-for="@Model.AddressStrFilter">
         <label for="addressid">Opening hours</label>
-        <input type="text" id="hours" class="form-control" asp-for="@Model.openingHoursFilter">
+        <input type="text" id="hours" class="form-control" asp-for="@Model.OpeningHoursFilter">
         <br />
         <button type="submit" class="btn btn-primary">Filter notes</button>
     </form>
@@ -55,7 +55,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var i in Model.addresses)
+            @foreach (var i in Model.Addresses)
             {
                 <tr>
                     <td>@Html.DisplayFor(item => i.Id)</td>

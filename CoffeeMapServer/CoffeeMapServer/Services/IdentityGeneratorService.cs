@@ -1,5 +1,4 @@
 ﻿using CoffeeMapServer.Infrastructures.IRepositories;
-using CoffeeMapServer.Infrastructures.Repositories;
 using CoffeeMapServer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -9,9 +8,10 @@ using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Services
 {
-    public class IdentityGeneratorService:IIdentityGeneratorService
+    public class IdentityGeneratorService : IIdentityGeneratorService
     {
         private readonly IUserRepository _userRepository;
+        
         public IdentityGeneratorService(IUserRepository repository)
         {
             _userRepository = repository;

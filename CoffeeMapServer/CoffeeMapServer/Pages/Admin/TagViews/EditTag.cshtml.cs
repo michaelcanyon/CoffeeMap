@@ -1,11 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
+using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Pages.Admin.TagViews
 {
@@ -14,34 +12,44 @@ namespace CoffeeMapServer.Pages.Admin.TagViews
         private readonly ITagRepository tagRepository;
 
         [BindProperty]
-        public Tag tag { get; set; }
-        public string nickname { get; set; }
-        public string role { get; set; }
+        public Tag Tag { get; set; }
+
+        public string Nickname { get; set; }
+
+        public string Role { get; set; }
+
+        public Guid Guid { get; set; }
+
         public EditTagModel(ITagRepository tagsRepository)
         {
             tagRepository = tagsRepository;
         }
-        public async Task<IActionResult> OnGet(int? id)
+
+        public async Task<IActionResult> OnGet(Guid id)
         {
-            role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
-            nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.nickname"].ToString();
+            Guid = id;
+            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
+            Nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.nickname"].ToString();
             try
             {
-                tag = await tagRepository.GetSingle(Convert.ToInt32(id));
+                Tag = await tagRepository.GetSingle(id);
                 return Page();
             }
-            catch {
+            catch
+            {
                 return RedirectToPage("Tags");
             }
         }
+
         public async Task<IActionResult> OnPostProcessAsync()
         {
             try
             {
-                await tagRepository.Update(tag);
+                await tagRepository.Update(Tag);
                 return RedirectToPage("Tags");
             }
-            catch {
+            catch
+            {
                 return RedirectToPage("Tags");
             }
         }

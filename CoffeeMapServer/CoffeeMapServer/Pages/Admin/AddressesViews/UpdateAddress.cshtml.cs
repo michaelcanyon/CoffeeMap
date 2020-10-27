@@ -1,11 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
+using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Views.Admin.Addresses
 {
@@ -14,27 +12,32 @@ namespace CoffeeMapServer.Views.Admin.Addresses
         private readonly IAddessRepository addressRepository;
 
         [BindProperty]
-        public Address address { get; set; }
-        public string role { get; set; }
-        public string nickname { get; set; }
+        public Address Address { get; set; }
+
+        public string Role { get; set; }
+
+        public string Nickname { get; set; }
+
         public UpdateAddressModel(IAddessRepository repository)
         {
             addressRepository = repository;
         }
-        public async Task<IActionResult> OnGet(int? id)
+
+        public async Task<IActionResult> OnGet(Guid id)
         {
-            nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.nickname"].ToString();
-            role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
-            address = await addressRepository.GetSingle(Convert.ToInt32(id));
-            if (address.OpeningHours == "none")
-                address.OpeningHours = null;
+            Nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.nickname"].ToString();
+            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
+            Address = await addressRepository.GetSingle(id);
+            if (Address.OpeningHours == "none")
+                Address.OpeningHours = null;
             return Page();
         }
+
         public async Task<IActionResult> OnPostAsync()
         {
-            if (address.OpeningHours == null)
-                address.OpeningHours = "none";
-            await addressRepository.Update(address);
+            if (Address.OpeningHours == null)
+                Address.OpeningHours = "none";
+            await addressRepository.Update(Address);
             return RedirectToPage("GetAddresses");
         }
     }

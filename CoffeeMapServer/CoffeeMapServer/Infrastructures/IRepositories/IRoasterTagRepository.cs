@@ -1,16 +1,16 @@
-﻿using CoffeeMapServer.Models;
-using CoffeeMapServer.Models.Intermediary_models;
+﻿using CoffeeMapServer.Models.Intermediary_models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Infrastructures.IRepositories
 {
-   public interface IRoasterTagRepository: IBaseRepository<RoasterTag>
+    public interface IRoasterTagRepository : IBaseRepository<RoasterTag>
     {
-        public Task<List<RoasterTag>> GetPairsByRoasterId(int roasterId);
-        public Task<List<RoasterTag>> GetPairsByTagId(int tagId);
-        public Task Delete(int roasterId, int tagId);
+        public Task<List<RoasterTag>> GetPairsByRoasterId(Guid roasterId);
+
+        public Task<List<RoasterTag>> GetPairsByTagId(Guid tagId);
+
+        public Task Delete(Guid roasterId, Guid tagId);
     }
 }

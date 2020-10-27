@@ -24,7 +24,7 @@ namespace CoffeeMapServer.Infrastructures.Repositories
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(Guid id)
         {
             SqlParameter _idParam = new SqlParameter("@id", id);
             await dbContext.Database.ExecuteSqlRawAsync("DELETE FROM Users WHERE Id=@id", _idParam);
@@ -33,14 +33,14 @@ namespace CoffeeMapServer.Infrastructures.Repositories
 
         public async Task<List<User>> GetList()
         {
-           return await dbContext.Users.ToListAsync();
+            return await dbContext.Users.ToListAsync();
         }
 
-        public async Task<User> GetSingle(int id)
+        public async Task<User> GetSingle(Guid id)
         {
             SqlParameter _idParam = new SqlParameter("@id", id);
-           var users= await dbContext.Users.FromSqlRaw("SELECT * FROM Users WHERE Id=@id", _idParam).ToListAsync();
-            return users.Count() > 0 ? users.First() : null; 
+            var users = await dbContext.Users.FromSqlRaw("SELECT * FROM Users WHERE Id=@id", _idParam).ToListAsync();
+            return users.Count() > 0 ? users.First() : null;
         }
 
         public async Task<User> GetSingle(string username, string password)
@@ -48,21 +48,24 @@ namespace CoffeeMapServer.Infrastructures.Repositories
             SqlParameter _username = new SqlParameter("@username", username);
             var passwordHash = CoffeeMapServer.Encryptions.Sha1Hash.GetHash(password);
             SqlParameter _password = new SqlParameter("@password", passwordHash);
-            var user =await dbContext.Users.FromSqlRaw("SELECT * FROM Users WHERE Login=@username AND Password=@password", _username, _password).ToListAsync();
+            var user = await dbContext.Users.FromSqlRaw("SELECT * FROM Users WHERE Login=@username AND Password=@password", _username, _password).ToListAsync();
             return user.Count() > 0 ? user.First() : null;
         }
+        
         public async Task<User> GetSingle(string username)
         {
             SqlParameter _username = new SqlParameter("@username", username);
             var user = await dbContext.Users.FromSqlRaw("SELECT * FROM Users WHERE Login=@username", _username).ToListAsync();
             return user.Count() > 0 ? user.First() : null;
         }
+        
         public async Task<User> GetSingleByMail(string email)
         {
             SqlParameter _email = new SqlParameter("@email", email);
             var user = await dbContext.Users.FromSqlRaw("SELECT * FROM Users WHERE Email=@email", _email).ToListAsync();
             return user.Count() > 0 ? user.First() : null;
         }
+        
         public async Task Update(User entity)
         {
             entity.Password = CoffeeMapServer.Encryptions.Sha1Hash.GetHash(entity.Password);

@@ -1,12 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CoffeeMapServer.Infrastructures;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
+using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Pages.Admin.UserViews
 {
@@ -14,13 +12,18 @@ namespace CoffeeMapServer.Pages.Admin.UserViews
     public class DeleteUserModel : PageModel
     {
         private readonly IUserRepository _userRepository;
+
+        public Guid Guid { get; set; }
+
         public DeleteUserModel(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
-        public async Task<IActionResult> OnGetAsync(int id)
+
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            await _userRepository.Delete(id);
+            Guid = id;
+            await _userRepository.Delete(Guid);
             return RedirectToPage("Users");
         }
     }

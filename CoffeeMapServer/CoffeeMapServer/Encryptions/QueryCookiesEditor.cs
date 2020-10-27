@@ -13,6 +13,7 @@ namespace CoffeeMapServer.Encryptions
             context.Response.Cookies.Append(".AspNetCore.Meta.Metadta.nickname", user.Login);
             context.Response.Cookies.Append(".AspNetCore.Meta.Metadta.role", user.role);
         }
+
         public static async Task ClearCookies(HttpContext context)
         {
             context.Response.Cookies.Append(".AspNetCore.Meta.Metadta", "");

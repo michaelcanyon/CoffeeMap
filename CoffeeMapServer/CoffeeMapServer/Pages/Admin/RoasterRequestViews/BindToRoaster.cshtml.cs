@@ -1,13 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using CoffeeMapServer.Models.Intermediary_models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Pages.Admin.RoasterRequestViews
 {
@@ -18,10 +16,16 @@ namespace CoffeeMapServer.Pages.Admin.RoasterRequestViews
         private readonly IRoasterTagRepository _roasterTagRepository;
         private readonly ITagRepository _tagRepository;
         private readonly IRoasterRepository _roasterRepository;
-        private List<Tag> bindTags { get; set; }
-        private Address address { get; set; }
-        private Roaster roaster { get; set; }
-        public BindToRoasterModel(IRoasterRequestRepository roasterRequestRepository,IRoasterRepository roasterRepository,
+
+        public Guid Guid { get; set; }
+        
+        private List<Tag> BindTags { get; set; }
+        
+        private Address Address { get; set; }
+        
+        private Roaster Roaster { get; set; }
+        
+        public BindToRoasterModel(IRoasterRequestRepository roasterRequestRepository, IRoasterRepository roasterRepository,
             IRoasterTagRepository roasterTagRepository, ITagRepository tagRepository, IAddessRepository addressRepository)
         {
             _roasterRequestRepository = roasterRequestRepository;
@@ -30,41 +34,41 @@ namespace CoffeeMapServer.Pages.Admin.RoasterRequestViews
             _roasterTagRepository = roasterTagRepository;
             _tagRepository = tagRepository;
         }
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            var request= await _roasterRequestRepository.GetSingle(Convert.ToInt32(id));
-            var tags = request.TagString.Split(" ");
-            bindTags = new List<Tag>();
+            var request = await _roasterRequestRepository.GetSingle(id);
+            var tags = request.TagString.Split(";");
+            BindTags = new List<Tag>();
             foreach (var item in tags)
-            { 
-                if (await _tagRepository.GetSingle(item)== null)
-                    await _tagRepository.Create(new Tag { TagTitle = item });
-                bindTags.Add(await _tagRepository.GetSingle(item));
-            }
-            address = new Address();
-            address.AddressStr = request.AddressStr;
-            address.OpeningHours = request.OpeningHours;
-               await _addressRepository.Create(address);
-            address = await _addressRepository.GetSingle(address);
-            if (address == null)
-                return RedirectToPage("RoasterRequests");
-            roaster = new Roaster();
-            roaster.OfficeAddressId = address.Id;
-            roaster.Name = request.Name;
-            roaster.ContactNumber = request.ContactNumber;
-            roaster.ContactEmail = request.ContactEmail;
-            roaster.WebSiteLink = request.WebSiteLink;
-            roaster.Description = request.Description;
-            roaster.TelegramProfileLink = request.TelegramProfileLink;
-            roaster.InstagramProfileLink = request.InstagramProfileLink;
-            roaster.VkProfileLink = request.VkProfileLink;
-            await _roasterRepository.Create(roaster);
-            var addedRoaster = await _roasterRepository.GetRoaster(roaster);
-            foreach (var item in bindTags)
             {
-               await _roasterTagRepository.Create(new RoasterTag { RoasterId = addedRoaster.Id, TagId = item.Id });
+                if (await _tagRepository.GetSingle(item) == null)
+                    await _tagRepository.Create(new Tag { TagTitle = item });
+                BindTags.Add(await _tagRepository.GetSingle(item));
             }
-            await _roasterRequestRepository.Delete(Convert.ToInt32(id));
+            Address = new Address();
+            Address.AddressStr = request.AddressStr;
+            Address.OpeningHours = request.OpeningHours;
+            await _addressRepository.Create(Address);
+            Address = await _addressRepository.GetSingle(Address);
+            if (Address == null)
+                return RedirectToPage("RoasterRequests");
+            Roaster = new Roaster();
+            Roaster.OfficeAddressId = Address.Id;
+            Roaster.Name = request.Name;
+            Roaster.ContactNumber = request.ContactNumber;
+            Roaster.ContactEmail = request.ContactEmail;
+            Roaster.WebSiteLink = request.WebSiteLink;
+            Roaster.Description = request.Description;
+            Roaster.TelegramProfileLink = request.TelegramProfileLink;
+            Roaster.InstagramProfileLink = request.InstagramProfileLink;
+            Roaster.VkProfileLink = request.VkProfileLink;
+            await _roasterRepository.Create(Roaster);
+            var addedRoaster = await _roasterRepository.GetRoaster(Roaster);
+            foreach (var item in BindTags)
+            {
+                await _roasterTagRepository.Create(new RoasterTag { RoasterId = addedRoaster.Id, TagId = item.Id });
+            }
+            await _roasterRequestRepository.Delete(id);
             return RedirectToPage("RoasterRequests");
         }
     }

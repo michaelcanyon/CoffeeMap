@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
-using CoffeeMapServer.Infrastructures.IRepositories;
+﻿using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CoffeeMapServer
 {
@@ -46,6 +44,7 @@ namespace CoffeeMapServer
         {
             try
             {
+                roaster.Id = Guid.Empty;
                 await _roasterRepository.Create(roaster);
                 return Ok();
             }
@@ -74,7 +73,7 @@ namespace CoffeeMapServer
         [Route("Roaster")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> DeleteRoaster(int roasterId)
+        public async Task<IActionResult> DeleteRoaster(Guid roasterId)
         {
             try
             {
@@ -88,7 +87,7 @@ namespace CoffeeMapServer
         }
         [HttpPost]
         [Route("SingleRoaster")]
-        public async Task<IActionResult> GetSingleRoaster(int roasterId)
+        public async Task<IActionResult> GetSingleRoaster(Guid roasterId)
         {
             try
             {
@@ -163,7 +162,8 @@ namespace CoffeeMapServer
         {
             try
             {
-                return await _roasterRequestRepository.GetList();            }
+                return await _roasterRequestRepository.GetList();
+            }
             catch (Exception)
             {
 
@@ -174,7 +174,7 @@ namespace CoffeeMapServer
         [Route("GetSingleRoasterRequest")]
         [ProducesResponseType(typeof(RoasterRequest), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<RoasterRequest> GetSingleRoasterRequest(int id)
+        public async Task<RoasterRequest> GetSingleRoasterRequest(Guid id)
         {
             try
             {
@@ -190,24 +190,25 @@ namespace CoffeeMapServer
         [Route("AddRoasterRequest")]
         [ProducesResponseType(typeof(RoasterRequest), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> AddRoasterRequest([FromBody]RoasterRequest roasterRequest)
+        public async Task<IActionResult> AddRoasterRequest([FromBody] RoasterRequest roasterRequest)
         {
             try
             {
+                roasterRequest.Id = Guid.Empty;
                 await _roasterRequestRepository.Create(roasterRequest);
                 return Ok();
             }
             catch
             {
                 return BadRequest("Unable to delete row! Wrong RoasterRequest format!");
-               
+
             }
         }
         [HttpDelete]
         [Route("DeleteRoasterRequest")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> DeleteRoasterRequest(int id)
+        public async Task<IActionResult> DeleteRoasterRequest(Guid id)
         {
             try
             {

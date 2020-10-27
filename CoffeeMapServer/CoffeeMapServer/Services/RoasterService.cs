@@ -2,6 +2,7 @@
 using CoffeeMapServer.Models;
 using CoffeeMapServer.Services.Interfaces;
 using CoffeeMapServer.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -31,7 +32,7 @@ namespace CoffeeMapServer.Services
         public async Task<List<Roaster>> GetRoasters()
             => await _roasterRepository.GetList();
 
-        public async Task<RoasterInfoViewModel> GetSingleRoaster(int id)
+        public async Task<RoasterInfoViewModel> GetSingleRoaster(Guid id)
         {
             var roaster = await _roasterRepository.GetSingle(id);
             var roasterAddress = await _addressRepository.GetSingle(roaster.OfficeAddressId);

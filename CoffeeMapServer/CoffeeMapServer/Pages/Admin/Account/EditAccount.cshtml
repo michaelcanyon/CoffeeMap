@@ -1,8 +1,8 @@
-﻿@page
+﻿@page "{guid?}"
 @model CoffeeMapServer.Pages.Admin.Account.EditAccountModel
 @{
 
-    @if (Model.role == "Master")
+    @if (Model.Role == "Master")
         Layout = "_MasterLayout";
 }
 @section scripts{
@@ -35,7 +35,7 @@
             <label for="old_password">Old Passsword</label>
             <input type="text" id="old_password" class="form-control" asp-for="@Model.user.Password" value="">
             <label for="new_password">New Password</label>
-            <input type="text" id="new_password" class="form-control" asp-for="@Model.newPassword">
+            <input type="text" id="new_password" class="form-control" asp-for="@Model.NewPassword">
             <h6 id="message"></h6>
             <label for="passwordConfirmation">Password Confirmation</label>
             <input type="text" id="confirmation" class="form-control">

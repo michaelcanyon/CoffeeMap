@@ -2,7 +2,7 @@
 @model CoffeeMapServer.Pages.Admin.RoasterRequestViews.RoasterRequestsModel
 @{
 
-    @if (Model.role == "Master")
+    @if (Model.Role == "Master")
         Layout = "_MasterLayout";
 }
 @section scripts{
@@ -32,7 +32,7 @@
                     ContactNumber
                 </th>
                 <th>
-                    Tags String
+                    Tags String(divide tags with ";" sign)
                 </th>
                 <th>
                     ContactEmail
@@ -58,7 +58,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var i in Model.roasterRequests)
+            @foreach (var i in Model.RoasterRequests)
             {
                 <tr>
                     <td>@Html.DisplayFor(item => i.Id)</td>

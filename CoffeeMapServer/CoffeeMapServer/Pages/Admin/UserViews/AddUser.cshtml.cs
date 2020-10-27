@@ -17,29 +17,34 @@ namespace CoffeeMapServer.Pages.Admin.UserViews
     public class AddUserModel : PageModel
     {
         private readonly IUserRepository _userRepository;
+
         public AddUserModel(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
+
         [BindProperty]
-        public User user { get; set; }
+        public User Ruser { get; set; }
+        
         public int ErrorStatusCode { get; set; }
+        
         public async Task<IActionResult> OnPostAsync()
         {
-            User userV = await _userRepository.GetSingle(user.Login);
+            User userV = await _userRepository.GetSingle(Ruser.Login);
             if (userV != null)
             {
                 return RedirectToPage("AddUser");
             }
-            userV = await _userRepository.GetSingleByMail(user.Email);
+            userV = await _userRepository.GetSingleByMail(Ruser.Email);
             if (userV != null)
             {
                 return RedirectToPage("AddUser"); 
             
             }
-            await _userRepository.Create(user);
+            await _userRepository.Create(Ruser);
             return RedirectToPage("Users");
         }
+
         public void OnGet(int StatusCode)
         {
             ErrorStatusCode = StatusCode;           

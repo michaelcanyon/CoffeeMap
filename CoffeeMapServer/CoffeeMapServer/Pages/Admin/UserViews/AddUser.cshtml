@@ -17,13 +17,13 @@
         <div class="form-group" id="editForm">
 
             <label for="login">Login</label>
-            <input type="text" maxlength="30" class="form-control" asp-for="@Model.user.Login" required>
+            <input type="text" maxlength="30" class="form-control" asp-for="@Model.Ruser.Login" required>
             <label for="mail">Email</label>
-            <input type="text" id="email" pattern="[^@@&%#(){}[]'|,.-`~$]@@[A-Za-z0-9].[a-z]" class="form-control" asp-for="@Model.user.Email">
+            <input type="text" id="email" pattern="[^@@&%#(){}[]'|,.-`~$]@@[A-Za-z0-9].[a-z]" class="form-control" asp-for="@Model.Ruser.Email">
             <label for="password">Password</label>
-            <input type="password" minlength="10" class="form-control" asp-for="@Model.user.Password" required>
+            <input type="password" minlength="10" class="form-control" asp-for="@Model.Ruser.Password" required>
             <label for="role">Role</label>
-            <select class="form-control" asp-for="@Model.user.role">
+            <select class="form-control" asp-for="@Model.Ruser.role">
                 <option value="Admin">Admin</option>
                 <option value="Master">Master</option>
             </select>

@@ -1,25 +1,18 @@
-using System;
 using CoffeeMapServer.EF;
+using CoffeeMapServer.Infrastructures.IRepositories;
+using CoffeeMapServer.Infrastructures.Repositories;
+using CoffeeMapServer.Infrastructures.Repositories.Intermediary_repositories;
+using CoffeeMapServer.Services;
+using CoffeeMapServer.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using CoffeeMapServer.Infrastructures.IRepositories;
-using CoffeeMapServer.Infrastructures.Repositories;
 using Microsoft.OpenApi.Models;
-using CoffeeMapServer.Infrastructures.Repositories.Intermediary_repositories;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using CoffeeMapServer.Infrastructures;
-using Microsoft.AspNetCore.CookiePolicy;
-using System.Threading.Tasks;
-using CoffeeMapServer.Services;
 
 namespace CoffeeMapServer
 {
@@ -47,6 +40,7 @@ namespace CoffeeMapServer
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IRoasterRequestRepository, RoasterRequestRepository>();
             services.AddTransient<IRoasterService, RoasterService>();
+            services.AddTransient<IIdentityGeneratorService, IdentityGeneratorService>();
             services.ConfigureAuth();
             services.AddRazorPages().AddRazorPagesOptions(options =>
             {

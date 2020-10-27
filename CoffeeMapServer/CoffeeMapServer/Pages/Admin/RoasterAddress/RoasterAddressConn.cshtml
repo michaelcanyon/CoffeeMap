@@ -2,7 +2,7 @@
 @model CoffeeMapServer.Pages.Admin.RoasterAddress.RoasterAddressConnModel
 @{
 
-    @if (Model.role == "Master")
+    @if (Model.Role == "Master")
         Layout = "_MasterLayout";
 }
 @section scripts{
@@ -26,9 +26,9 @@
     <br />
     <form method="post">
         <label>Address id</label>
-        <input type="text" class="form-control" asp-for="@Model.insertAddressId" required>
+        <input type="text" class="form-control" asp-for="@Model.InsertAddressId" required>
         <label>Roaster id</label>
-        <input type="text" class="form-control" asp-for="@Model.insertRoasterId" required>
+        <input type="text" class="form-control" asp-for="@Model.InsertRoasterId" required>
         <button type="submit" class="btn btn-primary">Create Connection</button>
     </form>
     <br />
@@ -37,17 +37,17 @@
             Roasters
         </h4>
         <label for="id">Id</label>
-        <input type="text" class="form-control" asp-for="@Model.idFilter">
+        <input type="text" class="form-control" asp-for="@Model.IdFilter">
         <label for="name">Name</label>
-        <input type="text" maxlength="30" class="form-control" asp-for="@Model.nameFilter">
+        <input type="text" maxlength="30" class="form-control" asp-for="@Model.NameFilter">
         <br />
         <h4>
             Addresses
         </h4>
         <label for="id">Id</label>
-        <input type="text" class="form-control" asp-for="@Model.addressIdFilter">
+        <input type="text" class="form-control" asp-for="@Model.AddressIdFilter">
         <label for="name">Address</label>
-        <input type="text" maxlength="30" class="form-control" asp-for="@Model.addressStrFilter">
+        <input type="text" maxlength="30" class="form-control" asp-for="@Model.AddressStrFilter">
         <br />
         <button type="submit" class="btn btn-primary">Filter notes</button>
     </form>
@@ -69,8 +69,8 @@
             </tr>
         </thead>
         <tbody>
-            @if (Model.roasters != null)
-                foreach (var i in Model.roasters)
+            @if (Model.Roasters != null)
+                foreach (var i in Model.Roasters)
                 {
                     <tr>
                         <td>@Html.DisplayFor(item => i.Id)</td>
@@ -94,8 +94,8 @@
             </tr>
         </thead>
         <tbody>
-            @if (Model.addresses != null)
-                foreach (var g in Model.addresses)
+            @if (Model.Addresses != null)
+                foreach (var g in Model.Addresses)
                 {
                     <tr>
                         <td>@Html.DisplayFor(item => g.Id)</td>

@@ -1,11 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Pages.Admin.RoasterAddress
 {
@@ -13,57 +13,70 @@ namespace CoffeeMapServer.Pages.Admin.RoasterAddress
     {
         private readonly IRoasterRepository roasterRepository;
         private readonly IAddessRepository addessRepository;
+
         public RoasterAddressConnModel(IRoasterRepository rRepository, IAddessRepository aRepository)
         {
             roasterRepository = rRepository;
             addessRepository = aRepository;
         }
-        [BindProperty(SupportsGet =true)]
-        public string idFilter { get; set; }
-        [BindProperty(SupportsGet = true)]
-        public string nameFilter { get; set; }
-        [BindProperty(SupportsGet = true)]
-        public string addressIdFilter { get; set; }
-        [BindProperty(SupportsGet = true)]
-        public string addressStrFilter { get; set; }
-        public List<Address> addresses { get; set; }
-        public List<Roaster> roasters { get; set; }
-
-        public Roaster insertableRoaster { get; set; }
-        public Address insertableAddress { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public string insertRoasterId { get; set; }
+        public string IdFilter { get; set; }
+
         [BindProperty(SupportsGet = true)]
-        public string insertAddressId { get; set; }
-        public string role { get; set; }
-        public string nickname { get; set; }
+        public string NameFilter { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string AddressIdFilter { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string AddressStrFilter { get; set; }
+
+        public List<Address> Addresses { get; set; }
+
+        public List<Roaster> Roasters { get; set; }
+
+        public Roaster InsertableRoaster { get; set; }
+
+        public Address InsertableAddress { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string InsertRoasterId { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string InsertAddressId { get; set; }
+
+        public string Role { get; set; }
+
+        public string Nickname { get; set; }
+
         public async Task OnGetAsync()
         {
-            nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.nickname"].ToString();
-            role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
-            addresses = await addessRepository.GetList();
-            roasters = await roasterRepository.GetList();
-            if (!string.IsNullOrEmpty(addressIdFilter))
-                addresses = addresses.Where(n => n.Id.Equals(Convert.ToInt32(addressIdFilter))).ToList();
-            if (!string.IsNullOrEmpty(addressStrFilter))
-                addresses = addresses.Where(n => n.AddressStr.Contains(addressStrFilter)).ToList();
-            if (!string.IsNullOrEmpty(idFilter))
-                roasters = roasters.Where(n => n.Id.Equals(Convert.ToInt32(idFilter))).ToList();
-            if (!string.IsNullOrEmpty(nameFilter))
-                roasters = roasters.Where(n => n.Name.Contains(nameFilter)).ToList();
+            Nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.nickname"].ToString();
+            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
+            Addresses = await addessRepository.GetList();
+            Roasters = await roasterRepository.GetList();
+            if (!string.IsNullOrEmpty(AddressIdFilter))
+                Addresses = Addresses.Where(n => n.Id.Equals(Guid.Parse(AddressIdFilter))).ToList();
+            if (!string.IsNullOrEmpty(AddressStrFilter))
+                Addresses = Addresses.Where(n => n.AddressStr.Contains(AddressStrFilter)).ToList();
+            if (!string.IsNullOrEmpty(IdFilter))
+                Roasters = Roasters.Where(n => n.Id.Equals(Guid.Parse(IdFilter))).ToList();
+            if (!string.IsNullOrEmpty(NameFilter))
+                Roasters = Roasters.Where(n => n.Name.Contains(NameFilter)).ToList();
 
         }
+
         public async Task<IActionResult> OnPostAsync()
         {
-            insertableAddress = await addessRepository.GetSingle(Convert.ToInt32(insertAddressId));
-            if (insertableAddress == null)
+            InsertableAddress = await addessRepository.GetSingle(Guid.Parse(InsertAddressId));
+            if (InsertableAddress == null)
                 return RedirectToPage("RoasterAddressConn");
-            insertableRoaster = await roasterRepository.GetSingle(Convert.ToInt32(insertRoasterId));
-            if (insertableRoaster == null)
+            InsertableRoaster = await roasterRepository.GetSingle(Guid.Parse(InsertRoasterId));
+            if (InsertableRoaster == null)
                 return RedirectToPage("RoasterAddressConn");
-            insertableRoaster.OfficeAddressId = Convert.ToInt32(insertAddressId);
-            await roasterRepository.Update(insertableRoaster);
+            InsertableRoaster.OfficeAddressId = Guid.Parse(InsertAddressId);
+            await roasterRepository.Update(InsertableRoaster);
             return RedirectToPage("RoasterAddressConn");
         }
     }

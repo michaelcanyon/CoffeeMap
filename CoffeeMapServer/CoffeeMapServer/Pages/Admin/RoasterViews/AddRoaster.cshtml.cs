@@ -1,13 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using CoffeeMapServer.Models.Intermediary_models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Views.Admin.RoasterViews
 {
@@ -19,15 +16,18 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
         private readonly IRoasterTagRepository roasterTagRepository;
 
         [BindProperty]
-        public Roaster roaster { get; set; }
+        public Roaster Roaster { get; set; }
 
         [BindProperty]
-        public Address address { get; set; }
+        public Address Address { get; set; }
 
         [BindProperty]
-        public string tags { get; set; }
-        public string role { get; set; }
-        public string nickname { get; set; }
+        public string Tags { get; set; }
+
+        public string Role { get; set; }
+
+        public string Nickname { get; set; }
+
         public AddRoasterModel(IRoasterRepository repository, IAddessRepository addrRepository, ITagRepository tagsRepository, IRoasterTagRepository roasterTagsRepository)
         {
             roasterRepository = repository;
@@ -36,38 +36,40 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
             roasterTagRepository = roasterTagsRepository;
 
         }
+
         public async Task OnGetAsync()
         {
-            nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.nickname"].ToString();
-            role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
+            Nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.nickname"].ToString();
+            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
         }
+
         public async Task<IActionResult> OnPostAsync()
         {
-            if (await roasterRepository.GetRoasterByName(roaster.Name) != null)
+            if (await roasterRepository.GetRoasterByName(Roaster.Name) != null)
             {
                 return RedirectToPage("Roasters");
             }
             string[] tags_array;
-            if (roaster.ContactEmail == null)
-                roaster.ContactEmail = "none";
-            if (roaster.InstagramProfileLink == null)
-                roaster.InstagramProfileLink = "none";
-            if (roaster.WebSiteLink == null)
-                roaster.WebSiteLink = "none";
-            if (roaster.VkProfileLink == null)
-                roaster.VkProfileLink = "none";
-            if (roaster.TelegramProfileLink == null)
-                roaster.TelegramProfileLink = "none";
-            if (address.OpeningHours == null)
-                address.OpeningHours = "none";
-            if (tags.Length == 0)
+            if (Roaster.ContactEmail == null)
+                Roaster.ContactEmail = "none";
+            if (Roaster.InstagramProfileLink == null)
+                Roaster.InstagramProfileLink = "none";
+            if (Roaster.WebSiteLink == null)
+                Roaster.WebSiteLink = "none";
+            if (Roaster.VkProfileLink == null)
+                Roaster.VkProfileLink = "none";
+            if (Roaster.TelegramProfileLink == null)
+                Roaster.TelegramProfileLink = "none";
+            if (Address.OpeningHours == null)
+                Address.OpeningHours = "none";
+            if (Tags.Length == 0)
             {
-                tags = "none";
-                tags_array = tags.Split("#");
+                Tags = "none";
+                tags_array = Tags.Split("#");
             }
             else
-            { 
-                tags_array = tags.Split("#");
+            {
+                tags_array = Tags.Split("#");
                 foreach (var i in tags_array)
                 {
                     if (i == "")
@@ -83,11 +85,11 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
                     continue;
                 _localTags.Add(await tagRepository.GetSingle(i));
             }
-            await addessRepository.Create(address);
-            var addr = await addessRepository.GetSingle(address);
-            roaster.OfficeAddressId = addr.Id;
-            await roasterRepository.Create(roaster);
-            var roasterId = (await roasterRepository.GetRoaster(roaster)).Id;
+            await addessRepository.Create(Address);
+            var addr = await addessRepository.GetSingle(Address);
+            Roaster.OfficeAddressId = addr.Id;
+            await roasterRepository.Create(Roaster);
+            var roasterId = (await roasterRepository.GetRoaster(Roaster)).Id;
             foreach (var i in _localTags)
             {
                 await roasterTagRepository.Create(new RoasterTag { RoasterId = roasterId, TagId = i.Id });

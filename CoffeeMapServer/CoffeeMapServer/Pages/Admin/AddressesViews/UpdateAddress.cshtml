@@ -2,7 +2,7 @@
 @model CoffeeMapServer.Views.Admin.Addresses.UpdateAddressModel
 @{
 
-    @if (Model.role == "Master")
+    @if (Model.Role == "Master")
         Layout = "_MasterLayout";
 }
 @section scripts{
@@ -24,15 +24,15 @@
     <form method="post">
         <div class="form-group">
             <label for="Id">Id</label>
-            <input type="hidden" class="form-control" asp-for="@Model.address.Id" value="@Model.address.Id">
+            <input type="hidden" class="form-control" asp-for="@Model.Address.Id" value="@Model.Address.Id">
         </div>
         <div class="form-group">
 
             <label for="Name">Address string</label>
-            <input type="text" maxlength="50" class="form-control" asp-for="@Model.address.AddressStr" required>
+            <input type="text" maxlength="50" class="form-control" asp-for="@Model.Address.AddressStr" required>
             <label for="phone">Opening hours</label>
-            <input type="text" id="hours" class="form-control" asp-for="@Model.address.OpeningHours">
+            <input type="text" id="hours" class="form-control" asp-for="@Model.Address.OpeningHours">
         </div>
-        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </section>

@@ -22,13 +22,13 @@
 <section class="content container-fluid">
     <form method="get" id="filtration" style="display:none;">
         <label for="login">Login</label>
-        <input type="text" class="form-control" asp-for="@Model.idFilter">
+        <input type="text" class="form-control" asp-for="@Model.IdFilter">
         <label for="name">Name</label>
-        <input type="text" maxlength="30" class="form-control" asp-for="@Model.loginFilter">
+        <input type="text" maxlength="30" class="form-control" asp-for="@Model.LoginFilter">
         <label for="email">Email</label>
-        <input type="text" class="form-control" asp-for="@Model.emailFilter">
+        <input type="text" class="form-control" asp-for="@Model.EmailFilter">
         <label for="role">role</label>
-        <input type="text" id="role" class="form-control" asp-for="@Model.roleFilter">
+        <input type="text" id="role" class="form-control" asp-for="@Model.RoleFilter">
         <br />
         <button type="submit" class="btn btn-primary">Filter notes</button>
 
@@ -56,7 +56,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var i in Model.users)
+            @foreach (var i in Model.Users)
             {
                 <tr>
                     <td>@Html.DisplayFor(item => i.Id)</td>

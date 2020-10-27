@@ -1,13 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using CoffeeMapServer.Models.Intermediary_models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Views.Admin.RoasterViews
 {
@@ -16,32 +14,41 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
         private readonly IRoasterRepository RoasterRepository;
         private readonly IRoasterTagRepository RoasterTagRepository;
         private readonly ITagRepository TagRepository;
-        public List<Roaster> roasters { get; set; }
-        public List<RoasterTag> roasterTags { get; set; }
+        public List<Roaster> Roasters { get; set; }
+        public List<RoasterTag> RoasterTags { get; set; }
 
-        public List<Tag> tags { get; set; }
+        public List<Tag> Tags { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public string idFilter { get; set; }
+        public string IdFilter { get; set; }
+
         [BindProperty(SupportsGet = true)]
-        public string nameFilter { get; set; }
+        public string NameFilter { get; set; }
+
         [BindProperty(SupportsGet = true)]
-        public string officeAddressIdFilter { get; set; }
+        public string OfficeAddressIdFilter { get; set; }
+
         [BindProperty(SupportsGet = true)]
-        public string contactNumberFilter { get; set; }
+        public string ContactNumberFilter { get; set; }
+
         [BindProperty(SupportsGet = true)]
-        public string contactEmailFilter { get; set; }
+        public string ContactEmailFilter { get; set; }
+
         [BindProperty(SupportsGet = true)]
-        public string instagramProfileFilter { get; set; }
+        public string InstagramProfileFilter { get; set; }
+
         [BindProperty(SupportsGet = true)]
         public string TelegramProfileFilter { get; set; }
+
         [BindProperty(SupportsGet = true)]
         public string VkProfileFilter { get; set; }
+
         [BindProperty(SupportsGet = true)]
         public string WebSiteFilter { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public string TagString { get; set; }
+
         public RoastersModel(IRoasterRepository roasterRepository, IRoasterTagRepository roasterTagRepository, ITagRepository tagRepository)
         {
             RoasterRepository = roasterRepository;
@@ -50,32 +57,35 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
         }
 
         [BindProperty]
-        public int roasterId { get; set; }
-        public string role { get; set; }
-        public string nickname { get; set; }
+        public int RoasterId { get; set; }
+
+        public string Role { get; set; }
+
+        public string Nickname { get; set; }
+
         public async Task OnGetAsync()
         {
-            nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.nickname"].ToString();
-            role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
-            roasters = await RoasterRepository.GetList();
-            roasterTags = await RoasterTagRepository.GetList();
-            tags = await TagRepository.GetList();
-            if (!string.IsNullOrEmpty(idFilter))
-                roasters = roasters.Where(s => s.Id.Equals(Convert.ToInt32(idFilter))).ToList();
-            if (!string.IsNullOrEmpty(nameFilter))
-                roasters = roasters.Where(s => s.Name.Contains(nameFilter)).ToList();
-            if (!string.IsNullOrEmpty(officeAddressIdFilter))
-                roasters = roasters.Where(s => s.OfficeAddressId.Equals(Convert.ToInt32(officeAddressIdFilter))).ToList();
-            if (!string.IsNullOrEmpty(contactNumberFilter))
-                roasters = roasters.Where(s => s.ContactNumber.Contains(contactNumberFilter)).ToList();
-            if (!string.IsNullOrEmpty(contactEmailFilter))
-                roasters = roasters.Where(s => s.ContactEmail.Contains(contactEmailFilter)).ToList();
-            if (!string.IsNullOrEmpty(instagramProfileFilter))
-                roasters = roasters.Where(s => s.InstagramProfileLink.Contains(instagramProfileFilter)).ToList();
+            Nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.nickname"].ToString();
+            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
+            Roasters = await RoasterRepository.GetList();
+            RoasterTags = await RoasterTagRepository.GetList();
+            Tags = await TagRepository.GetList();
+            if (!string.IsNullOrEmpty(IdFilter))
+                Roasters = Roasters.Where(s => s.Id.Equals(IdFilter)).ToList();
+            if (!string.IsNullOrEmpty(NameFilter))
+                Roasters = Roasters.Where(s => s.Name.Contains(NameFilter)).ToList();
+            if (!string.IsNullOrEmpty(OfficeAddressIdFilter))
+                Roasters = Roasters.Where(s => s.OfficeAddressId.Equals(OfficeAddressIdFilter)).ToList();
+            if (!string.IsNullOrEmpty(ContactNumberFilter))
+                Roasters = Roasters.Where(s => s.ContactNumber.Contains(ContactNumberFilter)).ToList();
+            if (!string.IsNullOrEmpty(ContactEmailFilter))
+                Roasters = Roasters.Where(s => s.ContactEmail.Contains(ContactEmailFilter)).ToList();
+            if (!string.IsNullOrEmpty(InstagramProfileFilter))
+                Roasters = Roasters.Where(s => s.InstagramProfileLink.Contains(InstagramProfileFilter)).ToList();
             if (!string.IsNullOrEmpty(VkProfileFilter))
-                roasters = roasters.Where(s => s.VkProfileLink.Contains(VkProfileFilter)).ToList();
+                Roasters = Roasters.Where(s => s.VkProfileLink.Contains(VkProfileFilter)).ToList();
             if (!string.IsNullOrEmpty(TelegramProfileFilter))
-                roasters = roasters.Where(s => s.TelegramProfileLink.Contains(TelegramProfileFilter)).ToList();
+                Roasters = Roasters.Where(s => s.TelegramProfileLink.Contains(TelegramProfileFilter)).ToList();
             if (!string.IsNullOrEmpty(TagString))
             {
                 var tagsArr = TagString.Split(" ");
@@ -83,10 +93,9 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
                 {
                     if (i == "")
                         continue;
-                    tags = tags.Where(tag => tag.TagTitle.Contains(i)).ToList();
+                    Tags = Tags.Where(tag => tag.TagTitle.Contains(i)).ToList();
                 }
             }
-
         }
 
     }

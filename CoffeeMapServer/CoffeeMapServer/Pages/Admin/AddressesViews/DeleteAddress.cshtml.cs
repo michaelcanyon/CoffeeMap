@@ -1,10 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
+using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Views.Admin.Addresses
 {
@@ -12,18 +10,24 @@ namespace CoffeeMapServer.Views.Admin.Addresses
     {
         private readonly IAddessRepository addessRepository;
         private readonly IRoasterRepository roasterRepository;
+
+        public Guid Guid { get; set; }
+
         public DeleteAddressModel(IAddessRepository repository, IRoasterRepository rRepository)
         {
             addessRepository = repository;
             roasterRepository = rRepository;
         }
-        public async Task<IActionResult> OnGet(int? id)
+
+        public async Task<IActionResult> OnGet(Guid id)
         {
-            await addessRepository.Delete(Convert.ToInt32(id));
-           var roaster= await roasterRepository.GetSingleByAddressId(Convert.ToInt32(id));
+            // TODO: обсуди с женей. Возможно, необходимо удалить все адреса у оффисов, где они совпадают. Ну или сам подумай.
+            Guid = id;
+            await addessRepository.Delete(id);
+            var roaster = await roasterRepository.GetSingleByAddressId(id);
             if (roaster != null)
             {
-                roaster.OfficeAddressId = 900000000;
+                roaster.OfficeAddressId = new Guid();
                 await roasterRepository.Update(roaster);
             }
             return RedirectToPage("GetAddresses");

@@ -1,5 +1,4 @@
-﻿using AspNetCore;
-using CoffeeMapServer.Models;
+﻿using CoffeeMapServer.Models;
 using System.Collections.Generic;
 
 namespace CoffeeMapServer.ViewModels
@@ -7,9 +6,11 @@ namespace CoffeeMapServer.ViewModels
     public class RoasterInfoViewModel
     {
         public Roaster Roaster { get; set; }
+       
         public Address Address { get; set; }
+        
         public List<Tag> Tags { get; set; }
-            
+
         public RoasterInfoViewModel(Roaster roaster, Address address, List<Tag> tagsList)
         {
             Roaster = roaster;

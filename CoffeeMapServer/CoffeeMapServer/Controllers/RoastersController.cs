@@ -3,6 +3,7 @@ using CoffeeMapServer.Services.Interfaces;
 using CoffeeMapServer.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -32,7 +33,7 @@ namespace CoffeeMapServer.Controllers
         [Route("Single")]
         [ProducesResponseType(typeof(RoasterInfoViewModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> RoasterInfoById(int id)
+        public async Task<IActionResult> RoasterInfoById(Guid id)
         {
             var roaster = await _roasterService.GetSingleRoaster(id);
             return Ok(roaster);
@@ -43,6 +44,7 @@ namespace CoffeeMapServer.Controllers
         [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Roaster([FromBody] RoasterRequest roasterRequest)
         {
+            roasterRequest.Id = Guid.Empty;
             await _roasterService.SendRoasterRequest(roasterRequest);
             return Ok();
         }

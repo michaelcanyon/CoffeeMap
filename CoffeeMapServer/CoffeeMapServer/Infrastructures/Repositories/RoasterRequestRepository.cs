@@ -17,6 +17,7 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         {
             DbContext = context;
         }
+
         public async Task Create(RoasterRequest entity)
         {
             try
@@ -29,7 +30,8 @@ namespace CoffeeMapServer.Infrastructures.Repositories
                 throw new Exception("RoasterRequest repository create method failed to complete");
             }
         }
-        public async Task Delete(int id)
+
+        public async Task Delete(Guid id)
         {
             try
             {
@@ -53,7 +55,7 @@ namespace CoffeeMapServer.Infrastructures.Repositories
                 throw new Exception("RoasterRequest repository DeleteAll method failed to complete");
             }
         }
-        public async Task<RoasterRequest> GetSingle(int id)
+        public async Task<RoasterRequest> GetSingle(Guid id)
         {
             try
             {
@@ -94,7 +96,7 @@ namespace CoffeeMapServer.Infrastructures.Repositories
                 await DbContext.Database.ExecuteSqlRawAsync("UPDATE RoasterRequests SET Name=@name, ContactEmail=@email," +
                     " ContactNumber=@phone, WebSiteLink=@website, InstagramProfileLink=@instagram, VkProfileLink=@vk," +
                     " TelegramProfileLink=@telegram, AddressStr=@address, OpeningHours=@openingHours, TagString=@tags WHERE Id=@id"
-                    , paramid, name, email, phone, website, instagram, vk, telegram, address,openingHours, tags);
+                    , paramid, name, email, phone, website, instagram, vk, telegram, address, openingHours, tags);
                 await DbContext.SaveChangesAsync();
             }
             catch

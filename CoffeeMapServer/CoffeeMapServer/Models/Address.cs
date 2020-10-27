@@ -6,7 +6,11 @@ namespace CoffeeMapServer.Models
     {
         [Required]
         public string AddressStr { get; set; }
+        
         [Required]
         public string OpeningHours { get; set; }
+        
+        //public Address() : base()
+        //{ }
     }
 }

@@ -10,19 +10,21 @@ using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Infrastructures.Repositories
 {
-    public class RoasterRepository: IRoasterRepository
+    public class RoasterRepository : IRoasterRepository
     {
         CoffeeDbContext DbContext { get; set; }
+        
         public RoasterRepository(CoffeeDbContext context)
         {
             DbContext = context;
         }
+        
         public async Task Create(Roaster entity)
         {
             try
             {
                 await DbContext.Roasters.AddAsync(entity);
-            await DbContext.SaveChangesAsync();
+                await DbContext.SaveChangesAsync();
             }
             catch
             {
@@ -30,7 +32,7 @@ namespace CoffeeMapServer.Infrastructures.Repositories
             }
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(Guid id)
         {
             try
             {
@@ -44,7 +46,7 @@ namespace CoffeeMapServer.Infrastructures.Repositories
             }
         }
 
-        public async Task<Roaster> GetSingle(int id)
+        public async Task<Roaster> GetSingle(Guid id)
         {
             try
             {
@@ -52,7 +54,8 @@ namespace CoffeeMapServer.Infrastructures.Repositories
                 var list = await DbContext.Roasters.FromSqlRaw("SELECT * FROM Roasters WHERE Id=@id", paramid).ToListAsync();
                 return list.Count() > 0 ? list.First() : null;
             }
-            catch {
+            catch
+            {
                 return null;
             }
         }
@@ -76,7 +79,8 @@ namespace CoffeeMapServer.Infrastructures.Repositories
                     , paramid, name, officeId, email, phone, website, instagram, vk, telegram);
                 await DbContext.SaveChangesAsync();
             }
-            catch {
+            catch
+            {
                 throw new Exception("Roaster repository update method failed to complete");
             }
 
@@ -89,7 +93,7 @@ namespace CoffeeMapServer.Infrastructures.Repositories
             }
             catch { return null; }
         }
-        public async Task<Roaster> GetSingleByAddressId(int addressId)
+        public async Task<Roaster> GetSingleByAddressId(Guid addressId)
         {
             try
             {
