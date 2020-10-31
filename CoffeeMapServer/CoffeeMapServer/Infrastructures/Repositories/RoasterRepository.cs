@@ -1,7 +1,6 @@
 ﻿using CoffeeMapServer.EF;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,19 +11,19 @@ namespace CoffeeMapServer.Infrastructures.Repositories
 {
     public class RoasterRepository : IRoasterRepository
     {
-        CoffeeDbContext DbContext { get; set; }
-        
-        public RoasterRepository(CoffeeDbContext context)
+        CoffeeDbContext Context { get; set; }
+
+        public RoasterRepository(CoffeeDbContext dbContext)
         {
-            DbContext = context;
+            Context = dbContext;
         }
-        
+
         public async Task Create(Roaster entity)
         {
             try
             {
-                await DbContext.Roasters.AddAsync(entity);
-                await DbContext.SaveChangesAsync();
+                await Context.Roasters.AddAsync(entity);
+                await Context.SaveChangesAsync();
             }
             catch
             {
@@ -36,9 +35,9 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         {
             try
             {
-                SqlParameter paramid = new SqlParameter("@id", id);
-                await DbContext.Database.ExecuteSqlRawAsync("DELETE FROM Roasters WHERE Id=@id", paramid);
-                await DbContext.SaveChangesAsync();
+                var roaster = (await Context.Roasters.Where(node => node.Id.Equals(id)).ToListAsync()).First();
+                Context.Roasters.Remove(roaster);
+                await Context.SaveChangesAsync();
             }
             catch
             {
@@ -50,9 +49,8 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         {
             try
             {
-                SqlParameter paramid = new SqlParameter("@id", id);
-                var list = await DbContext.Roasters.FromSqlRaw("SELECT * FROM Roasters WHERE Id=@id", paramid).ToListAsync();
-                return list.Count() > 0 ? list.First() : null;
+                var roasters = await Context.Roasters.Where(node => node.Id == id).ToListAsync();
+                return roasters.Count() > 0 ? roasters.First() : null;
             }
             catch
             {
@@ -64,20 +62,8 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         {
             try
             {
-                SqlParameter paramid = new SqlParameter("@id", entity.Id);
-                SqlParameter name = new SqlParameter("@name", entity.Name);
-                SqlParameter officeId = new SqlParameter("@officeId", entity.OfficeAddressId);
-                SqlParameter email = new SqlParameter("@email", entity.ContactEmail);
-                SqlParameter phone = new SqlParameter("@phone", entity.ContactNumber);
-                SqlParameter website = new SqlParameter("@website", entity.WebSiteLink);
-                SqlParameter instagram = new SqlParameter("@instagram", entity.InstagramProfileLink);
-                SqlParameter vk = new SqlParameter("@vk", entity.VkProfileLink);
-                SqlParameter telegram = new SqlParameter("@telegram", entity.TelegramProfileLink);
-
-                await DbContext.Database.ExecuteSqlRawAsync("UPDATE Roasters SET Name=@name, OfficeAddressId=@officeId, ContactEmail=@email" +
-                    ", ContactNumber=@phone, WebSiteLink=@website, InstagramProfileLink=@instagram, VkProfileLink=@vk, TelegramProfileLink=@telegram WHERE Id=@id"
-                    , paramid, name, officeId, email, phone, website, instagram, vk, telegram);
-                await DbContext.SaveChangesAsync();
+                Context.Roasters.Update(entity);
+                await Context.SaveChangesAsync();
             }
             catch
             {
@@ -85,21 +71,22 @@ namespace CoffeeMapServer.Infrastructures.Repositories
             }
 
         }
+
         public async Task<List<Roaster>> GetList()
         {
             try
             {
-                return await DbContext.Roasters.ToListAsync();
+                return await Context.Roasters.ToListAsync();
             }
             catch { return null; }
         }
+
         public async Task<Roaster> GetSingleByAddressId(Guid addressId)
         {
             try
             {
-                SqlParameter paramid = new SqlParameter("@id", addressId);
-                var list = await DbContext.Roasters.FromSqlRaw("SELECT * FROM Roasters WHERE OfficeAddressId=@id", paramid).ToListAsync();
-                return list.Count() > 0 ? list.First() : null;
+                var roaster = await Context.Roasters.Where(node => node.OfficeAddressId == addressId).ToListAsync();
+                return roaster.Count() > 0 ? roaster.First() : null;
             }
             catch { return null; }
         }
@@ -108,29 +95,22 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         {
             try
             {
-                SqlParameter name = new SqlParameter("@name", entity.Name);
-                SqlParameter officeId = new SqlParameter("@officeId", entity.OfficeAddressId);
-                SqlParameter email = new SqlParameter("@email", entity.ContactEmail);
-                SqlParameter phone = new SqlParameter("@phone", entity.ContactNumber);
-                SqlParameter website = new SqlParameter("@website", entity.WebSiteLink);
-                SqlParameter instagram = new SqlParameter("@instagram", entity.InstagramProfileLink);
-                SqlParameter vk = new SqlParameter("@vk", entity.VkProfileLink);
-                SqlParameter telegram = new SqlParameter("@telegram", entity.TelegramProfileLink);
-                var _roasters = await DbContext.Roasters.FromSqlRaw("SELECT * FROM Roasters WHERE Name=@name AND OfficeAddressId=@officeId AND ContactEmail=@email" +
-                     " AND ContactNumber=@phone AND WebSiteLink=@website AND InstagramProfileLink=@instagram AND VkProfileLink=@vk AND TelegramProfileLink=@telegram"
-                     , name, officeId, email, phone, website, instagram, vk, telegram).ToListAsync();
-                return _roasters.Count() > 0 ? _roasters.First() : null;
+                var roasters = await Context.Roasters.Where(node => (node.Name == entity.Name && node.OfficeAddressId == entity.OfficeAddressId
+                  && node.ContactEmail == entity.ContactEmail && node.ContactNumber == entity.ContactNumber && node.WebSiteLink == entity.WebSiteLink
+                  && node.InstagramProfileLink == entity.InstagramProfileLink && node.VkProfileLink == entity.VkProfileLink
+                  && node.TelegramProfileLink == entity.TelegramProfileLink
+                  )).ToListAsync();
+                return roasters.Count() > 0 ? roasters.First() : null;
             }
             catch { return null; }
         }
+
         public async Task<Roaster> GetRoasterByName(string roasterName)
         {
             try
             {
-                SqlParameter name = new SqlParameter("@name", roasterName);
-                var _roasters = await DbContext.Roasters.FromSqlRaw("SELECT * FROM Roasters WHERE Name=@name"
-                     , name).ToListAsync();
-                return _roasters.Count() > 0 ? _roasters.First() : null;
+                var roasters = await Context.Roasters.Where(node => node.Name == roasterName).ToListAsync();
+                return roasters.Count() > 0 ? roasters.First() : null;
             }
             catch { return null; }
         }

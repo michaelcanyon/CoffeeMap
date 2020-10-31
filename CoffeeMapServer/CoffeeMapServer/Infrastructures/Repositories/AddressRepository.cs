@@ -1,7 +1,6 @@
 ﻿using CoffeeMapServer.EF;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,51 +11,47 @@ namespace CoffeeMapServer.Infrastructures.Repositories
 {
     public class AddressRepository : IAddessRepository
     {
-        CoffeeDbContext DbContext { get; set; }
+        CoffeeDbContext Context { get; set; }
 
-        public AddressRepository(CoffeeDbContext context)
+        public AddressRepository(CoffeeDbContext dbContext)
         {
-            DbContext = context;
+            Context = dbContext;
         }
 
         public async Task Create(Address entity)
         {
-            await DbContext.Addresses.AddAsync(entity);
-            await DbContext.SaveChangesAsync();
+            await Context.Addresses.AddAsync(entity);
+            await Context.SaveChangesAsync();
         }
 
         public async Task Delete(Guid id)
         {
-            SqlParameter paramid = new SqlParameter("@id", id);
-            await DbContext.Database.ExecuteSqlRawAsync("DELETE FROM Addresses WHERE Id=@id", paramid);
-            await DbContext.SaveChangesAsync();
+            Context.Addresses.Remove((await Context.Addresses.Where(node => node.Id == id).ToListAsync()).First());
+            await Context.SaveChangesAsync();
         }
 
         public async Task<Address> GetSingle(Guid id)
         {
-            SqlParameter paramid = new SqlParameter("@id", id);
-            var list = await DbContext.Addresses.FromSqlRaw("SELECT * FROM Addresses WHERE Id=@id", paramid).ToListAsync();
-            return list.Count() > 0 ? list.First() : null;
+            var addresses = await Context.Addresses.Where(node => node.Id == id).ToListAsync();
+            return addresses.Count() > 0 ? addresses.First() : null;
         }
 
         public async Task Update(Address entity)
         {
-            SqlParameter paramid = new SqlParameter("@id", entity.Id);
-            SqlParameter address = new SqlParameter("@address", entity.AddressStr);
-            SqlParameter hours = new SqlParameter("@hours", entity.OpeningHours);
-            await DbContext.Database.ExecuteSqlRawAsync("UPDATE Addresses SET AddressStr=@address, OpeningHours=@hours WHERE Id=@id"
-               , paramid, address, hours);
-            await DbContext.SaveChangesAsync();
+            Context.Addresses.Update(entity);
+            await Context.SaveChangesAsync();
 
         }
 
         public async Task<List<Address>> GetList()
-            => await DbContext.Addresses.ToListAsync();
+        {
+            var addresses = await Context.Addresses.ToListAsync();
+            return addresses.Count() > 0 ? addresses : null;
+        }
 
         public async Task<Address> GetSingle(Address entity)
         {
-            SqlParameter addrstr = new SqlParameter("@address", entity.AddressStr);
-            var addrs = await DbContext.Addresses.FromSqlRaw("SELECT * FROM Addresses WHERE AddressStr=@address", addrstr).ToListAsync();
+            var addrs = await Context.Addresses.Where(node => node.AddressStr.Equals(entity.AddressStr)).ToListAsync();
             return addrs.Count() > 0 ? addrs.First() : null;
         }
     }

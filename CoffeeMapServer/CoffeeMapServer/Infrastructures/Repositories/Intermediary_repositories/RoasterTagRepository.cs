@@ -1,7 +1,6 @@
 ﻿using CoffeeMapServer.EF;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models.Intermediary_models;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,62 +11,59 @@ namespace CoffeeMapServer.Infrastructures.Repositories.Intermediary_repositories
 {
     public class RoasterTagRepository : IRoasterTagRepository
     {
-        private readonly CoffeeDbContext context;
+        private readonly CoffeeDbContext Context;
 
         public RoasterTagRepository(CoffeeDbContext dbContext)
         {
-            context = dbContext;
+            Context = dbContext;
         }
 
         public async Task Create(RoasterTag entity)
         {
-            await context.RoasterTags.AddAsync(entity);
-            await context.SaveChangesAsync();
+            await Context.RoasterTags.AddAsync(entity);
+            await Context.SaveChangesAsync();
         }
 
         public async Task Delete(Guid id)
         {
-            SqlParameter noteId = new SqlParameter("@noteId", id);
-            await context.Database.ExecuteSqlRawAsync("DELETE FROM RoasterTags WHERE Id=@noteId", noteId);
-            await context.SaveChangesAsync();
+            var roasterTagNode = (await Context.RoasterTags.Where(node => node.Id == id).ToListAsync()).First();
+            Context.RoasterTags.Remove(roasterTagNode);
+            await Context.SaveChangesAsync();
         }
 
         public async Task Delete(Guid roasterId, Guid TagId)
         {
-            SqlParameter _roasterId = new SqlParameter("@roasterId", roasterId);
-            SqlParameter _tagId = new SqlParameter("@tagId", TagId);
-            await context.Database.ExecuteSqlRawAsync("DELETE FROM RoasterTags WHERE RoasterId=@roasterId AND TagId=@tagId", _roasterId, _tagId);
-            await context.SaveChangesAsync();
+            var roasterTagNode = (await Context.RoasterTags.Where(node => (node.RoasterId == roasterId && node.TagId == TagId)).ToListAsync()).First();
+            Context.Remove(roasterTagNode);
+            await Context.SaveChangesAsync();
         }
         public async Task<List<RoasterTag>> GetList()
-            => await context.RoasterTags.ToListAsync();
+        {
+            var roasterTags = await Context.RoasterTags.ToListAsync();
+            return roasterTags.Count() > 0 ? roasterTags : null;
+        }
 
         public async Task<RoasterTag> GetSingle(Guid id)
         {
-            SqlParameter noteId = new SqlParameter("@noteId", id);
-            var RoasterTag = await context.RoasterTags.FromSqlRaw("SELECT * FROM RoasterTags WHERE Id=@noteId", noteId).ToListAsync();
-            return RoasterTag.Count() >= 1 ? RoasterTag.First() : null;
+            var roasterTags = await Context.RoasterTags.Where(node => node.Id == id).ToListAsync();
+            return roasterTags.Count() > 0 ? roasterTags.First() : null;
         }
 
         public async Task Update(RoasterTag entity)
         {
-            SqlParameter noteId = new SqlParameter("@noteId", entity.Id);
-            SqlParameter roasterId = new SqlParameter("@roasterId", entity.RoasterId);
-            SqlParameter tagId = new SqlParameter("@tagId", entity.TagId);
-            await context.Database.ExecuteSqlRawAsync("UPDATE RoasterTags SET RoasterId=@roasterId, TagId=@tagId WHERE Id=@noteId", noteId, roasterId, tagId);
-            await context.SaveChangesAsync();
+            Context.RoasterTags.Update(entity);
+            await Context.SaveChangesAsync();
         }
 
         public async Task<List<RoasterTag>> GetPairsByRoasterId(Guid roasterId)
         {
-            SqlParameter _roasterId = new SqlParameter("@roasterId", roasterId);
-            return await context.RoasterTags.FromSqlRaw("SELECT * FROM RoasterTags WHERE RoasterId=@roasterId", _roasterId).ToListAsync();
+            var roasterTags = await Context.RoasterTags.Where(node => node.RoasterId == roasterId).ToListAsync();
+            return roasterTags.Count() > 0 ? roasterTags : null;
         }
-
         public async Task<List<RoasterTag>> GetPairsByTagId(Guid id)
         {
-            SqlParameter _tagId = new SqlParameter("@tagId", id);
-            return await context.RoasterTags.FromSqlRaw("SELECT * FROM RoasterTags WHERE TagId=@tagId", _tagId).ToListAsync();
+            var roasterTags = await Context.RoasterTags.Where(node => node.TagId == id).ToListAsync();
+            return roasterTags.Count() > 0 ? roasterTags : null;
         }
 
     }
