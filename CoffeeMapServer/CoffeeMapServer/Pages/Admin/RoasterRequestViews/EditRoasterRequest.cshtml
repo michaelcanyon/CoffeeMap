@@ -23,7 +23,7 @@
 </section>
 <!-- Main content -->
 <section class="content container-fluid">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="Id">Id</label>
             <input type="hidden" class="form-control" asp-for="@Model.request.Id" value="@Model.request.Id">
@@ -48,7 +48,18 @@
             <label for="addressString">Address String</label>
             <input type="text" class="form-control" asp-for="@Model.request.AddressStr">
             <label for="openingHours">Opening hours</label>
-            <input type="text" class="form-control" id="hours" asp-for="@Model.request.OpeningHours">
+            <input type="text" class="form-control" id="hours" asp-for="@Model.request.OpeningHours" required>
+            <label>Current picture:</label>
+            <br>
+            @{
+                if (Model.request.Picture != null)
+                {<img style='width:500px; height:250px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.request.Picture))" />}
+            }
+            <br>
+            <label for="picture">Picture</label>
+            <input type="file" accept="image/jpeg,image/png,image/jpg" class="form-control" asp-for="@Model.Picture">
+            <label for="description">Description</label>
+            <textarea type="text" class="form-control" asp-for="@Model.request.Description" required></textarea>
         </div>
         <button type="submit" asp-page-handler="Process" class="btn btn-primary">Submit</button>
     </form>

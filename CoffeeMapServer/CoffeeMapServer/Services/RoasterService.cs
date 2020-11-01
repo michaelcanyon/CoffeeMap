@@ -4,6 +4,7 @@ using CoffeeMapServer.Services.Interfaces;
 using CoffeeMapServer.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Services

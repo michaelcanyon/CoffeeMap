@@ -62,6 +62,7 @@ namespace CoffeeMapServer.Pages.Admin.RoasterRequestViews
             Roaster.TelegramProfileLink = request.TelegramProfileLink;
             Roaster.InstagramProfileLink = request.InstagramProfileLink;
             Roaster.VkProfileLink = request.VkProfileLink;
+            Roaster.Picture = request.Picture;
             await _roasterRepository.Create(Roaster);
             var addedRoaster = await _roasterRepository.GetRoaster(Roaster);
             foreach (var item in BindTags)

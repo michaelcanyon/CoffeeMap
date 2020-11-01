@@ -24,7 +24,7 @@ namespace CoffeeMapServer.EF
         
         public CoffeeDbContext(DbContextOptions<CoffeeDbContext> options) : base(options)
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
 
     }

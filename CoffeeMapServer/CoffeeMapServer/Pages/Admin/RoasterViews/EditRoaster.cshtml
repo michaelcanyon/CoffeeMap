@@ -48,7 +48,7 @@
 </section>
 <!-- Main content -->
 <section class="content container-fluid">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="Id">Id</label>
             <input type="hidden" class="form-control" asp-for="@Model.Roaster.Id" value="@Model.Roaster.Id">
@@ -87,6 +87,17 @@
             <input type="text" class="form-control" asp-for="@Model.Roaster.VkProfileLink">
             <label for="telegram">Telegram link</label>
             <input type="text" class="form-control" asp-for="@Model.Roaster.TelegramProfileLink">
+            <label>Current picture:</label>
+            <br>
+            @{
+                if (Model.Roaster.Picture != null)
+                {<img style='position:relative; width:500px; height:250px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Roaster.Picture))" />}
+            }
+            <br>
+            <label for="picture">Picture</label>
+            <input type="file" accept="image/jpeg,image/png,image/jpg" class="form-control" name="Picture">
+            <label for="description">Description</label>
+            <textarea type="text" class="form-control" asp-for="@Model.Roaster.Description" required></textarea>
         </div>
         <button type="submit" asp-page-handler="Process" class="btn btn-primary">Submit</button>
     </form>

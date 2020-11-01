@@ -34,7 +34,7 @@
 </section>
 <!-- Main content -->
 <section class="content container-fluid">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <div class="form-group">
 
             <label for="Name">Name</label>
@@ -46,7 +46,7 @@
             <label for="office">Office Address</label>
             <input type="text" minlength="10" class="form-control" asp-for="@Model.Address.AddressStr" required>
             <label for="hours">Opening hours</label>
-            <input type="text" id="hours" class="form-control" asp-for="@Model.Address.OpeningHours">
+            <input type="text" id="hours" class="form-control" asp-for="@Model.Address.OpeningHours" required>
             <label for="hours">Tags:</label>
             <input type="text" class="form-control" id="tagPart">
             </br>
@@ -62,6 +62,10 @@
             <input type="text" class="form-control" asp-for="@Model.Roaster.VkProfileLink">
             <label for="telegram">Telegram link</label>
             <input type="text" class="form-control" asp-for="@Model.Roaster.TelegramProfileLink">
+            <label for="picture">Picture</label>
+            <input type="file" accept="image/jpeg,image/png,image/jpg" class="form-control" asp-for="@Model.Picture">
+            <label for="description">Description</label>
+            <textarea type="text" class="form-control" asp-for="@Model.Roaster.Description" required></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Create</button>
     </form>

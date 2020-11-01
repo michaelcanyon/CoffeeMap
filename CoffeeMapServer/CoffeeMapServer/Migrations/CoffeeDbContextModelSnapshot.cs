@@ -81,6 +81,9 @@ namespace CoffeeMapServer.Migrations
                     b.Property<Guid>("OfficeAddressId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<byte[]>("Picture")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("TelegramProfileLink")
                         .HasColumnType("nvarchar(max)");
 
@@ -126,6 +129,9 @@ namespace CoffeeMapServer.Migrations
                     b.Property<string>("OpeningHours")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Picture")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("TagString")
                         .HasColumnType("nvarchar(max)");

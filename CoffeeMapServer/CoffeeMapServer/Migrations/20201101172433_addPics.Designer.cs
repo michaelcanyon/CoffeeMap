@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoffeeMapServer.Migrations
 {
     [DbContext(typeof(CoffeeDbContext))]
-    [Migration("20201026225128_guidId")]
-    partial class guidId
+    [Migration("20201101172433_addPics")]
+    partial class addPics
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -83,6 +83,9 @@ namespace CoffeeMapServer.Migrations
                     b.Property<Guid>("OfficeAddressId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<byte[]>("Picture")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("TelegramProfileLink")
                         .HasColumnType("nvarchar(max)");
 
@@ -128,6 +131,9 @@ namespace CoffeeMapServer.Migrations
                     b.Property<string>("OpeningHours")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Picture")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("TagString")
                         .HasColumnType("nvarchar(max)");

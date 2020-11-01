@@ -1,10 +1,12 @@
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using CoffeeMapServer.Models.Intermediary_models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,6 +19,9 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
         private readonly ITagRepository tagRepository;
 
         public Guid Guid { get; set; }
+
+        [BindProperty]
+        public IFormFile Picture { get; set; }  
 
         [BindProperty]
         public Roaster Roaster { get; set; }
@@ -112,6 +117,17 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
                 Roaster.VkProfileLink = "none";
             if (Roaster.TelegramProfileLink == null)
                 Roaster.TelegramProfileLink = "none";
+
+            if (Picture != null)
+            {
+                byte[] bytePicture = null;
+                using (var binaryReader = new BinaryReader(Picture.OpenReadStream()))
+                {
+                    bytePicture = binaryReader.ReadBytes((int)Picture.Length);
+                }
+                Roaster.Picture = bytePicture;
+            }
+
             await roasterRepository.Update(Roaster);
             return RedirectToPage("Roasters");
         }
