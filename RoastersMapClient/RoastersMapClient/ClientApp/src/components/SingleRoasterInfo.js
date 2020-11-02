@@ -39,7 +39,7 @@ export class SingleRoasterInfo extends Component {
 
                             < div className="Left-Bar_RoasterInformation" >
                                 <div className="Roaster_title">
-                                    <span>{/*fields.name*/}{roast.roaster.name}</span>
+                                    <span>{roast.roaster.name}</span>
                                 </div>
                                 <div className="Roaster_description">
                                     <p>{roast.roaster.description}</p></div>
@@ -125,10 +125,13 @@ export class SingleRoasterInfo extends Component {
         if (roast== null)
             return "https://cdn.the-village.ru/the-village.ru/post_image-image/0PSvW6yyK9DQKKWAxLggiA.jpg";
         else {
-            let base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(roast)));
-            return ('data:image/jpg;base64,' + base64String);
+            var res = "data:image/jpg;base64," + roast;
+            return res;
         }
     }
+    _arrayBufferToBase64(buffer) {
+   
+}
     getStylesForMap() {
         if (this.state.desktop)
             return "d-none d-md-block col-md-6 col-lg-7 col-xl-8";
