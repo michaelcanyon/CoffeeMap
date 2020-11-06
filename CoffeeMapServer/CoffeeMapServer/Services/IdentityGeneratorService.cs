@@ -11,11 +11,8 @@ namespace CoffeeMapServer.Services
     public class IdentityGeneratorService : IIdentityGeneratorService
     {
         private readonly IUserRepository _userRepository;
-        
-        public IdentityGeneratorService(IUserRepository repository)
-        {
-            _userRepository = repository;
-        }
+
+        public IdentityGeneratorService(IUserRepository repository) => _userRepository = repository;
 
         public async Task<ClaimsIdentity> GetIdentity(string username, string password)
         {
@@ -26,7 +23,7 @@ namespace CoffeeMapServer.Services
             var claims = new List<Claim>
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login),
-                new Claim("role", user.role),
+                new Claim("role", user.Role),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             };
             return new ClaimsIdentity(claims, "Token");

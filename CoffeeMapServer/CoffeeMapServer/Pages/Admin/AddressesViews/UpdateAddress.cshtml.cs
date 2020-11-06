@@ -1,33 +1,28 @@
-using CoffeeMapServer.Infrastructures.IRepositories;
-using CoffeeMapServer.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Threading.Tasks;
+using CoffeeMapServer.Models;
+using CoffeeMapServer.Services.Interfaces.Admin;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CoffeeMapServer.Views.Admin.Addresses
 {
     public class UpdateAddressModel : PageModel
     {
-        private readonly IAddessRepository addressRepository;
+        private readonly IAddressService _addressService;
 
         [BindProperty]
         public Address Address { get; set; }
 
         public string Role { get; set; }
 
-        public string Nickname { get; set; }
+        public UpdateAddressModel(IAddressService addressService)
+            => _addressService = addressService;
 
-        public UpdateAddressModel(IAddessRepository repository)
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            addressRepository = repository;
-        }
-
-        public async Task<IActionResult> OnGet(Guid id)
-        {
-            Nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.nickname"].ToString();
             Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
-            Address = await addressRepository.GetSingle(id);
+            Address = await _addressService.GetSingleAddressByIdAsync(id);
             if (Address.OpeningHours == "none")
                 Address.OpeningHours = null;
             return Page();
@@ -37,7 +32,7 @@ namespace CoffeeMapServer.Views.Admin.Addresses
         {
             if (Address.OpeningHours == null)
                 Address.OpeningHours = "none";
-            await addressRepository.Update(Address);
+            await _addressService.UpdateAddressAsync(Address);
             return RedirectToPage("GetAddresses");
         }
     }

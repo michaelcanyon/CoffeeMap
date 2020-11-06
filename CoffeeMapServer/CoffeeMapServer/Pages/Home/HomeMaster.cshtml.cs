@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CoffeeMapServer.Infrastructures;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CoffeeMapServer.Pages.Home
@@ -13,7 +8,6 @@ namespace CoffeeMapServer.Pages.Home
     public class HomeMasterModel : PageModel
     {
         public void OnGet()
-        {
-        }
+        { }
     }
 }

@@ -1,5 +1,6 @@
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
+using CoffeeMapServer.Services.Interfaces.Admin;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
@@ -9,38 +10,25 @@ namespace CoffeeMapServer.Pages.Admin.RoasterRequestViews
 {
     public class RoasterRequestsModel : PageModel
     {
-        private readonly IRoasterRequestRepository _roasterRequestRepository;
+        private readonly IRoasterRequestService _roasterRequestService;
 
-        public RoasterRequestsModel(IRoasterRequestRepository roasterRequestRepository)
-        {
-            _roasterRequestRepository = roasterRequestRepository;
-        }
+        public RoasterRequestsModel(IRoasterRequestService roasterRequestService)
+            =>_roasterRequestService = roasterRequestService;
 
         [BindProperty]
-        public List<RoasterRequest> RoasterRequests { get; set; }
-
-        public string NDeletableRequests { get; set; }
-
-        [BindProperty]
-        public string RequestId { get; set; }
-
-        [BindProperty]
-        public Address Address { get; set; }
-
-        [BindProperty]
-        public Roaster Roaster { get; set; }
+        public IList<RoasterRequest> RoasterRequests { get; set; }
 
         public string Role { get; set; }
 
         public async Task OnGetAsync()
         {
             Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
-            RoasterRequests = await _roasterRequestRepository.GetList();
+            RoasterRequests = await _roasterRequestService.FetchRoasterRequestsListAsync();
         }
 
         public async Task<IActionResult> OnPostDeleteAllAsync()
         {
-            await _roasterRequestRepository.DeleteAll();
+            await _roasterRequestService.DeleteAllRoasterRequestsAsync();
             return RedirectToPage("RoasterRequests");
         }
     }

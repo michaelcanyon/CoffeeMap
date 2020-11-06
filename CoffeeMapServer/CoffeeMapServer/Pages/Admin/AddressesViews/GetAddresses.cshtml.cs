@@ -1,23 +1,21 @@
-using CoffeeMapServer.Infrastructures.IRepositories;
-using CoffeeMapServer.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CoffeeMapServer.Models;
+using CoffeeMapServer.Services.Interfaces.Admin;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CoffeeMapServer.Views.Admin.Addresses
 {
     public class GetAddressesModel : PageModel
     {
-        private readonly IAddessRepository addressRepository;
+        private readonly IAddressService _addressService;
 
-        public List<Address> Addresses { get; set; }
+        public IList<Address> Addresses { get; set; }
 
-        public GetAddressesModel(IAddessRepository repository)
-        {
-            addressRepository = repository;
-        }
+        public GetAddressesModel(IAddressService addressService)
+            => _addressService = addressService;
 
         [BindProperty(SupportsGet = true)]
         public string AddressIdFilter { get; set; }
@@ -28,18 +26,12 @@ namespace CoffeeMapServer.Views.Admin.Addresses
         [BindProperty(SupportsGet = true)]
         public string OpeningHoursFilter { get; set; }
 
-        [BindProperty]
-        public int AddressId { get; set; }
-
         public string Role { get; set; }
-
-        public string Nickname { get; set; }
 
         public async Task OnGetAsync()
         {
-            Nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.nickname"].ToString();
             Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
-            Addresses = await addressRepository.GetList();
+            Addresses = await _addressService.FetchAddressesAsync();
             if (!string.IsNullOrEmpty(AddressIdFilter))
                 Addresses = Addresses.Where(n => n.Id.Equals(AddressIdFilter)).ToList();
             if (!string.IsNullOrEmpty(AddressStrFilter))

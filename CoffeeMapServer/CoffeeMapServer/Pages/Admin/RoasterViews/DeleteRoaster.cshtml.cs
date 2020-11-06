@@ -11,19 +11,17 @@ namespace CoffeeMapServer.Pages.Admin.RoasterViews
 {
     public class DeleteRoasterModel : PageModel
     {
-        private readonly IRoasterRepository roasterRepository;
+        private readonly IRoasterRepository _roasterRepository;
 
-        public Guid Guid { get; set; }
-
-        public DeleteRoasterModel(IRoasterRepository repository)
+        public DeleteRoasterModel(IRoasterRepository roasterRepository)
         {
-            roasterRepository = repository;
+            _roasterRepository = roasterRepository;
         }
 
         public async Task<IActionResult> OnGet(Guid id)
         {
-            Guid = id;
-            await roasterRepository.Delete(Guid);
+            var roaster = await _roasterRepository.GetSingle(id);
+            await _roasterRepository.Delete(roaster);
             return RedirectToPage("Roasters");
         }
     }

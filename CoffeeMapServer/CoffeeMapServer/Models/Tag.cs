@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using CoffeeMapServer.Models.Intermediary_models;
 
 namespace CoffeeMapServer.Models
 {
@@ -7,7 +10,18 @@ namespace CoffeeMapServer.Models
         [Required]
         public string TagTitle { get; set; }
 
-        //public Tag() : base()
-        //{ }
+        //public ICollection<RoasterTag> RoasterTags { get; set; }
+        public Tag(Guid? id = null) : base(id)
+        { }
+
+        public static Tag New(
+            Guid id,
+            string tagTitle)
+            => new Tag(id)
+            { TagTitle = tagTitle };
+
+        public static Tag New(string tagTitle)
+            => new Tag
+            { TagTitle = tagTitle };
     }
 }

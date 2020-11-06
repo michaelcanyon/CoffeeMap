@@ -1,24 +1,20 @@
-using CoffeeMapServer.Infrastructures.IRepositories;
-using CoffeeMapServer.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CoffeeMapServer.Models;
+using CoffeeMapServer.Services.Interfaces.Admin;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CoffeeMapServer.Pages.Admin.RoasterAddress
 {
     public class RoasterAddressConnModel : PageModel
     {
-        private readonly IRoasterRepository roasterRepository;
-        private readonly IAddessRepository addessRepository;
+        private readonly IRoasterAddressConnectionService _roasterAddressConnectionService;
 
-        public RoasterAddressConnModel(IRoasterRepository rRepository, IAddessRepository aRepository)
-        {
-            roasterRepository = rRepository;
-            addessRepository = aRepository;
-        }
+        public RoasterAddressConnModel(IRoasterAddressConnectionService roasterAddressConnectionService)
+        => _roasterAddressConnectionService = roasterAddressConnectionService;
 
         [BindProperty(SupportsGet = true)]
         public string IdFilter { get; set; }
@@ -32,9 +28,9 @@ namespace CoffeeMapServer.Pages.Admin.RoasterAddress
         [BindProperty(SupportsGet = true)]
         public string AddressStrFilter { get; set; }
 
-        public List<Address> Addresses { get; set; }
+        public IList<Address> Addresses { get; set; }
 
-        public List<Roaster> Roasters { get; set; }
+        public IList<Roaster> Roasters { get; set; }
 
         public Roaster InsertableRoaster { get; set; }
 
@@ -48,14 +44,11 @@ namespace CoffeeMapServer.Pages.Admin.RoasterAddress
 
         public string Role { get; set; }
 
-        public string Nickname { get; set; }
-
         public async Task OnGetAsync()
         {
-            Nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.nickname"].ToString();
             Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
-            Addresses = await addessRepository.GetList();
-            Roasters = await roasterRepository.GetList();
+            Addresses = await _roasterAddressConnectionService.FetchAddressesAsync();
+            Roasters = await _roasterAddressConnectionService.FetchRoastersAsync();
             if (!string.IsNullOrEmpty(AddressIdFilter))
                 Addresses = Addresses.Where(n => n.Id.Equals(Guid.Parse(AddressIdFilter))).ToList();
             if (!string.IsNullOrEmpty(AddressStrFilter))
@@ -69,15 +62,17 @@ namespace CoffeeMapServer.Pages.Admin.RoasterAddress
 
         public async Task<IActionResult> OnPostAsync()
         {
-            InsertableAddress = await addessRepository.GetSingle(Guid.Parse(InsertAddressId));
+            InsertableAddress = await _roasterAddressConnectionService.FetchSingleAddressByIdAsync(Guid.Parse(InsertAddressId));
             if (InsertableAddress == null)
                 return RedirectToPage("RoasterAddressConn");
-            InsertableRoaster = await roasterRepository.GetSingle(Guid.Parse(InsertRoasterId));
+
+            InsertableRoaster = await _roasterAddressConnectionService.FetchSingleRoasterByIdAsync(Guid.Parse(InsertRoasterId));
             if (InsertableRoaster == null)
                 return RedirectToPage("RoasterAddressConn");
+
             InsertableRoaster.OfficeAddressId = Guid.Parse(InsertAddressId);
-            await roasterRepository.Update(InsertableRoaster);
-            return RedirectToPage("RoasterAddressConn");
+            await _roasterAddressConnectionService.UpdateRoasterAsync(InsertableRoaster);
+                return RedirectToPage("RoasterAddressConn");
         }
     }
 }

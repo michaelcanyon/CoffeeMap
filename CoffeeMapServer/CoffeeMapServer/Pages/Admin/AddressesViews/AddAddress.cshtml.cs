@@ -1,39 +1,33 @@
+using System.Threading.Tasks;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
+using CoffeeMapServer.Services.Interfaces.Admin;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Pages.Admin.AddressesViews
 {
     public class AddAddressModel : PageModel
     {
-        private readonly IAddessRepository addessRepository;
+        private readonly IAddressService _addressService;
 
         [BindProperty]
         public Address Address { get; set; }
 
         public string Role { get; set; }
 
-        public string Nickname { get; set; }
+        public AddAddressModel(IAddressService addressService)
+            => _addressService = addressService;
 
-        public AddAddressModel(IAddessRepository addrRepository)
-        {
-            addessRepository = addrRepository;
-        }
-
-        public async Task OnGetAsync()
-        {
-            Nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.nickname"].ToString();
-            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
-        }
+        public void OnGet() 
+            => Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
 
         public async Task<IActionResult> OnPostAsync()
         {
             if (Address.OpeningHours == null)
                 Address.OpeningHours = "none";
 
-            await addessRepository.Create(Address);
+            await _addressService.AddAddressAsync(Address);
             return RedirectToPage("GetAddresses");
 
         }

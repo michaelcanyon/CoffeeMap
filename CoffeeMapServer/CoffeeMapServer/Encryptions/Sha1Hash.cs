@@ -6,6 +6,9 @@ namespace CoffeeMapServer.Encryptions
     {
         public static string GetHash(string password)
         {
+            if (password == null)
+                return null;
+
             var sha1 = new System.Security.Cryptography.SHA1Managed();
 
             var plaintextBytes = Encoding.UTF8.GetBytes(password);

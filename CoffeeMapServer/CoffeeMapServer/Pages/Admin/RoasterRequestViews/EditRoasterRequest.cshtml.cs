@@ -1,5 +1,6 @@
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
+using CoffeeMapServer.Services.Interfaces.Admin;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,7 +12,7 @@ namespace CoffeeMapServer.Pages.Admin.RoasterRequestViews
 {
     public class EditRoasterRequestModel : PageModel
     {
-        private readonly IRoasterRequestRepository _roasterRequestRepository;
+        private readonly IRoasterRequestService _roasterRequestService;
         [BindProperty]
        
         public RoasterRequest request { get; set; }
@@ -23,16 +24,14 @@ namespace CoffeeMapServer.Pages.Admin.RoasterRequestViews
         
         public string Role { get; set; }
         
-        public EditRoasterRequestModel(IRoasterRequestRepository roasterRequestRepository)
-        {
-            _roasterRequestRepository = roasterRequestRepository;
-        }
+        public EditRoasterRequestModel(IRoasterRequestService roasterRequestService)
+            =>_roasterRequestService = roasterRequestService;
         
         public async Task OnGetAsync(Guid id)
         {
             Guid = id;
             Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
-            request = await _roasterRequestRepository.GetSingle(Guid);
+            request = await _roasterRequestService.FetchSingleRoasterRequestByIdAsync(Guid);
         }
         
         public async Task<IActionResult> OnPostProcessAsync()
@@ -46,7 +45,7 @@ namespace CoffeeMapServer.Pages.Admin.RoasterRequestViews
                 }
                 request.Picture = bytePicture;
             }
-            await _roasterRequestRepository.Update(request);
+            await _roasterRequestService.UpdateRoasterRequestAsync(request);
             return RedirectToPage("RoasterRequests");
         }
     }

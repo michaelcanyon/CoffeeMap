@@ -37,7 +37,6 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
         public List<string> tagsList = new List<string>();
 
         public List<string> DeletableTagsList = new List<string>();
-        public string Nickname { get; set; }
 
 
         public EditRoasterModel(IRoasterRepository repository, IRoasterTagRepository roasterTagsRepository, ITagRepository tagsRepository)
@@ -49,7 +48,6 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
 
         public async Task<IActionResult> OnGet(Guid id)
         {
-            Nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.nickname"].ToString();
             Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
             Roaster = await roasterRepository.GetSingle(id);
             var currentTagPairs = await roasterTagRepository.GetPairsByRoasterId(Roaster.Id);

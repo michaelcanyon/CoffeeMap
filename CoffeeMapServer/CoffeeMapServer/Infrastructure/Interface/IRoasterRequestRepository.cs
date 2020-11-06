@@ -1,10 +1,10 @@
-﻿using CoffeeMapServer.Models;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using CoffeeMapServer.Models;
 
 namespace CoffeeMapServer.Infrastructures.IRepositories
 {
     public interface IRoasterRequestRepository : IBaseRepository<RoasterRequest>
     {
-        public Task DeleteAll();
+        public void DeleteRange(IList<RoasterRequest> range);
     }
 }

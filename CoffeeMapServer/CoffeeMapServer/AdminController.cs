@@ -44,7 +44,6 @@ namespace CoffeeMapServer
         {
             try
             {
-                roaster.Id = Guid.Empty;
                 await _roasterRepository.Create(roaster);
                 return Ok();
             }
@@ -194,7 +193,6 @@ namespace CoffeeMapServer
         {
             try
             {
-                roasterRequest.Id = Guid.Empty;
                 await _roasterRequestRepository.Create(roasterRequest);
                 return Ok();
             }

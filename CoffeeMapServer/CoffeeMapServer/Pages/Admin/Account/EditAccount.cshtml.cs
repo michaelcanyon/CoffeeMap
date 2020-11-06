@@ -1,47 +1,42 @@
-using CoffeeMapServer.Infrastructures.IRepositories;
-using CoffeeMapServer.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Threading.Tasks;
+using CoffeeMapServer.Models;
+using CoffeeMapServer.Services.Interfaces.Admin;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CoffeeMapServer.Pages.Admin.Account
 {
     public class EditAccountModel : PageModel
     {
-        private readonly IUserRepository _userRepository;
-        
-        public EditAccountModel(IUserRepository userRepository)
-        {
-            _userRepository = userRepository;
-        }
-        
+        private readonly IAccountService _accountService;
+
+        public EditAccountModel(IAccountService accountService)
+            => _accountService = accountService;
+
         [BindProperty]
-        public User user { get; set; }
-        
-        public string PasswordHash { get; set; }
-        
+        public User _User { get; set; }
+
         [BindProperty]
         public string NewPassword { get; set; }
-        
+
         public string Role { get; set; }
-        
+
         public async Task OnGetAsync()
         {
             Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
             var id = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.id"].ToString();
-            user = await _userRepository.GetSingle(Guid.Parse(id));
+            _User = await _accountService.GetAccountByIdAsync(Guid.Parse(id));
         }
-        
+
         public async Task<IActionResult> OnPostAsync()
         {
-            var getUser = await _userRepository.GetSingle(user.Id);
-            if (CoffeeMapServer.Encryptions.Sha1Hash.GetHash(user.Password) != getUser.Password)
+            var getUser = await _accountService.GetAccountByIdAsync(_User.Id);
+            if (CoffeeMapServer.Encryptions.Sha1Hash.GetHash(_User.Password) != getUser.Password)
                 return RedirectToPage("EditAccount");
-            getUser.Password = NewPassword != null ? NewPassword : user.Password;
-            getUser.Email = user.Email;
-            await _userRepository.Update(getUser);
-            return getUser.role == "Master" ? RedirectToPage("/Home/HomeMaster") : RedirectToPage("/Home/Home");
+            var passwordHash = Encryptions.Sha1Hash.GetHash(NewPassword);
+            await _accountService.UpdateAccountAsync(getUser, passwordHash, _User.Email);
+            return getUser.Role == "Master" ? RedirectToPage("/Home/HomeMaster") : RedirectToPage("/Home/Home");
         }
     }
 }

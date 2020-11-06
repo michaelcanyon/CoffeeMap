@@ -34,7 +34,7 @@ namespace CoffeeMapServer
             services.AddControllersWithViews();
             services.AddDbContext<CoffeeDbContext>(options => options.UseSqlServer(connection));
             services.AddTransient<IRoasterRepository, RoasterRepository>();
-            services.AddTransient<IAddessRepository, AddressRepository>();
+            services.AddTransient<IAddressRepository, AddressRepository>();
             services.AddTransient<ITagRepository, TagRepository>();
             services.AddTransient<IRoasterTagRepository, RoasterTagRepository>();
             services.AddTransient<IUserRepository, UserRepository>();

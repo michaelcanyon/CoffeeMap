@@ -30,11 +30,7 @@ namespace CoffeeMapServer.Pages.Admin.UserViews
 
         public List<User> Users { get; set; }
 
-        public UsersModel(IUserRepository userRepository)
-        {
-            _userRepository = userRepository;
-
-        }
+        public UsersModel(IUserRepository userRepository) => _userRepository = userRepository;
 
         public async Task OnGetAsync()
         {
@@ -46,7 +42,7 @@ namespace CoffeeMapServer.Pages.Admin.UserViews
             if (!string.IsNullOrEmpty(EmailFilter))
                 Users = Users.Where(user => user.Email.Contains(EmailFilter)).ToList();
             if (!string.IsNullOrEmpty(RoleFilter))
-                Users = Users.Where(user => user.role.Equals(RoleFilter)).ToList();
+                Users = Users.Where(user => user.Role.Equals(RoleFilter)).ToList();
         }
     }
 }

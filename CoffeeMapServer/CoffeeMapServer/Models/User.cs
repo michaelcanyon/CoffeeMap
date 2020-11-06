@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 namespace CoffeeMapServer.Models
 {
     public class User : Entity
@@ -16,9 +17,32 @@ namespace CoffeeMapServer.Models
         public string Password { get; set; }
 
         [Required]
-        public string role { get; set; }
+        public string Role { get; set; }
 
-        //public User() : base()
-        //{ }
+        public User(Guid? id = null) : base(id)
+        { }
+
+        public static User New(
+            Guid id,
+            string login,
+            string email,
+            string password)
+            => new User(id)
+            {
+                Login = login,
+                Email = email,
+                Password = password
+            };
+
+        public static User New(
+            string login,
+            string email,
+            string password)
+            => new User
+            {
+                Login = login,
+                Email = email,
+                Password = password
+            };
     }
 }

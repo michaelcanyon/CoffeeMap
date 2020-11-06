@@ -56,20 +56,16 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
             TagRepository = tagRepository;
         }
 
-        [BindProperty]
-        public int RoasterId { get; set; }
-
+        // TODO: проверить, где состояния не нужно хранить в Pages. P.S Подумал. Нужны для подгрузки меню мастера\администратора. Несколько состояний, действительно, были лишними.
         public string Role { get; set; }
-
-        public string Nickname { get; set; }
 
         public async Task OnGetAsync()
         {
-            Nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.nickname"].ToString();
-            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
+            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
             Roasters = await RoasterRepository.GetList();
             RoasterTags = await RoasterTagRepository.GetList();
             Tags = await TagRepository.GetList();
+            // TODO: подумать над бизнес-сценариями
             if (!string.IsNullOrEmpty(IdFilter))
                 Roasters = Roasters.Where(s => s.Id.Equals(IdFilter)).ToList();
             if (!string.IsNullOrEmpty(NameFilter))

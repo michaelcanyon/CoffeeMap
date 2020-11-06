@@ -1,19 +1,19 @@
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using CoffeeMapServer.Models.Intermediary_models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Views.Admin.RoasterViews
 {
     public class AddRoasterModel : PageModel
     {
         private readonly IRoasterRepository roasterRepository;
-        private readonly IAddessRepository addessRepository;
+        private readonly IAddressRepository addessRepository;
         private readonly ITagRepository tagRepository;
         private readonly IRoasterTagRepository roasterTagRepository;
 
@@ -31,9 +31,7 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
 
         public string Role { get; set; }
 
-        public string Nickname { get; set; }
-
-        public AddRoasterModel(IRoasterRepository repository, IAddessRepository addrRepository, ITagRepository tagsRepository, IRoasterTagRepository roasterTagsRepository)
+        public AddRoasterModel(IRoasterRepository repository, IAddressRepository addrRepository, ITagRepository tagsRepository, IRoasterTagRepository roasterTagsRepository)
         {
             roasterRepository = repository;
             addessRepository = addrRepository;
@@ -42,11 +40,8 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
 
         }
 
-        public async Task OnGetAsync()
-        {
-            Nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.nickname"].ToString();
-            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
-        }
+        public void OnGet()
+           => Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -83,6 +78,7 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
                         await tagRepository.Create(new Tag { TagTitle = i });
                 }
             }
+
             List<Tag> _localTags = new List<Tag>();
             foreach (var i in tags_array)
             {
@@ -104,10 +100,9 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
                 Roaster.Picture = bytePicture;
             }
             await roasterRepository.Create(Roaster);
-            var roasterId = (await roasterRepository.GetRoaster(Roaster)).Id;
             foreach (var i in _localTags)
             {
-                await roasterTagRepository.Create(new RoasterTag { RoasterId = roasterId, TagId = i.Id });
+                await roasterTagRepository.Create(new RoasterTag { RoasterId = Roaster.Id, TagId = i.Id });
             }
             return RedirectToPage("Roasters");
 

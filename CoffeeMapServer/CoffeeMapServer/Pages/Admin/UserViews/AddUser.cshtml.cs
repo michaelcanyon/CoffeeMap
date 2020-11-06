@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 using CoffeeMapServer.Infrastructures;
 using CoffeeMapServer.Infrastructures.IRepositories;
@@ -18,36 +13,25 @@ namespace CoffeeMapServer.Pages.Admin.UserViews
     {
         private readonly IUserRepository _userRepository;
 
-        public AddUserModel(IUserRepository userRepository)
-        {
-            _userRepository = userRepository;
-        }
+        public AddUserModel(IUserRepository userRepository) => _userRepository = userRepository;
 
         [BindProperty]
         public User Ruser { get; set; }
-        
+
         public int ErrorStatusCode { get; set; }
-        
+
         public async Task<IActionResult> OnPostAsync()
         {
             User userV = await _userRepository.GetSingle(Ruser.Login);
             if (userV != null)
-            {
                 return RedirectToPage("AddUser");
-            }
             userV = await _userRepository.GetSingleByMail(Ruser.Email);
             if (userV != null)
-            {
-                return RedirectToPage("AddUser"); 
-            
-            }
+                return RedirectToPage("AddUser");
             await _userRepository.Create(Ruser);
             return RedirectToPage("Users");
         }
 
-        public void OnGet(int StatusCode)
-        {
-            ErrorStatusCode = StatusCode;           
-        }
+        public void OnGet(int StatusCode) => ErrorStatusCode = StatusCode;
     }
 }

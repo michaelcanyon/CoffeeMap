@@ -31,22 +31,31 @@
     <form method="get" id="filtration" style="display:none;">
         <label for="id">Id</label>
         <input type="text" class="form-control" asp-for="@Model.IdFilter">
+
         <label for="name">Name</label>
         <input type="text" maxlength="30" class="form-control" asp-for="@Model.NameFilter">
+
         <label for="addressid">office address Id</label>
         <input type="text" class="form-control" asp-for="@Model.OfficeAddressIdFilter">
+
         <label for="phone">Contact number</label>
         <input type="text" id="contactnumber" class="form-control" asp-for="@Model.ContactNumberFilter">
+
         <label for="mail">Contact email</label>
         <input type="text" class="form-control" asp-for="@Model.ContactEmailFilter">
+
         <label for="instagram">instagram link</label>
         <input type="text" class="form-control" asp-for="@Model.InstagramProfileFilter">
+
         <label for="telegram">telegram link</label>
         <input type="text" class="form-control" asp-for="@Model.TelegramProfileFilter">
+
         <label for="vk">vk link</label>
         <input type="text" class="form-control" asp-for="@Model.VkProfileFilter">
+
         <label for="website">website link</label>
         <input type="text" class="form-control" asp-for="@Model.WebSiteFilter">
+
         <label for="tag">Tag:</label>
         <input type="text" class="form-control" asp-for="@Model.TagString">
         <br />

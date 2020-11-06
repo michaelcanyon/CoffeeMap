@@ -15,10 +15,7 @@ namespace CoffeeMapServer.Pages.Admin.UserViews
 
         public Guid Guid { get; set; }
 
-        public DeleteUserModel(IUserRepository userRepository)
-        {
-            _userRepository = userRepository;
-        }
+        public DeleteUserModel(IUserRepository userRepository) => _userRepository = userRepository;
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {

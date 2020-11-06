@@ -8,13 +8,11 @@ namespace CoffeeMapServer.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
-        
-        //TODO: прописать в наследниках вызов родительского конструктора
-        //TODO: ? заменить id на guid
-        //public Entity()
-        //{
-        //    Id = new Guid();
-        //}
+        public Guid Id { get; }
+
+        protected Entity(Guid? id) 
+            => Id = id is null 
+                ? Guid.NewGuid()
+                : id.Value;
     }
 }

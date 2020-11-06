@@ -5,6 +5,6 @@ namespace CoffeeMapServer.Infrastructures.IRepositories
 {
     public interface ITagRepository : IBaseRepository<Tag>
     {
-        public Task<Tag> GetSingle(string title);
+        public Task<Tag> GetSingleAsync(string title);
     }
 }
