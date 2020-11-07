@@ -2,10 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CoffeeMapServer.Models;
 
 namespace CoffeeMapServer.Services.Interfaces.Admin
 {
-    interface ITagService
+   public interface ITagService
     {
+        public Task<IList<Tag>> FetchTagsListAsync();
+
+        public Task<Tag> FetchSingleTagAsync(Guid id);
+
+        public Task UpdateSingleTagAsync(Tag tag);
+
+        public Task DeleteTagAsync(Guid id);
     }
 }

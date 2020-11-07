@@ -1,10 +1,10 @@
-﻿using CoffeeMapServer.Infrastructures.IRepositories;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace CoffeeMapServer
 {
@@ -26,7 +26,7 @@ namespace CoffeeMapServer
         {
             try
             {
-                var roasters = await _roasterRepository.GetList();
+                var roasters = await _roasterRepository.GetListAsync();
                 ViewData["RoastersList"] = roasters;
                 return Ok(roasters);
 
@@ -44,7 +44,8 @@ namespace CoffeeMapServer
         {
             try
             {
-                await _roasterRepository.Create(roaster);
+                _roasterRepository.Add(roaster);
+                await _roasterRepository.SaveChangesAsync();
                 return Ok();
             }
             catch (Exception e)
@@ -60,7 +61,8 @@ namespace CoffeeMapServer
         {
             try
             {
-                await _roasterRepository.Update(roaster);
+                _roasterRepository.Update(roaster);
+                await _roasterRepository.SaveChangesAsync();
                 return Ok();
             }
             catch (Exception e)
@@ -76,7 +78,9 @@ namespace CoffeeMapServer
         {
             try
             {
-                await _roasterRepository.Delete(roasterId);
+                var roaster = await _roasterRepository.GetSingleAsync(roasterId);
+                _roasterRepository.Delete(roaster);
+                await _roasterRepository.SaveChangesAsync();
                 return Ok();
             }
             catch (Exception e)
@@ -90,7 +94,7 @@ namespace CoffeeMapServer
         {
             try
             {
-                var roaster = await _roasterRepository.GetSingle(roasterId);
+                var roaster = await _roasterRepository.GetSingleAsync(roasterId);
                 ViewData["SingleRoaster"] = roaster;
                 return View();
                 //return Ok(roaster);
@@ -109,7 +113,8 @@ namespace CoffeeMapServer
         {
             try
             {
-                await _userRepository.Create(user);
+                _userRepository.Add(user);
+                await _roasterRepository.SaveChangesAsync();
                 return Ok();
             }
             catch (Exception e)
@@ -127,7 +132,9 @@ namespace CoffeeMapServer
         {
             try
             {
-                await _userRepository.Delete(user.Id);
+                var user1 = await _userRepository.GetSingleAsync(user.Id);
+                _userRepository.Delete(user1);
+                await _userRepository.SaveChangesAsync();
                 return Ok();
             }
             catch (Exception e)
@@ -141,11 +148,11 @@ namespace CoffeeMapServer
         [Route("GetUsers")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<List<User>> GetUsers()
+        public async Task<IList<User>> GetUsers()
         {
             try
             {
-                return await _userRepository.GetList();
+                return await _userRepository.GetListAsync();
             }
             catch
             {
@@ -157,11 +164,11 @@ namespace CoffeeMapServer
         [Route("GetRoasterRequests")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<List<RoasterRequest>> GetRoasterRequests()
+        public async Task<IList<RoasterRequest>> GetRoasterRequests()
         {
             try
             {
-                return await _roasterRequestRepository.GetList();
+                return await _roasterRequestRepository.GetListAsync();
             }
             catch (Exception)
             {
@@ -177,7 +184,7 @@ namespace CoffeeMapServer
         {
             try
             {
-                return await _roasterRequestRepository.GetSingle(id);
+                return await _roasterRequestRepository.GetSingleAsync(id);
             }
             catch (Exception)
             {
@@ -193,7 +200,8 @@ namespace CoffeeMapServer
         {
             try
             {
-                await _roasterRequestRepository.Create(roasterRequest);
+                _roasterRequestRepository.Add(roasterRequest);
+                await _roasterRequestRepository.SaveChangesAsync();
                 return Ok();
             }
             catch
@@ -210,7 +218,9 @@ namespace CoffeeMapServer
         {
             try
             {
-                await _roasterRequestRepository.Delete(id);
+                var roasterReq = await _roasterRequestRepository.GetSingleAsync(id);
+                _roasterRequestRepository.Delete(roasterReq);
+                await _roasterRequestRepository.SaveChangesAsync();
                 return Ok();
             }
             catch

@@ -8,7 +8,7 @@ namespace CoffeeMapServer.Services.Interfaces
 {
     public interface IRoasterService
     {
-        public Task<List<Roaster>> GetRoastersAsync();
+        public Task<IList<Roaster>> GetRoastersAsync();
         public Task<RoasterInfoViewModel> GetRoasterViewModel(Guid id);
         public Task SendRoasterRequest(RoasterRequest roasterRequest);
     }

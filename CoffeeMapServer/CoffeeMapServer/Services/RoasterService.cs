@@ -1,11 +1,10 @@
-﻿using CoffeeMapServer.Infrastructures.IRepositories;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using CoffeeMapServer.Services.Interfaces;
 using CoffeeMapServer.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Services
 {
@@ -30,21 +29,24 @@ namespace CoffeeMapServer.Services
             _roasterRequestRepository = roasterRequestRepository ?? throw new ArgumentNullException(nameof(roasterRequestRepository));
         }
 
-        public async Task<List<Roaster>> GetRoastersAsync()
-            => await _roasterRepository.GetList();
+        public async Task<IList<Roaster>> GetRoastersAsync()
+            => await _roasterRepository.GetListAsync();
 
         public async Task<RoasterInfoViewModel> GetRoasterViewModel(Guid id)
         {
-            var roaster = await _roasterRepository.GetSingle(id);
-            var roasterAddress = await _addressRepository.GetSingle(roaster.OfficeAddressId);
-            var roasterTagsId = await _roasterTagRepository.GetPairsByRoasterId(roaster.Id);
+            var roaster = await _roasterRepository.GetSingleAsync(id);
+            var roasterAddress = await _addressRepository.GetSingleAsync(roaster.OfficeAddressId);
+            var roasterTagsId = await _roasterTagRepository.GetPairsByRoasterIdAsync(roaster.Id);
             var tags = new List<Tag>();
             foreach (var item in roasterTagsId)
-                tags.Add(await _tagRepository.GetSingle(item.TagId));
+                tags.Add(await _tagRepository.GetSingleAsync(item.TagId));
             return new RoasterInfoViewModel(roaster, roasterAddress, tags);
         }
 
         public async Task SendRoasterRequest(RoasterRequest roasterRequest)
-            => await _roasterRequestRepository.Create(roasterRequest);
+        {
+            _roasterRequestRepository.Add(roasterRequest);
+            await _roasterRequestRepository.SaveChangesAsync();
+        }
     }
 }

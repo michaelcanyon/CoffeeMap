@@ -1,27 +1,22 @@
-using CoffeeMapServer.Infrastructures.IRepositories;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using CoffeeMapServer.Models;
-using CoffeeMapServer.Models.Intermediary_models;
+using CoffeeMapServer.Services.Interfaces.Admin;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Views.Admin.RoasterViews
 {
     public class EditRoasterModel : PageModel
     {
-        private readonly IRoasterRepository roasterRepository;
-        private readonly IRoasterTagRepository roasterTagRepository;
-        private readonly ITagRepository tagRepository;
+        private readonly IRoasterAdminService _roasterAdminService;
 
         public Guid Guid { get; set; }
 
         [BindProperty]
-        public IFormFile Picture { get; set; }  
+        public IFormFile Picture { get; set; }
 
         [BindProperty]
         public Roaster Roaster { get; set; }
@@ -39,20 +34,16 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
         public List<string> DeletableTagsList = new List<string>();
 
 
-        public EditRoasterModel(IRoasterRepository repository, IRoasterTagRepository roasterTagsRepository, ITagRepository tagsRepository)
-        {
-            roasterRepository = repository;
-            roasterTagRepository = roasterTagsRepository;
-            tagRepository = tagsRepository;
-        }
+        public EditRoasterModel(IRoasterAdminService roasterAdminService)
+            => _roasterAdminService = roasterAdminService;
 
         public async Task<IActionResult> OnGet(Guid id)
         {
             Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
-            Roaster = await roasterRepository.GetSingle(id);
-            var currentTagPairs = await roasterTagRepository.GetPairsByRoasterId(Roaster.Id);
+            Roaster = await _roasterAdminService.FetchSingleRoasterAsync(id);
+            var currentTagPairs = await _roasterAdminService.FetchRoasterTagsAsync(Roaster.Id);
             foreach (var i in currentTagPairs)
-                tagsList.Add((await tagRepository.GetSingle(i.TagId)).TagTitle);
+                tagsList.Add((await _roasterAdminService.FetchTagByIdAsync(i.TagId)).TagTitle);
             if (Roaster.ContactEmail == "none")
                 Roaster.ContactEmail = null;
             if (Roaster.InstagramProfileLink == "none")
@@ -68,65 +59,7 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
 
         public async Task<IActionResult> OnPostProcessAsync()
         {
-            if (Tags != null && Tags.Length > 0)
-            {
-                var addTagsList = Tags.Split("#");
-                foreach (var i in addTagsList)
-                    if (!tagsList.Contains(i))
-                        tagsList.Add(i);
-                if (tagsList.Contains(""))
-                    tagsList.Remove("");
-            }
-
-            if (DeletableTags != null && DeletableTags.Length > 0)
-                DeletableTagsList.AddRange(DeletableTags.Split("#"));
-            if (DeletableTagsList.Count() > 0)
-                if (DeletableTagsList.Contains(""))
-                    DeletableTagsList.Remove("");
-            foreach (var i in DeletableTagsList)
-            {
-                var currentTag = await tagRepository.GetSingle(i);
-                await roasterTagRepository.Delete(Roaster.Id, currentTag.Id);
-            }
-
-            var pairs = await roasterTagRepository.GetPairsByRoasterId(Roaster.Id);
-            foreach (var i in tagsList)
-            {
-                Tag currentTag;
-                currentTag = await tagRepository.GetSingle(i);
-
-                if (currentTag == null)
-                {
-                    await tagRepository.Create(new Tag { TagTitle = i });
-                    currentTag = await tagRepository.GetSingle(i);
-                }
-
-                var buffRoasterTags = pairs.Where(item => item.TagId == currentTag.Id);
-                if (buffRoasterTags.Count() == 0)
-                    await roasterTagRepository.Create(new RoasterTag { RoasterId = Roaster.Id, TagId = currentTag.Id });
-            }
-            if (Roaster.ContactEmail == null)
-                Roaster.ContactEmail = "none";
-            if (Roaster.InstagramProfileLink == null)
-                Roaster.InstagramProfileLink = "none";
-            if (Roaster.WebSiteLink == null)
-                Roaster.WebSiteLink = "none";
-            if (Roaster.VkProfileLink == null)
-                Roaster.VkProfileLink = "none";
-            if (Roaster.TelegramProfileLink == null)
-                Roaster.TelegramProfileLink = "none";
-
-            if (Picture != null)
-            {
-                byte[] bytePicture = null;
-                using (var binaryReader = new BinaryReader(Picture.OpenReadStream()))
-                {
-                    bytePicture = binaryReader.ReadBytes((int)Picture.Length);
-                }
-                Roaster.Picture = bytePicture;
-            }
-
-            await roasterRepository.Update(Roaster);
+            await _roasterAdminService.UpdateRoasterAsync(Roaster, Tags, DeletableTags, Picture);
             return RedirectToPage("Roasters");
         }
     }

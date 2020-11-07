@@ -1,15 +1,15 @@
-using CoffeeMapServer.Infrastructures.IRepositories;
-using CoffeeMapServer.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Threading.Tasks;
+using CoffeeMapServer.Models;
+using CoffeeMapServer.Services.Interfaces.Admin;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CoffeeMapServer.Pages.Admin.TagViews
 {
     public class EditTagModel : PageModel
     {
-        private readonly ITagRepository tagRepository;
+        private readonly ITagService _tagService;
 
         [BindProperty]
         public Tag Tag { get; set; }
@@ -20,10 +20,8 @@ namespace CoffeeMapServer.Pages.Admin.TagViews
 
         public Guid Guid { get; set; }
 
-        public EditTagModel(ITagRepository tagsRepository)
-        {
-            tagRepository = tagsRepository;
-        }
+        public EditTagModel(ITagService tagService)
+            => _tagService = tagService;
 
         public async Task<IActionResult> OnGet(Guid id)
         {
@@ -32,26 +30,22 @@ namespace CoffeeMapServer.Pages.Admin.TagViews
             Nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.nickname"].ToString();
             try
             {
-                Tag = await tagRepository.GetSingle(id);
+                Tag = await _tagService.FetchSingleTagAsync(id);
                 return Page();
             }
             catch
-            {
-                return RedirectToPage("Tags");
-            }
+            { return RedirectToPage("Tags"); }
         }
 
         public async Task<IActionResult> OnPostProcessAsync()
         {
             try
             {
-                await tagRepository.Update(Tag);
+                await _tagService.UpdateSingleTagAsync(Tag);
                 return RedirectToPage("Tags");
             }
             catch
-            {
-                return RedirectToPage("Tags");
-            }
+            { return RedirectToPage("Tags"); }
         }
     }
 }

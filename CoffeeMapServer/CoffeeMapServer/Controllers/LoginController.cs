@@ -1,6 +1,7 @@
 ﻿using CoffeeMapServer.Encryptions;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Services.Interfaces;
+using CoffeeMapServer.Services.Interfaces.Admin;
 using CoffeeMapServer.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,12 +13,12 @@ namespace CoffeeMapServer.Controllers
     [Route("[controller]")]
     public class LoginController : Controller
     {
-        private readonly IUserRepository userRepository;
+        private readonly IUserService userService;
         private readonly IIdentityGeneratorService _identityGeneratorService;
 
-        public LoginController(IUserRepository repository, IIdentityGeneratorService identityGeneratorService)
+        public LoginController(IUserService repository, IIdentityGeneratorService identityGeneratorService)
         {
-            userRepository = repository;
+            userService = repository;
             _identityGeneratorService = identityGeneratorService;
         }
 
@@ -37,8 +38,8 @@ namespace CoffeeMapServer.Controllers
             if (identity == null)
                 return View();
             var token = await TokenGenerator.GenerateToken(identity);
-            var userSample = await userRepository.GetSingle(login.Email, login.Password);
-            await QueryCookiesEditor.SetUserCookies(userSample, token, HttpContext);
+            var userSample = await userService.Login(login.Email, login.Password);
+            QueryCookiesEditor.SetUserCookies(userSample, token, HttpContext);
             return userSample.Role == "Master" ? Redirect("~/Home/HomeMaster") : Redirect("~/Home/Home");
         }
     }

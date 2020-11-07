@@ -1,7 +1,6 @@
 using CoffeeMapServer.EF;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Infrastructures.Repositories;
-using CoffeeMapServer.Infrastructures.Repositories.Intermediary_repositories;
 using CoffeeMapServer.Services;
 using CoffeeMapServer.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;

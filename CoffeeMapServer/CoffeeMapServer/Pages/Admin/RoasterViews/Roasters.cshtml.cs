@@ -1,23 +1,21 @@
-using CoffeeMapServer.Infrastructures.IRepositories;
-using CoffeeMapServer.Models;
-using CoffeeMapServer.Models.Intermediary_models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CoffeeMapServer.Models;
+using CoffeeMapServer.Models.Intermediary_models;
+using CoffeeMapServer.Services.Interfaces.Admin;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CoffeeMapServer.Views.Admin.RoasterViews
 {
     public class RoastersModel : PageModel
     {
-        private readonly IRoasterRepository RoasterRepository;
-        private readonly IRoasterTagRepository RoasterTagRepository;
-        private readonly ITagRepository TagRepository;
-        public List<Roaster> Roasters { get; set; }
-        public List<RoasterTag> RoasterTags { get; set; }
+        private readonly IRoasterAdminService _roasterAdminService;
+        public IList<Roaster> Roasters { get; set; }
+        public IList<RoasterTag> RoasterTags { get; set; }
 
-        public List<Tag> Tags { get; set; }
+        public IList<Tag> Tags { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public string IdFilter { get; set; }
@@ -49,12 +47,9 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
         [BindProperty(SupportsGet = true)]
         public string TagString { get; set; }
 
-        public RoastersModel(IRoasterRepository roasterRepository, IRoasterTagRepository roasterTagRepository, ITagRepository tagRepository)
-        {
-            RoasterRepository = roasterRepository;
-            RoasterTagRepository = roasterTagRepository;
-            TagRepository = tagRepository;
-        }
+        public RoastersModel(IRoasterAdminService roasterAdminService)
+            => _roasterAdminService = roasterAdminService;
+
 
         // TODO: проверить, где состояния не нужно хранить в Pages. P.S Подумал. Нужны для подгрузки меню мастера\администратора. Несколько состояний, действительно, были лишними.
         public string Role { get; set; }
@@ -62,9 +57,9 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
         public async Task OnGetAsync()
         {
             Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
-            Roasters = await RoasterRepository.GetList();
-            RoasterTags = await RoasterTagRepository.GetList();
-            Tags = await TagRepository.GetList();
+            Roasters = await _roasterAdminService.FetchRoastersAsync();
+            RoasterTags = await _roasterAdminService.FetchRoasterTagsAsync();
+            Tags = await _roasterAdminService.FetchTagsAsync();
             // TODO: подумать над бизнес-сценариями
             if (!string.IsNullOrEmpty(IdFilter))
                 Roasters = Roasters.Where(s => s.Id.Equals(IdFilter)).ToList();
@@ -82,6 +77,7 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
                 Roasters = Roasters.Where(s => s.VkProfileLink.Contains(VkProfileFilter)).ToList();
             if (!string.IsNullOrEmpty(TelegramProfileFilter))
                 Roasters = Roasters.Where(s => s.TelegramProfileLink.Contains(TelegramProfileFilter)).ToList();
+            //TODO: Check if following codelines affect on results
             if (!string.IsNullOrEmpty(TagString))
             {
                 var tagsArr = TagString.Split(" ");

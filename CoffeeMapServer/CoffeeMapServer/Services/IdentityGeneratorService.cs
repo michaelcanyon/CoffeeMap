@@ -1,5 +1,6 @@
 ﻿using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Services.Interfaces;
+using CoffeeMapServer.Services.Interfaces.Admin;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -10,13 +11,13 @@ namespace CoffeeMapServer.Services
 {
     public class IdentityGeneratorService : IIdentityGeneratorService
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUserService _userService;
 
-        public IdentityGeneratorService(IUserRepository repository) => _userRepository = repository;
+        public IdentityGeneratorService(IUserService repository) => _userService = repository;
 
         public async Task<ClaimsIdentity> GetIdentity(string username, string password)
         {
-            var user = await _userRepository.GetSingle(username, password);
+            var user = await _userService.Login(username, password);
             if (user == null)
                 return null;
             //the last one claim ???

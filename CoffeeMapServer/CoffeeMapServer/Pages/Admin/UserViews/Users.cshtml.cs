@@ -1,6 +1,7 @@
 using CoffeeMapServer.Infrastructures;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
+using CoffeeMapServer.Services.Interfaces.Admin;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,7 +15,7 @@ namespace CoffeeMapServer.Pages.Admin.UserViews
     [Authorize(Policy = Policies.Master)]
     public class UsersModel : PageModel
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUserService _userService;
 
         [BindProperty]
         public string IdFilter { get; set; }
@@ -28,13 +29,14 @@ namespace CoffeeMapServer.Pages.Admin.UserViews
         [BindProperty]
         public string RoleFilter { get; set; }
 
-        public List<User> Users { get; set; }
+        public IList<User> Users { get; set; }
 
-        public UsersModel(IUserRepository userRepository) => _userRepository = userRepository;
+        public UsersModel(IUserService userService) 
+            => _userService = userService;
 
         public async Task OnGetAsync()
         {
-            Users = await _userRepository.GetList();
+            Users = await _userService.FetchUsersAsync();
             if (!string.IsNullOrEmpty(IdFilter))
                 Users = Users.Where(user => user.Id.Equals(Convert.ToInt32(IdFilter))).ToList();
             if (!string.IsNullOrEmpty(LoginFilter))

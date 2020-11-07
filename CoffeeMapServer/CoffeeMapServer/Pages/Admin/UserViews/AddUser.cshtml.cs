@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using CoffeeMapServer.Infrastructures;
-using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
+using CoffeeMapServer.Services.Interfaces.Admin;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,9 +11,9 @@ namespace CoffeeMapServer.Pages.Admin.UserViews
     [Authorize(Policy = Policies.Master)]
     public class AddUserModel : PageModel
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUserService _userService;
 
-        public AddUserModel(IUserRepository userRepository) => _userRepository = userRepository;
+        public AddUserModel(IUserService userService) => _userService = userService;
 
         [BindProperty]
         public User Ruser { get; set; }
@@ -22,16 +22,11 @@ namespace CoffeeMapServer.Pages.Admin.UserViews
 
         public async Task<IActionResult> OnPostAsync()
         {
-            User userV = await _userRepository.GetSingle(Ruser.Login);
-            if (userV != null)
-                return RedirectToPage("AddUser");
-            userV = await _userRepository.GetSingleByMail(Ruser.Email);
-            if (userV != null)
-                return RedirectToPage("AddUser");
-            await _userRepository.Create(Ruser);
+            await _userService.AddUserAsync(Ruser);
             return RedirectToPage("Users");
         }
 
-        public void OnGet(int StatusCode) => ErrorStatusCode = StatusCode;
+        public void OnGet(int StatusCode)
+            => ErrorStatusCode = StatusCode;
     }
 }

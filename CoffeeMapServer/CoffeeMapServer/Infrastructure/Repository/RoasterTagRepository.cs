@@ -36,5 +36,8 @@ namespace CoffeeMapServer.Infrastructures.Repositories
 
         public async Task SaveChangesAsync()
             => await Context.SaveChangesAsync();
+
+        public void DeleteRange(IList<RoasterTag> range)
+            => Context.RemoveRange(range);
     }
 }

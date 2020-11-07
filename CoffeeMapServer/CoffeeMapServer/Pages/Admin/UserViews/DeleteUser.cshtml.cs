@@ -1,5 +1,6 @@
 using CoffeeMapServer.Infrastructures;
 using CoffeeMapServer.Infrastructures.IRepositories;
+using CoffeeMapServer.Services.Interfaces.Admin;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,16 +12,16 @@ namespace CoffeeMapServer.Pages.Admin.UserViews
     [Authorize(Policy = Policies.Master)]
     public class DeleteUserModel : PageModel
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUserService _userService;
 
         public Guid Guid { get; set; }
 
-        public DeleteUserModel(IUserRepository userRepository) => _userRepository = userRepository;
+        public DeleteUserModel(IUserService userService) => _userService= userService;
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
             Guid = id;
-            await _userRepository.Delete(Guid);
+            await _userService.DeleteUserAsync(Guid);
             return RedirectToPage("Users");
         }
     }
