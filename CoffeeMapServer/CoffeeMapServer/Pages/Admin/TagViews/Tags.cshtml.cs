@@ -21,8 +21,8 @@ namespace CoffeeMapServer.Pages.Admin.TagViews
 
         public async Task OnGetAsync()
         {
-            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
-            Nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.nickname"].ToString();
+            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
+            Nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.nickname"].ToString();
             Tags = await _tagService.FetchTagsListAsync();
         }
     }

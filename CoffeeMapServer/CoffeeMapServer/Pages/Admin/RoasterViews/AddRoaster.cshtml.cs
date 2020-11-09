@@ -29,7 +29,7 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
             => _roasterAdminService = roasterAdminService;
 
         public void OnGet()
-           => Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
+           => Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
 
         public async Task<IActionResult> OnPostAsync()
         {

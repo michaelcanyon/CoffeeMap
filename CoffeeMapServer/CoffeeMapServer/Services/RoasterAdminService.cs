@@ -117,6 +117,9 @@ namespace CoffeeMapServer.Services
         public async Task<IList<RoasterTag>> FetchRoasterTagsAsync(Guid roasterId)
             => await _roasterTagRepository.GetPairsByRoasterIdAsync(roasterId);
 
+        public async Task<IList<RoasterTag>> FetchRoasterTagsAsync()
+            => await _roasterTagRepository.GetListAsync();
+
         public async Task<IList<Tag>> FetchTagsAsync()
             => await _tagRepository.GetListAsync();
 

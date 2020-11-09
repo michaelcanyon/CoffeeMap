@@ -24,8 +24,8 @@ namespace CoffeeMapServer.Pages.Admin.Account
 
         public async Task OnGetAsync()
         {
-            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
-            var id = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.id"].ToString();
+            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
+            var id = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.id"].ToString();
             _User = await _accountService.GetAccountByIdAsync(Guid.Parse(id));
         }
 

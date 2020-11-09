@@ -36,29 +36,54 @@ namespace CoffeeMapServer.Models
         [Required]
         public string OpeningHours { get; set; }
 
+        public RoasterRequest() { }
+
         public RoasterRequest(Guid? id = null) : base(id)
         { }
 
-        public static RoasterRequest New(Guid id, string name, string contactNumber, string contactEmail, string webSiteLink, string vkProfileLink, string igProfileLink, string tgProfileLink) => new RoasterRequest(id)
+        public static RoasterRequest New(Guid id,
+                                         string name,
+                                         string contactNumber,
+                                         string contactEmail,
+                                         string webSiteLink,
+                                         string vkProfileLink,
+                                         string igProfileLink,
+                                         string tgProfileLink,
+                                         string description,
+                                         byte[] picture) 
+            => new RoasterRequest(id)
         {
             Name = name,
             ContactNumber = contactNumber,
             ContactEmail = contactEmail,
+            Description = description,
             WebSiteLink = webSiteLink,
             VkProfileLink = vkProfileLink,
             InstagramProfileLink = igProfileLink,
-            TelegramProfileLink = tgProfileLink
+            TelegramProfileLink = tgProfileLink,
+            Picture = picture
         };
 
-        public static RoasterRequest New(string name, string contactNumber, string contactEmail, string webSiteLink, string vkProfileLink, string igProfileLink, string tgProfileLink) => new RoasterRequest
+        public static RoasterRequest New(string name,
+                                         string contactNumber,
+                                         string contactEmail,
+                                         string webSiteLink,
+                                         string vkProfileLink,
+                                         string igProfileLink,
+                                         string tgProfileLink,
+                                         string description,
+                                         byte[] picture) 
+            => new RoasterRequest()
         {
             Name = name,
             ContactNumber = contactNumber,
             ContactEmail = contactEmail,
+            Description = description,
             WebSiteLink = webSiteLink,
             VkProfileLink = vkProfileLink,
             InstagramProfileLink = igProfileLink,
-            TelegramProfileLink = tgProfileLink
+            TelegramProfileLink = tgProfileLink,
+            Picture = picture
         };
     }
 }

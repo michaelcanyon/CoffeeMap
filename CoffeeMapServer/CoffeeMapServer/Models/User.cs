@@ -19,30 +19,34 @@ namespace CoffeeMapServer.Models
         [Required]
         public string Role { get; set; }
 
-        public User(Guid? id = null) : base(id)
+        public User() { }
+
+        private User(Guid? id = null) : base(id)
         { }
 
-        public static User New(
-            Guid id,
-            string login,
-            string email,
-            string password)
+        public static User New(Guid id,
+                               string login,
+                               string email,
+                               string password,
+                               string role)
             => new User(id)
             {
                 Login = login,
                 Email = email,
-                Password = password
+                Password = password,
+                Role=role
             };
 
-        public static User New(
-            string login,
-            string email,
-            string password)
-            => new User
+        public static User New(string login,
+                               string email,
+                               string password,
+                               string role)
+            => new User()
             {
                 Login = login,
                 Email = email,
-                Password = password
+                Password = password,
+                Role = role
             };
     }
 }

@@ -30,7 +30,7 @@ namespace CoffeeMapServer.Views.Admin.Addresses
 
         public async Task OnGetAsync()
         {
-            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
+            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
             Addresses = await _addressService.FetchAddressesAsync();
             if (!string.IsNullOrEmpty(AddressIdFilter))
                 Addresses = Addresses.Where(n => n.Id.Equals(AddressIdFilter)).ToList();

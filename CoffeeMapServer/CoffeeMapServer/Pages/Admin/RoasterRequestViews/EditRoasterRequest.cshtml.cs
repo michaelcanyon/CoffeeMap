@@ -30,7 +30,7 @@ namespace CoffeeMapServer.Pages.Admin.RoasterRequestViews
         public async Task OnGetAsync(Guid id)
         {
             Guid = id;
-            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
+            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
             request = await _roasterRequestService.FetchSingleRoasterRequestByIdAsync(Guid);
         }
         

@@ -25,7 +25,7 @@ namespace CoffeeMapServer.Controllers
         [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> RoastersInfo()
         {
-            var roasters = await _roasterService.GetRoasters();
+            var roasters = await _roasterService.GetRoastersAsync();
             return Ok(roasters);
         }
 
@@ -35,7 +35,7 @@ namespace CoffeeMapServer.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> RoasterInfoById(Guid id)
         {
-            var roaster = await _roasterService.GetSingleRoaster(id);
+            var roaster = await _roasterService.GetRoasterViewModel(id);
             return Ok(roaster);
         }
 
@@ -44,8 +44,8 @@ namespace CoffeeMapServer.Controllers
         [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Roaster([FromBody] RoasterRequest roasterRequest)
         {
-            roasterRequest.Id = Guid.Empty;
-            await _roasterService.SendRoasterRequest(roasterRequest);
+            var roasterRequestpar = RoasterRequest.New(roasterRequest.Name, roasterRequest.ContactNumber, roasterRequest.ContactEmail, roasterRequest.WebSiteLink, roasterRequest.VkProfileLink, roasterRequest.InstagramProfileLink, roasterRequest.TelegramProfileLink, roasterRequest.Description, roasterRequest.Picture);
+            await _roasterService.SendRoasterRequest(roasterRequestpar);
             return Ok();
         }
 

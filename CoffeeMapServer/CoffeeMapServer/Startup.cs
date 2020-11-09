@@ -3,6 +3,7 @@ using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Infrastructures.Repositories;
 using CoffeeMapServer.Services;
 using CoffeeMapServer.Services.Interfaces;
+using CoffeeMapServer.Services.Interfaces.Admin;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Hosting;
@@ -39,6 +40,13 @@ namespace CoffeeMapServer
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IRoasterRequestRepository, RoasterRequestRepository>();
             services.AddTransient<IRoasterService, RoasterService>();
+            services.AddTransient<IRoasterAdminService, RoasterAdminService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IAddressService, AddressService>();
+            services.AddTransient<ITagService, TagService>();
+            services.AddTransient<IRoasterAddressConnectionService, RoasterAddressConnectionService>();
+            services.AddTransient<IRoasterRequestService, RoasterRequestService>();
             services.AddTransient<IIdentityGeneratorService, IdentityGeneratorService>();
             services.ConfigureAuth();
             services.AddRazorPages().AddRazorPagesOptions(options =>
@@ -80,7 +88,7 @@ namespace CoffeeMapServer
             app.UseSwagger();
             app.Use(async (context, next) =>
             {
-                var token = context.Request.Cookies[".AspNetCore.Meta.Metadta"];
+                var token = context.Request.Cookies[".AspNetCore.Meta.Metadata"];
                 if (!string.IsNullOrEmpty(token))
                     context.Request.Headers.Append("Authorization", "Bearer " + token);
 

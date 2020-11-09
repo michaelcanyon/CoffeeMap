@@ -5,6 +5,8 @@ namespace CoffeeMapServer.Models
 {
     public class Address : Entity
     {
+        public Address() { }
+
         private Address(Guid? id = null)
             : base(id)
         { }
@@ -23,7 +25,7 @@ namespace CoffeeMapServer.Models
             };
 
         public static Address New(string address, string openingHours)
-            => new Address
+            => new Address()
             {
                 AddressStr = address,
                 OpeningHours = openingHours

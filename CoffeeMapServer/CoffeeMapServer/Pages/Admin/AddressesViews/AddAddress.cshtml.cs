@@ -20,7 +20,7 @@ namespace CoffeeMapServer.Pages.Admin.AddressesViews
             => _addressService = addressService;
 
         public void OnGet() 
-            => Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
+            => Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
 
         public async Task<IActionResult> OnPostAsync()
         {

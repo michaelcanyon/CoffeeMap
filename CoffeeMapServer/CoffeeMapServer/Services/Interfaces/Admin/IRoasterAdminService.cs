@@ -15,6 +15,8 @@ namespace CoffeeMapServer.Services.Interfaces.Admin
 
         public Task<IList<RoasterTag>> FetchRoasterTagsAsync(Guid roasterId);
 
+        public Task<IList<RoasterTag>> FetchRoasterTagsAsync();
+
         public Task<Tag> FetchTagByIdAsync(Guid id);
 
         public Task<IList<Tag>> FetchTagsAsync();

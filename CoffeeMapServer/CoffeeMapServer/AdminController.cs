@@ -44,6 +44,16 @@ namespace CoffeeMapServer
         {
             try
             {
+                var roaster1 = Roaster.New(roaster.Name,
+                                           roaster.ContactNumber,
+                                           roaster.ContactEmail,
+                                           roaster.OfficeAddressId,
+                                           roaster.WebSiteLink,
+                                           roaster.VkProfileLink,
+                                           roaster.InstagramProfileLink,
+                                           roaster.TelegramProfileLink,
+                                           roaster.Picture,
+                                           roaster.Description);
                 _roasterRepository.Add(roaster);
                 await _roasterRepository.SaveChangesAsync();
                 return Ok();
@@ -113,7 +123,11 @@ namespace CoffeeMapServer
         {
             try
             {
-                _userRepository.Add(user);
+                var useradd = Models.User.New(user.Login,
+                                              user.Email,
+                                              Encryptions.Sha1Hash.GetHash(user.Password),
+                                              user.Role);
+                _userRepository.Add(useradd);
                 await _roasterRepository.SaveChangesAsync();
                 return Ok();
             }
@@ -128,11 +142,12 @@ namespace CoffeeMapServer
         [Route("DeleteUser")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> DeleteUser(User user)
+        public async Task<IActionResult> DeleteUser(string id)
         {
             try
             {
-                var user1 = await _userRepository.GetSingleAsync(user.Id);
+
+                var user1 = await _userRepository.GetSingleAsync(Guid.Parse(id));
                 _userRepository.Delete(user1);
                 await _userRepository.SaveChangesAsync();
                 return Ok();
@@ -200,6 +215,15 @@ namespace CoffeeMapServer
         {
             try
             {
+                var roasterrequest = RoasterRequest.New(roasterRequest.Name,
+                                                        roasterRequest.ContactNumber,
+                                                        roasterRequest.ContactEmail,
+                                                        roasterRequest.WebSiteLink,
+                                                        roasterRequest.VkProfileLink,
+                                                        roasterRequest.InstagramProfileLink,
+                                                        roasterRequest.TelegramProfileLink,
+                                                        roasterRequest.Description,
+                                                        roasterRequest.Picture);
                 _roasterRequestRepository.Add(roasterRequest);
                 await _roasterRequestRepository.SaveChangesAsync();
                 return Ok();

@@ -9,17 +9,16 @@ namespace CoffeeMapServer.Models.Intermediary_models
         public Guid RoasterId { get; set; }
 
         //[Required]
-        //public Roaster Roaster { get; set; }
+        public Roaster Roaster { get; set; }
 
         [Required]
         public Guid TagId { get; set; }
 
         //[Required]
-        //public Tag Tag { get; set; }
+        public Tag Tag { get; set; }
 
-        public RoasterTag(
-            Guid roasterId,
-            Guid tagId)
+        public RoasterTag(Guid roasterId,
+                          Guid tagId)
         {
             RoasterId = roasterId;
             TagId = tagId;

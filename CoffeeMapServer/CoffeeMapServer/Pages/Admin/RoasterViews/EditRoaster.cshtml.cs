@@ -39,7 +39,7 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
 
         public async Task<IActionResult> OnGet(Guid id)
         {
-            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
+            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
             Roaster = await _roasterAdminService.FetchSingleRoasterAsync(id);
             var currentTagPairs = await _roasterAdminService.FetchRoasterTagsAsync(Roaster.Id);
             foreach (var i in currentTagPairs)

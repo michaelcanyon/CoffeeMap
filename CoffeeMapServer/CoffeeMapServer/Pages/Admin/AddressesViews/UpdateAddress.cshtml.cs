@@ -21,7 +21,7 @@ namespace CoffeeMapServer.Views.Admin.Addresses
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
+            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
             Address = await _addressService.GetSingleAddressByIdAsync(id);
             if (Address.OpeningHours == "none")
                 Address.OpeningHours = null;

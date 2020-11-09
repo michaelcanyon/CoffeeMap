@@ -26,8 +26,8 @@ namespace CoffeeMapServer.Pages.Admin.TagViews
         public async Task<IActionResult> OnGet(Guid id)
         {
             Guid = id;
-            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
-            Nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.nickname"].ToString();
+            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
+            Nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.nickname"].ToString();
             try
             {
                 Tag = await _tagService.FetchSingleTagAsync(id);

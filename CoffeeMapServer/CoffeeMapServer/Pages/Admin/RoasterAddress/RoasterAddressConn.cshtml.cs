@@ -46,7 +46,7 @@ namespace CoffeeMapServer.Pages.Admin.RoasterAddress
 
         public async Task OnGetAsync()
         {
-            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
+            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
             Addresses = await _roasterAddressConnectionService.FetchAddressesAsync();
             Roasters = await _roasterAddressConnectionService.FetchRoastersAsync();
             if (!string.IsNullOrEmpty(AddressIdFilter))

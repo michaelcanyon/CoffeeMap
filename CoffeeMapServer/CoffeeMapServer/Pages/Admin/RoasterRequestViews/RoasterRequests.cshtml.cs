@@ -22,7 +22,7 @@ namespace CoffeeMapServer.Pages.Admin.RoasterRequestViews
 
         public async Task OnGetAsync()
         {
-            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadta.role"].ToString();
+            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
             RoasterRequests = await _roasterRequestService.FetchRoasterRequestsListAsync();
         }
 
