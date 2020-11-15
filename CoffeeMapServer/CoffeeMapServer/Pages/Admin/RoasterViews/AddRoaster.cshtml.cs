@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using CoffeeMapServer.Models;
 using CoffeeMapServer.Services.Interfaces.Admin;
@@ -26,7 +27,7 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
         public string Role { get; set; }
 
         public AddRoasterModel(IRoasterAdminService roasterAdminService)
-            => _roasterAdminService = roasterAdminService;
+            => _roasterAdminService = roasterAdminService ?? throw new ArgumentNullException(nameof(IRoasterAdminService));
 
         public void OnGet()
            => Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
@@ -35,7 +36,6 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
         {
             await _roasterAdminService.AddRoasterAsync(Roaster, Tags, Address, Picture);
             return RedirectToPage("Roasters");
-
         }
     }
 }

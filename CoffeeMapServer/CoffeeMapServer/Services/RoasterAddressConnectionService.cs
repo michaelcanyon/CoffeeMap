@@ -12,12 +12,11 @@ namespace CoffeeMapServer.Services
         private readonly IRoasterRepository _roasterRepository;
         private readonly IAddressRepository _addressRepository;
 
-        public RoasterAddressConnectionService(
-            IRoasterRepository roasterRepository,
-            IAddressRepository addressRepository)
+        public RoasterAddressConnectionService(IRoasterRepository roasterRepository,
+                                               IAddressRepository addressRepository)
         {
-            _roasterRepository = roasterRepository;
-            _addressRepository = addressRepository;
+            _roasterRepository = roasterRepository ?? throw new ArgumentNullException(nameof(roasterRepository));
+            _addressRepository = addressRepository ?? throw new ArgumentNullException(nameof(addressRepository));
         }
 
         public async Task<IList<Address>> FetchAddressesAsync()

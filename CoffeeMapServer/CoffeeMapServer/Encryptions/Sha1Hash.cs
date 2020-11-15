@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 
 namespace CoffeeMapServer.Encryptions
 {
@@ -24,7 +25,7 @@ namespace CoffeeMapServer.Encryptions
 
             var hashString = sb.ToString();
 
-            return hashString;
+            return hashString ?? throw new ArgumentNullException(nameof(Sha1Hash));
         }
     }
 }

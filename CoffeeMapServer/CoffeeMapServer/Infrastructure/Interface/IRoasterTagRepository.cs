@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CoffeeMapServer.Models.Intermediary_models;
+using CoffeeMapServer.Models;
 
 namespace CoffeeMapServer.Infrastructures.IRepositories
 {
@@ -11,15 +11,11 @@ namespace CoffeeMapServer.Infrastructures.IRepositories
 
         public Task<IList<RoasterTag>> GetPairsByTagIdAsync(Guid tagId);
 
-
-        //TODO: perhaps you will have o write new method & signature to get roastertag pair by roaster Id & Tag Id
         public void Delete(RoasterTag entity);
 
-        public void DeleteRange(IList<RoasterTag> range);
+        public void DeleteRoasterTags(IList<RoasterTag> range);
 
         public void Add(RoasterTag entity);
-
-        public void Update(RoasterTag entity);
 
         public Task<IList<RoasterTag>> GetListAsync();
 

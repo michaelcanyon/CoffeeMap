@@ -10,30 +10,27 @@ namespace CoffeeMapServer.Infrastructures.Repositories
 {
     public class AddressRepository : IAddressRepository
     {
-        CoffeeDbContext Context { get; set; }
+        private readonly CoffeeDbContext _context;
 
         public AddressRepository(CoffeeDbContext dbContext)
-            => Context = dbContext;
+            => _context = dbContext ?? throw new ArgumentNullException(nameof(CoffeeDbContext));
 
         public void Add(Address entity)
-            => Context.Addresses.Add(entity);
+            => _context.Addresses.Add(entity);
 
         public void Delete(Address entity)
-            => Context.Addresses.Remove(entity);
+            => _context.Addresses.Remove(entity);
 
         public async Task<Address> GetSingleAsync(Guid id)
-            => await Context.Addresses.FirstOrDefaultAsync(e => e.Id == id);
+            => await _context.Addresses.FirstOrDefaultAsync(e => e.Id == id);
 
         public void Update(Address entity)
-            => Context.Addresses.Update(entity);
+            => _context.Addresses.Update(entity);
 
         public async Task<IList<Address>> GetListAsync()
-            => await Context.Addresses.ToListAsync();
-
-        public async Task<Address> GetSingleAsync(Address entity)
-            => await Context.Addresses.FirstOrDefaultAsync(node => node.AddressStr.Equals(entity.AddressStr));
+            => await _context.Addresses.ToListAsync();
 
         public async Task SaveChangesAsync()
-        => await Context.SaveChangesAsync();
+            => await _context.SaveChangesAsync();
     }
 }

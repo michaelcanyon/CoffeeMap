@@ -11,12 +11,10 @@ namespace CoffeeMapServer.Infrastructures.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly CoffeeDbContext Context;
+
         public UserRepository(CoffeeDbContext context)
-            => Context = context;
-        /// <summary>
-        /// Don't forget to add HASHING
-        /// </summary>
-        /// <param name="entity"></param>
+            => Context = context ?? throw new ArgumentNullException(nameof(CoffeeDbContext));
+
         public void Add(User entity)
             => Context.Users.Add(entity);
 
@@ -29,17 +27,8 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         public async Task<User> GetSingleAsync(Guid id)
             => await Context.Users.FirstOrDefaultAsync(node => node.Id == id);
 
-        /// <summary>
-        /// hash password before check
-        /// </summary>
-        /// <param name="username"></param>
-        /// <param name="hashedpassword"></param>
-        /// <returns></returns>
         public async Task<User> GetSingleAsync(string username, string hashedPassword)
             => await Context.Users.FirstOrDefaultAsync(node => (node.Login == username && node.Password == hashedPassword));
-
-        public async Task<User> GetSingleAsync(string username)
-            => await Context.Users.FirstOrDefaultAsync(node => node.Login == username);
 
         public async Task<User> GetSingleByMailAsync(string email)
             => await Context.Users.FirstOrDefaultAsync(node => node.Email == email);

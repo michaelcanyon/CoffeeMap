@@ -1,11 +1,10 @@
+using System;
+using System.Threading.Tasks;
 using CoffeeMapServer.Infrastructures;
-using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Services.Interfaces.Admin;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
-using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Pages.Admin.UserViews
 {
@@ -14,14 +13,12 @@ namespace CoffeeMapServer.Pages.Admin.UserViews
     {
         private readonly IUserService _userService;
 
-        public Guid Guid { get; set; }
+        public DeleteUserModel(IUserService userService)
+            => _userService = userService ?? throw new ArgumentNullException(nameof(IUserService));
 
-        public DeleteUserModel(IUserService userService) => _userService= userService;
-
-        public async Task<IActionResult> OnGetAsync(Guid id)
+        public async Task<IActionResult> OnGetAsync(Guid guid)
         {
-            Guid = id;
-            await _userService.DeleteUserAsync(Guid);
+            await _userService.DeleteUserAsync(guid);
             return RedirectToPage("Users");
         }
     }

@@ -5,6 +5,6 @@ namespace CoffeeMapServer.Infrastructures.IRepositories
 {
     public interface IRoasterRequestRepository : IBaseRepository<RoasterRequest>
     {
-        public void DeleteRange(IList<RoasterRequest> range);
+        public void DeleteRoasterRequest(IList<RoasterRequest> range);
     }
 }

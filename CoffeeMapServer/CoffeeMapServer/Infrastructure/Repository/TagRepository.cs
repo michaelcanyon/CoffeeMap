@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using CoffeeMapServer.EF;
 using CoffeeMapServer.Infrastructures.IRepositories;
@@ -14,22 +13,16 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         private readonly CoffeeDbContext Context;
 
         public TagRepository(CoffeeDbContext context)
-            => Context = context;
+            => Context = context ?? throw new ArgumentNullException(nameof(CoffeeDbContext));
 
         public void Add(Tag entity)
             => Context.Tags.Add(entity);
-
 
         public void Delete(Tag entity)
             => Context.Tags.Remove(entity);
 
         public async Task<Tag> GetSingleAsync(Guid id)
             => await Context.Tags.FirstOrDefaultAsync(node => node.Id == id);
-
-        public async Task<List<Tag>> FetchMultipleTagsAsync(IEnumerable<Guid> ids)
-            => await Context.Tags
-                .Where(e => ids.Contains(e.Id))
-                .ToListAsync();
 
         public void Update(Tag entity)
             => Context.Tags.Update(entity);

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CoffeeMapServer.Models;
@@ -17,7 +18,7 @@ namespace CoffeeMapServer.Pages.Admin.TagViews
         public string Role { get; set; }
 
         public TagsModel(ITagService tagService)
-            => _tagService = tagService;
+            => _tagService = tagService ?? throw new ArgumentNullException(nameof(ITagService));
 
         public async Task OnGetAsync()
         {

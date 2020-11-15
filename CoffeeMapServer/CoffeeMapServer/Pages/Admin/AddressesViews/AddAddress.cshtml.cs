@@ -1,5 +1,5 @@
+using System;
 using System.Threading.Tasks;
-using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using CoffeeMapServer.Services.Interfaces.Admin;
 using Microsoft.AspNetCore.Mvc;
@@ -17,9 +17,9 @@ namespace CoffeeMapServer.Pages.Admin.AddressesViews
         public string Role { get; set; }
 
         public AddAddressModel(IAddressService addressService)
-            => _addressService = addressService;
+            => _addressService = addressService ?? throw new ArgumentNullException(nameof(IAddressService));
 
-        public void OnGet() 
+        public void OnGet()
             => Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
 
         public async Task<IActionResult> OnPostAsync()

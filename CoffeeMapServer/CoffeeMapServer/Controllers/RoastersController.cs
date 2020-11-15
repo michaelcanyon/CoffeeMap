@@ -1,11 +1,11 @@
-﻿using CoffeeMapServer.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using CoffeeMapServer.Models;
 using CoffeeMapServer.Services.Interfaces;
 using CoffeeMapServer.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Controllers
 {
@@ -15,9 +15,7 @@ namespace CoffeeMapServer.Controllers
     {
         private readonly IRoasterService _roasterService;
         public RoastersController(IRoasterService roasterService)
-        {
-            _roasterService = roasterService;
-        }
+            => _roasterService = roasterService ?? throw new ArgumentNullException(nameof(IRoasterService));
 
         [HttpGet]
         [Route("All")]
@@ -44,7 +42,8 @@ namespace CoffeeMapServer.Controllers
         [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Roaster([FromBody] RoasterRequest roasterRequest)
         {
-            var roasterRequestpar = RoasterRequest.New(roasterRequest.Name, roasterRequest.ContactNumber, roasterRequest.ContactEmail, roasterRequest.WebSiteLink, roasterRequest.VkProfileLink, roasterRequest.InstagramProfileLink, roasterRequest.TelegramProfileLink, roasterRequest.Description, roasterRequest.Picture);
+            var roasterRequestpar = RoasterRequest.New(roasterRequest.Roaster,
+                                                       roasterRequest.Address, roasterRequest.TagString);
             await _roasterService.SendRoasterRequest(roasterRequestpar);
             return Ok();
         }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace CoffeeMapServer.Views.Admin.Addresses
         public IList<Address> Addresses { get; set; }
 
         public GetAddressesModel(IAddressService addressService)
-            => _addressService = addressService;
+            => _addressService = addressService ?? throw new ArgumentNullException(nameof(IAddressService));
 
         [BindProperty(SupportsGet = true)]
         public string AddressIdFilter { get; set; }

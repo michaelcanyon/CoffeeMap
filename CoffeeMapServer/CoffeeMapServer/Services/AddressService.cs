@@ -12,12 +12,11 @@ namespace CoffeeMapServer.Services
         private readonly IAddressRepository _addressRepository;
         private readonly IRoasterRepository _roasterRepository;
 
-        public AddressService(
-            IAddressRepository addressRepository,
-            IRoasterRepository roasterRepository)
+        public AddressService(IAddressRepository addressRepository,
+                              IRoasterRepository roasterRepository)
         {
-            _addressRepository = addressRepository;
-            _roasterRepository = roasterRepository;
+            _addressRepository = addressRepository ?? throw new ArgumentNullException(nameof(addressRepository));
+            _roasterRepository = roasterRepository ?? throw new ArgumentNullException(nameof(roasterRepository));
         }
 
         public async Task AddAddressAsync(Address entity)
@@ -33,14 +32,12 @@ namespace CoffeeMapServer.Services
             _addressRepository.Delete(address);
 
             var roasters = await _roasterRepository.FetchRoastersByAddressIdAsync(id);
-            //TODO: make officeAddressId nullable
             foreach (var item in roasters)
             {
-                item.OfficeAddressId = new Guid();
+                item.OfficeAddress = null;
                 _roasterRepository.Update(item);
             }
 
-            await _addressRepository.SaveChangesAsync();
             await _roasterRepository.SaveChangesAsync();
         }
 

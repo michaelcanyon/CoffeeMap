@@ -11,7 +11,7 @@ namespace CoffeeMapServer.Pages.Admin.RoasterViews
         private readonly IRoasterAdminService _roasterAdminService;
 
         public DeleteRoasterModel(IRoasterAdminService roasterAdminService)
-            => _roasterAdminService = roasterAdminService;
+            => _roasterAdminService = roasterAdminService ?? throw new ArgumentNullException(nameof(IRoasterAdminService));
 
         public async Task<IActionResult> OnGet(Guid id)
         {

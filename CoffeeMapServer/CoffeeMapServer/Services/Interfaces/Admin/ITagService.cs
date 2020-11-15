@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using CoffeeMapServer.Models;
 
 namespace CoffeeMapServer.Services.Interfaces.Admin
 {
-   public interface ITagService
+    public interface ITagService
     {
         public Task<IList<Tag>> FetchTagsListAsync();
 

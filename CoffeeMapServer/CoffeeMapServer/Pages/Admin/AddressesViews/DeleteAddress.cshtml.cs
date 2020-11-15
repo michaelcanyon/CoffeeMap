@@ -13,7 +13,7 @@ namespace CoffeeMapServer.Views.Admin.Addresses
         public Guid Guid { get; set; }
 
         public DeleteAddressModel(IAddressService addressService)
-            => _addressService = addressService;
+            => _addressService = addressService ?? throw new ArgumentNullException(nameof(IAddressService));
 
         public async Task<IActionResult> OnGet(Guid id)
         {

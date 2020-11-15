@@ -10,14 +10,11 @@ namespace CoffeeMapServer.Pages.Admin.RoasterRequestViews
     {
         private readonly IRoasterRequestService _roasterRequestService;
 
-        public Guid guid { get; set; }
-
         public DeleteRoasterRequestModel(IRoasterRequestService roasterRequestService)
-            => _roasterRequestService = roasterRequestService;
+            => _roasterRequestService = roasterRequestService ?? throw new ArgumentNullException(nameof(IRoasterRequestService));
 
-        public async Task<IActionResult> OnGetAsync(Guid id)
+        public async Task<IActionResult> OnGetAsync(Guid guid)
         {
-            guid = id;
             await _roasterRequestService.DeleteRoasterRequestAsync(guid);
             return RedirectToPage("RoasterRequests");
         }

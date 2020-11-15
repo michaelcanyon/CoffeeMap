@@ -17,7 +17,7 @@ namespace CoffeeMapServer.Views.Admin.Addresses
         public string Role { get; set; }
 
         public UpdateAddressModel(IAddressService addressService)
-            => _addressService = addressService;
+            => _addressService = addressService ?? throw new ArgumentNullException(nameof(IAddressService));
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {

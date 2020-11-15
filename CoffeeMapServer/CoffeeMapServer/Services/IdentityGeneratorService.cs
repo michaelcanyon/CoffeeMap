@@ -13,14 +13,14 @@ namespace CoffeeMapServer.Services
     {
         private readonly IUserService _userService;
 
-        public IdentityGeneratorService(IUserService repository) => _userService = repository;
+        public IdentityGeneratorService(IUserService userService) 
+            => _userService = userService ?? throw new ArgumentNullException(nameof(userService));
 
         public async Task<ClaimsIdentity> GetIdentity(string username, string password)
         {
             var user = await _userService.Login(username, password);
             if (user == null)
                 return null;
-            //the last one claim ???
             var claims = new List<Claim>
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login),

@@ -1,8 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CoffeeMapServer.Models;
-using CoffeeMapServer.Models.Intermediary_models;
 using CoffeeMapServer.Services.Interfaces.Admin;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -48,10 +48,8 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
         public string TagString { get; set; }
 
         public RoastersModel(IRoasterAdminService roasterAdminService)
-            => _roasterAdminService = roasterAdminService;
+            => _roasterAdminService = roasterAdminService ?? throw new ArgumentNullException(nameof(IRoasterAdminService));
 
-
-        // TODO: проверить, где состояния не нужно хранить в Pages. P.S Подумал. Нужны для подгрузки меню мастера\администратора. Несколько состояний, действительно, были лишними.
         public string Role { get; set; }
 
         public async Task OnGetAsync()

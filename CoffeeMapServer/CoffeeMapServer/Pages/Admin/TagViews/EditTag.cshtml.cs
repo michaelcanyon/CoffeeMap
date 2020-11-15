@@ -18,23 +18,22 @@ namespace CoffeeMapServer.Pages.Admin.TagViews
 
         public string Role { get; set; }
 
-        public Guid Guid { get; set; }
-
         public EditTagModel(ITagService tagService)
-            => _tagService = tagService;
+            => _tagService = tagService ?? throw new ArgumentNullException(nameof(ITagService));
 
-        public async Task<IActionResult> OnGet(Guid id)
+        public async Task<IActionResult> OnGet(Guid guid)
         {
-            Guid = id;
             Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
             Nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.nickname"].ToString();
             try
             {
-                Tag = await _tagService.FetchSingleTagAsync(id);
+                Tag = await _tagService.FetchSingleTagAsync(guid);
                 return Page();
             }
             catch
-            { return RedirectToPage("Tags"); }
+            { 
+                return RedirectToPage("Tags"); 
+            }
         }
 
         public async Task<IActionResult> OnPostProcessAsync()
@@ -45,7 +44,9 @@ namespace CoffeeMapServer.Pages.Admin.TagViews
                 return RedirectToPage("Tags");
             }
             catch
-            { return RedirectToPage("Tags"); }
+            { 
+                return RedirectToPage("Tags"); 
+            }
         }
     }
 }

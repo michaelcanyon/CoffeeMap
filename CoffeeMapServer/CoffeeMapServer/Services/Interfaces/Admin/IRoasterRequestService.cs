@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using CoffeeMapServer.Models;
 
 namespace CoffeeMapServer.Services.Interfaces.Admin
 {
-   public interface IRoasterRequestService
+    public interface IRoasterRequestService
     {
         public Task<IList<RoasterRequest>> FetchRoasterRequestsListAsync();
 
@@ -19,7 +18,5 @@ namespace CoffeeMapServer.Services.Interfaces.Admin
         public Task BindToRoasterNdAddressAsync(Guid id);
 
         public Task DeleteAllRoasterRequestsAsync();
-
-
     }
 }

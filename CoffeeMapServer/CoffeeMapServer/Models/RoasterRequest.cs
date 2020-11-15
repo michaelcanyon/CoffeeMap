@@ -1,89 +1,39 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace CoffeeMapServer.Models
 {
     public class RoasterRequest : Entity
     {
-        /// <summary>
-        /// Roaster Name
-        /// </summary>
-        [Required]
-        public string Name { get; set; }
+        public Roaster Roaster { get; set; }
 
-        [Required]
-        public string ContactNumber { get; set; }
-
-        [Required]
-        public string ContactEmail { get; set; }
-
-        public string WebSiteLink { get; set; }
-
-        public string VkProfileLink { get; set; }
-
-        public string InstagramProfileLink { get; set; }
-
-        public string TelegramProfileLink { get; set; }
-
-        public byte[] Picture { get; set; }
-        public string TagString { get; set; }
-
-        public string Description { get; set; }
-
-        [Required]
-        public string AddressStr { get; set; }
-
-        [Required]
-        public string OpeningHours { get; set; }
+        public Address Address { get; set; }
 
         public RoasterRequest() { }
 
         public RoasterRequest(Guid? id = null) : base(id)
         { }
 
-        public static RoasterRequest New(Guid id,
-                                         string name,
-                                         string contactNumber,
-                                         string contactEmail,
-                                         string webSiteLink,
-                                         string vkProfileLink,
-                                         string igProfileLink,
-                                         string tgProfileLink,
-                                         string description,
-                                         byte[] picture) 
-            => new RoasterRequest(id)
-        {
-            Name = name,
-            ContactNumber = contactNumber,
-            ContactEmail = contactEmail,
-            Description = description,
-            WebSiteLink = webSiteLink,
-            VkProfileLink = vkProfileLink,
-            InstagramProfileLink = igProfileLink,
-            TelegramProfileLink = tgProfileLink,
-            Picture = picture
-        };
+        public string TagString { get; set; }
 
-        public static RoasterRequest New(string name,
-                                         string contactNumber,
-                                         string contactEmail,
-                                         string webSiteLink,
-                                         string vkProfileLink,
-                                         string igProfileLink,
-                                         string tgProfileLink,
-                                         string description,
-                                         byte[] picture) 
-            => new RoasterRequest()
-        {
-            Name = name,
-            ContactNumber = contactNumber,
-            ContactEmail = contactEmail,
-            Description = description,
-            WebSiteLink = webSiteLink,
-            VkProfileLink = vkProfileLink,
-            InstagramProfileLink = igProfileLink,
-            TelegramProfileLink = tgProfileLink,
-            Picture = picture
-        };
+        public static RoasterRequest New(Guid id,
+                                         Roaster roaster,
+                                         Address address,
+                                         string tagString)
+            => new RoasterRequest(id)
+            {
+                Roaster = roaster,
+                Address = address,
+                TagString=tagString
+            };
+
+        public static RoasterRequest New(Roaster roaster,
+                                         Address address,
+                                         string tagString)
+            => new RoasterRequest
+            {
+                Roaster = roaster,
+                Address = address,
+                TagString = tagString
+            };
     }
 }

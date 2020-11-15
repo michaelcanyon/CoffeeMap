@@ -8,7 +8,7 @@ namespace CoffeeMapServer.Services
     /// <summary>
     /// implements jwt generation service initialization
     /// </summary>
-    public static class AuthService
+    public static class ServiceCollectionCustomExtension
     {
         public static void ConfigureAuth(this IServiceCollection collection)
         {
@@ -43,6 +43,19 @@ namespace CoffeeMapServer.Services
             {
                 config.AddPolicy(Policies.Admin, Policies.AdminPolicy());
                 config.AddPolicy(Policies.Master, Policies.MasterPolicy());
+            });
+        }
+
+        public static void ConfigRazorPagesAcess(this IServiceCollection collection)
+        {
+            collection.AddRazorPages().AddRazorPagesOptions(options =>
+            {
+                options.Conventions.AuthorizeFolder("/Admin/AddressesViews/");
+                options.Conventions.AuthorizeFolder("/Admin/RoasterViews/");
+                options.Conventions.AuthorizeFolder("/Admin/RoasterAddress/");
+                options.Conventions.AuthorizeFolder("/Admin/TagViews/");
+                options.Conventions.AuthorizeFolder("/Admin/Account/");
+                options.Conventions.AuthorizeFolder("/Admin/RoasterRequestViews/");
             });
         }
     }

@@ -10,9 +10,8 @@ namespace CoffeeMapServer.Pages.Admin.RoasterRequestViews
     {
         private readonly IRoasterRequestService _roasterRequestService;
 
-        // TODO: если не будет работать, верни поле состояния guid
         public BindToRoasterModel(IRoasterRequestService roasterRequestService)
-            => _roasterRequestService = roasterRequestService;
+            => _roasterRequestService = roasterRequestService ?? throw new ArgumentNullException(nameof(IRoasterRequestService));
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {

@@ -1,10 +1,10 @@
-using CoffeeMapServer.Infrastructures.IRepositories;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using CoffeeMapServer.Models;
 using CoffeeMapServer.Services.Interfaces.Admin;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Pages.Admin.RoasterRequestViews
 {
@@ -13,7 +13,7 @@ namespace CoffeeMapServer.Pages.Admin.RoasterRequestViews
         private readonly IRoasterRequestService _roasterRequestService;
 
         public RoasterRequestsModel(IRoasterRequestService roasterRequestService)
-            =>_roasterRequestService = roasterRequestService;
+            => _roasterRequestService = roasterRequestService ?? throw new ArgumentNullException(nameof(IRoasterRequestService));
 
         [BindProperty]
         public IList<RoasterRequest> RoasterRequests { get; set; }

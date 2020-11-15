@@ -12,7 +12,7 @@ namespace CoffeeMapServer.Pages.Admin.Account
         private readonly IAccountService _accountService;
 
         public EditAccountModel(IAccountService accountService)
-            => _accountService = accountService;
+            => _accountService = accountService ?? throw new ArgumentNullException(nameof(IAccountService));
 
         [BindProperty]
         public User _User { get; set; }

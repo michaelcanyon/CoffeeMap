@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using CoffeeMapServer.Models.Intermediary_models;
 
 namespace CoffeeMapServer.Models
 {
@@ -10,7 +8,6 @@ namespace CoffeeMapServer.Models
         [Required]
         public string TagTitle { get; set; }
 
-        public ICollection<RoasterTag> RoasterTags { get; set; }
         public Tag() { }
 
         public Tag(Guid? id = null) : base(id)
@@ -24,7 +21,7 @@ namespace CoffeeMapServer.Models
             };
 
         public static Tag New(string tagTitle)
-            => new Tag()
+            => new Tag
             {
                 TagTitle = tagTitle
             };

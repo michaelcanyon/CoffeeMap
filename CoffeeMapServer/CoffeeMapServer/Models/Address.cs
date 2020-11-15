@@ -11,6 +11,7 @@ namespace CoffeeMapServer.Models
             : base(id)
         { }
 
+        // TODO: в конфигуратор
         [Required]
         public string AddressStr { get; set; }
         
@@ -25,7 +26,7 @@ namespace CoffeeMapServer.Models
             };
 
         public static Address New(string address, string openingHours)
-            => new Address()
+            => new Address
             {
                 AddressStr = address,
                 OpeningHours = openingHours

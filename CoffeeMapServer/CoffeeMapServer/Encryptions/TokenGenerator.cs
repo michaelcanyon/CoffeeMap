@@ -19,7 +19,7 @@ namespace CoffeeMapServer.Encryptions
                     expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
                     signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
-            return encodedJwt;
+            return encodedJwt ?? throw new ArgumentNullException(nameof(TokenGenerator));
         }
     }
 }

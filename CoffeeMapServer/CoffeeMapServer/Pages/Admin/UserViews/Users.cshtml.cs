@@ -1,14 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using CoffeeMapServer.Infrastructures;
-using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using CoffeeMapServer.Services.Interfaces.Admin;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Pages.Admin.UserViews
 {
@@ -31,8 +30,8 @@ namespace CoffeeMapServer.Pages.Admin.UserViews
 
         public IList<User> Users { get; set; }
 
-        public UsersModel(IUserService userService) 
-            => _userService = userService;
+        public UsersModel(IUserService userService)
+            => _userService = userService ?? throw new ArgumentNullException(nameof(IUserService));
 
         public async Task OnGetAsync()
         {

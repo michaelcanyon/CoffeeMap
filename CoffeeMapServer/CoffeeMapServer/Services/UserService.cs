@@ -13,7 +13,7 @@ namespace CoffeeMapServer.Services
         private readonly IUserRepository _userRepository;
 
         public UserService(IUserRepository userRepository)
-            => _userRepository = userRepository;
+            => _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
 
         public async Task<User> Login(string username, string password)
         { 

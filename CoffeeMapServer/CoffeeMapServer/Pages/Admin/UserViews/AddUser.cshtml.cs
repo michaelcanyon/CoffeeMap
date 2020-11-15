@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using CoffeeMapServer.Infrastructures;
 using CoffeeMapServer.Models;
@@ -13,7 +14,8 @@ namespace CoffeeMapServer.Pages.Admin.UserViews
     {
         private readonly IUserService _userService;
 
-        public AddUserModel(IUserService userService) => _userService = userService;
+        public AddUserModel(IUserService userService)
+            => _userService = userService ?? throw new ArgumentNullException(nameof(IUserService));
 
         [BindProperty]
         public User Ruser { get; set; }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CoffeeMapServer.Models;
-using CoffeeMapServer.Models.Intermediary_models;
 using Microsoft.AspNetCore.Http;
 
 namespace CoffeeMapServer.Services.Interfaces.Admin

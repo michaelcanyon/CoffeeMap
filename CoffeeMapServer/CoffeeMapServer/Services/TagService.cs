@@ -16,15 +16,15 @@ namespace CoffeeMapServer.Services
             ITagRepository tagRepository,
             IRoasterTagRepository roasterTagRepository)
         {
-            _tagRepository = tagRepository;
-            _roasterTagRepository = roasterTagRepository;
+            _tagRepository = tagRepository ?? throw new ArgumentNullException(nameof(tagRepository));
+            _roasterTagRepository = roasterTagRepository ?? throw new ArgumentNullException(nameof(tagRepository));
         }
 
         public async Task DeleteTagAsync(Guid id)
         {
             var removablePairs = await _roasterTagRepository.GetPairsByTagIdAsync(id);
             if (removablePairs.Count > 0)
-                _roasterTagRepository.DeleteRange(removablePairs);
+                _roasterTagRepository.DeleteRoasterTags(removablePairs);
 
             _tagRepository.Delete(await _tagRepository.GetSingleAsync(id));
 

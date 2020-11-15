@@ -11,14 +11,14 @@ namespace CoffeeMapServer.Services
         private readonly IUserRepository _userRepository;
 
         public AccountService(IUserRepository userRepository)
-            => _userRepository = userRepository;
+            => _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
+
         public async Task<User> GetAccountByIdAsync(Guid id)
             => await _userRepository.GetSingleAsync(id);
 
-        public async Task UpdateAccountAsync(
-            User entity,
-            string newPasswordHash,
-            string email)
+        public async Task UpdateAccountAsync(User entity,
+                                             string newPasswordHash,
+                                             string email)
         {
             entity.Password = newPasswordHash ?? entity.Password;
             entity.Email = email;

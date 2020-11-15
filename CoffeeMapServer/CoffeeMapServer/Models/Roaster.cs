@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using CoffeeMapServer.Models.Intermediary_models;
 
 namespace CoffeeMapServer.Models
 {
@@ -29,9 +27,8 @@ namespace CoffeeMapServer.Models
 
         public string TelegramProfileLink { get; set; }
 
-        //public ICollection<RoasterTag> RoasterTags { get; set; }
-
         public byte[] Picture { get; set; }
+
         public string Description { get; set; }
 
         public Roaster() { }
@@ -49,7 +46,7 @@ namespace CoffeeMapServer.Models
                                   string igProfileLink,
                                   string tgProfileLink,
                                   byte[] picture,
-                                  string description) 
+                                  string description)
             => new Roaster(id)
             {
                 Name = name,
@@ -64,27 +61,29 @@ namespace CoffeeMapServer.Models
                 Description = description
             };
 
-        public static Roaster New(
-             string name,
-             string contactNumber,
-             string contactEmail,
-             Guid officeAddressId,
-             string webSiteLink,
-             string vkProfileLink,
-             string igProfileLink,
-             string tgProfileLink, byte[] picture, string description) => new Roaster()
-             {
-                 Name = name,
-                 ContactNumber = contactNumber,
-                 ContactEmail = contactEmail,
-                 OfficeAddressId = officeAddressId,
-                 WebSiteLink = webSiteLink,
-                 VkProfileLink = vkProfileLink,
-                 InstagramProfileLink = igProfileLink,
-                 TelegramProfileLink = tgProfileLink,
-                 Picture = picture,
-                 Description = description
-             };
+        public static Roaster New(string name,
+                                  string contactNumber,
+                                  string contactEmail,
+                                  Guid officeAddressId,
+                                  string webSiteLink,
+                                  string vkProfileLink,
+                                  string igProfileLink,
+                                  string tgProfileLink,
+                                  byte[] picture,
+                                  string description)
+            => new Roaster()
+            {
+                Name = name,
+                ContactNumber = contactNumber,
+                ContactEmail = contactEmail,
+                OfficeAddressId = officeAddressId,
+                WebSiteLink = webSiteLink,
+                VkProfileLink = vkProfileLink,
+                InstagramProfileLink = igProfileLink,
+                TelegramProfileLink = tgProfileLink,
+                Picture = picture,
+                Description = description
+            };
 
     }
 }

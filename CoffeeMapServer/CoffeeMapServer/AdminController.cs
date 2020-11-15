@@ -20,6 +20,7 @@ namespace CoffeeMapServer
             _userRepository = userRepository;
             _roasterRequestRepository = roasterRequestRepository;
         }
+
         [HttpGet]
         [Route("GetRoasters")]
         public async Task<IActionResult> GetRoasters()
@@ -36,6 +37,7 @@ namespace CoffeeMapServer
                 return BadRequest(e.ToString());
             }
         }
+
         [HttpPut]
         [Route("Roasters")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
@@ -63,6 +65,7 @@ namespace CoffeeMapServer
                 return BadRequest(e.ToString());
             }
         }
+
         [HttpPost]
         [Route("Roaster")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
@@ -80,6 +83,7 @@ namespace CoffeeMapServer
                 return BadRequest(e.ToString());
             }
         }
+
         [HttpDelete]
         [Route("Roaster")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
@@ -98,6 +102,7 @@ namespace CoffeeMapServer
                 return BadRequest(e.ToString());
             }
         }
+
         [HttpPost]
         [Route("SingleRoaster")]
         public async Task<IActionResult> GetSingleRoaster(Guid roasterId)
@@ -173,8 +178,8 @@ namespace CoffeeMapServer
             {
                 return null;
             }
-
         }
+
         [HttpGet]
         [Route("GetRoasterRequests")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
@@ -191,6 +196,7 @@ namespace CoffeeMapServer
                 return null;
             }
         }
+
         [HttpGet]
         [Route("GetSingleRoasterRequest")]
         [ProducesResponseType(typeof(RoasterRequest), StatusCodes.Status200OK)]
@@ -207,6 +213,7 @@ namespace CoffeeMapServer
                 return null;
             }
         }
+
         [HttpPost]
         [Route("AddRoasterRequest")]
         [ProducesResponseType(typeof(RoasterRequest), StatusCodes.Status200OK)]
@@ -215,15 +222,7 @@ namespace CoffeeMapServer
         {
             try
             {
-                var roasterrequest = RoasterRequest.New(roasterRequest.Name,
-                                                        roasterRequest.ContactNumber,
-                                                        roasterRequest.ContactEmail,
-                                                        roasterRequest.WebSiteLink,
-                                                        roasterRequest.VkProfileLink,
-                                                        roasterRequest.InstagramProfileLink,
-                                                        roasterRequest.TelegramProfileLink,
-                                                        roasterRequest.Description,
-                                                        roasterRequest.Picture);
+                var roasterrequest = RoasterRequest.New(roasterRequest.Roaster, roasterRequest.Address, roasterRequest.TagString);
                 _roasterRequestRepository.Add(roasterRequest);
                 await _roasterRequestRepository.SaveChangesAsync();
                 return Ok();
@@ -234,6 +233,7 @@ namespace CoffeeMapServer
 
             }
         }
+
         [HttpDelete]
         [Route("DeleteRoasterRequest")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]

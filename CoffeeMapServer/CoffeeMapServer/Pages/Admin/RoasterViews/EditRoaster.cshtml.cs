@@ -13,8 +13,6 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
     {
         private readonly IRoasterAdminService _roasterAdminService;
 
-        public Guid Guid { get; set; }
-
         [BindProperty]
         public IFormFile Picture { get; set; }
 
@@ -22,10 +20,10 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
         public Roaster Roaster { get; set; }
 
         [BindProperty]
-        public string Tags { get; set; }
+        public string TagsToAdd { get; set; }
 
         [BindProperty]
-        public string DeletableTags { get; set; }
+        public string TagsToDelete { get; set; }
 
         public string Role { get; set; }
 
@@ -33,14 +31,13 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
 
         public List<string> DeletableTagsList = new List<string>();
 
-
         public EditRoasterModel(IRoasterAdminService roasterAdminService)
-            => _roasterAdminService = roasterAdminService;
+            => _roasterAdminService = roasterAdminService ?? throw new ArgumentNullException(nameof(IRoasterAdminService));
 
-        public async Task<IActionResult> OnGet(Guid id)
+        public async Task<IActionResult> OnGet(Guid guid)
         {
             Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
-            Roaster = await _roasterAdminService.FetchSingleRoasterAsync(id);
+            Roaster = await _roasterAdminService.FetchSingleRoasterAsync(guid);
             var currentTagPairs = await _roasterAdminService.FetchRoasterTagsAsync(Roaster.Id);
             foreach (var i in currentTagPairs)
                 tagsList.Add((await _roasterAdminService.FetchTagByIdAsync(i.TagId)).TagTitle);
@@ -59,7 +56,7 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
 
         public async Task<IActionResult> OnPostProcessAsync()
         {
-            await _roasterAdminService.UpdateRoasterAsync(Roaster, Tags, DeletableTags, Picture);
+            await _roasterAdminService.UpdateRoasterAsync(Roaster, TagsToAdd, TagsToDelete, Picture);
             return RedirectToPage("Roasters");
         }
     }

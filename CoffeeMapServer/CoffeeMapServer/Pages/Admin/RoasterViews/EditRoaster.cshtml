@@ -71,8 +71,8 @@
                 }
             </ul>
             <label>Add/Remove Tag:</label>
-            <input type="hidden" id="addTags" value="" asp-for="@Model.Tags">
-            <input type="hidden" id="deleteTags" value="" asp-for="@Model.DeletableTags">
+            <input type="hidden" id="addTags" value="" asp-for="@Model.TagsToAdd">
+            <input type="hidden" id="deleteTags" value="" asp-for="@Model.TagsToDelete">
             <input type="Text" class="form-control" id="TagPart">
             <button type="button" onclick="AddTag()">Add Tag</button>
             <button type="button" onclick="DeleteTag()">Delete Tag</button>

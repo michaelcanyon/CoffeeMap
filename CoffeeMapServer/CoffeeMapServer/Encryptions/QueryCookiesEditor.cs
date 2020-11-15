@@ -1,6 +1,5 @@
 ﻿using CoffeeMapServer.Models;
 using Microsoft.AspNetCore.Http;
-using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Encryptions
 {

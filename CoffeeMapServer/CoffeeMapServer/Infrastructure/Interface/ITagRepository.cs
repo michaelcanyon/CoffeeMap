@@ -1,5 +1,5 @@
-﻿using CoffeeMapServer.Models;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using CoffeeMapServer.Models;
 
 namespace CoffeeMapServer.Infrastructures.IRepositories
 {

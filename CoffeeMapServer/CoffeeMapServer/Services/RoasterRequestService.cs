@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CoffeeMapServer.builders;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
-using CoffeeMapServer.Models.Intermediary_models;
 using CoffeeMapServer.Services.Interfaces.Admin;
 
 namespace CoffeeMapServer.Services
@@ -22,44 +22,24 @@ namespace CoffeeMapServer.Services
             IAddressRepository addressRepository,
             ITagRepository tagRepository, IRoasterTagRepository roasterTagRepository)
         {
-            _roasterRepository = roasterRepository;
-            _roasterRequestRepository = roasterRequestRepository;
-            _addressRepository = addressRepository;
-            _tagRepository = tagRepository;
-            _roasterTagRepository = roasterTagRepository;
+            _roasterRepository = roasterRepository ?? throw new ArgumentNullException(nameof(roasterRepository));
+            _roasterRequestRepository = roasterRequestRepository ?? throw new ArgumentNullException(nameof(roasterRequestRepository));
+            _addressRepository = addressRepository ?? throw new ArgumentNullException(nameof(addressRepository));
+            _tagRepository = tagRepository ?? throw new ArgumentNullException(nameof(tagRepository));
+            _roasterTagRepository = roasterTagRepository ?? throw new ArgumentNullException(nameof(roasterTagRepository));
 
         }
 
         public async Task BindToRoasterNdAddressAsync(Guid id)
         {
             var request = await _roasterRequestRepository.GetSingleAsync(id);
-            var tags = request.TagString.Split(";");
-            var bindTags = new List<Tag>();
-            foreach (var item in tags)
-            {//TODO: condition made to avoid excessive tag getting function call
-                if (await _tagRepository.GetSingleAsync(item) == null)
-                {
-                    var tag = Tag.New(item);
-                    _tagRepository.Add(tag);
-                    bindTags.Add(tag);
-                    continue;
-                }
-                bindTags.Add(await _tagRepository.GetSingleAsync(item));
-            }
-            var address = Address.New(request.AddressStr, request.OpeningHours);
+
+            var bindTags = await RoasterRequestServiceBuilder.BuildAndBindTags(request.TagString, _tagRepository);
+
+            var address = Address.New(request.Address.AddressStr, request.Address.OpeningHours);
             _addressRepository.Add(address);
 
-            var roaster = Roaster.New(
-                request.Name,
-                request.ContactNumber,
-                request.ContactEmail,
-                address.Id,
-                request.WebSiteLink,
-                request.VkProfileLink,
-                request.InstagramProfileLink,
-                request.TelegramProfileLink,
-                request.Picture,
-                request.Description);
+            var roaster = RoasterRequestServiceBuilder.GenerateRoaster(request.Roaster, request.Address.Id);
 
             _roasterRepository.Add(roaster);
 
@@ -68,19 +48,13 @@ namespace CoffeeMapServer.Services
 
             _roasterRequestRepository.Delete(request);
 
-
-            //TODO: learn how to implement folowing statements as one transaction
             await _roasterRequestRepository.SaveChangesAsync();
-            await _roasterRepository.SaveChangesAsync();
-            await _addressRepository.SaveChangesAsync();
-            await _roasterTagRepository.SaveChangesAsync();
-            await _tagRepository.SaveChangesAsync();
         }
 
         public async Task DeleteAllRoasterRequestsAsync()
         {
             var range = await _roasterRequestRepository.GetListAsync();
-            _roasterRequestRepository.DeleteRange(range);
+            _roasterRequestRepository.DeleteRoasterRequest(range);
             await _roasterRequestRepository.SaveChangesAsync();
         }
 
@@ -89,11 +63,10 @@ namespace CoffeeMapServer.Services
             var roasterRequest = await _roasterRequestRepository.GetSingleAsync(id);
             _roasterRequestRepository.Delete(roasterRequest);
             await _roasterRequestRepository.SaveChangesAsync();
-            await _roasterRequestRepository.SaveChangesAsync();
         }
 
         public async Task<IList<RoasterRequest>> FetchRoasterRequestsListAsync()
-        => await _roasterRequestRepository.GetListAsync();
+            => await _roasterRequestRepository.GetListAsync();
 
         public async Task<RoasterRequest> FetchSingleRoasterRequestByIdAsync(Guid id)
             => await _roasterRequestRepository.GetSingleAsync(id);

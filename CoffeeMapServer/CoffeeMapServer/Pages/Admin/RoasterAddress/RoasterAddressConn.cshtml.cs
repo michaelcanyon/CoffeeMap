@@ -14,7 +14,7 @@ namespace CoffeeMapServer.Pages.Admin.RoasterAddress
         private readonly IRoasterAddressConnectionService _roasterAddressConnectionService;
 
         public RoasterAddressConnModel(IRoasterAddressConnectionService roasterAddressConnectionService)
-        => _roasterAddressConnectionService = roasterAddressConnectionService;
+        => _roasterAddressConnectionService = roasterAddressConnectionService ?? throw new ArgumentNullException(nameof(IRoasterAddressConnectionService));
 
         [BindProperty(SupportsGet = true)]
         public string IdFilter { get; set; }

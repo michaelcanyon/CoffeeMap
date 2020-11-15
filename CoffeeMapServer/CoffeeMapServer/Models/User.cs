@@ -34,14 +34,14 @@ namespace CoffeeMapServer.Models
                 Login = login,
                 Email = email,
                 Password = password,
-                Role=role
+                Role = role
             };
 
         public static User New(string login,
                                string email,
                                string password,
                                string role)
-            => new User()
+            => new User
             {
                 Login = login,
                 Email = email,

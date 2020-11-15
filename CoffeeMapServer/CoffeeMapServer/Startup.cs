@@ -1,6 +1,7 @@
 using CoffeeMapServer.EF;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Infrastructures.Repositories;
+using CoffeeMapServer.Middlewares;
 using CoffeeMapServer.Services;
 using CoffeeMapServer.Services.Interfaces;
 using CoffeeMapServer.Services.Interfaces.Admin;
@@ -22,9 +23,7 @@ namespace CoffeeMapServer
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public IConfiguration Configuration { get; }
         public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+            => Configuration = configuration;
         public void ConfigureServices(IServiceCollection services)
         {
             IConfigurationSection connString = Configuration.GetSection("ConnectionString");
@@ -49,17 +48,7 @@ namespace CoffeeMapServer
             services.AddTransient<IRoasterRequestService, RoasterRequestService>();
             services.AddTransient<IIdentityGeneratorService, IdentityGeneratorService>();
             services.ConfigureAuth();
-            services.AddRazorPages().AddRazorPagesOptions(options =>
-            {
-                options.Conventions.AuthorizeFolder("/Admin/AddressesViews/");
-                options.Conventions.AuthorizeFolder("/Admin/RoasterViews/");
-                options.Conventions.AuthorizeFolder("/Admin/RoasterAddress/");
-                options.Conventions.AuthorizeFolder("/Admin/TagViews/");
-                options.Conventions.AuthorizeFolder("/Admin/Account/");
-                options.Conventions.AuthorizeFolder("/Admin/RoasterRequestViews/");
-                // options.Conventions.AllowAnonymousToPage("/Admin/AuthorizationViews/Login");
-            });
-            //services.AddMvc();
+            services.ConfigRazorPagesAcess();
             services.AddSwaggerGen();
             services.AddSwaggerGen(c =>
             {
@@ -74,26 +63,16 @@ namespace CoffeeMapServer
             {
                 app.UseDeveloperExceptionPage();
             }
+
             //app.UseHttpsRedirection();
             app.UseRouting();
             app.UseCors(origin => origin.AllowAnyOrigin());
             app.UseStaticFiles();
-            app.UseStatusCodePages(async context =>
-            {
-                var response = context.HttpContext.Response;
-                if (response.StatusCode == (int)System.Net.HttpStatusCode.Unauthorized)
-                    response.Redirect("/Login");
-            });
+            app.UnauthorizedLogin();
+
             // prepare token to insert into cookie
             app.UseSwagger();
-            app.Use(async (context, next) =>
-            {
-                var token = context.Request.Cookies[".AspNetCore.Meta.Metadata"];
-                if (!string.IsNullOrEmpty(token))
-                    context.Request.Headers.Append("Authorization", "Bearer " + token);
-
-                await next();
-            });
+            app.SupplyResponceWithToken();
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseCookiePolicy(new CookiePolicyOptions
@@ -102,8 +81,7 @@ namespace CoffeeMapServer
                 HttpOnly = HttpOnlyPolicy.Always,
                 Secure = CookieSecurePolicy.Always
             });
-            //Enable middleware to serve swagger - ui(HTML, JS, CSS, etc.),
-            //specifying the Swagger JSON endpoint.
+
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");

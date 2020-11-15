@@ -1,11 +1,11 @@
-﻿using CoffeeMapServer.Encryptions;
-using CoffeeMapServer.Infrastructures.IRepositories;
+﻿using System;
+using System.Threading.Tasks;
+using CoffeeMapServer.Encryptions;
 using CoffeeMapServer.Services.Interfaces;
 using CoffeeMapServer.Services.Interfaces.Admin;
 using CoffeeMapServer.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace CoffeeMapServer.Controllers
 {
@@ -18,15 +18,15 @@ namespace CoffeeMapServer.Controllers
 
         public LoginController(IUserService repository, IIdentityGeneratorService identityGeneratorService)
         {
-            userService = repository;
-            _identityGeneratorService = identityGeneratorService;
+            userService = repository ?? throw new ArgumentNullException(nameof(IUserService));
+            _identityGeneratorService = identityGeneratorService ?? throw new ArgumentNullException(nameof(IIdentityGeneratorService));
         }
 
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Login()
         {
-             QueryCookiesEditor.ClearCookies(HttpContext);
+            QueryCookiesEditor.ClearCookies(HttpContext);
             return View();
         }
 

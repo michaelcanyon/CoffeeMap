@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CoffeeMapServer.EF;
 using CoffeeMapServer.Infrastructures.IRepositories;
-using CoffeeMapServer.Models.Intermediary_models;
+using CoffeeMapServer.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeMapServer.Infrastructures.Repositories
@@ -14,7 +14,7 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         private readonly CoffeeDbContext Context;
 
         public RoasterTagRepository(CoffeeDbContext dbContext)
-            => Context = dbContext;
+            => Context = dbContext ?? throw new ArgumentNullException(nameof(CoffeeDbContext));
 
         public void Add(RoasterTag entity)
             => Context.RoasterTags.Add(entity);
@@ -25,9 +25,6 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         public async Task<IList<RoasterTag>> GetListAsync()
             => await Context.RoasterTags.ToListAsync();
 
-        public void Update(RoasterTag entity)
-            => Context.RoasterTags.Update(entity);
-
         public async Task<IList<RoasterTag>> GetPairsByRoasterIdAsync(Guid roasterId)
             => await Context.RoasterTags.Where(node => node.RoasterId == roasterId).ToListAsync();
 
@@ -37,7 +34,7 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         public async Task SaveChangesAsync()
             => await Context.SaveChangesAsync();
 
-        public void DeleteRange(IList<RoasterTag> range)
+        public void DeleteRoasterTags(IList<RoasterTag> range)
             => Context.RemoveRange(range);
     }
 }

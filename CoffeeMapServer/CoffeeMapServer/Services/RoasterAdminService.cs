@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
-using CoffeeMapServer.Models.Intermediary_models;
 using CoffeeMapServer.Services.Interfaces.Admin;
 using Microsoft.AspNetCore.Http;
+using CoffeeMapServer.builders;
 
 namespace CoffeeMapServer.Services
 {
@@ -24,17 +24,21 @@ namespace CoffeeMapServer.Services
             ITagRepository tagRepository,
             IAddressRepository addressRepository)
         {
-            _roasterRepository = roasterRepository;
-            _roasterTagRepository = roasterTagRepository;
-            _tagRepository = tagRepository;
-            _addressReposiotry = addressRepository;
+            _roasterRepository = roasterRepository ?? throw new ArgumentNullException(nameof(roasterRepository));
+            _roasterTagRepository = roasterTagRepository ?? throw new ArgumentNullException(nameof(roasterTagRepository));
+            _tagRepository = tagRepository ?? throw new ArgumentNullException(nameof(tagRepository));
+            _addressReposiotry = addressRepository ?? throw new ArgumentNullException(nameof(addressRepository));
         }
 
-        public async Task AddRoasterAsync(Roaster roaster, string tags, Address address, IFormFile picture)
+        public async Task AddRoasterAsync(Roaster roaster,
+                                          string tags,
+                                          Address address,
+                                          IFormFile picture)
         {
-            if (await _roasterRepository.GetRoasterByNameAsync(roaster.Name) != null)
+            var roasterByName = await _roasterRepository.GetRoasterByNameAsync(roaster.Name);
+            if (roasterByName != null)
                 return;
-            string[] tags_array;
+
             if (roaster.ContactEmail == null)
                 roaster.ContactEmail = "none";
             if (roaster.InstagramProfileLink == null)
@@ -49,30 +53,7 @@ namespace CoffeeMapServer.Services
                 address.OpeningHours = "none";
 
             //Get and process tags string into tag entities
-            var _localTags = new List<Tag>();
-            if (tags.Length == 0)
-            {
-                tags = "none";
-                tags_array = tags.Split("#");
-            }
-            else
-            {
-                tags_array = tags.Split("#");
-                foreach (var i in tags_array)
-                {
-                    if (i == "")
-                        continue;
-                    Tag tempTag = await _tagRepository.GetSingleAsync(i);
-                    if (tempTag is null)
-                    {
-                        var newTag = Tag.New(i);
-                        _tagRepository.Add(newTag);
-                        _localTags.Add(newTag);
-                    }
-                    else
-                        _localTags.Add(tempTag);
-                }
-            }
+            var _localTags =await RoasterAdminServiceBuilder.BuildTagsList(tags, _tagRepository);
 
             //process address entity
             var _address = Address.New(address.AddressStr, address.OpeningHours);
@@ -80,15 +61,7 @@ namespace CoffeeMapServer.Services
             roaster.OfficeAddressId = _address.Id;
 
             //process picture
-            if (picture != null)
-            {
-                byte[] bytePicture = null;
-                using (var binaryReader = new BinaryReader(picture.OpenReadStream()))
-                {
-                    bytePicture = binaryReader.ReadBytes((int)picture.Length);
-                }
-                roaster.Picture = bytePicture;
-            }
+            roaster.Picture=BytePictureBuilder.GetBytePicture(picture);
             _roasterRepository.Add(roaster);
 
             //add roasterTags  notes
@@ -96,9 +69,6 @@ namespace CoffeeMapServer.Services
                 _roasterTagRepository.Add(new RoasterTag(roaster.Id, i.Id));
 
             await _roasterRepository.SaveChangesAsync();
-            await _roasterTagRepository.SaveChangesAsync();
-            await _tagRepository.SaveChangesAsync();
-            await _addressReposiotry.SaveChangesAsync();
         }
 
         public async Task DeleteRoasterByIdAsync(Guid id)
@@ -106,9 +76,8 @@ namespace CoffeeMapServer.Services
             var roaster = await _roasterRepository.GetSingleAsync(id);
             _roasterRepository.Delete(roaster);
             var pairs = await _roasterTagRepository.GetPairsByRoasterIdAsync(id);
-            _roasterTagRepository.DeleteRange(pairs);
+            _roasterTagRepository.DeleteRoasterTags(pairs);
             await _roasterRepository.SaveChangesAsync();
-            await _roasterTagRepository.SaveChangesAsync();
         }
 
         public async Task<IList<Roaster>> FetchRoastersAsync()
@@ -124,52 +93,30 @@ namespace CoffeeMapServer.Services
             => await _tagRepository.GetListAsync();
 
         public async Task<Tag> FetchTagByIdAsync(Guid id)
-            =>await _tagRepository.GetSingleAsync(id);
+            => await _tagRepository.GetSingleAsync(id);
 
         public async Task UpdateRoasterAsync(Roaster entity, string newTags, string deletableTags, IFormFile picture)
         {
             //fetch tags that already exists in current roaster note
-            var pairs = await _roasterTagRepository.GetPairsByRoasterIdAsync(entity.Id);
             var onGetTags = new List<string>();
-            foreach (var item in pairs)
-                onGetTags.Add((await _tagRepository.GetSingleAsync(item.TagId)).TagTitle);
+             onGetTags.AddRange(await RoasterAdminServiceBuilder.FetchRoasterTags(_roasterTagRepository,
+                                                                                  _tagRepository,
+                                                                                  entity.Id));
 
-            //Add new tags. Cicle is necessary for tags union
-            if (newTags != null && newTags.Length > 0)
-            {
-                var addTagsList = newTags.Split("#");
-                foreach (var i in addTagsList)
-                    if (!onGetTags.Contains(i))
-                    {
-                        if (i == "")
-                            continue;
-                        Tag tempTag = await _tagRepository.GetSingleAsync(i);
-                        if (tempTag is null)
-                        {
-                            tempTag = Tag.New(i);
-                            _tagRepository.Add(tempTag);
-                        }
-                        _roasterTagRepository.Add(new RoasterTag(entity.Id, tempTag.Id));
-                        onGetTags.Add(i);
-                    }
-            }
+            //Add new tags.
+            onGetTags.AddRange(await RoasterAdminServiceBuilder.BindTagsWithRoaster(newTags,
+                                                                                    onGetTags,
+                                                                                    _tagRepository,
+                                                                                    _roasterTagRepository,
+                                                                                    entity.Id));
 
             //Delete tags
-            if (deletableTags != null && deletableTags.Length > 0)
-            {
-                var delTags = deletableTags.Split("#");
-                foreach (var item in delTags)
-                    if (onGetTags.Contains(item))
-                    {
-                        if (item == "")
-                            continue;
-                        var tag = await _tagRepository.GetSingleAsync(item);
-                        var roasterTag = pairs.FirstOrDefault(n => n.RoasterId == entity.Id && n.TagId == tag.Id);
-                        _roasterTagRepository.Delete(roasterTag);
-                        onGetTags.Remove(item);
-                    }
-            }
-
+            await RoasterAdminServiceBuilder.DeleteTags(onGetTags,
+                                                        deletableTags,
+                                                        _tagRepository,
+                                                        _roasterTagRepository,
+                                                        entity.Id);
+            //TODO: remove when declare meanings additions with fluent api
             if (entity.ContactEmail == null)
                 entity.ContactEmail = "none";
             if (entity.InstagramProfileLink == null)
@@ -181,19 +128,9 @@ namespace CoffeeMapServer.Services
             if (entity.TelegramProfileLink == null)
                 entity.TelegramProfileLink = "none";
 
-            if (picture != null)
-            {
-                byte[] bytePicture = null;
-                using (var binaryReader = new BinaryReader(picture.OpenReadStream()))
-                {
-                    bytePicture = binaryReader.ReadBytes((int)picture.Length);
-                }
-                entity.Picture = bytePicture;
-            }
+            entity.Picture = BytePictureBuilder.GetBytePicture(picture);
 
             _roasterRepository.Update(entity);
-            await _roasterRepository.SaveChangesAsync();
-            await _tagRepository.SaveChangesAsync();
             await _roasterTagRepository.SaveChangesAsync();
         }
 

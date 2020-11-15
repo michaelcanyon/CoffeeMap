@@ -62,16 +62,16 @@
             {
                 <tr>
                     <td>@Html.DisplayFor(item => i.Id)</td>
-                    <td>@Html.DisplayFor(item => i.Name)</td>
-                    <td>@Html.DisplayFor(item => i.ContactNumber)</td>
+                    <td>@Html.DisplayFor(item => i.Roaster.Name)</td>
+                    <td>@Html.DisplayFor(item => i.Roaster.ContactNumber)</td>
                     <td>@Html.DisplayFor(item => i.TagString)</td>
-                    <td>@Html.DisplayFor(item => i.ContactEmail)</td>
-                    <td>@Html.DisplayFor(item => i.InstagramProfileLink)</td>
-                    <td>@Html.DisplayFor(item => i.TelegramProfileLink)</td>
-                    <td>@Html.DisplayFor(item => i.VkProfileLink)</td>
-                    <td>@Html.DisplayFor(item => i.WebSiteLink)</td>
-                    <td>@Html.DisplayFor(item => i.AddressStr)</td>
-                    <td>@Html.DisplayFor(item => i.OpeningHours)</td>
+                    <td>@Html.DisplayFor(item => i.Roaster.ContactEmail)</td>
+                    <td>@Html.DisplayFor(item => i.Roaster.InstagramProfileLink)</td>
+                    <td>@Html.DisplayFor(item => i.Roaster.TelegramProfileLink)</td>
+                    <td>@Html.DisplayFor(item => i.Roaster.VkProfileLink)</td>
+                    <td>@Html.DisplayFor(item => i.Roaster.WebSiteLink)</td>
+                    <td>@Html.DisplayFor(item => i.Address.AddressStr)</td>
+                    <td>@Html.DisplayFor(item => i.Address.OpeningHours)</td>
                     <td>
                         <a asp-page="EditRoasterRequest" asp-route-id="@i.Id">Edit|</a>
                         <a asp-page="DeleteRoasterRequest" asp-route-id="@i.Id">Delete|</a>
