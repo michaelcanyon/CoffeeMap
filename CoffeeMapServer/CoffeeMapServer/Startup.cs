@@ -26,8 +26,8 @@ namespace CoffeeMapServer
             => Configuration = configuration;
         public void ConfigureServices(IServiceCollection services)
         {
-            IConfigurationSection connString = Configuration.GetSection("ConnectionString");
-            string connection = connString.GetSection("Connection").Value;
+            var connString = Configuration.GetSection("ConnectionString");
+            var connection = connString.GetSection("Connection").Value;
             services.AddRazorPages();
             services.AddCors();
             services.AddControllersWithViews();
@@ -47,8 +47,9 @@ namespace CoffeeMapServer
             services.AddTransient<IRoasterAddressConnectionService, RoasterAddressConnectionService>();
             services.AddTransient<IRoasterRequestService, RoasterRequestService>();
             services.AddTransient<IIdentityGeneratorService, IdentityGeneratorService>();
-            services.ConfigureAuth();
-            services.ConfigRazorPagesAcess();
+            services
+                .ConfigureAuth()
+                .ConfigRazorPagesAcess();
             services.AddSwaggerGen();
             services.AddSwaggerGen(c =>
             {

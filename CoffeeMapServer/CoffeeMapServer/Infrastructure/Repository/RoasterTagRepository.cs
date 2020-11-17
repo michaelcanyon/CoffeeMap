@@ -26,10 +26,14 @@ namespace CoffeeMapServer.Infrastructures.Repositories
             => await Context.RoasterTags.ToListAsync();
 
         public async Task<IList<RoasterTag>> GetPairsByRoasterIdAsync(Guid roasterId)
-            => await Context.RoasterTags.Where(node => node.RoasterId == roasterId).ToListAsync();
+            => await Context.RoasterTags
+                .Where(node => node.RoasterId == roasterId)
+                .ToListAsync();
 
         public async Task<IList<RoasterTag>> GetPairsByTagIdAsync(Guid id)
-            => await Context.RoasterTags.Where(node => node.TagId == id).ToListAsync();
+            => await Context.RoasterTags
+                .Where(node => node.TagId == id)
+                .ToListAsync();
 
         public async Task SaveChangesAsync()
             => await Context.SaveChangesAsync();

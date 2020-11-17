@@ -13,9 +13,9 @@ namespace CoffeeMapServer.Pages.Admin.RoasterRequestViews
         public DeleteRoasterRequestModel(IRoasterRequestService roasterRequestService)
             => _roasterRequestService = roasterRequestService ?? throw new ArgumentNullException(nameof(IRoasterRequestService));
 
-        public async Task<IActionResult> OnGetAsync(Guid guid)
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            await _roasterRequestService.DeleteRoasterRequestAsync(guid);
+            await _roasterRequestService.DeleteRoasterRequestAsync(id);
             return RedirectToPage("RoasterRequests");
         }
     }

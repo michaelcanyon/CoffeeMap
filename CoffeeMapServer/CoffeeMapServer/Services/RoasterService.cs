@@ -5,6 +5,7 @@ using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using CoffeeMapServer.Services.Interfaces;
 using CoffeeMapServer.ViewModels;
+using System.Linq;
 
 namespace CoffeeMapServer.Services
 {
@@ -36,10 +37,11 @@ namespace CoffeeMapServer.Services
         {
             var roaster = await _roasterRepository.GetSingleAsync(id);
             var roasterAddress = await _addressRepository.GetSingleAsync(roaster.OfficeAddressId);
-            var roasterTagsId = await _roasterTagRepository.GetPairsByRoasterIdAsync(roaster.Id);
+            //TODO: check it out
+            var roasterTagsId = (await _roasterTagRepository.GetPairsByRoasterIdAsync(roaster.Id)).Select(p=>p.TagId).ToList();
             var tags = new List<Tag>();
-            foreach (var item in roasterTagsId)
-                tags.Add(await _tagRepository.GetSingleAsync(item.TagId));
+            //TODO: replace cycle with repository gettags method
+            tags.AddRange(await _tagRepository.GetTagsByTagIds(roasterTagsId));
             return new RoasterInfoViewModel(roaster, roasterAddress, tags);
         }
 

@@ -21,13 +21,13 @@ namespace CoffeeMapServer.Pages.Admin.TagViews
         public EditTagModel(ITagService tagService)
             => _tagService = tagService ?? throw new ArgumentNullException(nameof(ITagService));
 
-        public async Task<IActionResult> OnGet(Guid guid)
+        public async Task<IActionResult> OnGet(Guid id)
         {
             Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
             Nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.nickname"].ToString();
             try
             {
-                Tag = await _tagService.FetchSingleTagAsync(guid);
+                Tag = await _tagService.FetchSingleTagAsync(id);
                 return Page();
             }
             catch

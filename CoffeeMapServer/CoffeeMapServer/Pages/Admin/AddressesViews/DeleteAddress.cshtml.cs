@@ -10,14 +10,11 @@ namespace CoffeeMapServer.Views.Admin.Addresses
     {
         private readonly IAddressService _addressService;
 
-        public Guid Guid { get; set; }
-
         public DeleteAddressModel(IAddressService addressService)
             => _addressService = addressService ?? throw new ArgumentNullException(nameof(IAddressService));
 
         public async Task<IActionResult> OnGet(Guid id)
         {
-            Guid = id;
             await _addressService.DeleteAddressAsync(id);
             return RedirectToPage("GetAddresses");
         }

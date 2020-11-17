@@ -20,10 +20,17 @@ namespace CoffeeMapServer.Services
                                              string newPasswordHash,
                                              string email)
         {
-            entity.Password = newPasswordHash ?? entity.Password;
-            entity.Email = email;
-            _userRepository.Update(entity);
-            await _userRepository.SaveChangesAsync();
+            try
+            {
+                entity.Password = newPasswordHash ?? entity.Password;
+                entity.Email = email;
+                _userRepository.Update(entity);
+                await _userRepository.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                // TODO: логирование
+            }
         }
     }
 }

@@ -11,9 +11,10 @@ namespace CoffeeMapServer.Views.Admin.Addresses
     {
         private readonly IAddressService _addressService;
 
-        [BindProperty]
+        [BindProperty(SupportsGet =true)]
         public Address Address { get; set; }
 
+        [BindProperty(SupportsGet = true)]
         public string Role { get; set; }
 
         public UpdateAddressModel(IAddressService addressService)

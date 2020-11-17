@@ -34,10 +34,10 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
         public EditRoasterModel(IRoasterAdminService roasterAdminService)
             => _roasterAdminService = roasterAdminService ?? throw new ArgumentNullException(nameof(IRoasterAdminService));
 
-        public async Task<IActionResult> OnGet(Guid guid)
+        public async Task<IActionResult> OnGet(Guid id)
         {
             Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
-            Roaster = await _roasterAdminService.FetchSingleRoasterAsync(guid);
+            Roaster = await _roasterAdminService.FetchSingleRoasterAsync(id);
             var currentTagPairs = await _roasterAdminService.FetchRoasterTagsAsync(Roaster.Id);
             foreach (var i in currentTagPairs)
                 tagsList.Add((await _roasterAdminService.FetchTagByIdAsync(i.TagId)).TagTitle);

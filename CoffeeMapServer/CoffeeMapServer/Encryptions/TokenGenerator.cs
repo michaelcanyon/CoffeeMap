@@ -8,7 +8,7 @@ namespace CoffeeMapServer.Encryptions
 {
     public static class TokenGenerator
     {
-        public static async Task<string> GenerateToken(ClaimsIdentity claims)
+        public static string GenerateToken(ClaimsIdentity claims)
         {
             // создаем JWT-токен
             var jwt = new JwtSecurityToken(

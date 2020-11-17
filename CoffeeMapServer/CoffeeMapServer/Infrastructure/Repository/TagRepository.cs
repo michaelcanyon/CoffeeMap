@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using CoffeeMapServer.EF;
 using CoffeeMapServer.Infrastructures.IRepositories;
@@ -35,5 +37,8 @@ namespace CoffeeMapServer.Infrastructures.Repositories
 
         public async Task SaveChangesAsync()
             => await Context.SaveChangesAsync();
+
+        public async Task<IList<Tag>> GetTagsByTagIds(IList tagsIds)
+            => await Context.Tags.Where(t => tagsIds.Contains(t.Id)).ToListAsync();
     }
 }

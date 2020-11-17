@@ -18,8 +18,6 @@ namespace CoffeeMapServer.Pages.Admin.RoasterRequestViews
         [BindProperty]
         public IFormFile Picture { get; set; }
 
-        public Guid Guid { get; set; }
-
         public string Role { get; set; }
 
         public EditRoasterRequestModel(IRoasterRequestService roasterRequestService)
@@ -27,16 +25,37 @@ namespace CoffeeMapServer.Pages.Admin.RoasterRequestViews
 
         public async Task OnGetAsync(Guid id)
         {
-            Guid = id;
             Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
-            request = await _roasterRequestService.FetchSingleRoasterRequestByIdAsync(Guid);
+            request = await _roasterRequestService.FetchSingleRoasterRequestByIdAsync(id);
         }
 
         public async Task<IActionResult> OnPostProcessAsync()
         {
-            request.Roaster.Picture = builders.BytePictureBuilder.GetBytePicture(Picture);
-            await _roasterRequestService.UpdateRoasterRequestAsync(request);
-            return RedirectToPage("RoasterRequests");
+            try
+            {
+                //TODO: following code illustrates errors handling 
+                request.Roaster.Picture = builders.BytePictureBuilder.GetBytePicture(Picture);
+                /*var result =*/
+                await _roasterRequestService.UpdateRoasterRequestAsync(request);
+                //if (!result.success)
+                //    return badrequest("ошибка сохранения данных");
+                return RedirectToPage("RoasterRequests");
+            }
+            catch (Exception)
+            {
+                // TODO: глобальное логирование
+                return BadRequest();
+            }
+        }
+
+        class ServiceResult
+        {
+            public bool Success { get; set; }
+            public string Message { get; set; }
+            public Exception Exception { get; set; }
+
+            public static ServiceResult Fail(string message)
+                => new ServiceResult { Success = false, Message = message };
         }
     }
 }

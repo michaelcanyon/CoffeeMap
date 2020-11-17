@@ -13,11 +13,11 @@ namespace CoffeeMapServer.Pages.Admin.TagViews
         public DeleteTagModel(ITagService tagService)
             => _tagService = tagService ?? throw new ArgumentNullException(nameof(ITagService));
 
-        public async Task<IActionResult> OnGet(Guid guid)
+        public async Task<IActionResult> OnGet(Guid id)
         {
             try
             {
-                await _tagService.DeleteTagAsync(guid);
+                await _tagService.DeleteTagAsync(id);
                 return RedirectToPage("Tags");
             }
             catch

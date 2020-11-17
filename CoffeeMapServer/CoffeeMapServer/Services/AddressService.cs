@@ -34,6 +34,7 @@ namespace CoffeeMapServer.Services
             var roasters = await _roasterRepository.FetchRoastersByAddressIdAsync(id);
             foreach (var item in roasters)
             {
+                //TODO: 
                 item.OfficeAddress = null;
                 _roasterRepository.Update(item);
             }
@@ -50,7 +51,7 @@ namespace CoffeeMapServer.Services
         public async Task UpdateAddressAsync(Address entity)
         {
             _addressRepository.Update(entity);
-            await _addressRepository.SaveChangesAsync();
+           await  _addressRepository.SaveChangesAsync();
         }
     }
 }

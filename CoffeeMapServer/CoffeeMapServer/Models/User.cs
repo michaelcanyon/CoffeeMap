@@ -4,6 +4,7 @@ namespace CoffeeMapServer.Models
 {
     public class User : Entity
     {
+        //TODO: Declare anntotations within fluent api
         [Required(ErrorMessage = "Не указан логин")]
         [DataType(DataType.Text)]
         public string Login { get; set; }

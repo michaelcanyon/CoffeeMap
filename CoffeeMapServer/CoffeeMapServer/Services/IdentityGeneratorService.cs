@@ -21,6 +21,7 @@ namespace CoffeeMapServer.Services
             var user = await _userService.Login(username, password);
             if (user == null)
                 return null;
+
             var claims = new List<Claim>
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login),

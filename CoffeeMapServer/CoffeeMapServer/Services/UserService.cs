@@ -26,9 +26,11 @@ namespace CoffeeMapServer.Services
             User userV = await _userRepository.GetSingleAsync(entity.Login);
             if (userV != null)
                 return;
+
             userV = await _userRepository.GetSingleByMailAsync(entity.Email);
             if (userV != null)
                 return;
+
             _userRepository.Add(entity);
             await _userRepository.SaveChangesAsync();
         }

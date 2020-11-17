@@ -37,7 +37,7 @@ namespace CoffeeMapServer.Controllers
             var identity = await _identityGeneratorService.GetIdentity(login.Email, login.Password);
             if (identity == null)
                 return View();
-            var token = await TokenGenerator.GenerateToken(identity);
+            var token = TokenGenerator.GenerateToken(identity);
             var userSample = await userService.Login(login.Email, login.Password);
             QueryCookiesEditor.SetUserCookies(userSample, token, HttpContext);
             return userSample.Role == "Master" ? Redirect("~/Home/HomeMaster") : Redirect("~/Home/Home");

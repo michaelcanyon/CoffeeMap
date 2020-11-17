@@ -16,9 +16,9 @@ namespace CoffeeMapServer.Pages.Admin.UserViews
         public DeleteUserModel(IUserService userService)
             => _userService = userService ?? throw new ArgumentNullException(nameof(IUserService));
 
-        public async Task<IActionResult> OnGetAsync(Guid guid)
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            await _userService.DeleteUserAsync(guid);
+            await _userService.DeleteUserAsync(id);
             return RedirectToPage("Users");
         }
     }
