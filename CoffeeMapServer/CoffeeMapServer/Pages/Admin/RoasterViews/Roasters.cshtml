@@ -36,7 +36,7 @@
         <input type="text" maxlength="30" class="form-control" asp-for="@Model.NameFilter">
 
         <label for="addressid">office address Id</label>
-        <input type="text" class="form-control" asp-for="@Model.OfficeAddressIdFilter">
+        <input type="text" class="form-control" asp-for="@Model.OfficeAddressFilter">
 
         <label for="phone">Contact number</label>
         <input type="text" id="contactnumber" class="form-control" asp-for="@Model.ContactNumberFilter">
@@ -77,7 +77,7 @@
                     Name
                 </th>
                 <th>
-                    OfficeAddressId
+                    Office Address
                 </th>
                 <th>
                     ContactNumber
@@ -108,20 +108,14 @@
                 <tr>
                     <td>@Html.DisplayFor(item => i.Id)</td>
                     <td>@Html.DisplayFor(item => i.Name)</td>
-                    <td>@Html.DisplayFor(item => i.OfficeAddressId)</td>
+                    <td>@Html.DisplayFor(item => i.OfficeAddress.AddressStr)</td>
                     <td>@Html.DisplayFor(item => i.ContactNumber)</td>
                     <td>
                         <ul>
-                            @{
-                                var TempRoasterTags = Model.RoasterTags.Where(id => id.RoasterId == i.Id).ToList();
-                                foreach (var g in TempRoasterTags)
+                            @{ 
+                                foreach (var e in i.RoasterTags)
                                 {
-                                    var curTags = Model.Tags.Where(tag => tag.Id == g.TagId).ToList();
-                                    foreach (var e in curTags)
-                                    {
-                                        <li>@Html.DisplayFor(item => e.TagTitle)</li>
-                                    }
-
+                                    <li>@Html.DisplayFor(item=>e.Tag.TagTitle)</li>
                                 }
                             }
                         </ul>

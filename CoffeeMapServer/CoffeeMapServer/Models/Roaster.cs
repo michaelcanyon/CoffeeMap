@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace CoffeeMapServer.Models
 {
     public class Roaster : Entity
     {
-        [Required]
         public string Name { get; set; }
 
         public Address OfficeAddress { get; set; }
 
-        [Required]
-        public Guid OfficeAddressId { get; set; }
+        //Remove this shit
+        //public Guid OfficeAddressId { get; set; }
 
-        [Required]
         public string ContactNumber { get; set; }
 
         public string ContactEmail { get; set; }
@@ -31,6 +28,8 @@ namespace CoffeeMapServer.Models
 
         public string Description { get; set; }
 
+        public ICollection<RoasterTag> RoasterTags { get; set; }
+
         public Roaster() { }
 
         public Roaster(Guid? id = null) : base(id)
@@ -39,7 +38,6 @@ namespace CoffeeMapServer.Models
         public static Roaster New(Guid id,
                                   string name,
                                   string contactNumber,
-                                  Guid officeAddressId,
                                   string contactEmail,
                                   string webSiteLink,
                                   string vkProfileLink,
@@ -52,7 +50,6 @@ namespace CoffeeMapServer.Models
                 Name = name,
                 ContactNumber = contactNumber,
                 ContactEmail = contactEmail,
-                OfficeAddressId = officeAddressId,
                 WebSiteLink = webSiteLink,
                 VkProfileLink = vkProfileLink,
                 InstagramProfileLink = igProfileLink,
@@ -64,7 +61,6 @@ namespace CoffeeMapServer.Models
         public static Roaster New(string name,
                                   string contactNumber,
                                   string contactEmail,
-                                  Guid officeAddressId,
                                   string webSiteLink,
                                   string vkProfileLink,
                                   string igProfileLink,
@@ -76,7 +72,6 @@ namespace CoffeeMapServer.Models
                 Name = name,
                 ContactNumber = contactNumber,
                 ContactEmail = contactEmail,
-                OfficeAddressId = officeAddressId,
                 WebSiteLink = webSiteLink,
                 VkProfileLink = vkProfileLink,
                 InstagramProfileLink = igProfileLink,

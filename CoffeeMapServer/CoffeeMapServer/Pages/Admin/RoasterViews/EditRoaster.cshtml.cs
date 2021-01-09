@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using CoffeeMapServer.Models;
 using CoffeeMapServer.Services.Interfaces.Admin;
@@ -38,9 +39,10 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
         {
             Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
             Roaster = await _roasterAdminService.FetchSingleRoasterAsync(id);
-            var currentTagPairs = await _roasterAdminService.FetchRoasterTagsAsync(Roaster.Id);
-            foreach (var i in currentTagPairs)
-                tagsList.Add((await _roasterAdminService.FetchTagByIdAsync(i.TagId)).TagTitle);
+            //var currentTagPairs = await _roasterAdminService.FetchRoasterTagsAsync(Roaster.Id);
+            //foreach (var i in currentTagPairs)
+            //tagsList.Add((await _roasterAdminService.FetchTagByIdAsync(i.TagId)).TagTitle);
+            tagsList.AddRange(Roaster.RoasterTags.Select(t => t.Tag.TagTitle).ToList());
             if (Roaster.ContactEmail == "none")
                 Roaster.ContactEmail = null;
             if (Roaster.InstagramProfileLink == "none")

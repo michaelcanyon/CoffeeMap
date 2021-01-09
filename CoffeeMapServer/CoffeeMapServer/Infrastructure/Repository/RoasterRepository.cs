@@ -23,19 +23,19 @@ namespace CoffeeMapServer.Infrastructures.Repositories
             => _сontext.Roasters.Remove(entity);
 
         public async Task<Roaster> GetSingleAsync(Guid id)
-            => await _сontext.Roasters.FirstOrDefaultAsync(e => e.Id == id);
+            => await _сontext.Roasters.Include(r=>r.OfficeAddress).Include(r=>r.RoasterTags).ThenInclude(r=>r.Tag).FirstOrDefaultAsync(e => e.Id == id);
 
         public void Update(Roaster entity)
             => _сontext.Roasters.Update(entity);
 
         public async Task<IList<Roaster>> GetListAsync()
-            => await _сontext.Roasters.ToListAsync();
+            => await _сontext.Roasters.Include(r => r.OfficeAddress).Include(r=>r.RoasterTags).ThenInclude(r=>r.Tag).ToListAsync();
 
         public async Task<IList<Roaster>> FetchRoastersByAddressIdAsync(Guid id)
-            => await _сontext.Roasters.Where(r => r.OfficeAddressId == id).ToListAsync();
+            => await _сontext.Roasters.Include(r => r.OfficeAddress).Include(r=>r.RoasterTags).ThenInclude(r=>r.Tag).Where(r => r.OfficeAddress.Id == id).ToListAsync();
 
         public async Task<Roaster> GetRoasterByNameAsync(string roasterName)
-            => await _сontext.Roasters.FirstOrDefaultAsync(e => e.Name == roasterName);
+            => await _сontext.Roasters.Include(r => r.OfficeAddress).Include(r => r.RoasterTags).ThenInclude(r => r.Tag).Include(r => r.OfficeAddress).FirstOrDefaultAsync(e => e.Name == roasterName);
 
         public async Task SaveChangesAsync()
             => await _сontext.SaveChangesAsync();

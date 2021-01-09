@@ -1,5 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace CoffeeMapServer.Models
 {
@@ -11,12 +14,13 @@ namespace CoffeeMapServer.Models
             : base(id)
         { }
 
-        // TODO: в конфигуратор
-        [Required]
         public string AddressStr { get; set; }
         
-        [Required]
         public string OpeningHours { get; set; }
+
+        public ICollection<Roaster> Roasters { get; set; }
+
+        public Guid RoasterId { get; set; }
 
         public static Address New(Guid id, string address, string openingHours)
             => new Address(id)

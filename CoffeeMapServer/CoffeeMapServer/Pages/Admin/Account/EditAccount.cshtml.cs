@@ -24,10 +24,16 @@ namespace CoffeeMapServer.Pages.Admin.Account
 
         public async Task OnGetAsync()
         {
-            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
-            var id = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.id"].ToString();
-            _User = await _accountService.GetAccountByIdAsync(Guid.Parse(id));
-        }
+            try
+            {
+                Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
+                var id = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.id"].ToString();
+                _User = await _accountService.GetAccountByIdAsync(Guid.Parse(id));
+            }
+            catch { 
+                    //RedirectToPage("LoginCorrupted")
+            }
+            }
 
         public async Task<IActionResult> OnPostAsync()
         {

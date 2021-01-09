@@ -70,7 +70,7 @@ namespace CoffeeMapServer.Pages.Admin.RoasterAddress
             if (InsertableRoaster == null)
                 return RedirectToPage("RoasterAddressConn");
 
-            InsertableRoaster.OfficeAddressId = Guid.Parse(InsertAddressId);
+            InsertableRoaster.OfficeAddress = InsertableAddress;
             await _roasterAddressConnectionService.UpdateRoasterAsync(InsertableRoaster);
                 return RedirectToPage("RoasterAddressConn");
         }

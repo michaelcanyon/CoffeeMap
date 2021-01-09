@@ -1,0 +1,1845 @@
+2021-01-09 00:05:50.206 +03:00 [INF] Initiatilizing cofee app server
+2021-01-09 00:05:56.200 +03:00 [INF] User profile is available. Using 'C:\Users\hrani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-01-09 00:05:58.323 +03:00 [INF] Now listening on: https://localhost:5001
+2021-01-09 00:05:58.335 +03:00 [INF] Now listening on: http://localhost:5000
+2021-01-09 00:05:58.354 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-01-09 00:05:58.357 +03:00 [INF] Hosting environment: Development
+2021-01-09 00:05:58.361 +03:00 [INF] Content root path: C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer
+2021-01-09 00:06:05.562 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger  
+2021-01-09 00:06:06.483 +03:00 [INF] HTTP GET /swagger responded 301 in 660.9930 ms
+2021-01-09 00:06:06.529 +03:00 [INF] Request finished in 986.6908ms 301 
+2021-01-09 00:06:06.613 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/index.html  
+2021-01-09 00:06:06.901 +03:00 [INF] HTTP GET /swagger/index.html responded 200 in 230.0194 ms
+2021-01-09 00:06:06.921 +03:00 [INF] Request finished in 308.0308ms 200 text/html;charset=utf-8
+2021-01-09 00:06:07.137 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css  
+2021-01-09 00:06:07.138 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js  
+2021-01-09 00:06:07.138 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js  
+2021-01-09 00:06:07.499 +03:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2021-01-09 00:06:07.499 +03:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2021-01-09 00:06:07.579 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js responded 200 in 356.8245 ms
+2021-01-09 00:06:07.580 +03:00 [INF] HTTP GET /swagger/swagger-ui.css responded 200 in 420.0094 ms
+2021-01-09 00:06:07.644 +03:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2021-01-09 00:06:07.671 +03:00 [INF] Request finished in 533.2167ms 200 application/javascript
+2021-01-09 00:06:07.674 +03:00 [INF] Request finished in 537.5408ms 200 text/css
+2021-01-09 00:06:07.688 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js responded 200 in 450.5370 ms
+2021-01-09 00:06:07.705 +03:00 [INF] Request finished in 567.3181ms 200 application/javascript
+2021-01-09 00:06:08.466 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/swagger/swagger-ui-bundle.js.map  
+2021-01-09 00:06:08.479 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js.map responded 404 in 4.9885 ms
+2021-01-09 00:06:08.541 +03:00 [INF] Request finished in 76.0015ms 404 
+2021-01-09 00:06:08.622 +03:00 [INF] Request starting HTTP/1.1 GET https://127.0.0.1:5001/swagger/swagger-ui-bundle.js.map  
+2021-01-09 00:06:08.626 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js.map responded 404 in 0.6819 ms
+2021-01-09 00:06:08.639 +03:00 [INF] Request finished in 16.7964ms 404 
+2021-01-09 00:06:09.441 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js.map  
+2021-01-09 00:06:09.459 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js.map responded 404 in 2.7264 ms
+2021-01-09 00:06:09.478 +03:00 [INF] Request finished in 38.9423ms 404 
+2021-01-09 00:06:09.544 +03:00 [INF] Request starting HTTP/1.1 GET https://127.0.0.1:5001/swagger/swagger-ui-standalone-preset.js.map  
+2021-01-09 00:06:09.552 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js.map responded 404 in 1.4973 ms
+2021-01-09 00:06:09.568 +03:00 [INF] Request finished in 23.1132ms 404 
+2021-01-09 00:06:09.905 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json  
+2021-01-09 00:06:10.877 +03:00 [INF] HTTP GET /swagger/v1/swagger.json responded 200 in 964.4467 ms
+2021-01-09 00:06:10.892 +03:00 [INF] Request finished in 987.3163ms 200 application/json;charset=utf-8
+2021-01-09 00:06:37.873 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Admin/RoasterViews/Roasters  
+2021-01-09 00:06:38.039 +03:00 [INF] Authorization failed.
+2021-01-09 00:06:38.071 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2021-01-09 00:06:38.078 +03:00 [INF] HTTP GET /Admin/RoasterViews/Roasters responded 302 in 77.8089 ms
+2021-01-09 00:06:38.091 +03:00 [INF] Request finished in 229.7718ms 302 
+2021-01-09 00:06:38.173 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Login  
+2021-01-09 00:06:38.181 +03:00 [INF] Executing endpoint 'CoffeeMapServer.Controllers.LoginController.Login (CoffeeMapServer)'
+2021-01-09 00:06:38.350 +03:00 [INF] Route matched with {action = "Login", controller = "Login", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login() on controller CoffeeMapServer.Controllers.LoginController (CoffeeMapServer).
+2021-01-09 00:06:45.031 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 00:06:55.057 +03:00 [INF] Executed DbCommand (183ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 00:06:55.384 +03:00 [INF] Executed DbCommand (261ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 00:06:55.588 +03:00 [INF] Executing ViewResult, running view Login.
+2021-01-09 00:06:56.039 +03:00 [INF] Executed ViewResult - view Login executed in 453.9194ms.
+2021-01-09 00:06:56.072 +03:00 [INF] Executed action CoffeeMapServer.Controllers.LoginController.Login (CoffeeMapServer) in 17630.3937ms
+2021-01-09 00:06:56.085 +03:00 [INF] Executed endpoint 'CoffeeMapServer.Controllers.LoginController.Login (CoffeeMapServer)'
+2021-01-09 00:06:56.496 +03:00 [INF] HTTP GET /Login responded 200 in 18317.4032 ms
+2021-01-09 00:06:56.846 +03:00 [INF] Request finished in 18672.9656ms 200 text/html; charset=utf-8
+2021-01-09 00:08:15.238 +03:00 [INF] Request starting HTTP/2 POST https://localhost:5001/Login application/x-www-form-urlencoded 213
+2021-01-09 00:08:15.243 +03:00 [INF] CORS policy execution successful.
+2021-01-09 00:08:15.252 +03:00 [INF] Executing endpoint 'CoffeeMapServer.Controllers.LoginController.Login (CoffeeMapServer)'
+2021-01-09 00:08:15.390 +03:00 [INF] Route matched with {action = "Login", controller = "Login", page = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(CoffeeMapServer.ViewModels.LoginViewModel) on controller CoffeeMapServer.Controllers.LoginController (CoffeeMapServer).
+2021-01-09 00:08:15.460 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 00:08:15.491 +03:00 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 00:08:15.577 +03:00 [INF] Executed DbCommand (77ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 00:08:17.296 +03:00 [INF] Executed DbCommand (201ms) [Parameters=[@__username_0='?' (Size = 4000), @__hashedPassword_1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE ([u].[Login] = @__username_0) AND ([u].[Password] = @__hashedPassword_1)
+2021-01-09 00:08:18.146 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[@__username_0='?' (Size = 4000), @__hashedPassword_1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE ([u].[Login] = @__username_0) AND ([u].[Password] = @__hashedPassword_1)
+2021-01-09 00:08:18.205 +03:00 [INF] Executing RedirectResult, redirecting to /Home/HomeMaster.
+2021-01-09 00:08:18.219 +03:00 [INF] Executed action CoffeeMapServer.Controllers.LoginController.Login (CoffeeMapServer) in 2787.5967ms
+2021-01-09 00:08:18.251 +03:00 [INF] Executed endpoint 'CoffeeMapServer.Controllers.LoginController.Login (CoffeeMapServer)'
+2021-01-09 00:08:18.258 +03:00 [INF] HTTP POST /Login responded 302 in 3010.8657 ms
+2021-01-09 00:08:18.280 +03:00 [INF] Request finished in 3043.9399ms 302 
+2021-01-09 00:08:18.313 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Home/HomeMaster  
+2021-01-09 00:08:18.562 +03:00 [INF] Successfully validated the token.
+2021-01-09 00:08:18.574 +03:00 [INF] Authorization was successful.
+2021-01-09 00:08:18.576 +03:00 [INF] Executing endpoint '/Home/HomeMaster'
+2021-01-09 00:08:18.609 +03:00 [INF] Route matched with {page = "/Home/HomeMaster", action = "", controller = ""}. Executing page /Home/HomeMaster
+2021-01-09 00:08:18.662 +03:00 [INF] Executing handler method CoffeeMapServer.Pages.Home.HomeMasterModel.OnGet - ModelState is "Valid"
+2021-01-09 00:08:18.669 +03:00 [INF] Executed handler method OnGet, returned result .
+2021-01-09 00:08:18.701 +03:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2021-01-09 00:08:18.706 +03:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2021-01-09 00:08:19.000 +03:00 [INF] Executed page /Home/HomeMaster in 377.5956ms
+2021-01-09 00:08:19.006 +03:00 [INF] Executed endpoint '/Home/HomeMaster'
+2021-01-09 00:08:19.017 +03:00 [INF] HTTP GET /Home/HomeMaster responded 200 in 673.6410 ms
+2021-01-09 00:08:19.043 +03:00 [INF] Request finished in 729.7449ms 200 text/html; charset=utf-8
+2021-01-09 00:08:19.243 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/bower_components/jquery-slimscroll/jquery.slimscroll.js  
+2021-01-09 00:08:19.259 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/bower_components/fastclick/lib/fastclick.js  
+2021-01-09 00:08:19.293 +03:00 [INF] Successfully validated the token.
+2021-01-09 00:08:19.311 +03:00 [INF] Successfully validated the token.
+2021-01-09 00:08:19.339 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 63.7149 ms
+2021-01-09 00:08:19.392 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 88.1826 ms
+2021-01-09 00:08:19.440 +03:00 [INF] Request finished in 181.7666ms 404 
+2021-01-09 00:08:19.440 +03:00 [INF] Request finished in 193.722ms 404 
+2021-01-09 00:08:19.761 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/favicon.ico  
+2021-01-09 00:08:19.772 +03:00 [INF] Successfully validated the token.
+2021-01-09 00:08:19.777 +03:00 [INF] HTTP GET /favicon.ico responded 404 in 8.6377 ms
+2021-01-09 00:08:19.791 +03:00 [INF] Request finished in 28.8496ms 404 
+2021-01-09 00:08:46.947 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Admin/Account/EditAccount  
+2021-01-09 00:08:47.013 +03:00 [INF] Successfully validated the token.
+2021-01-09 00:08:47.022 +03:00 [INF] Authorization was successful.
+2021-01-09 00:08:47.026 +03:00 [INF] Executing endpoint '/Admin/Account/EditAccount'
+2021-01-09 00:08:47.085 +03:00 [INF] Route matched with {page = "/Admin/Account/EditAccount", action = "", controller = ""}. Executing page /Admin/Account/EditAccount
+2021-01-09 00:08:47.275 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 00:08:47.344 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 00:08:47.402 +03:00 [INF] Executed DbCommand (48ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 00:08:47.438 +03:00 [INF] Executing handler method CoffeeMapServer.Pages.Admin.Account.EditAccountModel.OnGetAsync - ModelState is "Valid"
+2021-01-09 00:08:47.521 +03:00 [INF] Executed DbCommand (12ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE [u].[Id] = @__id_0
+2021-01-09 00:08:47.556 +03:00 [INF] User "758a4e24-3db0-4604-950e-c27e83720c3a", master_1, Role: Master access procedure implemented
+2021-01-09 00:08:47.571 +03:00 [INF] Executed handler method OnGetAsync, returned result .
+2021-01-09 00:08:47.576 +03:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2021-01-09 00:08:47.586 +03:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2021-01-09 00:08:47.750 +03:00 [INF] Executed page /Admin/Account/EditAccount in 658.9601ms
+2021-01-09 00:08:47.772 +03:00 [INF] Executed endpoint '/Admin/Account/EditAccount'
+2021-01-09 00:08:47.795 +03:00 [INF] HTTP GET /Admin/Account/EditAccount responded 200 in 786.9468 ms
+2021-01-09 00:08:47.811 +03:00 [INF] Request finished in 866.8449ms 200 text/html; charset=utf-8
+2021-01-09 00:08:47.999 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/bower_components/jquery-slimscroll/jquery.slimscroll.js  
+2021-01-09 00:08:48.009 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/bower_components/fastclick/lib/fastclick.js  
+2021-01-09 00:08:48.034 +03:00 [INF] Successfully validated the token.
+2021-01-09 00:08:48.056 +03:00 [INF] Successfully validated the token.
+2021-01-09 00:08:48.074 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 19.3307 ms
+2021-01-09 00:08:48.060 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 28.8386 ms
+2021-01-09 00:08:48.089 +03:00 [INF] Request finished in 80.1653ms 404 
+2021-01-09 00:08:48.110 +03:00 [INF] Request finished in 112.5223ms 404 
+2021-01-09 00:08:48.293 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/bower_components/jquery-slimscroll/jquery.slimscroll.js  
+2021-01-09 00:08:48.323 +03:00 [INF] Successfully validated the token.
+2021-01-09 00:08:48.338 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 18.0686 ms
+2021-01-09 00:08:48.349 +03:00 [INF] Request finished in 55.4713ms 404 
+2021-01-09 00:08:48.386 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/bower_components/fastclick/lib/fastclick.js  
+2021-01-09 00:08:48.426 +03:00 [INF] Successfully validated the token.
+2021-01-09 00:08:48.453 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 56.5488 ms
+2021-01-09 00:08:48.460 +03:00 [INF] Request finished in 74.4971ms 404 
+2021-01-09 00:09:45.485 +03:00 [INF] Request starting HTTP/2 POST https://localhost:5001/Admin/Account/EditAccount?handler=Process application/x-www-form-urlencoded 372
+2021-01-09 00:09:45.492 +03:00 [INF] CORS policy execution successful.
+2021-01-09 00:09:45.497 +03:00 [INF] Successfully validated the token.
+2021-01-09 00:09:45.501 +03:00 [INF] Authorization was successful.
+2021-01-09 00:09:45.504 +03:00 [INF] Executing endpoint '/Admin/Account/EditAccount'
+2021-01-09 00:09:45.509 +03:00 [INF] Route matched with {page = "/Admin/Account/EditAccount", action = "", controller = ""}. Executing page /Admin/Account/EditAccount
+2021-01-09 00:09:45.558 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 00:09:45.611 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 00:09:45.709 +03:00 [INF] Executed DbCommand (84ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 00:09:45.760 +03:00 [INF] Executing handler method CoffeeMapServer.Pages.Admin.Account.EditAccountModel.OnPostAsync - ModelState is "Valid"
+2021-01-09 00:09:45.824 +03:00 [INF] Executed DbCommand (10ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE [u].[Id] = @__id_0
+2021-01-09 00:09:45.884 +03:00 [INF] User "758a4e24-3db0-4604-950e-c27e83720c3a", master_1, Role: Master access procedure implemented
+2021-01-09 00:09:46.472 +03:00 [INF] Executed DbCommand (64ms) [Parameters=[@p4='?' (DbType = Guid), @p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+UPDATE [Users] SET [Email] = @p0, [Login] = @p1, [Password] = @p2, [Role] = @p3
+WHERE [Id] = @p4;
+SELECT @@ROWCOUNT;
+2021-01-09 00:09:46.692 +03:00 [INF] Account master_1 has been modified
+2021-01-09 00:09:46.706 +03:00 [INF] Executed handler method OnPostAsync, returned result Microsoft.AspNetCore.Mvc.RedirectToPageResult.
+2021-01-09 00:09:46.732 +03:00 [INF] Executing RedirectToPageResult, redirecting to /Home/HomeMaster.
+2021-01-09 00:09:46.742 +03:00 [INF] Executed page /Admin/Account/EditAccount in 1215.89ms
+2021-01-09 00:09:46.759 +03:00 [INF] Executed endpoint '/Admin/Account/EditAccount'
+2021-01-09 00:09:46.771 +03:00 [INF] HTTP POST /Admin/Account/EditAccount?handler=Process responded 302 in 1272.9087 ms
+2021-01-09 00:09:46.786 +03:00 [INF] Request finished in 1302.5755ms 302 
+2021-01-09 00:09:46.806 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Home/HomeMaster  
+2021-01-09 00:09:46.814 +03:00 [INF] Successfully validated the token.
+2021-01-09 00:09:46.824 +03:00 [INF] Authorization was successful.
+2021-01-09 00:09:46.829 +03:00 [INF] Executing endpoint '/Home/HomeMaster'
+2021-01-09 00:09:46.842 +03:00 [INF] Route matched with {page = "/Home/HomeMaster", action = "", controller = ""}. Executing page /Home/HomeMaster
+2021-01-09 00:09:46.853 +03:00 [INF] Executing handler method CoffeeMapServer.Pages.Home.HomeMasterModel.OnGet - ModelState is "Valid"
+2021-01-09 00:09:46.858 +03:00 [INF] Executed handler method OnGet, returned result .
+2021-01-09 00:09:46.869 +03:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2021-01-09 00:09:46.875 +03:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2021-01-09 00:09:46.890 +03:00 [INF] Executed page /Home/HomeMaster in 38.7262ms
+2021-01-09 00:09:46.895 +03:00 [INF] Executed endpoint '/Home/HomeMaster'
+2021-01-09 00:09:46.911 +03:00 [INF] HTTP GET /Home/HomeMaster responded 200 in 98.2407 ms
+2021-01-09 00:09:46.947 +03:00 [INF] Request finished in 140.4445ms 200 text/html; charset=utf-8
+2021-01-09 00:09:47.077 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/bower_components/jquery-slimscroll/jquery.slimscroll.js  
+2021-01-09 00:09:47.087 +03:00 [INF] Successfully validated the token.
+2021-01-09 00:09:47.188 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/bower_components/fastclick/lib/fastclick.js  
+2021-01-09 00:09:47.224 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 137.7532 ms
+2021-01-09 00:09:47.229 +03:00 [INF] Successfully validated the token.
+2021-01-09 00:09:47.241 +03:00 [INF] Request finished in 163.905ms 404 
+2021-01-09 00:09:47.255 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 27.2171 ms
+2021-01-09 00:09:47.277 +03:00 [INF] Request finished in 88.8611ms 404 
+2021-01-09 00:10:24.766 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Admin/Account/EditAccount  
+2021-01-09 00:10:24.774 +03:00 [INF] Successfully validated the token.
+2021-01-09 00:10:24.779 +03:00 [INF] Authorization was successful.
+2021-01-09 00:10:24.819 +03:00 [INF] Executing endpoint '/Admin/Account/EditAccount'
+2021-01-09 00:10:24.827 +03:00 [INF] Route matched with {page = "/Admin/Account/EditAccount", action = "", controller = ""}. Executing page /Admin/Account/EditAccount
+2021-01-09 00:10:24.852 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 00:10:24.870 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 00:10:24.913 +03:00 [INF] Executed DbCommand (36ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 00:10:24.931 +03:00 [INF] Executing handler method CoffeeMapServer.Pages.Admin.Account.EditAccountModel.OnGetAsync - ModelState is "Valid"
+2021-01-09 00:10:35.272 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE [u].[Id] = @__id_0
+2021-01-09 00:10:38.642 +03:00 [INF] User "758a4e24-3db0-4604-950e-c27e83720c3a", master_1, Role: Master access procedure implemented
+2021-01-09 00:11:50.309 +03:00 [INF] Initiatilizing cofee app server
+2021-01-09 00:11:55.630 +03:00 [INF] User profile is available. Using 'C:\Users\hrani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-01-09 00:11:58.209 +03:00 [INF] Now listening on: https://localhost:5001
+2021-01-09 00:11:58.241 +03:00 [INF] Now listening on: http://localhost:5000
+2021-01-09 00:11:58.263 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-01-09 00:11:58.270 +03:00 [INF] Hosting environment: Development
+2021-01-09 00:11:58.273 +03:00 [INF] Content root path: C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer
+2021-01-09 00:12:08.830 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger  
+2021-01-09 00:12:10.009 +03:00 [INF] HTTP GET /swagger responded 301 in 857.5330 ms
+2021-01-09 00:12:10.125 +03:00 [INF] Request finished in 1302.2436ms 301 
+2021-01-09 00:12:10.205 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/index.html  
+2021-01-09 00:12:10.561 +03:00 [INF] HTTP GET /swagger/index.html responded 200 in 218.0455 ms
+2021-01-09 00:12:10.569 +03:00 [INF] Request finished in 364.0106ms 200 text/html;charset=utf-8
+2021-01-09 00:12:10.811 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js  
+2021-01-09 00:12:10.811 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js  
+2021-01-09 00:12:10.811 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css  
+2021-01-09 00:12:11.180 +03:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2021-01-09 00:12:11.182 +03:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2021-01-09 00:12:11.280 +03:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2021-01-09 00:12:11.301 +03:00 [INF] HTTP GET /swagger/swagger-ui.css responded 200 in 479.1722 ms
+2021-01-09 00:12:11.301 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js responded 200 in 481.9175 ms
+2021-01-09 00:12:11.301 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js responded 200 in 481.4833 ms
+2021-01-09 00:12:11.322 +03:00 [INF] Request finished in 511.373ms 200 application/javascript
+2021-01-09 00:12:11.322 +03:00 [INF] Request finished in 511.3203ms 200 text/css
+2021-01-09 00:12:11.344 +03:00 [INF] Request finished in 532.3971ms 200 application/javascript
+2021-01-09 00:12:12.050 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/swagger/swagger-ui-bundle.js.map  
+2021-01-09 00:12:12.067 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js.map responded 404 in 6.9990 ms
+2021-01-09 00:12:12.140 +03:00 [INF] Request finished in 91.6633ms 404 
+2021-01-09 00:12:12.184 +03:00 [INF] Request starting HTTP/1.1 GET https://127.0.0.1:5001/swagger/swagger-ui-bundle.js.map  
+2021-01-09 00:12:12.190 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js.map responded 404 in 0.6667 ms
+2021-01-09 00:12:12.198 +03:00 [INF] Request finished in 13.7066ms 404 
+2021-01-09 00:12:12.784 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js.map  
+2021-01-09 00:12:12.794 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js.map responded 404 in 2.5904 ms
+2021-01-09 00:12:12.828 +03:00 [INF] Request finished in 48.5459ms 404 
+2021-01-09 00:12:12.887 +03:00 [INF] Request starting HTTP/1.1 GET https://127.0.0.1:5001/swagger/swagger-ui-standalone-preset.js.map  
+2021-01-09 00:12:12.893 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js.map responded 404 in 1.4357 ms
+2021-01-09 00:12:12.903 +03:00 [INF] Request finished in 16.0112ms 404 
+2021-01-09 00:12:13.248 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json  
+2021-01-09 00:12:14.054 +03:00 [INF] HTTP GET /swagger/v1/swagger.json responded 200 in 795.8415 ms
+2021-01-09 00:12:14.076 +03:00 [INF] Request finished in 828.0733ms 200 application/json;charset=utf-8
+2021-01-09 00:12:24.412 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Admin/RoasterViews/Roasters  
+2021-01-09 00:12:24.598 +03:00 [INF] Authorization failed.
+2021-01-09 00:12:24.643 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2021-01-09 00:12:24.649 +03:00 [INF] HTTP GET /Admin/RoasterViews/Roasters responded 302 in 85.0346 ms
+2021-01-09 00:12:24.663 +03:00 [INF] Request finished in 250.6341ms 302 
+2021-01-09 00:12:24.680 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Login  
+2021-01-09 00:12:24.690 +03:00 [INF] Executing endpoint 'CoffeeMapServer.Controllers.LoginController.Login (CoffeeMapServer)'
+2021-01-09 00:12:24.841 +03:00 [INF] Route matched with {action = "Login", controller = "Login", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login() on controller CoffeeMapServer.Controllers.LoginController (CoffeeMapServer).
+2021-01-09 00:12:29.327 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 00:12:30.830 +03:00 [INF] Executed DbCommand (94ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 00:12:31.041 +03:00 [INF] Executed DbCommand (148ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 00:12:31.131 +03:00 [INF] Executing ViewResult, running view Login.
+2021-01-09 00:12:31.490 +03:00 [INF] Executed ViewResult - view Login executed in 359.6437ms.
+2021-01-09 00:12:31.505 +03:00 [INF] Executed action CoffeeMapServer.Controllers.LoginController.Login (CoffeeMapServer) in 6583.8276ms
+2021-01-09 00:12:31.527 +03:00 [INF] Executed endpoint 'CoffeeMapServer.Controllers.LoginController.Login (CoffeeMapServer)'
+2021-01-09 00:12:31.536 +03:00 [INF] HTTP GET /Login responded 200 in 6848.3447 ms
+2021-01-09 00:12:31.602 +03:00 [INF] Request finished in 6922.2756ms 200 text/html; charset=utf-8
+2021-01-09 00:13:11.210 +03:00 [INF] Request starting HTTP/2 POST https://localhost:5001/Login application/x-www-form-urlencoded 213
+2021-01-09 00:13:11.218 +03:00 [INF] CORS policy execution successful.
+2021-01-09 00:13:11.224 +03:00 [INF] Executing endpoint 'CoffeeMapServer.Controllers.LoginController.Login (CoffeeMapServer)'
+2021-01-09 00:13:11.334 +03:00 [INF] Route matched with {action = "Login", controller = "Login", page = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(CoffeeMapServer.ViewModels.LoginViewModel) on controller CoffeeMapServer.Controllers.LoginController (CoffeeMapServer).
+2021-01-09 00:13:11.397 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 00:13:11.472 +03:00 [INF] Executed DbCommand (29ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 00:13:11.562 +03:00 [INF] Executed DbCommand (83ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 00:13:13.559 +03:00 [INF] Executed DbCommand (267ms) [Parameters=[@__username_0='?' (Size = 4000), @__hashedPassword_1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE ([u].[Login] = @__username_0) AND ([u].[Password] = @__hashedPassword_1)
+2021-01-09 00:13:13.685 +03:00 [INF] Executing ViewResult, running view Login.
+2021-01-09 00:13:13.732 +03:00 [INF] Executed ViewResult - view Login executed in 47.3882ms.
+2021-01-09 00:13:13.743 +03:00 [INF] Executed action CoffeeMapServer.Controllers.LoginController.Login (CoffeeMapServer) in 2380.7993ms
+2021-01-09 00:13:13.778 +03:00 [INF] Executed endpoint 'CoffeeMapServer.Controllers.LoginController.Login (CoffeeMapServer)'
+2021-01-09 00:13:13.789 +03:00 [INF] HTTP POST /Login responded 200 in 2566.7183 ms
+2021-01-09 00:13:13.859 +03:00 [INF] Request finished in 2650.8436ms 200 text/html; charset=utf-8
+2021-01-09 00:13:32.296 +03:00 [INF] Request starting HTTP/2 POST https://localhost:5001/Login application/x-www-form-urlencoded 213
+2021-01-09 00:13:32.309 +03:00 [INF] CORS policy execution successful.
+2021-01-09 00:13:32.318 +03:00 [INF] Executing endpoint 'CoffeeMapServer.Controllers.LoginController.Login (CoffeeMapServer)'
+2021-01-09 00:13:32.339 +03:00 [INF] Route matched with {action = "Login", controller = "Login", page = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(CoffeeMapServer.ViewModels.LoginViewModel) on controller CoffeeMapServer.Controllers.LoginController (CoffeeMapServer).
+2021-01-09 00:13:32.490 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 00:13:32.524 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 00:13:32.604 +03:00 [INF] Executed DbCommand (71ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 00:13:32.676 +03:00 [INF] Executed DbCommand (14ms) [Parameters=[@__username_0='?' (Size = 4000), @__hashedPassword_1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE ([u].[Login] = @__username_0) AND ([u].[Password] = @__hashedPassword_1)
+2021-01-09 00:13:32.730 +03:00 [INF] Executing ViewResult, running view Login.
+2021-01-09 00:13:32.778 +03:00 [INF] Executed ViewResult - view Login executed in 49.0695ms.
+2021-01-09 00:13:32.872 +03:00 [INF] Executed action CoffeeMapServer.Controllers.LoginController.Login (CoffeeMapServer) in 524.1436ms
+2021-01-09 00:13:32.891 +03:00 [INF] Executed endpoint 'CoffeeMapServer.Controllers.LoginController.Login (CoffeeMapServer)'
+2021-01-09 00:13:32.928 +03:00 [INF] HTTP POST /Login responded 200 in 613.6385 ms
+2021-01-09 00:13:32.962 +03:00 [INF] Request finished in 667.1642ms 200 text/html; charset=utf-8
+2021-01-09 00:13:54.889 +03:00 [INF] Request starting HTTP/2 POST https://localhost:5001/Login application/x-www-form-urlencoded 215
+2021-01-09 00:13:54.911 +03:00 [INF] CORS policy execution successful.
+2021-01-09 00:13:54.926 +03:00 [INF] Executing endpoint 'CoffeeMapServer.Controllers.LoginController.Login (CoffeeMapServer)'
+2021-01-09 00:13:54.938 +03:00 [INF] Route matched with {action = "Login", controller = "Login", page = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(CoffeeMapServer.ViewModels.LoginViewModel) on controller CoffeeMapServer.Controllers.LoginController (CoffeeMapServer).
+2021-01-09 00:13:54.951 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 00:13:54.972 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 00:13:55.042 +03:00 [INF] Executed DbCommand (54ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 00:13:55.130 +03:00 [INF] Executed DbCommand (38ms) [Parameters=[@__username_0='?' (Size = 4000), @__hashedPassword_1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE ([u].[Login] = @__username_0) AND ([u].[Password] = @__hashedPassword_1)
+2021-01-09 00:13:56.210 +03:00 [INF] Executed DbCommand (36ms) [Parameters=[@__username_0='?' (Size = 4000), @__hashedPassword_1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE ([u].[Login] = @__username_0) AND ([u].[Password] = @__hashedPassword_1)
+2021-01-09 00:13:56.286 +03:00 [INF] Executing RedirectResult, redirecting to /Home/HomeMaster.
+2021-01-09 00:13:56.292 +03:00 [INF] Executed action CoffeeMapServer.Controllers.LoginController.Login (CoffeeMapServer) in 1347.6597ms
+2021-01-09 00:13:56.302 +03:00 [INF] Executed endpoint 'CoffeeMapServer.Controllers.LoginController.Login (CoffeeMapServer)'
+2021-01-09 00:13:56.305 +03:00 [INF] HTTP POST /Login responded 302 in 1383.0877 ms
+2021-01-09 00:13:56.318 +03:00 [INF] Request finished in 1428.9341ms 302 
+2021-01-09 00:13:56.430 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Home/HomeMaster  
+2021-01-09 00:13:56.825 +03:00 [INF] Successfully validated the token.
+2021-01-09 00:13:56.838 +03:00 [INF] Authorization was successful.
+2021-01-09 00:13:56.841 +03:00 [INF] Executing endpoint '/Home/HomeMaster'
+2021-01-09 00:13:56.871 +03:00 [INF] Route matched with {page = "/Home/HomeMaster", action = "", controller = ""}. Executing page /Home/HomeMaster
+2021-01-09 00:13:56.919 +03:00 [INF] Executing handler method CoffeeMapServer.Pages.Home.HomeMasterModel.OnGet - ModelState is "Valid"
+2021-01-09 00:13:56.926 +03:00 [INF] Executed handler method OnGet, returned result .
+2021-01-09 00:13:56.964 +03:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2021-01-09 00:13:56.979 +03:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2021-01-09 00:13:57.238 +03:00 [INF] Executed page /Home/HomeMaster in 361.6735ms
+2021-01-09 00:13:57.245 +03:00 [INF] Executed endpoint '/Home/HomeMaster'
+2021-01-09 00:13:57.261 +03:00 [INF] HTTP GET /Home/HomeMaster responded 200 in 709.2385 ms
+2021-01-09 00:13:57.295 +03:00 [INF] Request finished in 865.4539ms 200 text/html; charset=utf-8
+2021-01-09 00:13:57.448 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/bower_components/jquery-slimscroll/jquery.slimscroll.js  
+2021-01-09 00:13:57.493 +03:00 [INF] Successfully validated the token.
+2021-01-09 00:13:57.502 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 18.5455 ms
+2021-01-09 00:13:57.503 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/bower_components/fastclick/lib/fastclick.js  
+2021-01-09 00:13:57.510 +03:00 [INF] Request finished in 62.7708ms 404 
+2021-01-09 00:13:57.546 +03:00 [INF] Successfully validated the token.
+2021-01-09 00:13:57.557 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 12.6262 ms
+2021-01-09 00:13:57.579 +03:00 [INF] Request finished in 76.5038ms 404 
+2021-01-09 00:13:57.980 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/favicon.ico  
+2021-01-09 00:13:57.990 +03:00 [INF] Successfully validated the token.
+2021-01-09 00:13:57.998 +03:00 [INF] HTTP GET /favicon.ico responded 404 in 10.8121 ms
+2021-01-09 00:13:58.011 +03:00 [INF] Request finished in 30.8086ms 404 
+2021-01-09 00:14:09.625 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Admin/Account/EditAccount  
+2021-01-09 00:14:09.685 +03:00 [INF] Successfully validated the token.
+2021-01-09 00:14:09.725 +03:00 [INF] Authorization was successful.
+2021-01-09 00:14:09.737 +03:00 [INF] Executing endpoint '/Admin/Account/EditAccount'
+2021-01-09 00:14:09.809 +03:00 [INF] Route matched with {page = "/Admin/Account/EditAccount", action = "", controller = ""}. Executing page /Admin/Account/EditAccount
+2021-01-09 00:14:09.824 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 00:14:09.838 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 00:14:09.908 +03:00 [INF] Executed DbCommand (54ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 00:14:09.954 +03:00 [INF] Executing handler method CoffeeMapServer.Pages.Admin.Account.EditAccountModel.OnGetAsync - ModelState is "Valid"
+2021-01-09 00:14:13.471 +03:00 [INF] Executed DbCommand (16ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE [u].[Id] = @__id_0
+2021-01-09 00:14:23.666 +03:00 [INF] User "758a4e24-3db0-4604-950e-c27e83720c3a", master_1, Role: Master access procedure implemented
+2021-01-09 00:14:40.556 +03:00 [INF] Executed handler method OnGetAsync, returned result .
+2021-01-09 00:14:40.561 +03:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2021-01-09 00:14:40.564 +03:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2021-01-09 00:14:47.612 +03:00 [INF] Executed page /Admin/Account/EditAccount in 37792.9807ms
+2021-01-09 00:14:48.005 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/bower_components/jquery-slimscroll/jquery.slimscroll.js  
+2021-01-09 00:14:48.256 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/bower_components/fastclick/lib/fastclick.js  
+2021-01-09 00:14:48.260 +03:00 [INF] Executed endpoint '/Admin/Account/EditAccount'
+2021-01-09 00:14:48.275 +03:00 [INF] Successfully validated the token.
+2021-01-09 00:14:48.279 +03:00 [INF] Successfully validated the token.
+2021-01-09 01:11:15.536 +03:00 [INF] Initiatilizing cofee app server
+2021-01-09 01:15:59.093 +03:00 [INF] User profile is available. Using 'C:\Users\hrani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-01-09 01:16:00.529 +03:00 [INF] Now listening on: https://localhost:5001
+2021-01-09 01:16:00.563 +03:00 [INF] Now listening on: http://localhost:5000
+2021-01-09 01:16:00.567 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-01-09 01:16:00.570 +03:00 [INF] Hosting environment: Development
+2021-01-09 01:16:00.576 +03:00 [INF] Content root path: C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer
+2021-01-09 01:19:46.601 +03:00 [INF] Initiatilizing cofee app server
+2021-01-09 01:19:50.092 +03:00 [INF] User profile is available. Using 'C:\Users\hrani\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-01-09 01:19:51.407 +03:00 [INF] Now listening on: https://localhost:5001
+2021-01-09 01:19:51.413 +03:00 [INF] Now listening on: http://localhost:5000
+2021-01-09 01:19:51.420 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-01-09 01:19:51.425 +03:00 [INF] Hosting environment: Development
+2021-01-09 01:19:51.431 +03:00 [INF] Content root path: C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer
+2021-01-09 01:19:56.249 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger  
+2021-01-09 01:19:57.099 +03:00 [INF] HTTP GET /swagger responded 301 in 604.5026 ms
+2021-01-09 01:19:57.155 +03:00 [INF] Request finished in 931.7199ms 301 
+2021-01-09 01:19:57.184 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/index.html  
+2021-01-09 01:19:57.650 +03:00 [INF] HTTP GET /swagger/index.html responded 200 in 229.6282 ms
+2021-01-09 01:19:57.860 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js  
+2021-01-09 01:19:57.860 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css  
+2021-01-09 01:19:57.861 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js  
+2021-01-09 01:19:57.861 +03:00 [INF] Request finished in 677.939ms 200 text/html;charset=utf-8
+2021-01-09 01:19:58.103 +03:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2021-01-09 01:19:58.160 +03:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2021-01-09 01:19:58.327 +03:00 [INF] HTTP GET /swagger/swagger-ui.css responded 200 in 446.1996 ms
+2021-01-09 01:19:58.327 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js responded 200 in 446.7852 ms
+2021-01-09 01:19:58.328 +03:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2021-01-09 01:19:58.357 +03:00 [INF] Request finished in 497.2716ms 200 text/css
+2021-01-09 01:19:58.377 +03:00 [INF] Request finished in 516.3738ms 200 application/javascript
+2021-01-09 01:19:58.402 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js responded 200 in 533.1716 ms
+2021-01-09 01:19:58.435 +03:00 [INF] Request finished in 575.8438ms 200 application/javascript
+2021-01-09 01:19:59.165 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/swagger/swagger-ui-bundle.js.map  
+2021-01-09 01:19:59.181 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js.map responded 404 in 4.5238 ms
+2021-01-09 01:19:59.228 +03:00 [INF] Request finished in 63.6255ms 404 
+2021-01-09 01:19:59.273 +03:00 [INF] Request starting HTTP/1.1 GET https://127.0.0.1:5001/swagger/swagger-ui-bundle.js.map  
+2021-01-09 01:19:59.278 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js.map responded 404 in 0.6849 ms
+2021-01-09 01:19:59.292 +03:00 [INF] Request finished in 18.6546ms 404 
+2021-01-09 01:19:59.866 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js.map  
+2021-01-09 01:19:59.879 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js.map responded 404 in 2.8202 ms
+2021-01-09 01:19:59.896 +03:00 [INF] Request finished in 31.7907ms 404 
+2021-01-09 01:19:59.981 +03:00 [INF] Request starting HTTP/1.1 GET https://127.0.0.1:5001/swagger/swagger-ui-standalone-preset.js.map  
+2021-01-09 01:19:59.996 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js.map responded 404 in 2.3050 ms
+2021-01-09 01:20:00.048 +03:00 [INF] Request finished in 66.975ms 404 
+2021-01-09 01:20:00.527 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json  
+2021-01-09 01:20:01.451 +03:00 [INF] HTTP GET /swagger/v1/swagger.json responded 200 in 874.7595 ms
+2021-01-09 01:20:01.467 +03:00 [INF] Request finished in 940.7144ms 200 application/json;charset=utf-8
+2021-01-09 01:20:32.309 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Admin/RoasterViews/Roasters  
+2021-01-09 01:20:32.410 +03:00 [INF] Authorization failed.
+2021-01-09 01:20:32.433 +03:00 [INF] AuthenticationScheme: Bearer was challenged.
+2021-01-09 01:20:32.440 +03:00 [INF] HTTP GET /Admin/RoasterViews/Roasters responded 302 in 60.4709 ms
+2021-01-09 01:20:32.457 +03:00 [INF] Request finished in 149.6529ms 302 
+2021-01-09 01:20:32.474 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/Login  
+2021-01-09 01:20:32.480 +03:00 [INF] Executing endpoint 'CoffeeMapServer.Controllers.LoginController.Login (CoffeeMapServer)'
+2021-01-09 01:20:32.578 +03:00 [INF] Route matched with {action = "Login", controller = "Login", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login() on controller CoffeeMapServer.Controllers.LoginController (CoffeeMapServer).
+2021-01-09 01:20:35.629 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 01:20:39.771 +03:00 [INF] Executed DbCommand (105ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 01:20:40.425 +03:00 [INF] Executed DbCommand (575ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 01:20:40.510 +03:00 [INF] Executing ViewResult, running view Login.
+2021-01-09 01:20:40.832 +03:00 [INF] Executed ViewResult - view Login executed in 299.0367ms.
+2021-01-09 01:20:40.847 +03:00 [INF] Executed action CoffeeMapServer.Controllers.LoginController.Login (CoffeeMapServer) in 8257.6063ms
+2021-01-09 01:20:40.857 +03:00 [INF] Executed endpoint 'CoffeeMapServer.Controllers.LoginController.Login (CoffeeMapServer)'
+2021-01-09 01:20:40.864 +03:00 [INF] HTTP GET /Login responded 200 in 8385.8522 ms
+2021-01-09 01:20:41.095 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/AuthForm/vendor/bootstrap/css/bootstrap.min.css  
+2021-01-09 01:20:41.115 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/AuthForm/vendor/animate/animate.css  
+2021-01-09 01:20:41.198 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/AuthForm/vendor/jquery/jquery-3.2.1.min.js  
+2021-01-09 01:20:41.163 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/AuthForm/vendor/daterangepicker/daterangepicker.css  
+2021-01-09 01:20:41.278 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/AuthForm/vendor/bootstrap/js/bootstrap.min.js  
+2021-01-09 01:20:41.632 +03:00 [INF] Sending file. Request path: '/AuthForm/vendor/jquery/jquery-3.2.1.min.js'. Physical path: 'C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer\wwwroot\AuthForm\vendor\jquery\jquery-3.2.1.min.js'
+2021-01-09 01:20:41.658 +03:00 [INF] Sending file. Request path: '/AuthForm/vendor/daterangepicker/daterangepicker.css'. Physical path: 'C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer\wwwroot\AuthForm\vendor\daterangepicker\daterangepicker.css'
+2021-01-09 01:20:41.669 +03:00 [INF] Request finished in 472.6561ms 200 application/javascript
+2021-01-09 01:20:41.096 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/AuthForm/fonts/Linearicons-Free-v1.0.0/icon-font.min.css  
+2021-01-09 01:20:41.096 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/AuthForm/fonts/font-awesome-4.7.0/css/font-awesome.min.css  
+2021-01-09 01:20:41.714 +03:00 [INF] Request finished in 555.6072ms 200 text/css
+2021-01-09 01:20:41.116 +03:00 [INF] Request finished in 8641.2033ms 200 text/html; charset=utf-8
+2021-01-09 01:20:41.757 +03:00 [INF] Sending file. Request path: '/AuthForm/fonts/Linearicons-Free-v1.0.0/icon-font.min.css'. Physical path: 'C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer\wwwroot\AuthForm\fonts\Linearicons-Free-v1.0.0\icon-font.min.css'
+2021-01-09 01:20:41.193 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/AuthForm/css/main.css  
+2021-01-09 01:20:41.141 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/AuthForm/vendor/css-hamburgers/hamburgers.min.css  
+2021-01-09 01:20:41.145 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/AuthForm/vendor/select2/select2.min.css  
+2021-01-09 01:20:41.845 +03:00 [INF] Sending file. Request path: '/AuthForm/fonts/font-awesome-4.7.0/css/font-awesome.min.css'. Physical path: 'C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer\wwwroot\AuthForm\fonts\font-awesome-4.7.0\css\font-awesome.min.css'
+2021-01-09 01:20:41.875 +03:00 [INF] Request finished in 777.5839ms 200 text/css
+2021-01-09 01:20:41.142 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/AuthForm/vendor/animsition/css/animsition.min.css  
+2021-01-09 01:20:41.172 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/AuthForm/css/util.css  
+2021-01-09 01:20:41.218 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/AuthForm/vendor/animsition/js/animsition.min.js  
+2021-01-09 01:20:41.967 +03:00 [INF] Request finished in 851.1305ms 200 text/css
+2021-01-09 01:20:41.917 +03:00 [INF] Sending file. Request path: '/AuthForm/css/main.css'. Physical path: 'C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer\wwwroot\AuthForm\css\main.css'
+2021-01-09 01:20:42.088 +03:00 [INF] Sending file. Request path: '/AuthForm/css/util.css'. Physical path: 'C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer\wwwroot\AuthForm\css\util.css'
+2021-01-09 01:20:41.917 +03:00 [INF] Sending file. Request path: '/AuthForm/vendor/select2/select2.min.css'. Physical path: 'C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer\wwwroot\AuthForm\vendor\select2\select2.min.css'
+2021-01-09 01:20:42.095 +03:00 [INF] Sending file. Request path: '/AuthForm/vendor/animsition/css/animsition.min.css'. Physical path: 'C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer\wwwroot\AuthForm\vendor\animsition\css\animsition.min.css'
+2021-01-09 01:20:41.237 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/AuthForm/vendor/bootstrap/js/popper.js  
+2021-01-09 01:20:41.357 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/AuthForm/vendor/daterangepicker/moment.min.js  
+2021-01-09 01:20:42.145 +03:00 [INF] Request finished in 952.0071ms 200 text/css
+2021-01-09 01:20:42.186 +03:00 [INF] Request finished in 1012.7434ms 200 text/css
+2021-01-09 01:20:42.365 +03:00 [INF] Sending file. Request path: '/AuthForm/vendor/bootstrap/js/popper.js'. Physical path: 'C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer\wwwroot\AuthForm\vendor\bootstrap\js\popper.js'
+2021-01-09 01:20:42.222 +03:00 [INF] Request finished in 1074.8744ms 200 text/css
+2021-01-09 01:20:42.414 +03:00 [INF] Request finished in 1176.7479ms 200 application/javascript
+2021-01-09 01:20:42.131 +03:00 [INF] Sending file. Request path: '/AuthForm/vendor/animsition/js/animsition.min.js'. Physical path: 'C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer\wwwroot\AuthForm\vendor\animsition\js\animsition.min.js'
+2021-01-09 01:20:41.282 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/AuthForm/vendor/select2/select2.min.js  
+2021-01-09 01:20:41.433 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/AuthForm/vendor/countdowntime/countdowntime.js  
+2021-01-09 01:20:41.358 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/AuthForm/vendor/daterangepicker/daterangepicker.js  
+2021-01-09 01:20:42.306 +03:00 [INF] Request finished in 1163.735ms 200 text/css
+2021-01-09 01:20:42.455 +03:00 [INF] Request finished in 1235.8432ms 200 application/javascript
+2021-01-09 01:20:42.390 +03:00 [INF] Sending file. Request path: '/AuthForm/vendor/daterangepicker/moment.min.js'. Physical path: 'C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer\wwwroot\AuthForm\vendor\daterangepicker\moment.min.js'
+2021-01-09 01:20:42.517 +03:00 [INF] Sending file. Request path: '/AuthForm/vendor/countdowntime/countdowntime.js'. Physical path: 'C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer\wwwroot\AuthForm\vendor\countdowntime\countdowntime.js'
+2021-01-09 01:20:41.693 +03:00 [INF] Sending file. Request path: '/AuthForm/vendor/bootstrap/js/bootstrap.min.js'. Physical path: 'C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer\wwwroot\AuthForm\vendor\bootstrap\js\bootstrap.min.js'
+2021-01-09 01:20:41.446 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/AuthForm/js/main.js  
+2021-01-09 01:20:41.647 +03:00 [INF] Sending file. Request path: '/AuthForm/vendor/bootstrap/css/bootstrap.min.css'. Physical path: 'C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer\wwwroot\AuthForm\vendor\bootstrap\css\bootstrap.min.css'
+2021-01-09 01:20:42.613 +03:00 [INF] Request finished in 1254.6703ms 200 application/javascript
+2021-01-09 01:20:42.553 +03:00 [INF] Sending file. Request path: '/AuthForm/vendor/select2/select2.min.js'. Physical path: 'C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer\wwwroot\AuthForm\vendor\select2\select2.min.js'
+2021-01-09 01:20:42.633 +03:00 [INF] Request finished in 1198.5537ms 200 application/javascript
+2021-01-09 01:20:42.549 +03:00 [INF] Sending file. Request path: '/AuthForm/vendor/daterangepicker/daterangepicker.js'. Physical path: 'C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer\wwwroot\AuthForm\vendor\daterangepicker\daterangepicker.js'
+2021-01-09 01:20:42.652 +03:00 [INF] Request finished in 1373.7425ms 200 application/javascript
+2021-01-09 01:20:41.631 +03:00 [INF] Sending file. Request path: '/AuthForm/vendor/animate/animate.css'. Physical path: 'C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer\wwwroot\AuthForm\vendor\animate\animate.css'
+2021-01-09 01:20:41.914 +03:00 [INF] Sending file. Request path: '/AuthForm/vendor/css-hamburgers/hamburgers.min.css'. Physical path: 'C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer\wwwroot\AuthForm\vendor\css-hamburgers\hamburgers.min.css'
+2021-01-09 01:20:42.680 +03:00 [INF] Sending file. Request path: '/AuthForm/js/main.js'. Physical path: 'C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer\wwwroot\AuthForm\js\main.js'
+2021-01-09 01:20:42.700 +03:00 [INF] Request finished in 1603.9711ms 200 text/css
+2021-01-09 01:20:42.733 +03:00 [INF] Request finished in 1451.1397ms 200 application/javascript
+2021-01-09 01:20:42.786 +03:00 [INF] Request finished in 1427.4239ms 200 application/javascript
+2021-01-09 01:20:42.915 +03:00 [INF] Request finished in 1467.313ms 200 application/javascript
+2021-01-09 01:20:42.857 +03:00 [INF] Request finished in 1741.3831ms 200 text/css
+2021-01-09 01:20:42.879 +03:00 [INF] Request finished in 1738.0374ms 200 text/css
+2021-01-09 01:20:42.945 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/AuthForm/fonts/OpenSans/OpenSans-Regular.ttf  
+2021-01-09 01:20:42.946 +03:00 [INF] Request starting HTTP/2 GET https://localhost:5001/AuthForm/fonts/OpenSans/OpenSans-Bold.ttf  
+2021-01-09 01:20:43.180 +03:00 [INF] CORS policy execution successful.
+2021-01-09 01:20:43.191 +03:00 [INF] CORS policy execution successful.
+2021-01-09 01:20:43.312 +03:00 [INF] Sending file. Request path: '/AuthForm/fonts/OpenSans/OpenSans-Regular.ttf'. Physical path: 'C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer\wwwroot\AuthForm\fonts\OpenSans\OpenSans-Regular.ttf'
+2021-01-09 01:20:43.361 +03:00 [INF] Sending file. Request path: '/AuthForm/fonts/OpenSans/OpenSans-Bold.ttf'. Physical path: 'C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer\wwwroot\AuthForm\fonts\OpenSans\OpenSans-Bold.ttf'
+2021-01-09 01:20:43.374 +03:00 [INF] Request finished in 424.0542ms 200 application/x-font-ttf
+2021-01-09 01:20:43.397 +03:00 [INF] Request finished in 450.9862ms 200 application/x-font-ttf
+2021-01-09 01:21:16.132 +03:00 [INF] Application is shutting down...
+2021-01-09 01:22:59.959 +03:00 [INF] Initiatilizing cofee app server
+2021-01-09 01:23:12.172 +03:00 [INF] HTTP GET /swagger responded 301 in 416.5228 ms
+2021-01-09 01:23:12.434 +03:00 [INF] HTTP GET /swagger/index.html responded 200 in 131.0653 ms
+2021-01-09 01:23:12.835 +03:00 [INF] HTTP GET /swagger/swagger-ui.css responded 200 in 257.9616 ms
+2021-01-09 01:23:12.960 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js responded 200 in 375.3053 ms
+2021-01-09 01:23:12.983 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js responded 200 in 405.5273 ms
+2021-01-09 01:23:13.573 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js.map responded 404 in 6.0619 ms
+2021-01-09 01:23:13.651 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js.map responded 404 in 0.5488 ms
+2021-01-09 01:23:14.073 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js.map responded 404 in 4.4097 ms
+2021-01-09 01:23:14.111 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js.map responded 404 in 1.6851 ms
+2021-01-09 01:23:15.378 +03:00 [INF] HTTP GET /swagger/v1/swagger.json responded 200 in 885.3390 ms
+2021-01-09 01:23:28.968 +03:00 [INF] HTTP GET /Admin/RoasterViews/Roasters responded 302 in 57.2231 ms
+2021-01-09 01:23:33.026 +03:00 [INF] HTTP GET /Login responded 200 in 4036.6564 ms
+2021-01-09 01:24:06.974 +03:00 [INF] HTTP POST /Login responded 200 in 1399.8486 ms
+2021-01-09 01:24:19.114 +03:00 [INF] HTTP POST /Login responded 302 in 837.7659 ms
+2021-01-09 01:24:19.658 +03:00 [INF] HTTP GET /Home/HomeMaster responded 200 in 512.1454 ms
+2021-01-09 01:24:20.059 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 9.2055 ms
+2021-01-09 01:24:20.096 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 3.6540 ms
+2021-01-09 01:24:20.419 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 1.6419 ms
+2021-01-09 01:24:20.664 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 4.9936 ms
+2021-01-09 01:24:20.863 +03:00 [INF] HTTP GET /favicon.ico responded 404 in 4.7088 ms
+2021-01-09 01:24:56.832 +03:00 [INF] User "758a4e24-3db0-4604-950e-c27e83720c3a", master_1, Role: Master access procedure implemented
+2021-01-09 01:24:57.032 +03:00 [INF] HTTP GET /Admin/Account/EditAccount responded 200 in 7177.4763 ms
+2021-01-09 01:24:58.151 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 3.9126 ms
+2021-01-09 01:24:58.151 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 3.2085 ms
+2021-01-09 01:24:58.667 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 1.0005 ms
+2021-01-09 01:24:59.306 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 5.0505 ms
+2021-01-09 01:26:04.685 +03:00 [INF] HTTP GET /Admin/RoasterRequestViews/RoasterRequests responded 200 in 227.0792 ms
+2021-01-09 01:26:05.433 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 4.6405 ms
+2021-01-09 01:26:05.489 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 2.3015 ms
+2021-01-09 01:26:05.901 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 3.1192 ms
+2021-01-09 01:26:06.190 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 8.3662 ms
+2021-01-09 01:26:31.023 +03:00 [INF] User "758a4e24-3db0-4604-950e-c27e83720c3a", master_1, Role: Master access procedure implemented
+2021-01-09 01:26:31.060 +03:00 [INF] HTTP GET /Admin/Account/EditAccount responded 200 in 74.8827 ms
+2021-01-09 01:26:31.524 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 4.8544 ms
+2021-01-09 01:26:31.570 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 46.0302 ms
+2021-01-09 01:26:32.072 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 3.6610 ms
+2021-01-09 01:31:14.805 +03:00 [INF] Initiatilizing cofee app server
+2021-01-09 01:31:28.366 +03:00 [INF] HTTP GET /swagger responded 301 in 573.6111 ms
+2021-01-09 01:31:28.831 +03:00 [INF] HTTP GET /swagger/index.html responded 200 in 166.4849 ms
+2021-01-09 01:31:29.229 +03:00 [INF] HTTP GET /swagger/swagger-ui.css responded 200 in 241.0595 ms
+2021-01-09 01:31:29.294 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js responded 200 in 306.9935 ms
+2021-01-09 01:31:29.433 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js responded 200 in 446.5803 ms
+2021-01-09 01:31:30.159 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js.map responded 404 in 13.9778 ms
+2021-01-09 01:31:30.297 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js.map responded 404 in 0.8375 ms
+2021-01-09 01:31:30.868 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js.map responded 404 in 2.7262 ms
+2021-01-09 01:31:30.903 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js.map responded 404 in 1.6503 ms
+2021-01-09 01:31:32.143 +03:00 [INF] HTTP GET /swagger/v1/swagger.json responded 200 in 891.4516 ms
+2021-01-09 01:31:44.137 +03:00 [INF] HTTP GET /Admin/RoasterViews/Roasters responded 302 in 40.1250 ms
+2021-01-09 01:31:49.766 +03:00 [INF] HTTP GET /Login responded 200 in 5584.3920 ms
+2021-01-09 01:32:04.711 +03:00 [INF] HTTP POST /Login responded 200 in 2079.5041 ms
+2021-01-09 01:32:17.393 +03:00 [INF] HTTP POST /Login responded 200 in 211.7932 ms
+2021-01-09 01:32:26.796 +03:00 [INF] HTTP POST /Login responded 302 in 753.4531 ms
+2021-01-09 01:32:27.364 +03:00 [INF] HTTP GET /Home/HomeMaster responded 200 in 528.0099 ms
+2021-01-09 01:32:27.550 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 6.6079 ms
+2021-01-09 01:32:27.564 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 5.6231 ms
+2021-01-09 01:32:27.777 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 18.3804 ms
+2021-01-09 01:32:27.871 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 0.9347 ms
+2021-01-09 01:32:28.011 +03:00 [INF] HTTP GET /favicon.ico responded 404 in 5.6983 ms
+2021-01-09 01:32:53.009 +03:00 [ERR] Error text message: Object reference not set to an instance of an object.
+Stack trace:    at CoffeeMapServer.Services.AccountService.GetAccountByIdAsync(Guid id) in C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer\Services\AccountService.cs:line 27
+
+2021-01-09 01:33:17.288 +03:00 [ERR] HTTP GET /Admin/Account/EditAccount responded 500 in 42024.2838 ms
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at AspNetCore.Pages_Admin_Account_EditAccount.<ExecuteAsync>b__24_1() in C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer\Pages\Admin\Account\EditAccount.cshtml:line 29
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext.GetChildContentAsync(Boolean useCachedResult, HtmlEncoder encoder)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.RenderAtEndOfFormTagHelper.ProcessAsync(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner.<RunAsync>g__Awaited|0_0(Task task, TagHelperExecutionContext executionContext, Int32 i, Int32 count)
+   at AspNetCore.Pages_Admin_Account_EditAccount.ExecuteAsync() in C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer\Pages\Admin\Account\EditAccount.cshtml:line 6
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at CoffeeMapServer.Middlewares.AuthMiddlewares.<>c.<<SupplyResponceWithToken>b__0_0>d.MoveNext() in C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer\Middlewares\AuthMiddlewares.cs:line 15
+--- End of stack trace from previous location where exception was thrown ---
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2021-01-09 01:33:17.781 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at AspNetCore.Pages_Admin_Account_EditAccount.<ExecuteAsync>b__24_1() in C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer\Pages\Admin\Account\EditAccount.cshtml:line 29
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext.GetChildContentAsync(Boolean useCachedResult, HtmlEncoder encoder)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.RenderAtEndOfFormTagHelper.ProcessAsync(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner.<RunAsync>g__Awaited|0_0(Task task, TagHelperExecutionContext executionContext, Int32 i, Int32 count)
+   at AspNetCore.Pages_Admin_Account_EditAccount.ExecuteAsync() in C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer\Pages\Admin\Account\EditAccount.cshtml:line 6
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at CoffeeMapServer.Middlewares.AuthMiddlewares.<>c.<<SupplyResponceWithToken>b__0_0>d.MoveNext() in C:\Users\hrani\Documents\GitHub\CoffeeMap\CoffeeMapServer\CoffeeMapServer\Middlewares\AuthMiddlewares.cs:line 15
+--- End of stack trace from previous location where exception was thrown ---
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-01-09 02:16:07.732 +03:00 [INF] Initiatilizing cofee app server
+2021-01-09 02:22:44.112 +03:00 [INF] Initiatilizing cofee app server
+2021-01-09 02:22:56.096 +03:00 [INF] HTTP GET /swagger responded 301 in 480.0354 ms
+2021-01-09 02:22:56.470 +03:00 [INF] HTTP GET /swagger/index.html responded 200 in 175.2834 ms
+2021-01-09 02:22:56.857 +03:00 [INF] HTTP GET /swagger/swagger-ui.css responded 200 in 235.9618 ms
+2021-01-09 02:22:56.942 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js responded 200 in 321.8314 ms
+2021-01-09 02:22:57.031 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js responded 200 in 410.3509 ms
+2021-01-09 02:22:57.850 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js.map responded 404 in 3.5416 ms
+2021-01-09 02:22:57.945 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js.map responded 404 in 0.7405 ms
+2021-01-09 02:22:58.382 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js.map responded 404 in 3.2958 ms
+2021-01-09 02:22:58.435 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js.map responded 404 in 2.2225 ms
+2021-01-09 02:22:59.545 +03:00 [INF] HTTP GET /swagger/v1/swagger.json responded 200 in 792.6352 ms
+2021-01-09 02:25:13.685 +03:00 [INF] HTTP GET /Admin/RoasterViews/Roasters responded 302 in 43.5756 ms
+2021-01-09 02:25:26.356 +03:00 [INF] HTTP GET /Login responded 200 in 12633.4477 ms
+2021-01-09 02:25:38.079 +03:00 [INF] HTTP POST /Login responded 302 in 3329.1444 ms
+2021-01-09 02:25:38.772 +03:00 [INF] HTTP GET /Home/HomeMaster responded 200 in 648.7512 ms
+2021-01-09 02:25:39.278 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 7.3854 ms
+2021-01-09 02:25:39.299 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 4.8028 ms
+2021-01-09 02:25:39.417 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 1.5856 ms
+2021-01-09 02:25:39.438 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 0.9771 ms
+2021-01-09 02:25:39.698 +03:00 [INF] HTTP GET /favicon.ico responded 404 in 4.8224 ms
+2021-01-09 16:22:52.474 +03:00 [INF] Initiatilizing cofee app server
+2021-01-09 16:23:06.293 +03:00 [INF] HTTP GET /swagger responded 301 in 628.9820 ms
+2021-01-09 16:23:06.755 +03:00 [INF] HTTP GET /swagger/index.html responded 200 in 243.3735 ms
+2021-01-09 16:23:07.452 +03:00 [INF] HTTP GET /swagger/swagger-ui.css responded 200 in 549.4667 ms
+2021-01-09 16:23:07.474 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js responded 200 in 570.9594 ms
+2021-01-09 16:23:07.614 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js responded 200 in 711.0588 ms
+2021-01-09 16:23:08.310 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js.map responded 404 in 5.4564 ms
+2021-01-09 16:23:08.412 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js.map responded 404 in 0.8295 ms
+2021-01-09 16:23:09.002 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js.map responded 404 in 2.6459 ms
+2021-01-09 16:23:09.079 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js.map responded 404 in 2.3366 ms
+2021-01-09 16:23:10.284 +03:00 [INF] HTTP GET /swagger/v1/swagger.json responded 200 in 841.5116 ms
+2021-01-09 16:23:23.194 +03:00 [INF] HTTP GET /Admin/RoasterViews/Roasters responded 302 in 47.2297 ms
+2021-01-09 16:23:26.441 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 16:23:35.889 +03:00 [INF] Executed DbCommand (77ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 16:23:36.667 +03:00 [INF] Executed DbCommand (722ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 16:23:37.211 +03:00 [INF] HTTP GET /Login responded 200 in 14000.9449 ms
+2021-01-09 16:23:59.334 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 16:23:59.352 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 16:23:59.408 +03:00 [INF] Executed DbCommand (42ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 16:24:00.861 +03:00 [INF] Executed DbCommand (198ms) [Parameters=[@__username_0='?' (Size = 4000), @__hashedPassword_1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE ([u].[Login] = @__username_0) AND ([u].[Password] = @__hashedPassword_1)
+2021-01-09 16:24:01.060 +03:00 [INF] HTTP POST /Login responded 200 in 1814.5611 ms
+2021-01-09 16:24:25.992 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 16:24:26.019 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 16:24:26.068 +03:00 [INF] Executed DbCommand (41ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 16:24:26.123 +03:00 [INF] Executed DbCommand (11ms) [Parameters=[@__username_0='?' (Size = 4000), @__hashedPassword_1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE ([u].[Login] = @__username_0) AND ([u].[Password] = @__hashedPassword_1)
+2021-01-09 16:24:26.974 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[@__username_0='?' (Size = 4000), @__hashedPassword_1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE ([u].[Login] = @__username_0) AND ([u].[Password] = @__hashedPassword_1)
+2021-01-09 16:24:27.060 +03:00 [INF] HTTP POST /Login responded 302 in 1199.8089 ms
+2021-01-09 16:24:27.729 +03:00 [INF] HTTP GET /Home/HomeMaster responded 200 in 632.1333 ms
+2021-01-09 16:24:28.384 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 1.1408 ms
+2021-01-09 16:24:28.385 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 3.4418 ms
+2021-01-09 16:24:28.854 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 1.6242 ms
+2021-01-09 16:24:29.164 +03:00 [INF] HTTP GET /favicon.ico responded 404 in 8.1571 ms
+2021-01-09 19:27:32.162 +03:00 [INF] Initiatilizing cofee app server
+2021-01-09 19:27:46.100 +03:00 [INF] HTTP GET /swagger responded 301 in 588.8951 ms
+2021-01-09 19:27:46.556 +03:00 [INF] HTTP GET /swagger/index.html responded 200 in 173.0925 ms
+2021-01-09 19:27:47.015 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js responded 200 in 296.3084 ms
+2021-01-09 19:27:47.018 +03:00 [INF] HTTP GET /swagger/swagger-ui.css responded 200 in 300.2648 ms
+2021-01-09 19:27:47.094 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js responded 200 in 381.5466 ms
+2021-01-09 19:27:47.790 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js.map responded 404 in 8.9940 ms
+2021-01-09 19:27:47.861 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js.map responded 404 in 0.5355 ms
+2021-01-09 19:27:48.263 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js.map responded 404 in 2.6964 ms
+2021-01-09 19:27:48.304 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js.map responded 404 in 2.4291 ms
+2021-01-09 19:27:49.414 +03:00 [INF] HTTP GET /swagger/v1/swagger.json responded 200 in 787.5754 ms
+2021-01-09 19:28:09.518 +03:00 [INF] Initiatilizing cofee app server
+2021-01-09 19:28:20.961 +03:00 [INF] HTTP GET /swagger responded 301 in 291.6985 ms
+2021-01-09 19:28:21.194 +03:00 [INF] HTTP GET /swagger/index.html responded 200 in 116.8779 ms
+2021-01-09 19:28:21.639 +03:00 [INF] HTTP GET /swagger/swagger-ui.css responded 200 in 309.0103 ms
+2021-01-09 19:28:21.652 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js responded 200 in 322.7202 ms
+2021-01-09 19:28:21.657 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js responded 200 in 327.6878 ms
+2021-01-09 19:28:22.345 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js.map responded 404 in 6.9043 ms
+2021-01-09 19:28:22.428 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js.map responded 404 in 0.5135 ms
+2021-01-09 19:28:23.015 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js.map responded 404 in 1.5347 ms
+2021-01-09 19:28:23.051 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js.map responded 404 in 0.8317 ms
+2021-01-09 19:28:24.172 +03:00 [INF] HTTP GET /swagger/v1/swagger.json responded 200 in 848.4643 ms
+2021-01-09 19:28:26.505 +03:00 [INF] HTTP GET /Admin/RoasterViews/Roasters responded 302 in 29.9371 ms
+2021-01-09 19:28:30.489 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:28:35.916 +03:00 [INF] Executed DbCommand (169ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:28:36.392 +03:00 [INF] Executed DbCommand (336ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:28:36.880 +03:00 [INF] HTTP GET /Login responded 200 in 10348.4537 ms
+2021-01-09 19:29:00.525 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:29:00.544 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:29:00.604 +03:00 [INF] Executed DbCommand (52ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:29:00.764 +03:00 [INF] User service layer access in progress...
+2021-01-09 19:29:02.187 +03:00 [INF] Executed DbCommand (267ms) [Parameters=[@__username_0='?' (Size = 4000), @__hashedPassword_1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE ([u].[Login] = @__username_0) AND ([u].[Password] = @__hashedPassword_1)
+2021-01-09 19:29:03.354 +03:00 [INF] User service layer access in progress...
+2021-01-09 19:29:03.460 +03:00 [INF] Executed DbCommand (76ms) [Parameters=[@__username_0='?' (Size = 4000), @__hashedPassword_1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE ([u].[Login] = @__username_0) AND ([u].[Password] = @__hashedPassword_1)
+2021-01-09 19:29:03.544 +03:00 [INF] HTTP POST /Login responded 302 in 3122.8462 ms
+2021-01-09 19:29:04.260 +03:00 [INF] HTTP GET /Home/HomeMaster responded 200 in 646.0670 ms
+2021-01-09 19:29:04.832 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 8.6027 ms
+2021-01-09 19:29:05.017 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 7.4998 ms
+2021-01-09 19:29:05.788 +03:00 [INF] HTTP GET /favicon.ico responded 404 in 0.9601 ms
+2021-01-09 19:29:40.786 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:29:40.816 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:29:40.864 +03:00 [INF] Executed DbCommand (37ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:29:41.361 +03:00 [INF] Executed DbCommand (62ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[Id], [r].[ContactEmail], [r].[ContactNumber], [r].[Description], [r].[InstagramProfileLink], [r].[Name], [r].[OfficeAddressId], [r].[Picture], [r].[TelegramProfileLink], [r].[VkProfileLink], [r].[WebSiteLink], [a].[Id], [a].[AddressStr], [a].[OpeningHours], [a].[RoasterId], [t0].[RoasterId], [t0].[TagId], [t0].[Id], [t0].[TagTitle]
+FROM [Roasters] AS [r]
+LEFT JOIN [Addresses] AS [a] ON [r].[OfficeAddressId] = [a].[Id]
+LEFT JOIN (
+    SELECT [r0].[RoasterId], [r0].[TagId], [t].[Id], [t].[TagTitle]
+    FROM [RoasterTags] AS [r0]
+    INNER JOIN [Tags] AS [t] ON [r0].[TagId] = [t].[Id]
+) AS [t0] ON [r].[Id] = [t0].[RoasterId]
+ORDER BY [r].[Id], [t0].[RoasterId], [t0].[TagId], [t0].[Id]
+2021-01-09 19:29:41.977 +03:00 [INF] HTTP GET /Admin/RoasterViews/Roasters responded 200 in 1335.0822 ms
+2021-01-09 19:29:42.740 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 8.9923 ms
+2021-01-09 19:29:42.881 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 17.7431 ms
+2021-01-09 19:29:43.396 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 4.1271 ms
+2021-01-09 19:29:43.511 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 1.0712 ms
+2021-01-09 19:29:49.515 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:29:49.570 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:29:49.640 +03:00 [INF] Executed DbCommand (47ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:29:49.707 +03:00 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+2021-01-09 19:29:49.797 +03:00 [INF] HTTP GET /Admin/UserViews/Users responded 200 in 348.5533 ms
+2021-01-09 19:29:50.165 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 1.0990 ms
+2021-01-09 19:29:50.208 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 1.2968 ms
+2021-01-09 19:29:50.743 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 3.9873 ms
+2021-01-09 19:29:50.931 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 3.5354 ms
+2021-01-09 19:29:56.396 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:29:56.410 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:29:56.471 +03:00 [INF] Executed DbCommand (52ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:29:56.600 +03:00 [INF] HTTP GET /Admin/UserViews/AddUser responded 200 in 234.6169 ms
+2021-01-09 19:29:56.995 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 0.9191 ms
+2021-01-09 19:29:57.005 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 1.1649 ms
+2021-01-09 19:29:57.473 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 1.0816 ms
+2021-01-09 19:29:57.664 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 3.5239 ms
+2021-01-09 19:30:30.807 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:30:30.826 +03:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:30:30.917 +03:00 [INF] Executed DbCommand (75ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:30:30.958 +03:00 [INF] User service layer access in progress...
+2021-01-09 19:30:30.988 +03:00 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE CAST(0 AS bit) = CAST(1 AS bit)
+2021-01-09 19:30:31.085 +03:00 [INF] Executed DbCommand (45ms) [Parameters=[@__email_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @__email_0
+2021-01-09 19:30:31.478 +03:00 [INF] Executed DbCommand (17ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Users] ([Id], [Email], [Login], [Password], [Role])
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2021-01-09 19:32:00.602 +03:00 [INF] Initiatilizing cofee app server
+2021-01-09 19:32:14.290 +03:00 [INF] HTTP GET /swagger responded 301 in 644.6664 ms
+2021-01-09 19:32:14.632 +03:00 [INF] HTTP GET /swagger/index.html responded 200 in 171.2360 ms
+2021-01-09 19:32:15.102 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js responded 200 in 337.2228 ms
+2021-01-09 19:32:15.103 +03:00 [INF] HTTP GET /swagger/swagger-ui.css responded 200 in 335.4942 ms
+2021-01-09 19:32:15.310 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js responded 200 in 547.4499 ms
+2021-01-09 19:32:16.054 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js.map responded 404 in 6.2339 ms
+2021-01-09 19:32:16.165 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js.map responded 404 in 1.1143 ms
+2021-01-09 19:32:16.742 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js.map responded 404 in 2.9903 ms
+2021-01-09 19:32:16.780 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js.map responded 404 in 1.4837 ms
+2021-01-09 19:32:17.888 +03:00 [INF] HTTP GET /swagger/v1/swagger.json responded 200 in 810.5156 ms
+2021-01-09 19:32:38.271 +03:00 [INF] HTTP GET /Admin/RoasterViews/Roasters responded 302 in 36.3933 ms
+2021-01-09 19:32:41.570 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:32:42.822 +03:00 [INF] Executed DbCommand (82ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:32:43.296 +03:00 [INF] Executed DbCommand (429ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:32:43.594 +03:00 [INF] HTTP GET /Login responded 200 in 5285.6198 ms
+2021-01-09 19:32:51.959 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:32:51.990 +03:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:32:52.045 +03:00 [INF] Executed DbCommand (48ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:32:52.215 +03:00 [INF] User service layer access in progress...
+2021-01-09 19:32:53.715 +03:00 [INF] Executed DbCommand (257ms) [Parameters=[@__username_0='?' (Size = 4000), @__hashedPassword_1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE ([u].[Login] = @__username_0) AND ([u].[Password] = @__hashedPassword_1)
+2021-01-09 19:32:54.462 +03:00 [INF] User service layer access in progress...
+2021-01-09 19:32:54.490 +03:00 [INF] Executed DbCommand (12ms) [Parameters=[@__username_0='?' (Size = 4000), @__hashedPassword_1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE ([u].[Login] = @__username_0) AND ([u].[Password] = @__hashedPassword_1)
+2021-01-09 19:32:54.562 +03:00 [INF] HTTP POST /Login responded 302 in 2722.8619 ms
+2021-01-09 19:32:55.152 +03:00 [INF] HTTP GET /Home/HomeMaster responded 200 in 548.7088 ms
+2021-01-09 19:32:55.652 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 2.7766 ms
+2021-01-09 19:32:55.662 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 1.5142 ms
+2021-01-09 19:32:56.247 +03:00 [INF] HTTP GET /favicon.ico responded 404 in 6.4855 ms
+2021-01-09 19:33:00.495 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:33:00.529 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:33:00.580 +03:00 [INF] Executed DbCommand (40ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:33:00.675 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+2021-01-09 19:33:00.855 +03:00 [INF] HTTP GET /Admin/UserViews/Users responded 200 in 514.3075 ms
+2021-01-09 19:33:01.243 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 4.9109 ms
+2021-01-09 19:33:01.243 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 3.1387 ms
+2021-01-09 19:33:01.741 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 128.8124 ms
+2021-01-09 19:33:01.913 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 1.1368 ms
+2021-01-09 19:33:08.379 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:33:08.392 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:33:08.444 +03:00 [INF] Executed DbCommand (39ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:33:08.480 +03:00 [INF] User service layer access in progress...
+2021-01-09 19:33:08.529 +03:00 [INF] Executed DbCommand (13ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE [u].[Id] = @__id_0
+2021-01-09 19:33:08.893 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[@p0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+DELETE FROM [Users]
+WHERE [Id] = @p0;
+SELECT @@ROWCOUNT;
+2021-01-09 19:33:09.006 +03:00 [INF] Users table has been modified. Deleted user:
+ Id:9075f088-e644-4704-9813-1fa5301f088b
+ Username: admin_1234
+2021-01-09 19:33:09.023 +03:00 [INF] HTTP GET /Admin/UserViews/DeleteUser?id=9075f088-e644-4704-9813-1fa5301f088b responded 302 in 668.3335 ms
+2021-01-09 19:33:09.063 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:33:09.073 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:33:09.092 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:33:09.125 +03:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+2021-01-09 19:33:09.190 +03:00 [INF] HTTP GET /Admin/UserViews/Users responded 200 in 130.8961 ms
+2021-01-09 19:33:09.635 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 1.4434 ms
+2021-01-09 19:33:09.644 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 1.0654 ms
+2021-01-09 19:33:45.843 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:33:45.857 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:33:45.909 +03:00 [INF] Executed DbCommand (44ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:33:46.029 +03:00 [INF] HTTP GET /Admin/UserViews/AddUser responded 200 in 222.4075 ms
+2021-01-09 19:33:46.432 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 1.0452 ms
+2021-01-09 19:33:46.459 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 1.0771 ms
+2021-01-09 19:34:03.738 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:34:03.751 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:34:03.803 +03:00 [INF] Executed DbCommand (42ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:34:03.834 +03:00 [INF] User service layer access in progress...
+2021-01-09 19:34:03.862 +03:00 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE CAST(0 AS bit) = CAST(1 AS bit)
+2021-01-09 19:34:03.955 +03:00 [INF] Executed DbCommand (14ms) [Parameters=[@__email_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @__email_0
+2021-01-09 19:34:04.054 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Users] ([Id], [Email], [Login], [Password], [Role])
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2021-01-09 19:34:04.098 +03:00 [INF] Users table has been modified. Inserted user:
+ Id:f8380915-0bcd-403e-9e3d-6a02083b1882
+ Username: admin_1234
+2021-01-09 19:34:04.108 +03:00 [INF] HTTP POST /Admin/UserViews/AddUser responded 302 in 405.8802 ms
+2021-01-09 19:34:04.180 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:34:04.190 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:34:04.247 +03:00 [INF] Executed DbCommand (44ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:34:04.279 +03:00 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+2021-01-09 19:34:04.356 +03:00 [INF] HTTP GET /Admin/UserViews/Users responded 200 in 181.6280 ms
+2021-01-09 19:34:04.850 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 1.0735 ms
+2021-01-09 19:34:04.860 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 1.2909 ms
+2021-01-09 19:34:05.191 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 4.8696 ms
+2021-01-09 19:34:05.507 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 6.4803 ms
+2021-01-09 19:34:22.482 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:34:22.497 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:34:22.589 +03:00 [INF] Executed DbCommand (74ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:34:22.693 +03:00 [INF] Executed DbCommand (30ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[AddressStr], [a].[OpeningHours], [a].[RoasterId]
+FROM [Addresses] AS [a]
+2021-01-09 19:34:22.880 +03:00 [INF] HTTP GET /Admin/AddressesViews/GetAddresses responded 200 in 456.1489 ms
+2021-01-09 19:34:23.329 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 2.8046 ms
+2021-01-09 19:34:23.329 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 2.8048 ms
+2021-01-09 19:34:24.089 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 3.7718 ms
+2021-01-09 19:34:24.314 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 2.7603 ms
+2021-01-09 19:34:28.053 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:34:28.076 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:34:28.142 +03:00 [INF] Executed DbCommand (50ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:34:28.244 +03:00 [INF] HTTP GET /Admin/AddressesViews/AddAddress responded 200 in 235.2105 ms
+2021-01-09 19:34:28.651 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 0.7726 ms
+2021-01-09 19:34:28.651 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 2.1274 ms
+2021-01-09 19:34:29.061 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 18.2785 ms
+2021-01-09 19:34:29.363 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 4.6988 ms
+2021-01-09 19:34:37.287 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:34:37.317 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:34:37.415 +03:00 [INF] Executed DbCommand (76ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:34:37.459 +03:00 [INF] Address service Layer access in progress...
+2021-01-09 19:34:37.540 +03:00 [INF] Executed DbCommand (23ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Addresses] ([Id], [AddressStr], [OpeningHours], [RoasterId])
+VALUES (@p0, @p1, @p2, @p3);
+2021-01-09 19:34:37.580 +03:00 [INF] Address table has been modified! Address:
+ Id: {entity.Id}
+ Address string: {entity.AddressStr}
+ has been inserted.
+2021-01-09 19:34:37.614 +03:00 [INF] HTTP POST /Admin/AddressesViews/AddAddress responded 302 in 338.6710 ms
+2021-01-09 19:34:37.660 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:34:37.677 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:34:37.749 +03:00 [INF] Executed DbCommand (55ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:34:37.793 +03:00 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[AddressStr], [a].[OpeningHours], [a].[RoasterId]
+FROM [Addresses] AS [a]
+2021-01-09 19:34:37.837 +03:00 [INF] HTTP GET /Admin/AddressesViews/GetAddresses responded 200 in 181.8942 ms
+2021-01-09 19:34:38.281 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 0.9313 ms
+2021-01-09 19:34:38.289 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 0.9051 ms
+2021-01-09 19:35:53.816 +03:00 [INF] Initiatilizing cofee app server
+2021-01-09 19:36:07.922 +03:00 [INF] HTTP GET /swagger responded 301 in 600.5568 ms
+2021-01-09 19:36:08.302 +03:00 [INF] HTTP GET /swagger/index.html responded 200 in 167.8384 ms
+2021-01-09 19:36:08.913 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js responded 200 in 401.5997 ms
+2021-01-09 19:36:08.939 +03:00 [INF] HTTP GET /swagger/swagger-ui.css responded 200 in 427.1934 ms
+2021-01-09 19:36:09.120 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js responded 200 in 608.0015 ms
+2021-01-09 19:36:09.957 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js.map responded 404 in 4.5956 ms
+2021-01-09 19:36:10.043 +03:00 [INF] HTTP GET /swagger/swagger-ui-bundle.js.map responded 404 in 0.6446 ms
+2021-01-09 19:36:10.602 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js.map responded 404 in 28.9758 ms
+2021-01-09 19:36:10.665 +03:00 [INF] HTTP GET /swagger/swagger-ui-standalone-preset.js.map responded 404 in 2.4605 ms
+2021-01-09 19:36:12.059 +03:00 [INF] HTTP GET /swagger/v1/swagger.json responded 200 in 1011.6509 ms
+2021-01-09 19:36:51.633 +03:00 [INF] HTTP GET /Admin/RoasterViews/Roasters responded 302 in 61.3553 ms
+2021-01-09 19:36:54.485 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:36:56.253 +03:00 [INF] Executed DbCommand (93ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:36:56.853 +03:00 [INF] Executed DbCommand (542ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:36:57.176 +03:00 [INF] HTTP GET /Login responded 200 in 5500.8522 ms
+2021-01-09 19:37:18.841 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:37:18.887 +03:00 [INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:37:18.934 +03:00 [INF] Executed DbCommand (38ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:37:19.083 +03:00 [INF] User service layer access in progress...
+2021-01-09 19:37:20.435 +03:00 [INF] Executed DbCommand (244ms) [Parameters=[@__username_0='?' (Size = 4000), @__hashedPassword_1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE ([u].[Login] = @__username_0) AND ([u].[Password] = @__hashedPassword_1)
+2021-01-09 19:37:21.167 +03:00 [INF] User service layer access in progress...
+2021-01-09 19:37:21.196 +03:00 [INF] Executed DbCommand (8ms) [Parameters=[@__username_0='?' (Size = 4000), @__hashedPassword_1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE ([u].[Login] = @__username_0) AND ([u].[Password] = @__hashedPassword_1)
+2021-01-09 19:37:21.263 +03:00 [INF] HTTP POST /Login responded 302 in 2520.5860 ms
+2021-01-09 19:37:21.838 +03:00 [INF] HTTP GET /Home/HomeMaster responded 200 in 528.3745 ms
+2021-01-09 19:37:22.218 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 2.3319 ms
+2021-01-09 19:37:22.411 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 1.0911 ms
+2021-01-09 19:37:23.005 +03:00 [INF] HTTP GET /favicon.ico responded 404 in 5.0755 ms
+2021-01-09 19:37:25.056 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:37:25.094 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:37:25.146 +03:00 [INF] Executed DbCommand (43ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:37:25.701 +03:00 [INF] Executed DbCommand (134ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[Id], [r].[ContactEmail], [r].[ContactNumber], [r].[Description], [r].[InstagramProfileLink], [r].[Name], [r].[OfficeAddressId], [r].[Picture], [r].[TelegramProfileLink], [r].[VkProfileLink], [r].[WebSiteLink], [a].[Id], [a].[AddressStr], [a].[OpeningHours], [a].[RoasterId], [t0].[RoasterId], [t0].[TagId], [t0].[Id], [t0].[TagTitle]
+FROM [Roasters] AS [r]
+LEFT JOIN [Addresses] AS [a] ON [r].[OfficeAddressId] = [a].[Id]
+LEFT JOIN (
+    SELECT [r0].[RoasterId], [r0].[TagId], [t].[Id], [t].[TagTitle]
+    FROM [RoasterTags] AS [r0]
+    INNER JOIN [Tags] AS [t] ON [r0].[TagId] = [t].[Id]
+) AS [t0] ON [r].[Id] = [t0].[RoasterId]
+ORDER BY [r].[Id], [t0].[RoasterId], [t0].[TagId], [t0].[Id]
+2021-01-09 19:37:26.352 +03:00 [INF] HTTP GET /Admin/RoasterViews/Roasters responded 200 in 1440.9520 ms
+2021-01-09 19:37:26.863 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 1.1951 ms
+2021-01-09 19:37:26.891 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 2.1717 ms
+2021-01-09 19:37:54.958 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:37:55.005 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:37:55.082 +03:00 [INF] Executed DbCommand (66ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:37:55.182 +03:00 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[AddressStr], [a].[OpeningHours], [a].[RoasterId]
+FROM [Addresses] AS [a]
+2021-01-09 19:37:55.315 +03:00 [INF] HTTP GET /Admin/AddressesViews/GetAddresses responded 200 in 401.8831 ms
+2021-01-09 19:37:55.869 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 2.0623 ms
+2021-01-09 19:37:55.870 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 3.0629 ms
+2021-01-09 19:37:56.392 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 8.8698 ms
+2021-01-09 19:37:56.789 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 6.6538 ms
+2021-01-09 19:38:02.569 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:38:02.581 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:38:02.643 +03:00 [INF] Executed DbCommand (47ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:38:02.689 +03:00 [INF] Address service Layer access in progress...
+2021-01-09 19:38:02.814 +03:00 [INF] Executed DbCommand (29ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AddressStr], [a].[OpeningHours], [a].[RoasterId]
+FROM [Addresses] AS [a]
+WHERE [a].[Id] = @__id_0
+2021-01-09 19:38:03.017 +03:00 [INF] Executed DbCommand (23ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[Id], [r].[ContactEmail], [r].[ContactNumber], [r].[Description], [r].[InstagramProfileLink], [r].[Name], [r].[OfficeAddressId], [r].[Picture], [r].[TelegramProfileLink], [r].[VkProfileLink], [r].[WebSiteLink], [a].[Id], [a].[AddressStr], [a].[OpeningHours], [a].[RoasterId], [t0].[RoasterId], [t0].[TagId], [t0].[Id], [t0].[TagTitle]
+FROM [Roasters] AS [r]
+LEFT JOIN [Addresses] AS [a] ON [r].[OfficeAddressId] = [a].[Id]
+LEFT JOIN (
+    SELECT [r0].[RoasterId], [r0].[TagId], [t].[Id], [t].[TagTitle]
+    FROM [RoasterTags] AS [r0]
+    INNER JOIN [Tags] AS [t] ON [r0].[TagId] = [t].[Id]
+) AS [t0] ON [r].[Id] = [t0].[RoasterId]
+WHERE [a].[Id] = @__id_0
+ORDER BY [r].[Id], [t0].[RoasterId], [t0].[TagId], [t0].[Id]
+2021-01-09 19:38:03.563 +03:00 [INF] Executed DbCommand (172ms) [Parameters=[@p0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+DELETE FROM [Addresses]
+WHERE [Id] = @p0;
+SELECT @@ROWCOUNT;
+2021-01-09 19:38:03.730 +03:00 [INF] Address table has been modified. Address:
+ Id: e5dda81e-d8db-4b26-b32d-2598ae133c55
+ Address string: Москва, ул.Ворошилова 134, к.9
+ has been deleted.
+2021-01-09 19:38:03.757 +03:00 [INF] HTTP GET /Admin/AddressesViews/DeleteAddress?id=e5dda81e-d8db-4b26-b32d-2598ae133c55 responded 302 in 1210.9631 ms
+2021-01-09 19:38:03.819 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:38:03.847 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:38:03.937 +03:00 [INF] Executed DbCommand (75ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:38:04.027 +03:00 [INF] Executed DbCommand (30ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[AddressStr], [a].[OpeningHours], [a].[RoasterId]
+FROM [Addresses] AS [a]
+2021-01-09 19:38:04.093 +03:00 [INF] HTTP GET /Admin/AddressesViews/GetAddresses responded 200 in 293.7530 ms
+2021-01-09 19:38:04.539 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 1.0174 ms
+2021-01-09 19:38:04.541 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 0.9466 ms
+2021-01-09 19:38:04.931 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 5.9988 ms
+2021-01-09 19:38:05.259 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 2.8803 ms
+2021-01-09 19:38:25.784 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:38:25.804 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:38:25.856 +03:00 [INF] Executed DbCommand (43ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:38:25.941 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [u].[Id], [u].[Email], [u].[Login], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+2021-01-09 19:38:26.069 +03:00 [INF] HTTP GET /Admin/UserViews/Users responded 200 in 320.4072 ms
+2021-01-09 19:38:26.529 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 10.0871 ms
+2021-01-09 19:38:26.624 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 0.8624 ms
+2021-01-09 19:38:26.973 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 5.6975 ms
+2021-01-09 19:38:27.194 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 1.5443 ms
+2021-01-09 19:38:28.563 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:38:28.578 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:38:28.648 +03:00 [INF] Executed DbCommand (56ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:38:28.714 +03:00 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[TagTitle]
+FROM [Tags] AS [t]
+2021-01-09 19:38:28.799 +03:00 [INF] HTTP GET /Admin/TagViews/Tags responded 200 in 255.1042 ms
+2021-01-09 19:38:29.145 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 1.3086 ms
+2021-01-09 19:38:29.197 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 0.8539 ms
+2021-01-09 19:38:29.630 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 0.9853 ms
+2021-01-09 19:38:29.862 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 0.8344 ms
+2021-01-09 19:38:34.583 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:38:34.601 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:38:34.673 +03:00 [INF] Executed DbCommand (56ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:38:34.768 +03:00 [INF] Executed DbCommand (28ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[Id], [r].[ContactEmail], [r].[ContactNumber], [r].[Description], [r].[InstagramProfileLink], [r].[Name], [r].[OfficeAddressId], [r].[Picture], [r].[TelegramProfileLink], [r].[VkProfileLink], [r].[WebSiteLink], [a].[Id], [a].[AddressStr], [a].[OpeningHours], [a].[RoasterId], [t0].[RoasterId], [t0].[TagId], [t0].[Id], [t0].[TagTitle]
+FROM [Roasters] AS [r]
+LEFT JOIN [Addresses] AS [a] ON [r].[OfficeAddressId] = [a].[Id]
+LEFT JOIN (
+    SELECT [r0].[RoasterId], [r0].[TagId], [t].[Id], [t].[TagTitle]
+    FROM [RoasterTags] AS [r0]
+    INNER JOIN [Tags] AS [t] ON [r0].[TagId] = [t].[Id]
+) AS [t0] ON [r].[Id] = [t0].[RoasterId]
+ORDER BY [r].[Id], [t0].[RoasterId], [t0].[TagId], [t0].[Id]
+2021-01-09 19:38:34.895 +03:00 [INF] HTTP GET /Admin/RoasterViews/Roasters responded 200 in 322.7039 ms
+2021-01-09 19:38:35.254 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 7.6830 ms
+2021-01-09 19:38:35.263 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 2.2950 ms
+2021-01-09 19:38:35.711 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 2.6714 ms
+2021-01-09 19:38:35.847 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 3.4387 ms
+2021-01-09 19:38:40.271 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:38:40.295 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:38:40.340 +03:00 [INF] Executed DbCommand (36ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:38:40.550 +03:00 [INF] HTTP GET /Admin/RoasterViews/AddRoaster responded 200 in 328.2243 ms
+2021-01-09 19:38:40.871 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 2.9347 ms
+2021-01-09 19:38:40.894 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 0.9182 ms
+2021-01-09 19:38:41.496 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 1.8079 ms
+2021-01-09 19:38:41.649 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 1.6767 ms
+2021-01-09 19:39:56.447 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:39:56.458 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:39:56.510 +03:00 [INF] Executed DbCommand (42ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:39:56.589 +03:00 [INF] Roaster admin service layer access in progress...
+2021-01-09 19:39:56.783 +03:00 [INF] Executed DbCommand (76ms) [Parameters=[@__roasterName_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[ContactEmail], [t].[ContactNumber], [t].[Description], [t].[InstagramProfileLink], [t].[Name], [t].[OfficeAddressId], [t].[Picture], [t].[TelegramProfileLink], [t].[VkProfileLink], [t].[WebSiteLink], [t].[Id0], [t].[AddressStr], [t].[OpeningHours], [t].[RoasterId], [t1].[RoasterId], [t1].[TagId], [t1].[Id], [t1].[TagTitle]
+FROM (
+    SELECT TOP(1) [r].[Id], [r].[ContactEmail], [r].[ContactNumber], [r].[Description], [r].[InstagramProfileLink], [r].[Name], [r].[OfficeAddressId], [r].[Picture], [r].[TelegramProfileLink], [r].[VkProfileLink], [r].[WebSiteLink], [a].[Id] AS [Id0], [a].[AddressStr], [a].[OpeningHours], [a].[RoasterId]
+    FROM [Roasters] AS [r]
+    LEFT JOIN [Addresses] AS [a] ON [r].[OfficeAddressId] = [a].[Id]
+    WHERE [r].[Name] = @__roasterName_0
+) AS [t]
+LEFT JOIN (
+    SELECT [r0].[RoasterId], [r0].[TagId], [t0].[Id], [t0].[TagTitle]
+    FROM [RoasterTags] AS [r0]
+    INNER JOIN [Tags] AS [t0] ON [r0].[TagId] = [t0].[Id]
+) AS [t1] ON [t].[Id] = [t1].[RoasterId]
+ORDER BY [t].[Id], [t1].[RoasterId], [t1].[TagId], [t1].[Id]
+2021-01-09 19:39:56.894 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[@__title_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[TagTitle]
+FROM [Tags] AS [t]
+WHERE [t].[TagTitle] = @__title_0
+2021-01-09 19:39:56.917 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__title_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[Id], [t].[TagTitle]
+FROM [Tags] AS [t]
+WHERE [t].[TagTitle] = @__title_0
+2021-01-09 19:40:01.858 +03:00 [INF] Executed DbCommand (11ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Addresses] ([Id], [AddressStr], [OpeningHours], [RoasterId])
+VALUES (@p0, @p1, @p2, @p3);
+2021-01-09 19:40:01.894 +03:00 [INF] Executed DbCommand (18ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Tags] ([Id], [TagTitle])
+VALUES (@p0, @p1);
+2021-01-09 19:40:03.177 +03:00 [INF] Executed DbCommand (1,229ms) [Parameters=[@p2='?' (DbType = Guid), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Guid), @p9='?' (Size = -1) (DbType = Binary), @p10='?' (Size = 4000), @p11='?' (Size = 4000), @p12='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Roasters] ([Id], [ContactEmail], [ContactNumber], [Description], [InstagramProfileLink], [Name], [OfficeAddressId], [Picture], [TelegramProfileLink], [VkProfileLink], [WebSiteLink])
+VALUES (@p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12);
+2021-01-09 19:40:03.217 +03:00 [INF] Executed DbCommand (10ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [RoasterTags] ([RoasterId], [TagId])
+VALUES (@p0, @p1);
+2021-01-09 19:40:03.238 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [RoasterTags] ([RoasterId], [TagId])
+VALUES (@p0, @p1);
+2021-01-09 19:40:03.287 +03:00 [INF] Roaster, Tags, RoasterTags, Addresses tables have been modified. Inserted roaster:
+ Id: ac7e6df3-e411-44ec-b6ff-6e845bbb85ad
+ Roaster name: new roaster 2
+2021-01-09 19:40:03.312 +03:00 [INF] HTTP POST /Admin/RoasterViews/AddRoaster responded 302 in 7159.3992 ms
+2021-01-09 19:40:03.375 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'CoffeeDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-01-09 19:40:03.399 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2021-01-09 19:40:03.455 +03:00 [INF] Executed DbCommand (45ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2021-01-09 19:40:03.511 +03:00 [INF] Executed DbCommand (29ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[Id], [r].[ContactEmail], [r].[ContactNumber], [r].[Description], [r].[InstagramProfileLink], [r].[Name], [r].[OfficeAddressId], [r].[Picture], [r].[TelegramProfileLink], [r].[VkProfileLink], [r].[WebSiteLink], [a].[Id], [a].[AddressStr], [a].[OpeningHours], [a].[RoasterId], [t0].[RoasterId], [t0].[TagId], [t0].[Id], [t0].[TagTitle]
+FROM [Roasters] AS [r]
+LEFT JOIN [Addresses] AS [a] ON [r].[OfficeAddressId] = [a].[Id]
+LEFT JOIN (
+    SELECT [r0].[RoasterId], [r0].[TagId], [t].[Id], [t].[TagTitle]
+    FROM [RoasterTags] AS [r0]
+    INNER JOIN [Tags] AS [t] ON [r0].[TagId] = [t].[Id]
+) AS [t0] ON [r].[Id] = [t0].[RoasterId]
+ORDER BY [r].[Id], [t0].[RoasterId], [t0].[TagId], [t0].[Id]
+2021-01-09 19:40:04.012 +03:00 [INF] HTTP GET /Admin/RoasterViews/Roasters responded 200 in 644.9970 ms
+2021-01-09 19:40:04.377 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 1.8629 ms
+2021-01-09 19:40:04.429 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 0.6605 ms
+2021-01-09 19:40:04.930 +03:00 [INF] HTTP GET /bower_components/jquery-slimscroll/jquery.slimscroll.js responded 404 in 3.2406 ms
+2021-01-09 19:40:05.225 +03:00 [INF] HTTP GET /bower_components/fastclick/lib/fastclick.js responded 404 in 2.3471 ms

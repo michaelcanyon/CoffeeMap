@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Serilog;
 
 namespace CoffeeMapServer
 {
@@ -69,6 +70,7 @@ namespace CoffeeMapServer
             app.UseRouting();
             app.UseCors(origin => origin.AllowAnyOrigin());
             app.UseStaticFiles();
+            app.UseSerilogRequestLogging();
             app.UnauthorizedLogin();
 
             // prepare token to insert into cookie
@@ -92,7 +94,6 @@ namespace CoffeeMapServer
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
             });
-
         }
     }
 }

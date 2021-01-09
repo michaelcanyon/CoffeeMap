@@ -13,9 +13,9 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
     {
         private readonly IRoasterAdminService _roasterAdminService;
         public IList<Roaster> Roasters { get; set; }
-        public IList<RoasterTag> RoasterTags { get; set; }
+        //public IList<RoasterTag> RoasterTags { get; set; }
 
-        public IList<Tag> Tags { get; set; }
+        //public IList<Tag> Tags { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public string IdFilter { get; set; }
@@ -24,7 +24,7 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
         public string NameFilter { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public string OfficeAddressIdFilter { get; set; }
+        public string OfficeAddressFilter { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public string ContactNumberFilter { get; set; }
@@ -56,15 +56,16 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
         {
             Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
             Roasters = await _roasterAdminService.FetchRoastersAsync();
-            RoasterTags = await _roasterAdminService.FetchRoasterTagsAsync();
-            Tags = await _roasterAdminService.FetchTagsAsync();
+            //RoasterTags = await _roasterAdminService.FetchRoasterTagsAsync();
+            //Tags = await _roasterAdminService.FetchTagsAsync();
             // TODO: подумать над бизнес-сценариями
             if (!string.IsNullOrEmpty(IdFilter))
                 Roasters = Roasters.Where(s => s.Id.Equals(IdFilter)).ToList();
             if (!string.IsNullOrEmpty(NameFilter))
                 Roasters = Roasters.Where(s => s.Name.Contains(NameFilter)).ToList();
-            if (!string.IsNullOrEmpty(OfficeAddressIdFilter))
-                Roasters = Roasters.Where(s => s.OfficeAddressId.Equals(OfficeAddressIdFilter)).ToList();
+            // TODO: fix this if it won't work
+            if (!string.IsNullOrEmpty(OfficeAddressFilter))
+                Roasters = Roasters.Where(s => s.OfficeAddress.AddressStr.Contains(OfficeAddressFilter)).ToList();
             if (!string.IsNullOrEmpty(ContactNumberFilter))
                 Roasters = Roasters.Where(s => s.ContactNumber.Contains(ContactNumberFilter)).ToList();
             if (!string.IsNullOrEmpty(ContactEmailFilter))
@@ -75,17 +76,20 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
                 Roasters = Roasters.Where(s => s.VkProfileLink.Contains(VkProfileFilter)).ToList();
             if (!string.IsNullOrEmpty(TelegramProfileFilter))
                 Roasters = Roasters.Where(s => s.TelegramProfileLink.Contains(TelegramProfileFilter)).ToList();
-            //TODO: Check if following codelines affect on results
             if (!string.IsNullOrEmpty(TagString))
-            {
-                var tagsArr = TagString.Split(" ");
-                foreach (var i in tagsArr)
-                {
-                    if (i == "")
-                        continue;
-                    Tags = Tags.Where(tag => tag.TagTitle.Contains(i)).ToList();
-                }
-            }
+                Roasters = Roasters.SelectMany(r => r.RoasterTags, (r, t) => new { roast = r, tagp = t }).Where(pa => pa.tagp.Tag.TagTitle.Contains(TagString)).Select(pa => pa.roast).ToList();
+
+            //TODO: Check if following codelines affect on results
+            //if (!string.IsNullOrEmpty(TagString))
+            //{
+            //    var tagsArr = TagString.Split(" ");
+            //    foreach (var i in tagsArr)
+            //    {
+            //        if (i == "")
+            //            continue;
+            //        Tags = Tags.Where(tag => tag.TagTitle.Contains(i)).ToList();
+            //    }
+            //}
         }
 
     }

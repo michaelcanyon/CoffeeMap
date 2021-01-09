@@ -38,7 +38,6 @@ namespace CoffeeMapServer.builders
             => Roaster.New(roaster.Name,
                            roaster.ContactNumber,
                            roaster.ContactEmail,
-                           addressId,
                            roaster.WebSiteLink,
                            roaster.VkProfileLink,
                            roaster.InstagramProfileLink,

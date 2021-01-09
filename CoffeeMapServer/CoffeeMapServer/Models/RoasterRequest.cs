@@ -4,9 +4,11 @@ namespace CoffeeMapServer.Models
 {
     public class RoasterRequest : Entity
     {
+
         public Roaster Roaster { get; set; }
 
         public Address Address { get; set; }
+
 
         public RoasterRequest() { }
 

@@ -62,7 +62,7 @@
             <input type="text" id="email" class="form-control" asp-for="@Model.Roaster.ContactEmail">
             <label>Tags:</label>
             <ul id="tagList">
-                @if (Model.tagsList.Count > 0)
+                @if (Model.tagsList.Count() > 0)
                 {
                     foreach (var i in Model.tagsList)
                     {
@@ -78,7 +78,9 @@
             <button type="button" onclick="DeleteTag()">Delete Tag</button>
             <br>
             <label for="address">addressId</label>
-            <input type="text" class="form-control" asp-for="@Model.Roaster.OfficeAddressId" required>
+
+            <input type="text" class="form-control" asp-for="@Model.Roaster.OfficeAddress.Id" required>
+            <input type="hidden" value="@Model.Roaster.OfficeAddress" asp-for="@Model.Roaster.OfficeAddress" required>
             <label for="website">Web-site link</label>
             <input type="text" pattern="[A-Za-zА-Яа-яЁё]{,}.[A-Za-zА-Яа-яЁё]{,10}" class="form-control" asp-for="@Model.Roaster.WebSiteLink">
             <label for="instagram">instagram link</label>

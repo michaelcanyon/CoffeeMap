@@ -5,11 +5,13 @@ namespace CoffeeMapServer.Models
 {
     public class RoasterTag
     {
-        [Required]
         public Guid RoasterId { get; set; }
 
-        [Required]
+        public Roaster Roaster { get; set; }
+
         public Guid TagId { get; set; }
+
+        public Tag Tag { get; set; }
 
         public RoasterTag(Guid roasterId,
                           Guid tagId)

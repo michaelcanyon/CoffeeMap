@@ -33,7 +33,6 @@ namespace CoffeeMapServer.Pages.Admin.RoasterRequestViews
         {
             try
             {
-                //TODO: following code illustrates errors handling 
                 request.Roaster.Picture = builders.BytePictureBuilder.GetBytePicture(Picture);
                 /*var result =*/
                 await _roasterRequestService.UpdateRoasterRequestAsync(request);

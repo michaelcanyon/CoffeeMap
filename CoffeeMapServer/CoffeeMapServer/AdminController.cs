@@ -49,7 +49,6 @@ namespace CoffeeMapServer
                 var roaster1 = Roaster.New(roaster.Name,
                                            roaster.ContactNumber,
                                            roaster.ContactEmail,
-                                           roaster.OfficeAddressId,
                                            roaster.WebSiteLink,
                                            roaster.VkProfileLink,
                                            roaster.InstagramProfileLink,

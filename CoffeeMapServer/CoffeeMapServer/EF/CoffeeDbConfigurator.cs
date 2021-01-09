@@ -5,7 +5,6 @@ namespace CoffeeMapServer.EF
 {
     public partial class CoffeeDbContext
     {
-        //TODO: don't forget to fix nullable fields in argument entitites
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Address>()
@@ -30,15 +29,6 @@ namespace CoffeeMapServer.EF
                 .Property(p => p.ContactNumber)
                 .IsRequired();
             modelBuilder.Entity<Roaster>()
-                .Property(p => p.OfficeAddressId)
-                .HasDefaultValue(null);
-            modelBuilder.Entity<Roaster>()
-                .Property(p => p.OfficeAddress)
-                .HasDefaultValue(null);
-            modelBuilder.Entity<Roaster>()
-                .Property(p => p.InstagramProfileLink)
-                .HasDefaultValue("");
-            modelBuilder.Entity<Roaster>()
                 .Property(p => p.TelegramProfileLink)
                 .HasDefaultValue("");
             modelBuilder.Entity<Roaster>()
@@ -48,13 +38,10 @@ namespace CoffeeMapServer.EF
                 .Property(p => p.WebSiteLink)
                 .HasDefaultValue("");
 
-            
-            modelBuilder.Entity<RoasterRequest>()
-                .Property(p => p.Address)
-                .IsRequired();
-            modelBuilder.Entity<RoasterRequest>()
-                .Property(p => p.Roaster)
-                .IsRequired();
+            modelBuilder.Entity<Roaster>()
+                .HasOne(r => r.OfficeAddress)
+                .WithMany(a => a.Roasters);
+
             modelBuilder.Entity<RoasterRequest>()
                 .Property(p => p.TagString)
                 .HasDefaultValue("");
@@ -79,37 +66,16 @@ namespace CoffeeMapServer.EF
 
             modelBuilder.Entity<RoasterTag>()
                 .HasKey(rt => new { rt.RoasterId, rt.TagId });
+            modelBuilder.Entity<RoasterTag>()
+                .HasOne(r => r.Roaster)
+                .WithMany(e => e.RoasterTags)
+                .HasForeignKey(r => r.RoasterId);
+            modelBuilder.Entity<RoasterTag>()
+                .HasOne(t => t.Tag)
+                .WithMany(e => e.RoasterTags)
+                .HasForeignKey(t => t.TagId);
 
-            modelBuilder.Entity<Roaster>()
-                .HasOne(e => e.OfficeAddress)
-                .WithOne()
-                .HasForeignKey<Roaster>(e => e.OfficeAddressId)
-                .OnDelete(DeleteBehavior.Restrict);
 
-            //modelBuilder.Entity<Address>()
-            //    .HasKey(e => e.Id);
-
-            //modelBuilder.Entity<Roaster>()
-            //    .HasKey(e => e.Id);
-
-            //modelBuilder.Entity<Tag>()
-            //    .HasKey(e => e.Id);
-
-            //modelBuilder.Entity<RoasterRequest>()
-            //    .HasKey(e => e.Id);
-
-            //modelBuilder.Entity<User>()
-            //    .HasKey(e => e.Id);
-
-            //modelBuilder.Entity<RoasterTag>()
-            //    .HasOne(rt => rt.Roaster)
-            //    .WithMany(rt => rt.RoasterTags)
-            //    .HasForeignKey(rt => rt.RoasterId);
-
-            //modelBuilder.Entity<RoasterTag>()
-            //    .HasOne(rt => rt.Tag)
-            //    .WithMany(rt => rt.RoasterTags)
-            //    .HasForeignKey(rt => rt.TagId);
         }
     }
 }

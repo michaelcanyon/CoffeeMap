@@ -1,12 +1,15 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace CoffeeMapServer.Models
 {
     public class Tag : Entity
     {
-        [Required]
         public string TagTitle { get; set; }
+
+        public ICollection<RoasterTag> RoasterTags { get; set; }
 
         public Tag() { }
 
