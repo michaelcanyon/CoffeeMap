@@ -16,16 +16,16 @@ namespace CoffeeMapServer.Pages.Admin.UserViews
     {
         private readonly IUserService _userService;
 
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public string IdFilter { get; set; }
 
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public string LoginFilter { get; set; }
 
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public string EmailFilter { get; set; }
 
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public string RoleFilter { get; set; }
 
         public IList<User> Users { get; set; }
@@ -33,17 +33,25 @@ namespace CoffeeMapServer.Pages.Admin.UserViews
         public UsersModel(IUserService userService)
             => _userService = userService ?? throw new ArgumentNullException(nameof(IUserService));
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            Users = await _userService.FetchUsersAsync();
-            if (!string.IsNullOrEmpty(IdFilter))
-                Users = Users.Where(user => user.Id.Equals(Convert.ToInt32(IdFilter))).ToList();
-            if (!string.IsNullOrEmpty(LoginFilter))
-                Users = Users.Where(user => user.Login.Contains(LoginFilter)).ToList();
-            if (!string.IsNullOrEmpty(EmailFilter))
-                Users = Users.Where(user => user.Email.Contains(EmailFilter)).ToList();
-            if (!string.IsNullOrEmpty(RoleFilter))
-                Users = Users.Where(user => user.Role.Equals(RoleFilter)).ToList();
+            try
+            {
+                Users = await _userService.FetchUsersAsync();
+                if (!string.IsNullOrEmpty(IdFilter))
+                    Users = Users.Where(user => user.Id.ToString().Equals(Convert.ToString(IdFilter))).ToList();
+                if (!string.IsNullOrEmpty(LoginFilter))
+                    Users = Users.Where(user => user.Login.Contains(LoginFilter)).ToList();
+                if (!string.IsNullOrEmpty(EmailFilter))
+                    Users = Users.Where(user => user.Email.Contains(EmailFilter)).ToList();
+                if (!string.IsNullOrEmpty(RoleFilter))
+                    Users = Users.Where(user => user.Role.Equals(RoleFilter)).ToList();
+                return Page();
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
     }
 }

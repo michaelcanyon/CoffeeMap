@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{StatusCode}"
 @model CoffeeMapServer.Pages.Admin.UserViews.AddUserModel
 @section scripts{
     <script type="text/javascript" src="~/dist/jquery-3.5.1.js"></script>
@@ -30,12 +30,12 @@
         </div>
         <button type="submit" class="btn btn-primary">Create</button>
     </form>
-    @if (Model.ErrorStatusCode.Equals(601))
+    @if (Model.ErrorStatusCode.Equals("601"))
     {
-        <span style="color:red;">Such login is already exist</span>
+        <span style="color:red;">Such user is already exist</span>
     }
-    else if (Model.ErrorStatusCode.Equals(602))
+    else if (Model.ErrorStatusCode.Equals("602"))
     {
-        <span style="color:red;">Such email is already exist</span>
+        <span style="color:red;">Such email is already registered</span>
     }
 </section>

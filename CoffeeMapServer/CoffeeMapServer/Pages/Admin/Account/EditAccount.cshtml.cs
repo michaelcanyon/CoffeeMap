@@ -22,18 +22,19 @@ namespace CoffeeMapServer.Pages.Admin.Account
 
         public string Role { get; set; }
 
-        public async Task OnGetAsync()
+        [BindProperty]
+        public string RStatusCode { get; set; }
+
+        public async Task<IActionResult> OnGetAsync()
         {
-            try
-            {
+            
                 Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
                 var id = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.id"].ToString();
                 _User = await _accountService.GetAccountByIdAsync(Guid.Parse(id));
-            }
-            catch { 
-                    //RedirectToPage("LoginCorrupted")
-            }
-            }
+            if (_User == null)
+                return BadRequest();
+            return Page(); 
+        }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -41,8 +42,13 @@ namespace CoffeeMapServer.Pages.Admin.Account
             if (CoffeeMapServer.Encryptions.Sha1Hash.GetHash(_User.Password) != getUser.Password)
                 return RedirectToPage("EditAccount");
             var passwordHash = Encryptions.Sha1Hash.GetHash(NewPassword);
-            await _accountService.UpdateAccountAsync(getUser, passwordHash, _User.Email);
-            return getUser.Role == "Master" ? RedirectToPage("/Home/HomeMaster") : RedirectToPage("/Home/Home");
+           var respCode= await _accountService.UpdateAccountAsync(getUser, passwordHash, _User.Email);
+            if (respCode.Equals(0))
+                return getUser.Role == "Master" ? RedirectToPage("/Home/HomeMaster") : RedirectToPage("/Home/Home");
+            else if (respCode.Equals(-1))
+                return Redirect("601");
+            else
+                return BadRequest();
         }
     }
 }

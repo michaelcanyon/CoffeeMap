@@ -14,6 +14,9 @@ namespace CoffeeMapServer.Pages.Admin.AddressesViews
         [BindProperty]
         public Address Address { get; set; }
 
+        [BindProperty]
+        public string RStatusCode { get; set; }
+
         public string Role { get; set; }
 
         public AddAddressModel(IAddressService addressService)
@@ -24,12 +27,16 @@ namespace CoffeeMapServer.Pages.Admin.AddressesViews
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (Address.OpeningHours == null)
-                Address.OpeningHours = "none";
-
-            await _addressService.AddAddressAsync(Address);
-            return RedirectToPage("GetAddresses");
-
+           var respCode= await _addressService.AddAddressAsync(Address);
+            if (respCode == 0)
+                return RedirectToPage("GetAddresses");
+            else if (respCode == -1)
+                return Redirect("601");
+            else 
+                return StatusCode(400);
         }
+
+        public void OnGetAsync(string StatusCode)
+            => RStatusCode = StatusCode;
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using CoffeeMapServer.Models;
 using CoffeeMapServer.Services.Interfaces.Admin;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CoffeeMapServer.Pages.Admin.TagViews
@@ -20,11 +21,19 @@ namespace CoffeeMapServer.Pages.Admin.TagViews
         public TagsModel(ITagService tagService)
             => _tagService = tagService ?? throw new ArgumentNullException(nameof(ITagService));
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
-            Nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.nickname"].ToString();
-            Tags = await _tagService.FetchTagsListAsync();
+            try
+            {
+                Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
+                Nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.nickname"].ToString();
+                Tags = await _tagService.FetchTagsListAsync();
+                return Page();
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
     }
 }

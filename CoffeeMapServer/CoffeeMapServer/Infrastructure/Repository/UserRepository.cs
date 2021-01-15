@@ -30,6 +30,9 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         public async Task<User> GetSingleAsync(string username, string hashedPassword)
             => await Context.Users.FirstOrDefaultAsync(node => (node.Login == username && node.Password == hashedPassword));
 
+        public async Task<User> GetSingleAsync(string username)
+            => await Context.Users.FirstOrDefaultAsync(node => (node.Login == username));
+
         public async Task<User> GetSingleByMailAsync(string email)
             => await Context.Users.FirstOrDefaultAsync(node => node.Email == email);
 

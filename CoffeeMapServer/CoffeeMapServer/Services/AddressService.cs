@@ -23,26 +23,27 @@ namespace CoffeeMapServer.Services
             _roasterRepository = roasterRepository ?? throw new ArgumentNullException(nameof(roasterRepository));
         }
 
-        public async Task AddAddressAsync(Address entity)
+        public async Task<int> AddAddressAsync(Address entity)
         {
             try
             {
                 _logger.LogInformation("Address service Layer access in progress...");
+                var dbAddress= _addressRepository.GetSingleAsync(entity.AddressStr);
+                if (dbAddress != null)
+                    return -1;
                 _addressRepository.Add(entity);
                 await _addressRepository.SaveChangesAsync();
                 _logger.LogInformation($"Address table has been modified! Address:\n Id: {entity.Id}\n Address string: {entity.AddressStr}\n has been inserted.");
+                return 0;
             }
             catch (Exception e)
             {
-                var em = new StringBuilder();
-                em.AppendLine($"Address service layer error occured! Error message: {e.Message}");
-                em.AppendLine($"Stack trace: {e.StackTrace}");
-                _logger.LogError(em.ToString());
-
+                _logger.LogError($"Address service layer error occured! Error message: {e.Message}");
+                return -2;
             }
         }
 
-        public async Task DeleteAddressAsync(Guid id)
+        public async Task<int> DeleteAddressAsync(Guid id)
         {
             try
             {
@@ -59,13 +60,12 @@ namespace CoffeeMapServer.Services
 
                 await _roasterRepository.SaveChangesAsync();
                 _logger.LogInformation($"Address table has been modified. Address:\n Id: {address.Id}\n Address string: {address.AddressStr}\n has been deleted.");
+                return 0;
             }
             catch (Exception e)
             {
-                var em = new StringBuilder();
-                em.AppendLine($"Address service layer error occured! Error message: {e.Message}");
-                em.AppendLine($"Stack trace: {e.StackTrace}");
-                _logger.LogError(em.ToString());
+                _logger.LogError("Address service layer error occured! Error message:" + e.Message);
+                return -1;
             }
         }
 
@@ -75,21 +75,23 @@ namespace CoffeeMapServer.Services
         public async Task<Address> GetSingleAddressByIdAsync(Guid id)
             => await _addressRepository.GetSingleAsync(id);
 
-        public async Task UpdateAddressAsync(Address entity)
+        public async Task<int> UpdateAddressAsync(Address entity)
         {
             try
             {
                 _logger.LogInformation("Address service Layer access in progress...");
+                var address = _addressRepository.GetSingleAsync(entity.AddressStr);
+                if (address != null)
+                    return -1;
                 _addressRepository.Update(entity);
                 await _addressRepository.SaveChangesAsync();
                 _logger.LogInformation($"Address Table has been modified. Address:\n Address Id: {entity.Id} \n Address string: {entity.AddressStr}\n has been added.");
+                return 0;
             }
             catch(Exception e)
             {
-                var em = new StringBuilder();
-                em.AppendLine($"Address service layer error occured! Error message: {e.Message}");
-                em.AppendLine($"Stack trace: {e.StackTrace}");
-                _logger.LogError(em.ToString());
+                _logger.LogError("Address service layer error occured! Error message:" +e.Message);
+                return -2;
             }
         }
     }

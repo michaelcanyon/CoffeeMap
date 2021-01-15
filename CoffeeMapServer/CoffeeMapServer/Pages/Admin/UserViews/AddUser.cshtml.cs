@@ -20,15 +20,22 @@ namespace CoffeeMapServer.Pages.Admin.UserViews
         [BindProperty]
         public User Ruser { get; set; }
 
-        public int ErrorStatusCode { get; set; }
+        public string ErrorStatusCode { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            await _userService.AddUserAsync(Ruser);
-            return RedirectToPage("Users");
+            var i = await _userService.AddUserAsync(Ruser);
+            if (i == 0)
+                return RedirectToPage("Users");
+            else if (i == 601 || i == 602)
+                return Redirect(i.ToString());
+            else
+                return BadRequest();
         }
 
-        public void OnGet(int StatusCode)
-            => ErrorStatusCode = StatusCode;
+        public void OnGet(string StatusCode)
+        {
+            ErrorStatusCode = StatusCode;
+        }
     }
 }

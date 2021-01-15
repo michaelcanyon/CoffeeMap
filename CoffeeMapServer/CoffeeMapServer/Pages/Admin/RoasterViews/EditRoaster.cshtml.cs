@@ -39,27 +39,19 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
         {
             Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
             Roaster = await _roasterAdminService.FetchSingleRoasterAsync(id);
-            //var currentTagPairs = await _roasterAdminService.FetchRoasterTagsAsync(Roaster.Id);
-            //foreach (var i in currentTagPairs)
-            //tagsList.Add((await _roasterAdminService.FetchTagByIdAsync(i.TagId)).TagTitle);
             tagsList.AddRange(Roaster.RoasterTags.Select(t => t.Tag.TagTitle).ToList());
-            if (Roaster.ContactEmail == "none")
-                Roaster.ContactEmail = null;
-            if (Roaster.InstagramProfileLink == "none")
-                Roaster.InstagramProfileLink = null;
-            if (Roaster.TelegramProfileLink == "none")
-                Roaster.TelegramProfileLink = null;
-            if (Roaster.VkProfileLink == "none")
-                Roaster.VkProfileLink = null;
-            if (Roaster.WebSiteLink == "none")
-                Roaster.WebSiteLink = null;
+            if (Roaster == null)
+                return BadRequest();
             return Page();
         }
 
         public async Task<IActionResult> OnPostProcessAsync()
         {
-            await _roasterAdminService.UpdateRoasterAsync(Roaster, TagsToAdd, TagsToDelete, Picture);
-            return RedirectToPage("Roasters");
+           var respCode= await _roasterAdminService.UpdateRoasterAsync(Roaster, TagsToAdd, TagsToDelete, Picture);
+            if (respCode.Equals(0))
+                return RedirectToPage("Roasters");
+            else
+                return BadRequest();
         }
     }
 }

@@ -11,8 +11,8 @@ namespace CoffeeMapServer.Services.Interfaces.Admin
 
         public Task<Tag> FetchSingleTagAsync(Guid id);
 
-        public Task UpdateSingleTagAsync(Tag tag);
+        public Task<int> UpdateSingleTagAsync(Tag tag);
 
-        public Task DeleteTagAsync(Guid id);
+        public Task<int> DeleteTagAsync(Guid id);
     }
 }

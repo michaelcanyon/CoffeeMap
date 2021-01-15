@@ -27,6 +27,7 @@ namespace CoffeeMapServer.Controllers
         public IActionResult Login()
         {
             QueryCookiesEditor.ClearCookies(HttpContext);
+            ViewData["RespCode"] = "0";
             return View();
         }
 
@@ -34,13 +35,23 @@ namespace CoffeeMapServer.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromForm] LoginViewModel login)
         {
-            var identity = await _identityGeneratorService.GetIdentity(login.Email, login.Password);
-            if (identity == null)
-                return View();
-            var token = TokenGenerator.GenerateToken(identity);
-            var userSample = await userService.Login(login.Email, login.Password);
-            QueryCookiesEditor.SetUserCookies(userSample, token, HttpContext);
-            return userSample.Role == "Master" ? Redirect("~/Home/HomeMaster") : Redirect("~/Home/Home");
+            try
+            {
+                var identity = await _identityGeneratorService.GetIdentity(login.Email, login.Password);
+                if (identity == null)
+                {
+                    ViewData["RespCode"] = "401";
+                    return View();
+                }
+                var token = TokenGenerator.GenerateToken(identity);
+                var userSample = await userService.Login(login.Email, login.Password);
+                QueryCookiesEditor.SetUserCookies(userSample, token, HttpContext);
+                return userSample.Role == "Master" ? Redirect("~/Home/HomeMaster") : Redirect("~/Home/Home");
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
     }
 }

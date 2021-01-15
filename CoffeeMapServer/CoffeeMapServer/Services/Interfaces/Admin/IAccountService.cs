@@ -8,7 +8,7 @@ namespace CoffeeMapServer.Services.Interfaces.Admin
     {
         public Task<User> GetAccountByIdAsync(Guid id);
 
-        public Task UpdateAccountAsync(
+        public Task<int> UpdateAccountAsync(
             User entity,
             string newPasswordHash,
             string email);

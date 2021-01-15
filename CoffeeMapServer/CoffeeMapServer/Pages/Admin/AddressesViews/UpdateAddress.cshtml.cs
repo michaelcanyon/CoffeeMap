@@ -24,17 +24,18 @@ namespace CoffeeMapServer.Views.Admin.Addresses
         {
             Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
             Address = await _addressService.GetSingleAddressByIdAsync(id);
-            if (Address.OpeningHours == "none")
-                Address.OpeningHours = null;
+            if (Address == null)
+                return BadRequest();
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (Address.OpeningHours == null)
-                Address.OpeningHours = "none";
-            await _addressService.UpdateAddressAsync(Address);
-            return RedirectToPage("GetAddresses");
+            var respCode=await _addressService.UpdateAddressAsync(Address);
+            if (respCode.Equals(0))
+                return RedirectToPage("GetAddresses");
+            else
+                return BadRequest();
         }
     }
 }

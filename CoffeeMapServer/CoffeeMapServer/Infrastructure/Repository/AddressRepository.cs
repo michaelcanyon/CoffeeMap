@@ -24,6 +24,9 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         public async Task<Address> GetSingleAsync(Guid id)
             => await _context.Addresses.FirstOrDefaultAsync(e => e.Id == id);
 
+        public async Task<Address> GetSingleAsync(string addressStr)
+            => await _context.Addresses.FirstOrDefaultAsync(e => e.AddressStr == addressStr);
+
         public void Update(Address entity)
             => _context.Addresses.Update(entity);
 

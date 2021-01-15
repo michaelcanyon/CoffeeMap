@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using CoffeeMapServer.EF;
 using CoffeeMapServer.Infrastructures.IRepositories;
@@ -24,8 +25,10 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         public void DeleteRoasterRequest(IList<RoasterRequest> range)
             => _context.RoasterRequests.RemoveRange(range);
 
-        public async Task<RoasterRequest> GetSingleAsync(Guid id)
-            => await _context.RoasterRequests.FirstOrDefaultAsync(node => node.Id == id);
+        public async Task<RoasterRequest> GetSingleAsync(Guid id/*, [CallerMemberName] string methodName = ""*/)
+            => await _context.RoasterRequests
+            //.TagWith($"{nameof(RoasterRequestRepository)}.{methodName} ({id})")
+            .FirstOrDefaultAsync(node => node.Id == id);
 
         public void Update(RoasterRequest entity)
             => _context.RoasterRequests.Update(entity);

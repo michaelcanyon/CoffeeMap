@@ -7,14 +7,16 @@ namespace CoffeeMapServer.EF
     {
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //TODO:required fields: Address.AddressStr, Roaster.Name, Roaster.ContactNumber,
+
+                             
             modelBuilder.Entity<Address>()
                 .Property(p => p.AddressStr)
-                .IsRequired()
-                .HasDefaultValue("");
+                .IsRequired();
             modelBuilder.Entity<Address>()
                 .Property(p => p.OpeningHours)
                 .IsRequired()
-                .HasDefaultValue("");
+                .HasDefaultValue("none");
 
             modelBuilder.Entity<Roaster>()
                 .Property(p => p.Name)
@@ -24,19 +26,19 @@ namespace CoffeeMapServer.EF
                 .HasDefaultValue("Description will apperar as soon as possible:)");
             modelBuilder.Entity<Roaster>()
                 .Property(p => p.ContactEmail)
-                .IsRequired();
+                .HasDefaultValue("none");
             modelBuilder.Entity<Roaster>()
                 .Property(p => p.ContactNumber)
                 .IsRequired();
             modelBuilder.Entity<Roaster>()
                 .Property(p => p.TelegramProfileLink)
-                .HasDefaultValue("");
+                .HasDefaultValue("none");
             modelBuilder.Entity<Roaster>()
                 .Property(p => p.VkProfileLink)
-                .HasDefaultValue("");
+                .HasDefaultValue("none");
             modelBuilder.Entity<Roaster>()
                 .Property(p => p.WebSiteLink)
-                .HasDefaultValue("");
+                .HasDefaultValue("none");
 
             modelBuilder.Entity<Roaster>()
                 .HasOne(r => r.OfficeAddress)

@@ -15,8 +15,11 @@ namespace CoffeeMapServer.Pages.Admin.RoasterRequestViews
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            await _roasterRequestService.DeleteRoasterRequestAsync(id);
-            return RedirectToPage("RoasterRequests");
+            var respCode = await _roasterRequestService.DeleteRoasterRequestAsync(id);
+            if (respCode.Equals(0))
+                return RedirectToPage("RoasterRequests");
+            else
+                return BadRequest();
         }
     }
 }

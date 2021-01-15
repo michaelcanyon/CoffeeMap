@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
@@ -62,10 +61,7 @@ namespace CoffeeMapServer.Services
             }
             catch (Exception e)
             {
-                var em = new StringBuilder();
-                em.AppendLine($"Roaster service layer error occured! Error text message: {e.Message}");
-                em.AppendLine($"Stack trace: {e.StackTrace}");
-                _logger.LogError(em.ToString());
+                _logger.LogError(e, "Roaster service layer error occured!");
             }
         }
     }

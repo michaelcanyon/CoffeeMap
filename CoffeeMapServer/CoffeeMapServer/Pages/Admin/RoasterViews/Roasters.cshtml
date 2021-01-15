@@ -35,7 +35,7 @@
         <label for="name">Name</label>
         <input type="text" maxlength="30" class="form-control" asp-for="@Model.NameFilter">
 
-        <label for="addressid">office address Id</label>
+        <label for="addressid">office address:</label>
         <input type="text" class="form-control" asp-for="@Model.OfficeAddressFilter">
 
         <label for="phone">Contact number</label>
@@ -65,7 +65,7 @@
     <br />
     <button id="filtrationbar" class="btn btn-primary">Filtration</button>
     <br />
-    <a asp-page="AddRoaster">Create roaster note</a>
+    <a asp-page="AddRoaster" asp-route-StatusCode="0">Create roaster note</a>
     <br />
     <table class="table">
         <thead>

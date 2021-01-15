@@ -20,10 +20,10 @@ namespace CoffeeMapServer.Services.Interfaces.Admin
 
         public Task<IList<Tag>> FetchTagsAsync();
 
-        public Task UpdateRoasterAsync(Roaster entity, string newTags, string deletableTags, IFormFile picture);
+        public Task<int> UpdateRoasterAsync(Roaster entity, string newTags, string deletableTags, IFormFile picture);
 
-        public Task AddRoasterAsync(Roaster roaster, string tags, Address address, IFormFile picture);
+        public Task<int> AddRoasterAsync(Roaster roaster, string tags, Address address, IFormFile picture);
 
-        public Task DeleteRoasterByIdAsync(Guid id);
+        public Task<int> DeleteRoasterByIdAsync(Guid id);
     }
 }

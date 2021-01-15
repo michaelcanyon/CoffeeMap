@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{StatusCode}"
 @model CoffeeMapServer.Views.Admin.RoasterViews.AddRoasterModel
 @{
 
@@ -34,6 +34,9 @@
 </section>
 <!-- Main content -->
 <section class="content container-fluid">
+    @if (Model.RStatusCode.Equals("601"))
+    {<span style="color:red; font-weight:bold;">Roaster with such name already exists</span>}
+    <br/>
     <form method="post" enctype="multipart/form-data">
         <div class="form-group">
 

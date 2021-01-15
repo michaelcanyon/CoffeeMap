@@ -36,7 +36,7 @@ namespace CoffeeMapServer.Services
         public async Task<Roaster> FetchSingleRoasterByIdAsync(Guid id)
             => await _roasterRepository.GetSingleAsync(id);
 
-        public async Task UpdateRoasterAsync(Roaster entity)
+        public async Task<int> UpdateRoasterAsync(Roaster entity)
         {
             try
             {
@@ -44,13 +44,12 @@ namespace CoffeeMapServer.Services
                 _roasterRepository.Update(entity);
                 await _roasterRepository.SaveChangesAsync();
                 _logger.LogInformation($"Roaster and Address tables have been modified. Modified roaster:\n {entity.Id}\n Name:{entity.Name}");
+                return 0;
             }
             catch (Exception e)
             {
-                var em = new StringBuilder();
-                em.AppendLine($"Roaster address connection service layer error occured! Error text message: {e.Message}");
-                em.AppendLine($"Stack trace: {e.StackTrace}");
-                _logger.LogError(em.ToString());
+                _logger.LogError("Roaster address connection service layer error occured! Error text message:" + e.Message);
+                return -1;
             }
         }
     }

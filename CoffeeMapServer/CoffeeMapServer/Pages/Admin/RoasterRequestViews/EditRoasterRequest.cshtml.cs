@@ -23,10 +23,13 @@ namespace CoffeeMapServer.Pages.Admin.RoasterRequestViews
         public EditRoasterRequestModel(IRoasterRequestService roasterRequestService)
             => _roasterRequestService = roasterRequestService ?? throw new ArgumentNullException(nameof(IRoasterRequestService));
 
-        public async Task OnGetAsync(Guid id)
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
             Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
             request = await _roasterRequestService.FetchSingleRoasterRequestByIdAsync(id);
+            if (request == null)
+                return BadRequest();
+            return Page();
         }
 
         public async Task<IActionResult> OnPostProcessAsync()
@@ -34,27 +37,16 @@ namespace CoffeeMapServer.Pages.Admin.RoasterRequestViews
             try
             {
                 request.Roaster.Picture = builders.BytePictureBuilder.GetBytePicture(Picture);
-                /*var result =*/
-                await _roasterRequestService.UpdateRoasterRequestAsync(request);
-                //if (!result.success)
-                //    return badrequest("ошибка сохранения данных");
-                return RedirectToPage("RoasterRequests");
+                var respCode = await _roasterRequestService.UpdateRoasterRequestAsync(request);
+                if (respCode.Equals(0))
+                    return RedirectToPage("RoasterRequests");
+                else
+                    return BadRequest();
             }
-            catch (Exception)
+            catch
             {
-                // TODO: глобальное логирование
                 return BadRequest();
             }
-        }
-
-        class ServiceResult
-        {
-            public bool Success { get; set; }
-            public string Message { get; set; }
-            public Exception Exception { get; set; }
-
-            public static ServiceResult Fail(string message)
-                => new ServiceResult { Success = false, Message = message };
         }
     }
 }

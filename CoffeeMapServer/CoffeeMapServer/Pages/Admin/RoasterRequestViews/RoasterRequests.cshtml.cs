@@ -20,16 +20,22 @@ namespace CoffeeMapServer.Pages.Admin.RoasterRequestViews
 
         public string Role { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
             Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
             RoasterRequests = await _roasterRequestService.FetchRoasterRequestsListAsync();
+            if (RoasterRequests == null)
+                return BadRequest();
+            return Page();
         }
 
         public async Task<IActionResult> OnPostDeleteAllAsync()
         {
-            await _roasterRequestService.DeleteAllRoasterRequestsAsync();
-            return RedirectToPage("RoasterRequests");
+            var respCode = await _roasterRequestService.DeleteAllRoasterRequestsAsync();
+            if (respCode.Equals(0))
+                return RedirectToPage("RoasterRequests");
+            else
+                return BadRequest();
         }
     }
 }

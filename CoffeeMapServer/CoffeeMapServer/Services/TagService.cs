@@ -24,7 +24,7 @@ namespace CoffeeMapServer.Services
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task DeleteTagAsync(Guid id)
+        public async Task<int> DeleteTagAsync(Guid id)
         {
             try
             {
@@ -37,17 +37,15 @@ namespace CoffeeMapServer.Services
                 _tagRepository.Delete(await _tagRepository.GetSingleAsync(id));
 
                 await _tagRepository.SaveChangesAsync();
-                await _roasterTagRepository.SaveChangesAsync();
 
                 _logger.LogInformation($"Tags table has been modified. Deleted tag:\n Id:{id}");
+                return 0;
 
             }
             catch (Exception e)
             {
-                var em = new StringBuilder();
-                em.AppendLine($"Tag service layer error occured! Error text message: {e.Message}");
-                em.AppendLine($"Stack trace: {e.StackTrace}");
-                _logger.LogError(em.ToString());
+                _logger.LogError($"Tag service layer error occured! Error text message: {e.Message}");
+                return -1;
             }
         }
 
@@ -57,7 +55,7 @@ namespace CoffeeMapServer.Services
         public async Task<IList<Tag>> FetchTagsListAsync()
             => await _tagRepository.GetListAsync();
 
-        public async Task UpdateSingleTagAsync(Tag tag)
+        public async Task<int> UpdateSingleTagAsync(Tag tag)
         {
             try
             {
@@ -67,13 +65,12 @@ namespace CoffeeMapServer.Services
                 await _tagRepository.SaveChangesAsync();
 
                 _logger.LogInformation($"Tags table has been modified. Updated tag:\n Id:{tag.Id}");
+                return 0;
             }
             catch (Exception e)
             {
-                var em = new StringBuilder();
-                em.AppendLine($"Tag service layer error occured! Error text message: {e.Message}");
-                em.AppendLine($"Stack trace: {e.StackTrace}");
-                _logger.LogError(em.ToString());
+                _logger.LogError($"Tag service layer error occured! Error text message: {e.Message}");
+                return -1;
             }
         }
     }

@@ -15,15 +15,11 @@ namespace CoffeeMapServer.Pages.Admin.TagViews
 
         public async Task<IActionResult> OnGet(Guid id)
         {
-            try
-            {
-                await _tagService.DeleteTagAsync(id);
+            var respCode = await _tagService.DeleteTagAsync(id);
+            if (respCode.Equals(0))
                 return RedirectToPage("Tags");
-            }
-            catch
-            {
-                return RedirectToPage("Tags");
-            }
+            else
+                return BadRequest();
         }
     }
 }

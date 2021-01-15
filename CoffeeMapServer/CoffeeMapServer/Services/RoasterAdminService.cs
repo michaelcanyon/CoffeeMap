@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using CoffeeMapServer.builders;
 using CoffeeMapServer.Infrastructures.IRepositories;
@@ -32,7 +31,7 @@ namespace CoffeeMapServer.Services
             _logger = logger ?? throw new ArgumentNullException(nameof(addressRepository));
         }
 
-        public async Task AddRoasterAsync(Roaster roaster,
+        public async Task<int> AddRoasterAsync(Roaster roaster,
                                           string tags,
                                           Address address,
                                           IFormFile picture)
@@ -40,10 +39,10 @@ namespace CoffeeMapServer.Services
             try
             {
                 _logger.LogInformation("Roaster admin service layer access in progress...");
-                
+
                 var roasterByName = await _roasterRepository.GetRoasterByNameAsync(roaster.Name);
                 if (roasterByName != null)
-                    return;
+                    return -1;
 
                 if (roaster.ContactEmail == null)
                     roaster.ContactEmail = "none";
@@ -72,19 +71,18 @@ namespace CoffeeMapServer.Services
                 roaster.Picture = BytePictureBuilder.GetBytePicture(picture);
                 _roasterRepository.Add(roaster);
                 await _roasterRepository.SaveChangesAsync();
-                
+
                 _logger.LogInformation($"Roaster, Tags, RoasterTags, Addresses tables have been modified. Inserted roaster:\n Id: {roaster.Id}\n Roaster name: {roaster.Name}");
+                return 0;
             }
             catch (Exception e)
             {
-                var em = new StringBuilder();
-                em.AppendLine($"Roaster admin service layer error occured! Error text message: {e.Message}");
-                em.AppendLine($"Stack trace: {e.StackTrace}");
-                _logger.LogError(em.ToString());
+                _logger.LogError($"Roaster admin service layer error occured! Error text message: {e.Message}");
+                return -2;
             }
         }
 
-        public async Task DeleteRoasterByIdAsync(Guid id)
+        public async Task<int> DeleteRoasterByIdAsync(Guid id)
         {
             try
             {
@@ -95,13 +93,12 @@ namespace CoffeeMapServer.Services
                 _roasterTagRepository.DeleteRoasterTags(pairs);
                 await _roasterRepository.SaveChangesAsync();
                 _logger.LogInformation($"Roaster, Tags, RoasterTags, Addresses tables have been modified. Deleted roaster:\n Id: {roaster.Id}\n Roaster name: {roaster.Name}");
+                return 0;
             }
             catch (Exception e)
             {
-                var em = new StringBuilder();
-                em.AppendLine($"Roaster admin service layer error occured! Error text message: {e.Message}");
-                em.AppendLine($"Stack trace: {e.StackTrace}");
-                _logger.LogError(em.ToString());
+                _logger.LogError("Roaster admin service layer error occured! Error text message:" + e.Message);
+                return -1;
             }
         }
 
@@ -120,7 +117,7 @@ namespace CoffeeMapServer.Services
         public async Task<Tag> FetchTagByIdAsync(Guid id)
             => await _tagRepository.GetSingleAsync(id);
 
-        public async Task UpdateRoasterAsync(Roaster entity, string newTags, string deletableTags, IFormFile picture)
+        public async Task<int> UpdateRoasterAsync(Roaster entity, string newTags, string deletableTags, IFormFile picture)
         {
             //fetch tags that already exists in current roaster note
             var onGetTags = new List<string>();
@@ -162,13 +159,12 @@ namespace CoffeeMapServer.Services
                 _roasterRepository.Update(entity);
                 await _roasterTagRepository.SaveChangesAsync();
                 _logger.LogInformation($"Roaster, Tags, RoasterTags, Addresses tables have been modified. Updated roaster:\n Id: {entity.Id}\n Roaster name: {entity.Name}");
+                return 0;
             }
             catch (Exception e)
             {
-                var em = new StringBuilder();
-                em.AppendLine($"Roaster admin service layer error occured! Error text message: {e.Message}");
-                em.AppendLine($"Stack trace: {e.StackTrace}");
-                _logger.LogError(em.ToString());
+                _logger.LogError("Roaster admin service layer error occured! Error text message:" + e.Message);
+                return -1;
             }
         }
 

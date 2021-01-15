@@ -30,15 +30,12 @@ namespace CoffeeMapServer.Services
             }
             catch(Exception e)
             {
-                var em = new StringBuilder();
-                em.AppendLine($"Account service layer error occured! Error text message: {e.Message}");
-                em.AppendLine($"Stack trace: {e.StackTrace}");
-                _logger.LogError(em.ToString());
+                _logger.LogError($"Account service layer error occured! Error text message: {e.Message}");
                 return null;
             }
         }
 
-        public async Task UpdateAccountAsync(User entity,
+        public async Task<int> UpdateAccountAsync(User entity,
                                              string newPasswordHash,
                                              string email)
         {
@@ -46,17 +43,19 @@ namespace CoffeeMapServer.Services
             {
                 entity.Password = newPasswordHash ?? entity.Password;
                 entity.Email = email;
+                var user = _userRepository.GetSingleByMailAsync(email);
+                if (user != null)
+                    return -1;
                 _userRepository.Update(entity);
                 await _userRepository.SaveChangesAsync();
                 _logger.LogInformation("Account service Layer access in progress...");
                 _logger.LogInformation("Account {0} has been modified", entity.Login);
+                return 0;
             }
             catch (Exception e)
             {
-                var em = new StringBuilder();
-                em.AppendLine($"Account service layer error occured! Error text message: {e.Message}");
-                em.AppendLine($"Stack trace: {e.StackTrace}");
-                _logger.LogError(em.ToString());
+                _logger.LogError($"Account service layer error occured! Error text message: {e.Message}");
+                return -2;
             }
         }
     }

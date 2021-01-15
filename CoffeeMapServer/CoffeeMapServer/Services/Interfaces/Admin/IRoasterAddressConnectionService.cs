@@ -15,6 +15,6 @@ namespace CoffeeMapServer.Services.Interfaces.Admin
 
         public Task<Roaster> FetchSingleRoasterByIdAsync(Guid id);
 
-        public Task UpdateRoasterAsync(Roaster entity);
+        public Task<int> UpdateRoasterAsync(Roaster entity);
     }
 }

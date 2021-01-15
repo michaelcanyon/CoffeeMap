@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
@@ -30,7 +29,7 @@ namespace CoffeeMapServer.Services
             return await _userRepository.GetSingleAsync(username, hash);
         }
 
-        public async Task AddUserAsync(User entity)
+        public async Task<int> AddUserAsync(User entity)
         {
             try
             {
@@ -38,28 +37,27 @@ namespace CoffeeMapServer.Services
 
                 User userV = await _userRepository.GetSingleAsync(entity.Login);
                 if (userV != null)
-                    return;
+                    return 601;
 
                 userV = await _userRepository.GetSingleByMailAsync(entity.Email);
                 if (userV != null)
-                    return;
+                    return 602;
 
                 _userRepository.Add(entity);
                 await _userRepository.SaveChangesAsync();
 
                 _logger.LogInformation($"Users table has been modified. Inserted user:\n Id:{entity.Id}\n Username: {entity.Login}");
+                return 0;
 
             }
             catch (Exception e)
             {
-                var em = new StringBuilder();
-                em.AppendLine($"User service layer error occured! Error text message: {e.Message}");
-                em.AppendLine($"Stack trace: {e.StackTrace}");
-                _logger.LogError(em.ToString());
+                _logger.LogError($"User service layer error occured! Error text message: {e.Message}");
+                return -2;
             }
         }
 
-        public async Task DeleteUserAsync(Guid id)
+        public async Task<int> DeleteUserAsync(Guid id)
         {
             try
             {
@@ -70,13 +68,12 @@ namespace CoffeeMapServer.Services
                 await _userRepository.SaveChangesAsync();
 
                 _logger.LogInformation($"Users table has been modified. Deleted user:\n Id:{user.Id}\n Username: {user.Login}");
+                return 0;
             }
             catch (Exception e)
             {
-                var em = new StringBuilder();
-                em.AppendLine($"User service layer error occured! Error text message: {e.Message}");
-                em.AppendLine($"Stack trace: {e.StackTrace}");
-                _logger.LogError(em.ToString());
+                _logger.LogError($"User service layer error occured! Error text message: {e.Message}");
+                return -1;
             }
         }
 

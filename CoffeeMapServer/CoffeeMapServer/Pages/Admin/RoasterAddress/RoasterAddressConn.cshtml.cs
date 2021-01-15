@@ -44,35 +44,45 @@ namespace CoffeeMapServer.Pages.Admin.RoasterAddress
 
         public string Role { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
-            Addresses = await _roasterAddressConnectionService.FetchAddressesAsync();
-            Roasters = await _roasterAddressConnectionService.FetchRoastersAsync();
-            if (!string.IsNullOrEmpty(AddressIdFilter))
-                Addresses = Addresses.Where(n => n.Id.Equals(Guid.Parse(AddressIdFilter))).ToList();
-            if (!string.IsNullOrEmpty(AddressStrFilter))
-                Addresses = Addresses.Where(n => n.AddressStr.Contains(AddressStrFilter)).ToList();
-            if (!string.IsNullOrEmpty(IdFilter))
-                Roasters = Roasters.Where(n => n.Id.Equals(Guid.Parse(IdFilter))).ToList();
-            if (!string.IsNullOrEmpty(NameFilter))
-                Roasters = Roasters.Where(n => n.Name.Contains(NameFilter)).ToList();
+            try
+            {
+                Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
+                Addresses = await _roasterAddressConnectionService.FetchAddressesAsync();
+                Roasters = await _roasterAddressConnectionService.FetchRoastersAsync();
+                if (!string.IsNullOrEmpty(AddressIdFilter))
+                    Addresses = Addresses.Where(n => n.Id.Equals(Guid.Parse(AddressIdFilter))).ToList();
+                if (!string.IsNullOrEmpty(AddressStrFilter))
+                    Addresses = Addresses.Where(n => n.AddressStr.Contains(AddressStrFilter)).ToList();
+                if (!string.IsNullOrEmpty(IdFilter))
+                    Roasters = Roasters.Where(n => n.Id.Equals(Guid.Parse(IdFilter))).ToList();
+                if (!string.IsNullOrEmpty(NameFilter))
+                    Roasters = Roasters.Where(n => n.Name.Contains(NameFilter)).ToList();
+                return Page();
+            }
+            catch
+            {
+                return BadRequest();
+            }
 
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
             InsertableAddress = await _roasterAddressConnectionService.FetchSingleAddressByIdAsync(Guid.Parse(InsertAddressId));
-            if (InsertableAddress == null)
-                return RedirectToPage("RoasterAddressConn");
-
             InsertableRoaster = await _roasterAddressConnectionService.FetchSingleRoasterByIdAsync(Guid.Parse(InsertRoasterId));
-            if (InsertableRoaster == null)
-                return RedirectToPage("RoasterAddressConn");
+
+            if (InsertableAddress == null || InsertableRoaster == null)
+                return BadRequest();
 
             InsertableRoaster.OfficeAddress = InsertableAddress;
-            await _roasterAddressConnectionService.UpdateRoasterAsync(InsertableRoaster);
+            var respCode = await _roasterAddressConnectionService.UpdateRoasterAsync(InsertableRoaster);
+
+            if (respCode.Equals(0))
                 return RedirectToPage("RoasterAddressConn");
+            else
+                return BadRequest();
         }
     }
 }

@@ -34,7 +34,7 @@ namespace CoffeeMapServer.Services
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task BindToRoasterNdAddressAsync(Guid id)
+        public async Task<int> BindToRoasterNdAddressAsync(Guid id)
         {
             try
             {
@@ -58,17 +58,16 @@ namespace CoffeeMapServer.Services
                 await _roasterRequestRepository.SaveChangesAsync();
 
                 _logger.LogInformation($"Roaster requests table has been modified. Roaster request:\n Id:{request.Id}");
+                return 0;
             }
             catch (Exception e)
             {
-                var em = new StringBuilder();
-                em.AppendLine($"Roaster request service layer error occured! Error text message: {e.Message}");
-                em.AppendLine($"Stack trace: {e.StackTrace}");
-                _logger.LogError(em.ToString());
+                _logger.LogError($"Roaster request service layer error occured! Error text message: {e.Message}");
+                return -1;
             }
         }
 
-        public async Task DeleteAllRoasterRequestsAsync()
+        public async Task<int> DeleteAllRoasterRequestsAsync()
         {
             try
             {
@@ -79,17 +78,16 @@ namespace CoffeeMapServer.Services
                 await _roasterRequestRepository.SaveChangesAsync();
 
                 _logger.LogInformation($"Roaster requests table has been cleared.");
+                return 0;
             }
             catch (Exception e)
             {
-                var em = new StringBuilder();
-                em.AppendLine($"Roaster request service layer error occured! Error text message: {e.Message}");
-                em.AppendLine($"Stack trace: {e.StackTrace}");
-                _logger.LogError(em.ToString());
+                _logger.LogError($"Roaster request service layer error occured! Error text message: {e.Message}");
+                return -1;
             }
         }
 
-        public async Task DeleteRoasterRequestAsync(Guid id)
+        public async Task<int> DeleteRoasterRequestAsync(Guid id)
         {
             try
             {
@@ -100,13 +98,12 @@ namespace CoffeeMapServer.Services
                 await _roasterRequestRepository.SaveChangesAsync();
 
                 _logger.LogInformation($"Roaster requests table has been modified. Deleted Roaster request:\n Id:{roasterRequest.Id}");
+                return 0;
             }
             catch (Exception e)
             {
-                var em = new StringBuilder();
-                em.AppendLine($"Roaster request service layer error occured! Error text message: {e.Message}");
-                em.AppendLine($"Stack trace: {e.StackTrace}");
-                _logger.LogError(em.ToString());
+                _logger.LogError($"Roaster request service layer error occured! Error text message: {e.Message}");
+                return -1;
             }
         }
 
@@ -116,7 +113,7 @@ namespace CoffeeMapServer.Services
         public async Task<RoasterRequest> FetchSingleRoasterRequestByIdAsync(Guid id)
             => await _roasterRequestRepository.GetSingleAsync(id);
 
-        public async Task UpdateRoasterRequestAsync(RoasterRequest entity)
+        public async Task<int> UpdateRoasterRequestAsync(RoasterRequest entity)
         {
             try
             {
@@ -126,13 +123,12 @@ namespace CoffeeMapServer.Services
                 await _roasterRequestRepository.SaveChangesAsync();
 
                 _logger.LogInformation($"Roaster requests table has been modified. Updated Roaster request:\n Id:{entity.Id}");
+                return 0;
             }
             catch (Exception e)
             {
-                var em = new StringBuilder();
-                em.AppendLine($"Roaster request service layer error occured! Error text message: {e.Message}");
-                em.AppendLine($"Stack trace: {e.StackTrace}");
-                _logger.LogError(em.ToString());
+                _logger.LogError($"Roaster request service layer error occured! Error text message: {e.Message}");
+                return -1;
             }
         }
     }

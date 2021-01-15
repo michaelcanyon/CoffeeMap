@@ -25,28 +25,19 @@ namespace CoffeeMapServer.Pages.Admin.TagViews
         {
             Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
             Nickname = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.nickname"].ToString();
-            try
-            {
-                Tag = await _tagService.FetchSingleTagAsync(id);
-                return Page();
-            }
-            catch
-            { 
-                return RedirectToPage("Tags"); 
-            }
+            Tag = await _tagService.FetchSingleTagAsync(id);
+            if (Tag == null)
+                return BadRequest();
+            return Page();
         }
 
         public async Task<IActionResult> OnPostProcessAsync()
         {
-            try
-            {
-                await _tagService.UpdateSingleTagAsync(Tag);
+            var respCode = await _tagService.UpdateSingleTagAsync(Tag);
+            if (respCode.Equals(0))
                 return RedirectToPage("Tags");
-            }
-            catch
-            { 
-                return RedirectToPage("Tags"); 
-            }
+            else
+                return BadRequest();
         }
     }
 }

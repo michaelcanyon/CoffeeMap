@@ -7,8 +7,15 @@ namespace CoffeeMapServer.Pages.Admin.Account
     {
         public IActionResult OnGet()
         {
-            Encryptions.QueryCookiesEditor.ClearCookies(HttpContext);
-            return Redirect("~/Login");
+            try
+            {
+                Encryptions.QueryCookiesEditor.ClearCookies(HttpContext);
+                return Redirect("~/Login");
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
     }
 }

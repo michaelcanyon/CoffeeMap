@@ -9,9 +9,9 @@ namespace CoffeeMapServer.Services.Interfaces.Admin
     {
         public Task<User> Login(string username, string hashedPassword);
 
-        public Task AddUserAsync(User entity);
+        public Task<int> AddUserAsync(User entity);
 
-        public Task DeleteUserAsync(Guid id);
+        public Task<int> DeleteUserAsync(Guid id);
 
         public Task<IList<User>> FetchUsersAsync();
     }

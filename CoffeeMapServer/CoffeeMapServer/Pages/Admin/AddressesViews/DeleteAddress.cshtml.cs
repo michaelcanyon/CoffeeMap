@@ -15,8 +15,11 @@ namespace CoffeeMapServer.Views.Admin.Addresses
 
         public async Task<IActionResult> OnGet(Guid id)
         {
-            await _addressService.DeleteAddressAsync(id);
-            return RedirectToPage("GetAddresses");
+           var respCode= await _addressService.DeleteAddressAsync(id);
+            if (respCode.Equals(0))
+                return RedirectToPage("GetAddresses");
+            else
+                return BadRequest();
         }
     }
 }

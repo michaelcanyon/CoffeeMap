@@ -18,8 +18,11 @@ namespace CoffeeMapServer.Pages.Admin.UserViews
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            await _userService.DeleteUserAsync(id);
-            return RedirectToPage("Users");
+            var respCode = await _userService.DeleteUserAsync(id);
+            if (respCode.Equals(0))
+                return RedirectToPage("Users");
+            else
+                return BadRequest();
         }
     }
 }

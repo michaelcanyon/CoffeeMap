@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{StatusCode}"
 @model CoffeeMapServer.Pages.Admin.AddressesViews.AddAddressModel
 @{
 
@@ -31,4 +31,8 @@
         </div>
         <button type="submit" class="btn btn-primary">Create</button>
     </form>
+    @if (Model.RStatusCode == "601")
+    {
+        <span style="color:red;">Such address already exist!</span>
+    }
 </section>

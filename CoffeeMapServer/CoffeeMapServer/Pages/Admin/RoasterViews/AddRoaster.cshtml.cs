@@ -26,16 +26,35 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
 
         public string Role { get; set; }
 
+        [BindProperty]
+        public string RStatusCode { get; set; }
+
         public AddRoasterModel(IRoasterAdminService roasterAdminService)
             => _roasterAdminService = roasterAdminService ?? throw new ArgumentNullException(nameof(IRoasterAdminService));
 
-        public void OnGet()
-           => Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
+        public IActionResult OnGet(string StatusCode)
+        {
+            try
+            {
+                Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
+                RStatusCode = StatusCode;
+                return Page();
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            await _roasterAdminService.AddRoasterAsync(Roaster, Tags, Address, Picture);
-            return RedirectToPage("Roasters");
+            var respCode = await _roasterAdminService.AddRoasterAsync(Roaster, Tags, Address, Picture);
+            if (respCode == 0)
+                return RedirectToPage("Roasters");
+            else if (respCode == -1)
+                return Redirect("601");
+            else
+                return BadRequest();
         }
     }
 }
