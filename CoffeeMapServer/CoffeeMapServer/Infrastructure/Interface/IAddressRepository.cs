@@ -6,5 +6,7 @@ namespace CoffeeMapServer.Infrastructures.IRepositories
     public interface IAddressRepository : IBaseRepository<Address>
     {
         public Task<Address> GetSingleAsync(string addressStr);
+
+        public Task<Address> GetSingleAsNoTrackingAsync(string addressStr);
     }
 }

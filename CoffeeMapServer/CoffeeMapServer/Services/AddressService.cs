@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using CoffeeMapServer.Services.Interfaces.Admin;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace CoffeeMapServer.Services
 {
@@ -13,10 +13,10 @@ namespace CoffeeMapServer.Services
     {
         private readonly IAddressRepository _addressRepository;
         private readonly IRoasterRepository _roasterRepository;
-        private readonly ILogger<AddressService> _logger;
+        private readonly ILogger _logger;
 
         public AddressService(IAddressRepository addressRepository,
-                              IRoasterRepository roasterRepository, ILogger<AddressService> logger)
+                              IRoasterRepository roasterRepository, ILogger logger)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _addressRepository = addressRepository ?? throw new ArgumentNullException(nameof(addressRepository));
@@ -27,18 +27,18 @@ namespace CoffeeMapServer.Services
         {
             try
             {
-                _logger.LogInformation("Address service Layer access in progress...");
-                var dbAddress= _addressRepository.GetSingleAsync(entity.AddressStr);
+                _logger.Information("Address service Layer access in progress...");
+                var dbAddress= _addressRepository.GetSingleAsNoTrackingAsync(entity.AddressStr);
                 if (dbAddress != null)
                     return -1;
                 _addressRepository.Add(entity);
                 await _addressRepository.SaveChangesAsync();
-                _logger.LogInformation($"Address table has been modified! Address:\n Id: {entity.Id}\n Address string: {entity.AddressStr}\n has been inserted.");
+                _logger.Information($"Address table has been modified! Address:\n Id: {entity.Id}\n Address string: {entity.AddressStr}\n has been inserted.");
                 return 0;
             }
             catch (Exception e)
             {
-                _logger.LogError($"Address service layer error occured! Error message: {e.Message}");
+                _logger.Error($"Address service layer error occured! Error message: {e.Message}");
                 return -2;
             }
         }
@@ -47,7 +47,7 @@ namespace CoffeeMapServer.Services
         {
             try
             {
-                _logger.LogInformation("Address service Layer access in progress...");
+                _logger.Information("Address service Layer access in progress...");
                 var address = await _addressRepository.GetSingleAsync(id);
                 _addressRepository.Delete(address);
 
@@ -59,12 +59,12 @@ namespace CoffeeMapServer.Services
                 }
 
                 await _roasterRepository.SaveChangesAsync();
-                _logger.LogInformation($"Address table has been modified. Address:\n Id: {address.Id}\n Address string: {address.AddressStr}\n has been deleted.");
+                _logger.Information($"Address table has been modified. Address:\n Id: {address.Id}\n Address string: {address.AddressStr}\n has been deleted.");
                 return 0;
             }
             catch (Exception e)
             {
-                _logger.LogError("Address service layer error occured! Error message:" + e.Message);
+                _logger.Error("Address service layer error occured! Error message:" + e.Message);
                 return -1;
             }
         }
@@ -79,18 +79,18 @@ namespace CoffeeMapServer.Services
         {
             try
             {
-                _logger.LogInformation("Address service Layer access in progress...");
-                var address = _addressRepository.GetSingleAsync(entity.AddressStr);
-                if (address != null)
+                _logger.Information("Address service Layer access in progress...");
+                var address = await _addressRepository.GetSingleAsNoTrackingAsync(entity.AddressStr);
+                if (address!=null && !address.Id.Equals(entity.Id))
                     return -1;
                 _addressRepository.Update(entity);
                 await _addressRepository.SaveChangesAsync();
-                _logger.LogInformation($"Address Table has been modified. Address:\n Address Id: {entity.Id} \n Address string: {entity.AddressStr}\n has been added.");
+                _logger.Information($"Address Table has been modified. Address:\n Address Id: {entity.Id} \n Address string: {entity.AddressStr}\n has been added.");
                 return 0;
             }
             catch(Exception e)
             {
-                _logger.LogError("Address service layer error occured! Error message:" +e.Message);
+                _logger.Error("Address service layer error occured! Error message:" +e.Message);
                 return -2;
             }
         }

@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{statusCode}"
 @model CoffeeMapServer.Views.Admin.Addresses.UpdateAddressModel
 @{
 
@@ -18,6 +18,11 @@
     <h1>
         Update address
     </h1>
+    @if (Model.RStatusCode.Equals("601"))
+    {
+    <span style="color:red;">Such address already exists!</span>
+    <br/>
+    }
 </section>
 <!-- Main content -->
 <section class="content container-fluid">

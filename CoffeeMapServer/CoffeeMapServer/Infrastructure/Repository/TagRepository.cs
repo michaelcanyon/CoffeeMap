@@ -35,6 +35,9 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         public async Task<Tag> GetSingleAsync(string title)
             => await Context.Tags.FirstOrDefaultAsync(node => node.TagTitle == title);
 
+        public async Task<Tag> GetSingleAsNoTrackingAsync(string title)
+            => await Context.Tags.AsNoTracking().FirstOrDefaultAsync(node => node.TagTitle == title);
+
         public async Task SaveChangesAsync()
             => await Context.SaveChangesAsync();
 

@@ -1,11 +1,10 @@
-﻿using CoffeeMapServer.Infrastructures.IRepositories;
-using CoffeeMapServer.Services.Interfaces;
-using CoffeeMapServer.Services.Interfaces.Admin;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using CoffeeMapServer.Services.Interfaces;
+using CoffeeMapServer.Services.Interfaces.Admin;
 
 namespace CoffeeMapServer.Services
 {
@@ -13,7 +12,7 @@ namespace CoffeeMapServer.Services
     {
         private readonly IUserService _userService;
 
-        public IdentityGeneratorService(IUserService userService) 
+        public IdentityGeneratorService(IUserService userService)
             => _userService = userService ?? throw new ArgumentNullException(nameof(userService));
 
         public async Task<ClaimsIdentity> GetIdentity(string username, string password)

@@ -1,19 +1,18 @@
 ﻿using System;
-using System.Text;
 using System.Threading.Tasks;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using CoffeeMapServer.Services.Interfaces.Admin;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace CoffeeMapServer.Services
 {
     public class AccountService : IAccountService
     {
         private readonly IUserRepository _userRepository;
-        private readonly ILogger<AccountService> _logger;
+        private readonly ILogger _logger;
 
-        public AccountService(IUserRepository userRepository, ILogger<AccountService> logger)
+        public AccountService(IUserRepository userRepository, ILogger logger)
         {
             _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
             _logger = logger;
@@ -24,13 +23,13 @@ namespace CoffeeMapServer.Services
             try
             {
                 var user = await _userRepository.GetSingleAsync(id);
-                _logger.LogInformation("Account service Layer access in progress...");
-                _logger.LogInformation("User {0}, {1}, Role: {2} access procedure implemented", user.Id, user.Login, user.Role);
+                _logger.Information("Account service Layer access in progress...");
+                _logger.Information("User {0}, {1}, Role: {2} access procedure implemented", user.Id, user.Login, user.Role);
                 return user;
             }
             catch(Exception e)
             {
-                _logger.LogError($"Account service layer error occured! Error text message: {e.Message}");
+                _logger.Error($"Account service layer error occured! Error text message: {e.Message}");
                 return null;
             }
         }
@@ -43,18 +42,18 @@ namespace CoffeeMapServer.Services
             {
                 entity.Password = newPasswordHash ?? entity.Password;
                 entity.Email = email;
-                var user = _userRepository.GetSingleByMailAsync(email);
-                if (user != null)
+                var user =await _userRepository.GetSingleByMailAsync(email);
+                if (user != null && !user.Id.Equals(entity.Id))
                     return -1;
                 _userRepository.Update(entity);
                 await _userRepository.SaveChangesAsync();
-                _logger.LogInformation("Account service Layer access in progress...");
-                _logger.LogInformation("Account {0} has been modified", entity.Login);
+                _logger.Information("Account service Layer access in progress...");
+                _logger.Information("Account {0} has been modified", entity.Login);
                 return 0;
             }
             catch (Exception e)
             {
-                _logger.LogError($"Account service layer error occured! Error text message: {e.Message}");
+                _logger.Error($"Account service layer error occured! Error text message: {e.Message}");
                 return -2;
             }
         }

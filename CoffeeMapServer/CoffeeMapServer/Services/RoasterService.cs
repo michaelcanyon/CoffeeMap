@@ -6,7 +6,7 @@ using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using CoffeeMapServer.Services.Interfaces;
 using CoffeeMapServer.ViewModels;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace CoffeeMapServer.Services
 {
@@ -17,14 +17,14 @@ namespace CoffeeMapServer.Services
         private readonly IRoasterTagRepository _roasterTagRepository;
         private readonly IAddressRepository _addressRepository;
         private readonly IRoasterRequestRepository _roasterRequestRepository;
-        private readonly ILogger<RoasterService> _logger;
+        private readonly ILogger _logger;
 
         public RoasterService(IRoasterRepository roasterRepository,
                               ITagRepository tagRepository,
                               IAddressRepository addressRepository,
                               IRoasterTagRepository roasterTagRepository,
                               IRoasterRequestRepository roasterRequestRepository,
-                              ILogger<RoasterService> logger)
+                              ILogger logger)
         {
             _roasterRepository = roasterRepository ?? throw new ArgumentNullException(nameof(roasterRepository));
             _tagRepository = tagRepository ?? throw new ArgumentNullException(nameof(tagRepository));
@@ -52,16 +52,16 @@ namespace CoffeeMapServer.Services
         {
             try
             {
-                _logger.LogInformation("Roaster service layer access in progress...");
+                _logger.Information("Roaster service layer access in progress...");
                 
                 _roasterRequestRepository.Add(roasterRequest);
                 await _roasterRequestRepository.SaveChangesAsync();
                 
-                _logger.LogInformation($"Roaster request table has been modified. Inserted request:\n Id:{roasterRequest.Id}");
+                _logger.Information($"Roaster request table has been modified. Inserted request:\n Id:{roasterRequest.Id}");
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Roaster service layer error occured!");
+                _logger.Error(e, "Roaster service layer error occured!");
             }
         }
     }

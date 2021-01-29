@@ -6,10 +6,7 @@ namespace CoffeeMapServer.EF
     public partial class CoffeeDbContext
     {
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            //TODO:required fields: Address.AddressStr, Roaster.Name, Roaster.ContactNumber,
-
-                             
+        {                    
             modelBuilder.Entity<Address>()
                 .Property(p => p.AddressStr)
                 .IsRequired();

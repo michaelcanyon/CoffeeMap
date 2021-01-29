@@ -32,11 +32,15 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
 
         public List<string> DeletableTagsList = new List<string>();
 
+        [BindProperty]
+        public string RStatusCode { get; set; }
+
         public EditRoasterModel(IRoasterAdminService roasterAdminService)
             => _roasterAdminService = roasterAdminService ?? throw new ArgumentNullException(nameof(IRoasterAdminService));
 
-        public async Task<IActionResult> OnGet(Guid id)
+        public async Task<IActionResult> OnGet(Guid id, string statusCode)
         {
+            RStatusCode = statusCode;
             Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
             Roaster = await _roasterAdminService.FetchSingleRoasterAsync(id);
             tagsList.AddRange(Roaster.RoasterTags.Select(t => t.Tag.TagTitle).ToList());
@@ -50,6 +54,8 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
            var respCode= await _roasterAdminService.UpdateRoasterAsync(Roaster, TagsToAdd, TagsToDelete, Picture);
             if (respCode.Equals(0))
                 return RedirectToPage("Roasters");
+            else if (respCode.Equals(-1))
+                return RedirectToPage("EditRoaster",new { id=Roaster.Id, statusCode="601" });
             else
                 return BadRequest();
         }

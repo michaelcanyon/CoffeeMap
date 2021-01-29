@@ -36,6 +36,8 @@ namespace CoffeeMapServer.Infrastructures.Repositories
 
         public async Task<Roaster> GetRoasterByNameAsync(string roasterName)
             => await _сontext.Roasters.Include(r => r.OfficeAddress).Include(r => r.RoasterTags).ThenInclude(r => r.Tag).Include(r => r.OfficeAddress).FirstOrDefaultAsync(e => e.Name == roasterName);
+        public async Task<Roaster> GetRoasterByNameNonTrackableAsync(string roasterName)
+            => await _сontext.Roasters.AsNoTracking().Include(r => r.OfficeAddress).Include(r => r.RoasterTags).ThenInclude(r => r.Tag).Include(r => r.OfficeAddress).FirstOrDefaultAsync(e => e.Name == roasterName);
 
         public async Task SaveChangesAsync()
             => await _сontext.SaveChangesAsync();

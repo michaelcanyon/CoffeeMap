@@ -126,7 +126,7 @@
                     <td>@Html.DisplayFor(item => i.VkProfileLink)</td>
                     <td>@Html.DisplayFor(item => i.WebSiteLink)</td>
                     <td>
-                        <a asp-page="EditRoaster" asp-route-id="@i.Id">Edit|</a>
+                        <a asp-page="EditRoaster" asp-route-id="@i.Id" asp-route-statusCode="0">Edit|</a>
                         <a asp-page="DeleteRoaster" asp-route-id="@i.Id">Delete|</a>
                     </td>
                 </tr>

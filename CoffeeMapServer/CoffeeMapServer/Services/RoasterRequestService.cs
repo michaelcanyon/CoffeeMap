@@ -6,7 +6,7 @@ using CoffeeMapServer.builders;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using CoffeeMapServer.Services.Interfaces.Admin;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace CoffeeMapServer.Services
 {
@@ -17,14 +17,14 @@ namespace CoffeeMapServer.Services
         private readonly IAddressRepository _addressRepository;
         private readonly ITagRepository _tagRepository;
         private readonly IRoasterTagRepository _roasterTagRepository;
-        private readonly ILogger<RoasterRequestService> _logger;
+        private readonly ILogger _logger;
 
         public RoasterRequestService(IRoasterRepository roasterRepository,
                                      IRoasterRequestRepository roasterRequestRepository,
                                      IAddressRepository addressRepository,
                                      ITagRepository tagRepository,
                                      IRoasterTagRepository roasterTagRepository,
-                                     ILogger<RoasterRequestService> logger)
+                                     ILogger logger)
         {
             _roasterRepository = roasterRepository ?? throw new ArgumentNullException(nameof(roasterRepository));
             _roasterRequestRepository = roasterRequestRepository ?? throw new ArgumentNullException(nameof(roasterRequestRepository));
@@ -38,7 +38,7 @@ namespace CoffeeMapServer.Services
         {
             try
             {
-                _logger.LogInformation("Roaster request service layer access in progress...");
+                _logger.Information("Roaster request service layer access in progress...");
 
                 var request = await _roasterRequestRepository.GetSingleAsync(id);
 
@@ -57,12 +57,12 @@ namespace CoffeeMapServer.Services
 
                 await _roasterRequestRepository.SaveChangesAsync();
 
-                _logger.LogInformation($"Roaster requests table has been modified. Roaster request:\n Id:{request.Id}");
+                _logger.Information($"Roaster requests table has been modified. Roaster request:\n Id:{request.Id}");
                 return 0;
             }
             catch (Exception e)
             {
-                _logger.LogError($"Roaster request service layer error occured! Error text message: {e.Message}");
+                _logger.Error($"Roaster request service layer error occured! Error text message: {e.Message}");
                 return -1;
             }
         }
@@ -71,18 +71,18 @@ namespace CoffeeMapServer.Services
         {
             try
             {
-                _logger.LogInformation("Roaster request service layer access in progress...");
+                _logger.Information("Roaster request service layer access in progress...");
 
                 var range = await _roasterRequestRepository.GetListAsync();
                 _roasterRequestRepository.DeleteRoasterRequest(range);
                 await _roasterRequestRepository.SaveChangesAsync();
 
-                _logger.LogInformation($"Roaster requests table has been cleared.");
+                _logger.Information($"Roaster requests table has been cleared.");
                 return 0;
             }
             catch (Exception e)
             {
-                _logger.LogError($"Roaster request service layer error occured! Error text message: {e.Message}");
+                _logger.Error($"Roaster request service layer error occured! Error text message: {e.Message}");
                 return -1;
             }
         }
@@ -91,18 +91,18 @@ namespace CoffeeMapServer.Services
         {
             try
             {
-                _logger.LogInformation("Roaster request service layer access in progress...");
+                _logger.Information("Roaster request service layer access in progress...");
 
                 var roasterRequest = await _roasterRequestRepository.GetSingleAsync(id);
                 _roasterRequestRepository.Delete(roasterRequest);
                 await _roasterRequestRepository.SaveChangesAsync();
 
-                _logger.LogInformation($"Roaster requests table has been modified. Deleted Roaster request:\n Id:{roasterRequest.Id}");
+                _logger.Information($"Roaster requests table has been modified. Deleted Roaster request:\n Id:{roasterRequest.Id}");
                 return 0;
             }
             catch (Exception e)
             {
-                _logger.LogError($"Roaster request service layer error occured! Error text message: {e.Message}");
+                _logger.Error($"Roaster request service layer error occured! Error text message: {e.Message}");
                 return -1;
             }
         }
@@ -117,17 +117,17 @@ namespace CoffeeMapServer.Services
         {
             try
             {
-                _logger.LogInformation("Roaster request service layer access in progress...");
+                _logger.Information("Roaster request service layer access in progress...");
 
                 _roasterRequestRepository.Update(entity);
                 await _roasterRequestRepository.SaveChangesAsync();
 
-                _logger.LogInformation($"Roaster requests table has been modified. Updated Roaster request:\n Id:{entity.Id}");
+                _logger.Information($"Roaster requests table has been modified. Updated Roaster request:\n Id:{entity.Id}");
                 return 0;
             }
             catch (Exception e)
             {
-                _logger.LogError($"Roaster request service layer error occured! Error text message: {e.Message}");
+                _logger.Error($"Roaster request service layer error occured! Error text message: {e.Message}");
                 return -1;
             }
         }

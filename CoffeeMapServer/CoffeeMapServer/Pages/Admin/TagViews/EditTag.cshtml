@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{statusCode}"
 @model CoffeeMapServer.Pages.Admin.TagViews.EditTagModel
 @{
 
@@ -13,6 +13,10 @@
     <h1>
         Edit Tag
     </h1>
+    @if (Model.RStatusCode.Equals("601"))
+    {
+        <span style="color:red">Such tag is already exists!</span>
+    }
 </section>
 <!-- Main content -->
 <section class="content container-fluid">

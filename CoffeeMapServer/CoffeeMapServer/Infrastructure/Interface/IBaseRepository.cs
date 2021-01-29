@@ -9,7 +9,7 @@ namespace CoffeeMapServer.Infrastructures.IRepositories
         public void Add(T entity);
         
         public Task<T> GetSingleAsync(Guid id);
-        
+
         public void Update(T entity);
         
         public void Delete(T id);

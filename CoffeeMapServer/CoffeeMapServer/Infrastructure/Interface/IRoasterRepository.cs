@@ -10,5 +10,7 @@ namespace CoffeeMapServer.Infrastructures.IRepositories
         public Task<IList<Roaster>> FetchRoastersByAddressIdAsync(Guid addressId);
 
         public Task<Roaster> GetRoasterByNameAsync(string name);
+
+        public Task<Roaster> GetRoasterByNameNonTrackableAsync(string roasterName);
     }
 }

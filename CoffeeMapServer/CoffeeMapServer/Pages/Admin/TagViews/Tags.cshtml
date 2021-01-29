@@ -35,7 +35,7 @@
                     <td>@Html.DisplayFor(item => i.Id)</td>
                     <td>@Html.DisplayFor(item => i.TagTitle)</td>
                     <td>
-                        <a asp-page="EditTag" asp-route-id="@i.Id">Edit|</a>
+                        <a asp-page="EditTag" asp-route-id="@i.Id" asp-route-statusCode="0">Edit|</a>
                         <a asp-page="DeleteTag" asp-route-id="@i.Id">Delete|</a>
                     </td>
                 </tr>

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using CoffeeMapServer.Services.Interfaces.Admin;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace CoffeeMapServer.Services
 {
@@ -13,11 +13,11 @@ namespace CoffeeMapServer.Services
     {
         private readonly ITagRepository _tagRepository;
         private readonly IRoasterTagRepository _roasterTagRepository;
-        private readonly ILogger<TagService> _logger;
+        private readonly ILogger _logger;
 
         public TagService(ITagRepository tagRepository,
                           IRoasterTagRepository roasterTagRepository,
-                          ILogger<TagService> logger)
+                          ILogger logger)
         {
             _tagRepository = tagRepository ?? throw new ArgumentNullException(nameof(tagRepository));
             _roasterTagRepository = roasterTagRepository ?? throw new ArgumentNullException(nameof(tagRepository));
@@ -28,7 +28,7 @@ namespace CoffeeMapServer.Services
         {
             try
             {
-                _logger.LogInformation("Tag service layer access in progress...");
+                _logger.Information("Tag service layer access in progress...");
 
                 var removablePairs = await _roasterTagRepository.GetPairsByTagIdAsync(id);
                 if (removablePairs.Count > 0)
@@ -38,13 +38,13 @@ namespace CoffeeMapServer.Services
 
                 await _tagRepository.SaveChangesAsync();
 
-                _logger.LogInformation($"Tags table has been modified. Deleted tag:\n Id:{id}");
+                _logger.Information($"Tags table has been modified. Deleted tag:\n Id:{id}");
                 return 0;
 
             }
             catch (Exception e)
             {
-                _logger.LogError($"Tag service layer error occured! Error text message: {e.Message}");
+                _logger.Error($"Tag service layer error occured! Error text message: {e.Message}");
                 return -1;
             }
         }
@@ -59,18 +59,20 @@ namespace CoffeeMapServer.Services
         {
             try
             {
-                _logger.LogInformation("Tag service layer access in progress...");
-
+                _logger.Information("Tag service layer access in progress...");
+                var buffTag =await _tagRepository.GetSingleAsNoTrackingAsync(tag.TagTitle);
+                if (buffTag != null && !buffTag.Id.Equals(tag.Id))
+                    return -1;
                 _tagRepository.Update(tag);
                 await _tagRepository.SaveChangesAsync();
 
-                _logger.LogInformation($"Tags table has been modified. Updated tag:\n Id:{tag.Id}");
+                _logger.Information($"Tags table has been modified. Updated tag:\n Id:{tag.Id}");
                 return 0;
             }
             catch (Exception e)
             {
-                _logger.LogError($"Tag service layer error occured! Error text message: {e.Message}");
-                return -1;
+                _logger.Error($"Tag service layer error occured! Error text message: {e.Message}");
+                return -2;
             }
         }
     }

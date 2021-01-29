@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using CoffeeMapServer.Services.Interfaces.Admin;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace CoffeeMapServer.Services
 {
@@ -12,10 +12,10 @@ namespace CoffeeMapServer.Services
     {
 
         private readonly IUserRepository _userRepository;
-        private readonly ILogger<UserService> _logger;
+        private readonly ILogger _logger;
 
         public UserService(IUserRepository userRepository,
-                           ILogger<UserService> logger)
+                           ILogger logger)
         {
             _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -23,7 +23,7 @@ namespace CoffeeMapServer.Services
 
         public async Task<User> Login(string username, string password)
         {
-            _logger.LogInformation("User service layer access in progress...");
+            _logger.Information("User service layer access in progress...");
 
             var hash = Encryptions.Sha1Hash.GetHash(password);
             return await _userRepository.GetSingleAsync(username, hash);
@@ -33,7 +33,7 @@ namespace CoffeeMapServer.Services
         {
             try
             {
-                _logger.LogInformation("User service layer access in progress...");
+                _logger.Information("User service layer access in progress...");
 
                 User userV = await _userRepository.GetSingleAsync(entity.Login);
                 if (userV != null)
@@ -46,13 +46,13 @@ namespace CoffeeMapServer.Services
                 _userRepository.Add(entity);
                 await _userRepository.SaveChangesAsync();
 
-                _logger.LogInformation($"Users table has been modified. Inserted user:\n Id:{entity.Id}\n Username: {entity.Login}");
+                _logger.Information($"Users table has been modified. Inserted user:\n Id:{entity.Id}\n Username: {entity.Login}");
                 return 0;
 
             }
             catch (Exception e)
             {
-                _logger.LogError($"User service layer error occured! Error text message: {e.Message}");
+                _logger.Error($"User service layer error occured! Error text message: {e.Message}");
                 return -2;
             }
         }
@@ -61,18 +61,18 @@ namespace CoffeeMapServer.Services
         {
             try
             {
-                _logger.LogInformation("User service layer access in progress...");
+                _logger.Information("User service layer access in progress...");
 
                 var user = await _userRepository.GetSingleAsync(id);
                 _userRepository.Delete(user);
                 await _userRepository.SaveChangesAsync();
 
-                _logger.LogInformation($"Users table has been modified. Deleted user:\n Id:{user.Id}\n Username: {user.Login}");
+                _logger.Information($"Users table has been modified. Deleted user:\n Id:{user.Id}\n Username: {user.Login}");
                 return 0;
             }
             catch (Exception e)
             {
-                _logger.LogError($"User service layer error occured! Error text message: {e.Message}");
+                _logger.Error($"User service layer error occured! Error text message: {e.Message}");
                 return -1;
             }
         }

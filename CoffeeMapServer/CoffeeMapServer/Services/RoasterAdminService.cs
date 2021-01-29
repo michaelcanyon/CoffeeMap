@@ -6,7 +6,7 @@ using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using CoffeeMapServer.Services.Interfaces.Admin;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace CoffeeMapServer.Services
 {
@@ -16,13 +16,13 @@ namespace CoffeeMapServer.Services
         private readonly IRoasterTagRepository _roasterTagRepository;
         private readonly ITagRepository _tagRepository;
         private readonly IAddressRepository _addressReposiotry;
-        private readonly ILogger<RoasterAdminService> _logger;
+        private readonly ILogger _logger;
 
         public RoasterAdminService(IRoasterRepository roasterRepository,
                                    IRoasterTagRepository roasterTagRepository,
                                    ITagRepository tagRepository,
                                    IAddressRepository addressRepository,
-                                   ILogger<RoasterAdminService> logger)
+                                   ILogger logger)
         {
             _roasterRepository = roasterRepository ?? throw new ArgumentNullException(nameof(roasterRepository));
             _roasterTagRepository = roasterTagRepository ?? throw new ArgumentNullException(nameof(roasterTagRepository));
@@ -38,9 +38,9 @@ namespace CoffeeMapServer.Services
         {
             try
             {
-                _logger.LogInformation("Roaster admin service layer access in progress...");
+                _logger.Information("Roaster admin service layer access in progress...");
 
-                var roasterByName = await _roasterRepository.GetRoasterByNameAsync(roaster.Name);
+                var roasterByName = await _roasterRepository.GetRoasterByNameNonTrackableAsync(roaster.Name);
                 if (roasterByName != null)
                     return -1;
 
@@ -72,12 +72,12 @@ namespace CoffeeMapServer.Services
                 _roasterRepository.Add(roaster);
                 await _roasterRepository.SaveChangesAsync();
 
-                _logger.LogInformation($"Roaster, Tags, RoasterTags, Addresses tables have been modified. Inserted roaster:\n Id: {roaster.Id}\n Roaster name: {roaster.Name}");
+                _logger.Information($"Roaster, Tags, RoasterTags, Addresses tables have been modified. Inserted roaster:\n Id: {roaster.Id}\n Roaster name: {roaster.Name}");
                 return 0;
             }
             catch (Exception e)
             {
-                _logger.LogError($"Roaster admin service layer error occured! Error text message: {e.Message}");
+                _logger.Error($"Roaster admin service layer error occured! Error text message: {e.Message}");
                 return -2;
             }
         }
@@ -86,18 +86,18 @@ namespace CoffeeMapServer.Services
         {
             try
             {
-                _logger.LogInformation("Roaster admin service layer access in progress...");
+                _logger.Information("Roaster admin service layer access in progress...");
                 var roaster = await _roasterRepository.GetSingleAsync(id);
                 _roasterRepository.Delete(roaster);
                 var pairs = await _roasterTagRepository.GetPairsByRoasterIdAsync(id);
                 _roasterTagRepository.DeleteRoasterTags(pairs);
                 await _roasterRepository.SaveChangesAsync();
-                _logger.LogInformation($"Roaster, Tags, RoasterTags, Addresses tables have been modified. Deleted roaster:\n Id: {roaster.Id}\n Roaster name: {roaster.Name}");
+                _logger.Information($"Roaster, Tags, RoasterTags, Addresses tables have been modified. Deleted roaster:\n Id: {roaster.Id}\n Roaster name: {roaster.Name}");
                 return 0;
             }
             catch (Exception e)
             {
-                _logger.LogError("Roaster admin service layer error occured! Error text message:" + e.Message);
+                _logger.Error("Roaster admin service layer error occured! Error text message:" + e.Message);
                 return -1;
             }
         }
@@ -118,9 +118,15 @@ namespace CoffeeMapServer.Services
             => await _tagRepository.GetSingleAsync(id);
 
         public async Task<int> UpdateRoasterAsync(Roaster entity, string newTags, string deletableTags, IFormFile picture)
-        {
-            //fetch tags that already exists in current roaster note
-            var onGetTags = new List<string>();
+        { 
+            _logger.Information("Roaster admin service layer access in progress...");
+            try
+            {
+                var broast = await _roasterRepository.GetRoasterByNameNonTrackableAsync(entity.Name);
+                if (broast != null && !broast.Id.Equals(entity.Id))
+                    return -1;
+                //fetch tags that already exists in current roaster note
+                var onGetTags = new List<string>();
             onGetTags.AddRange(await RoasterAdminServiceBuilder.FetchRoasterTags(_roasterTagRepository,
                                                                                  _tagRepository,
                                                                                  entity.Id));
@@ -138,9 +144,7 @@ namespace CoffeeMapServer.Services
                                                         _tagRepository,
                                                         _roasterTagRepository,
                                                         entity.Id);
-            try
-            {
-                _logger.LogInformation("Roaster admin service layer access in progress...");
+
                 //TODO: remove when declare meanings additions with fluent api
                 if (entity.ContactEmail == null)
                     entity.ContactEmail = "none";
@@ -158,13 +162,13 @@ namespace CoffeeMapServer.Services
                 entity.OfficeAddress = roasterAddress;
                 _roasterRepository.Update(entity);
                 await _roasterTagRepository.SaveChangesAsync();
-                _logger.LogInformation($"Roaster, Tags, RoasterTags, Addresses tables have been modified. Updated roaster:\n Id: {entity.Id}\n Roaster name: {entity.Name}");
+                _logger.Information($"Roaster, Tags, RoasterTags, Addresses tables have been modified. Updated roaster:\n Id: {entity.Id}\n Roaster name: {entity.Name}");
                 return 0;
             }
             catch (Exception e)
             {
-                _logger.LogError("Roaster admin service layer error occured! Error text message:" + e.Message);
-                return -1;
+                _logger.Error("Roaster admin service layer error occured! Error text message:" + e.Message);
+                return -2;
             }
         }
 

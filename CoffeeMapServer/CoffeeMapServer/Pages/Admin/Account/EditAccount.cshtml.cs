@@ -25,24 +25,26 @@ namespace CoffeeMapServer.Pages.Admin.Account
         [BindProperty]
         public string RStatusCode { get; set; }
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(string statusCode)
         {
-            
-                Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
-                var id = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.id"].ToString();
-                _User = await _accountService.GetAccountByIdAsync(Guid.Parse(id));
+
+            RStatusCode = statusCode;
+            Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
+            var id = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.id"].ToString();
+            _User = await _accountService.GetAccountByIdAsync(Guid.Parse(id));
             if (_User == null)
                 return BadRequest();
-            return Page(); 
+            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
             var getUser = await _accountService.GetAccountByIdAsync(_User.Id);
-            if (CoffeeMapServer.Encryptions.Sha1Hash.GetHash(_User.Password) != getUser.Password)
-                return RedirectToPage("EditAccount");
+            if(_User.Password!=null)
+                if (Encryptions.Sha1Hash.GetHash(_User.Password) != getUser.Password)
+                    return Redirect("602");
             var passwordHash = Encryptions.Sha1Hash.GetHash(NewPassword);
-           var respCode= await _accountService.UpdateAccountAsync(getUser, passwordHash, _User.Email);
+            var respCode = await _accountService.UpdateAccountAsync(getUser, passwordHash, _User.Email);
             if (respCode.Equals(0))
                 return getUser.Role == "Master" ? RedirectToPage("/Home/HomeMaster") : RedirectToPage("/Home/Home");
             else if (respCode.Equals(-1))

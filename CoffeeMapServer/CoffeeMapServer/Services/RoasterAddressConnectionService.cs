@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using CoffeeMapServer.Services.Interfaces.Admin;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace CoffeeMapServer.Services
 {
@@ -13,11 +13,11 @@ namespace CoffeeMapServer.Services
     {
         private readonly IRoasterRepository _roasterRepository;
         private readonly IAddressRepository _addressRepository;
-        private readonly ILogger<RoasterAddressConnectionService> _logger;
+        private readonly ILogger _logger;
 
         public RoasterAddressConnectionService(IRoasterRepository roasterRepository,
                                                IAddressRepository addressRepository,
-                                               ILogger<RoasterAddressConnectionService> logger)
+                                               ILogger logger)
         {
             _roasterRepository = roasterRepository ?? throw new ArgumentNullException(nameof(roasterRepository));
             _addressRepository = addressRepository ?? throw new ArgumentNullException(nameof(addressRepository));
@@ -40,15 +40,15 @@ namespace CoffeeMapServer.Services
         {
             try
             {
-                _logger.LogInformation("RoasterAddressConnection service layer access in progress...");
+                _logger.Information("RoasterAddressConnection service layer access in progress...");
                 _roasterRepository.Update(entity);
                 await _roasterRepository.SaveChangesAsync();
-                _logger.LogInformation($"Roaster and Address tables have been modified. Modified roaster:\n {entity.Id}\n Name:{entity.Name}");
+                _logger.Information($"Roaster and Address tables have been modified. Modified roaster:\n {entity.Id}\n Name:{entity.Name}");
                 return 0;
             }
             catch (Exception e)
             {
-                _logger.LogError("Roaster address connection service layer error occured! Error text message:" + e.Message);
+                _logger.Error("Roaster address connection service layer error occured! Error text message:" + e.Message);
                 return -1;
             }
         }

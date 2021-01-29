@@ -27,6 +27,18 @@
     <h1>
         Edit account
     </h1>
+    @if (Model.RStatusCode.Equals("601"))
+    {
+        <br />
+        <span style="color:red; font-weight:bold;">Email is already busy!</span>
+        <br />
+    }
+    else if (Model.RStatusCode.Equals("602"))
+    {
+        <br />
+        <span style="color:red; font-weight:bold;">Password change procedure failed! Old password incorrect or wasn't filled!</span>
+        <br />
+    }
 </section>
 <!-- Main content -->
 <section class="content container-fluid">
@@ -48,8 +60,5 @@
         </div>
         <button type="submit" id="submit_button" asp-page-handler="Process" class="btn btn-primary">Submit</button>
     </form>
-    @if (Model.RStatusCode.Equals("601"))
-    { 
-    <span>Email is already busy!</span>
-    }
+    
 </section>

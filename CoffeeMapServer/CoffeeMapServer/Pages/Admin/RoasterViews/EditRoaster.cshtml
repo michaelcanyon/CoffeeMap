@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{statusCode}"
 @model CoffeeMapServer.Views.Admin.RoasterViews.EditRoasterModel
 @{
 
@@ -45,6 +45,11 @@
     <h1>
         Update roaster
     </h1>
+    @if (Model.RStatusCode.Equals("601"))
+    {
+        <span style="color:red;">Roaster with such name already exists!</span>
+        <br />
+    }
 </section>
 <!-- Main content -->
 <section class="content container-fluid">

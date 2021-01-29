@@ -17,11 +17,14 @@ namespace CoffeeMapServer.Views.Admin.Addresses
         [BindProperty(SupportsGet = true)]
         public string Role { get; set; }
 
+        [BindProperty]
+        public string RStatusCode { get; set; }
         public UpdateAddressModel(IAddressService addressService)
             => _addressService = addressService ?? throw new ArgumentNullException(nameof(IAddressService));
 
-        public async Task<IActionResult> OnGetAsync(Guid id)
+        public async Task<IActionResult> OnGetAsync(Guid id, string statusCode)
         {
+            RStatusCode = statusCode;
             Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
             Address = await _addressService.GetSingleAddressByIdAsync(id);
             if (Address == null)
@@ -34,6 +37,8 @@ namespace CoffeeMapServer.Views.Admin.Addresses
             var respCode=await _addressService.UpdateAddressAsync(Address);
             if (respCode.Equals(0))
                 return RedirectToPage("GetAddresses");
+            else if (respCode.Equals(-1))
+                return RedirectToPage("UpdateAddress",new { id = Address.Id, statusCode = "601" });
             else
                 return BadRequest();
         }

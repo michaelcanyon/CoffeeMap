@@ -51,6 +51,7 @@ namespace CoffeeMapServer
             services
                 .ConfigureAuth()
                 .ConfigRazorPagesAcess();
+            services.AddSingleton(Log.Logger);
             services.AddSwaggerGen();
             services.AddSwaggerGen(c =>
             {
