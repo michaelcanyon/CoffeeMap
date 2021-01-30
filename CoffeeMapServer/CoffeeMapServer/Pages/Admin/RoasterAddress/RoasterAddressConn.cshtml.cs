@@ -14,7 +14,7 @@ namespace CoffeeMapServer.Pages.Admin.RoasterAddress
         private readonly IRoasterAddressConnectionService _roasterAddressConnectionService;
 
         public RoasterAddressConnModel(IRoasterAddressConnectionService roasterAddressConnectionService)
-        => _roasterAddressConnectionService = roasterAddressConnectionService ?? throw new ArgumentNullException(nameof(IRoasterAddressConnectionService));
+             => _roasterAddressConnectionService = roasterAddressConnectionService ?? throw new ArgumentNullException(nameof(IRoasterAddressConnectionService));
 
         [BindProperty(SupportsGet = true)]
         public string IdFilter { get; set; }
@@ -52,13 +52,21 @@ namespace CoffeeMapServer.Pages.Admin.RoasterAddress
                 Addresses = await _roasterAddressConnectionService.FetchAddressesAsync();
                 Roasters = await _roasterAddressConnectionService.FetchRoastersAsync();
                 if (!string.IsNullOrEmpty(AddressIdFilter))
-                    Addresses = Addresses.Where(n => n.Id.Equals(Guid.Parse(AddressIdFilter))).ToList();
+                    Addresses = Addresses
+                                .Where(n => n.Id.Equals(Guid.Parse(AddressIdFilter)))
+                                .ToList();
                 if (!string.IsNullOrEmpty(AddressStrFilter))
-                    Addresses = Addresses.Where(n => n.AddressStr.Contains(AddressStrFilter)).ToList();
+                    Addresses = Addresses
+                                .Where(n => n.AddressStr.Contains(AddressStrFilter))
+                                .ToList();
                 if (!string.IsNullOrEmpty(IdFilter))
-                    Roasters = Roasters.Where(n => n.Id.Equals(Guid.Parse(IdFilter))).ToList();
+                    Roasters = Roasters
+                               .Where(n => n.Id.Equals(Guid.Parse(IdFilter)))
+                               .ToList();
                 if (!string.IsNullOrEmpty(NameFilter))
-                    Roasters = Roasters.Where(n => n.Name.Contains(NameFilter)).ToList();
+                    Roasters = Roasters
+                               .Where(n => n.Name.Contains(NameFilter))
+                               .ToList();
                 return Page();
             }
             catch

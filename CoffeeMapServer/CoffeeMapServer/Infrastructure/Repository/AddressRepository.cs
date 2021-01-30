@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using CoffeeMapServer.EF;
 using CoffeeMapServer.Infrastructures.IRepositories;
@@ -21,20 +22,32 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         public void Delete(Address entity)
             => _context.Addresses.Remove(entity);
 
-        public async Task<Address> GetSingleAsync(Guid id)
-            => await _context.Addresses.FirstOrDefaultAsync(e => e.Id == id);
+        public async Task<Address> GetSingleAsync(Guid id,
+                                                  [CallerMemberName] string methodName = "")
+            => await _context.Addresses
+               .TagWith($"{nameof(AddressRepository)}.{methodName} ({id})")
+               .FirstOrDefaultAsync(e => e.Id == id);
 
-        public async Task<Address> GetSingleAsync(string addressStr)
-            => await _context.Addresses.FirstOrDefaultAsync(e => e.AddressStr == addressStr);
+        public async Task<Address> GetSingleAsync(string addressStr,
+                                                  [CallerMemberName] string methodName = "")
+            => await _context.Addresses
+               .TagWith($"{nameof(AddressRepository)}.{methodName} ({addressStr})")
+               .FirstOrDefaultAsync(e => e.AddressStr == addressStr);
 
-        public async Task<Address> GetSingleAsNoTrackingAsync(string addressStr)
-            => await _context.Addresses.AsNoTracking().FirstOrDefaultAsync(e => e.AddressStr == addressStr);
+        public async Task<Address> GetSingleAsNoTrackingAsync(string addressStr,
+                                                              [CallerMemberName] string methodName = "")
+            => await _context.Addresses
+               .AsNoTracking()
+               .TagWith($"{nameof(AddressRepository)}.{methodName} ({addressStr}) No Tracking")
+               .FirstOrDefaultAsync(e => e.AddressStr == addressStr);
 
         public void Update(Address entity)
             => _context.Addresses.Update(entity);
 
-        public async Task<IList<Address>> GetListAsync()
-            => await _context.Addresses.ToListAsync();
+        public async Task<IList<Address>> GetListAsync([CallerMemberName] string methodName = "")
+            => await _context.Addresses
+               .TagWith($"{nameof(AddressRepository)}.{methodName}")
+               .ToListAsync();
 
         public async Task SaveChangesAsync()
             => await _context.SaveChangesAsync();

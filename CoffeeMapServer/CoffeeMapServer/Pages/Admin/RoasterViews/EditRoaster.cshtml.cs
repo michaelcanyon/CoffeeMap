@@ -51,7 +51,10 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
 
         public async Task<IActionResult> OnPostProcessAsync()
         {
-           var respCode= await _roasterAdminService.UpdateRoasterAsync(Roaster, TagsToAdd, TagsToDelete, Picture);
+           var respCode= await _roasterAdminService.UpdateRoasterAsync(Roaster,
+                                                                       TagsToAdd,
+                                                                       TagsToDelete,
+                                                                       Picture);
             if (respCode.Equals(0))
                 return RedirectToPage("Roasters");
             else if (respCode.Equals(-1))

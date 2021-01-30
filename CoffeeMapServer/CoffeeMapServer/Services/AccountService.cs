@@ -12,10 +12,11 @@ namespace CoffeeMapServer.Services
         private readonly IUserRepository _userRepository;
         private readonly ILogger _logger;
 
-        public AccountService(IUserRepository userRepository, ILogger logger)
+        public AccountService(IUserRepository userRepository,
+                              ILogger logger)
         {
             _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
-            _logger = logger;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public async Task<User> GetAccountByIdAsync(Guid id)
@@ -27,7 +28,7 @@ namespace CoffeeMapServer.Services
                 _logger.Information("User {0}, {1}, Role: {2} access procedure implemented", user.Id, user.Login, user.Role);
                 return user;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 _logger.Error($"Account service layer error occured! Error text message: {e.Message}");
                 return null;
@@ -42,7 +43,7 @@ namespace CoffeeMapServer.Services
             {
                 entity.Password = newPasswordHash ?? entity.Password;
                 entity.Email = email;
-                var user =await _userRepository.GetSingleByMailAsync(email);
+                var user = await _userRepository.GetSingleByMailAsync(email);
                 if (user != null && !user.Id.Equals(entity.Id))
                     return -1;
                 _userRepository.Update(entity);

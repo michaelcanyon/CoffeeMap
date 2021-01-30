@@ -42,16 +42,21 @@ namespace CoffeeMapServer.Services
 
                 var request = await _roasterRequestRepository.GetSingleAsync(id);
 
-                var bindTags = await RoasterRequestServiceBuilder.BuildAndBindTags(request.TagString, _tagRepository);
+                var bindTags = await RoasterRequestServiceBuilder.BuildAndBindTags(request.TagString,
+                                                                                   _tagRepository);
 
-                var address = Address.New(request.Address.AddressStr, request.Address.OpeningHours);
+                var address = Address.New(request.Address.AddressStr,
+                                          request.Address.OpeningHours);
                 _addressRepository.Add(address);
 
-                var roaster = RoasterRequestServiceBuilder.GenerateRoaster(request.Roaster, request.Address.Id);
+                var roaster = RoasterRequestServiceBuilder.GenerateRoaster(request.Roaster,
+                                                                           request.Address.Id);
 
                 _roasterRepository.Add(roaster);
 
-                RoasterTagsPairsBuilder.BuildRoasterTags(bindTags, roaster.Id, _roasterTagRepository);
+                RoasterTagsPairsBuilder.BuildRoasterTags(bindTags,
+                                                         roaster.Id,
+                                                         _roasterTagRepository);
 
                 _roasterRequestRepository.Delete(request);
 

@@ -5,6 +5,7 @@ namespace CoffeeMapServer.EF
 {
     public partial class CoffeeDbContext
     {
+        private const string nonestr = "none";
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {                    
             modelBuilder.Entity<Address>()
@@ -13,29 +14,29 @@ namespace CoffeeMapServer.EF
             modelBuilder.Entity<Address>()
                 .Property(p => p.OpeningHours)
                 .IsRequired()
-                .HasDefaultValue("none");
+                .HasDefaultValue(nonestr);
 
             modelBuilder.Entity<Roaster>()
                 .Property(p => p.Name)
                 .IsRequired();
             modelBuilder.Entity<Roaster>()
                 .Property(p => p.Description)
-                .HasDefaultValue("Description will apperar as soon as possible:)");
+                .HasDefaultValue(nonestr);
             modelBuilder.Entity<Roaster>()
                 .Property(p => p.ContactEmail)
-                .HasDefaultValue("none");
+                .HasDefaultValue(nonestr);
             modelBuilder.Entity<Roaster>()
                 .Property(p => p.ContactNumber)
                 .IsRequired();
             modelBuilder.Entity<Roaster>()
                 .Property(p => p.TelegramProfileLink)
-                .HasDefaultValue("none");
+                .HasDefaultValue(nonestr);
             modelBuilder.Entity<Roaster>()
                 .Property(p => p.VkProfileLink)
-                .HasDefaultValue("none");
+                .HasDefaultValue(nonestr);
             modelBuilder.Entity<Roaster>()
                 .Property(p => p.WebSiteLink)
-                .HasDefaultValue("none");
+                .HasDefaultValue(nonestr);
 
             modelBuilder.Entity<Roaster>()
                 .HasOne(r => r.OfficeAddress)
@@ -43,7 +44,7 @@ namespace CoffeeMapServer.EF
 
             modelBuilder.Entity<RoasterRequest>()
                 .Property(p => p.TagString)
-                .HasDefaultValue("");
+                .HasDefaultValue(nonestr);
 
             modelBuilder.Entity<Tag>()
                 .Property(p => p.TagTitle)

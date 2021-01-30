@@ -42,7 +42,10 @@ namespace CoffeeMapServer.Services
             var roaster = await _roasterRepository.GetSingleAsync(id);
             //TODO: check it out
             var roasterAddress = await _addressRepository.GetSingleAsync(roaster.OfficeAddress.Id);
-            var roasterTagsId = (await _roasterTagRepository.GetPairsByRoasterIdAsync(roaster.Id)).Select(p => p.TagId).ToList();
+            var roasterTagsId = (await _roasterTagRepository
+                                       .GetPairsByRoasterIdAsync(roaster.Id))
+                                       .Select(p => p.TagId)
+                                       .ToList();
             var tags = new List<Tag>();
             tags.AddRange(await _tagRepository.GetTagsByTagIds(roasterTagsId));
             return new RoasterInfoViewModel(roaster, roasterAddress, tags);
@@ -53,10 +56,10 @@ namespace CoffeeMapServer.Services
             try
             {
                 _logger.Information("Roaster service layer access in progress...");
-                
+
                 _roasterRequestRepository.Add(roasterRequest);
                 await _roasterRequestRepository.SaveChangesAsync();
-                
+
                 _logger.Information($"Roaster request table has been modified. Inserted request:\n Id:{roasterRequest.Id}");
             }
             catch (Exception e)

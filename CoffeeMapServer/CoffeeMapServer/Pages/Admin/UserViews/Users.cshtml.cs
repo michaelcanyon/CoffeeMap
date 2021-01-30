@@ -39,13 +39,21 @@ namespace CoffeeMapServer.Pages.Admin.UserViews
             {
                 Users = await _userService.FetchUsersAsync();
                 if (!string.IsNullOrEmpty(IdFilter))
-                    Users = Users.Where(user => user.Id.ToString().Equals(Convert.ToString(IdFilter))).ToList();
+                    Users = Users
+                            .Where(user => user.Id.ToString().Equals(Convert.ToString(IdFilter)))
+                            .ToList();
                 if (!string.IsNullOrEmpty(LoginFilter))
-                    Users = Users.Where(user => user.Login.Contains(LoginFilter)).ToList();
+                    Users = Users
+                            .Where(user => user.Login.Contains(LoginFilter))
+                            .ToList();
                 if (!string.IsNullOrEmpty(EmailFilter))
-                    Users = Users.Where(user => user.Email.Contains(EmailFilter)).ToList();
+                    Users = Users
+                            .Where(user => user.Email.Contains(EmailFilter))
+                            .ToList();
                 if (!string.IsNullOrEmpty(RoleFilter))
-                    Users = Users.Where(user => user.Role.Equals(RoleFilter)).ToList();
+                    Users = Users
+                            .Where(user => user.Role.Equals(RoleFilter))
+                            .ToList();
                 return Page();
             }
             catch

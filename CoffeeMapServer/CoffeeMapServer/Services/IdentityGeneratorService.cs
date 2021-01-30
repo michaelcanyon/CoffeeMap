@@ -15,7 +15,8 @@ namespace CoffeeMapServer.Services
         public IdentityGeneratorService(IUserService userService)
             => _userService = userService ?? throw new ArgumentNullException(nameof(userService));
 
-        public async Task<ClaimsIdentity> GetIdentity(string username, string password)
+        public async Task<ClaimsIdentity> GetIdentity(string username,
+                                                      string password)
         {
             var user = await _userService.Login(username, password);
             if (user == null)

@@ -5,6 +5,7 @@ namespace CoffeeMapServer.Services.Interfaces
 {
     public interface IIdentityGeneratorService
     {
-        public Task<ClaimsIdentity> GetIdentity(string username, string password);
+        public Task<ClaimsIdentity> GetIdentity(string username,
+                                                string password);
     }
 }

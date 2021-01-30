@@ -55,25 +55,52 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
             {
                 Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
                 Roasters = await _roasterAdminService.FetchRoastersAsync();
-                // TODO: подумать над бизнес-сценариями
                 if (!string.IsNullOrEmpty(IdFilter))
-                    Roasters = Roasters.Where(s => s.Id.ToString().Equals(IdFilter)).ToList();
+                    Roasters = Roasters
+                               .Where(s => s.Id.ToString().Equals(IdFilter))
+                               .ToList();
                 if (!string.IsNullOrEmpty(NameFilter))
-                    Roasters = Roasters.Where(s => s.Name.Contains(NameFilter)).ToList();
+                    Roasters = Roasters
+                               .Where(s => s.Name
+                                            .Contains(NameFilter))
+                               .ToList();
                 if (!string.IsNullOrEmpty(OfficeAddressFilter))
-                    Roasters = Roasters.Where(s => s.OfficeAddress.AddressStr.Contains(OfficeAddressFilter)).ToList();
+                    Roasters = Roasters
+                               .Where(s => s.OfficeAddress.AddressStr
+                                                          .Contains(OfficeAddressFilter))
+                               .ToList();
                 if (!string.IsNullOrEmpty(ContactNumberFilter))
-                    Roasters = Roasters.Where(s => s.ContactNumber.Contains(ContactNumberFilter)).ToList();
+                    Roasters = Roasters
+                               .Where(s => s.ContactNumber
+                                            .Contains(ContactNumberFilter))
+                               .ToList();
                 if (!string.IsNullOrEmpty(ContactEmailFilter))
-                    Roasters = Roasters.Where(s => s.ContactEmail.Contains(ContactEmailFilter)).ToList();
+                    Roasters = Roasters
+                               .Where(s => s.ContactEmail
+                                            .Contains(ContactEmailFilter))
+                               .ToList();
                 if (!string.IsNullOrEmpty(InstagramProfileFilter))
-                    Roasters = Roasters.Where(s => s.InstagramProfileLink.Contains(InstagramProfileFilter)).ToList();
+                    Roasters = Roasters
+                               .Where(s => s.InstagramProfileLink
+                                            .Contains(InstagramProfileFilter))
+                               .ToList();
                 if (!string.IsNullOrEmpty(VkProfileFilter))
-                    Roasters = Roasters.Where(s => s.VkProfileLink.Contains(VkProfileFilter)).ToList();
+                    Roasters = Roasters.
+                               Where(s => s.VkProfileLink
+                                           .Contains(VkProfileFilter))
+                               .ToList();
                 if (!string.IsNullOrEmpty(TelegramProfileFilter))
-                    Roasters = Roasters.Where(s => s.TelegramProfileLink.Contains(TelegramProfileFilter)).ToList();
+                    Roasters = Roasters
+                               .Where(s => s.TelegramProfileLink
+                                            .Contains(TelegramProfileFilter))
+                               .ToList();
                 if (!string.IsNullOrEmpty(TagString))
-                    Roasters = Roasters.SelectMany(r => r.RoasterTags, (r, t) => new { roast = r, tagp = t }).Where(pa => pa.tagp.Tag.TagTitle.Contains(TagString)).Select(pa => pa.roast).ToList();
+                    Roasters = Roasters
+                               .SelectMany(r => r.RoasterTags, (r, t) => new { roast = r, tagp = t })
+                               .Where(pa => pa.tagp.Tag.TagTitle
+                                                        .Contains(TagString))
+                               .Select(pa => pa.roast)
+                               .ToList();
                 return Page();
             }
             catch

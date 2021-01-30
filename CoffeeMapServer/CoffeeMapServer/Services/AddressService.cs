@@ -16,7 +16,8 @@ namespace CoffeeMapServer.Services
         private readonly ILogger _logger;
 
         public AddressService(IAddressRepository addressRepository,
-                              IRoasterRepository roasterRepository, ILogger logger)
+                              IRoasterRepository roasterRepository,
+                              ILogger logger)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _addressRepository = addressRepository ?? throw new ArgumentNullException(nameof(addressRepository));
@@ -28,9 +29,11 @@ namespace CoffeeMapServer.Services
             try
             {
                 _logger.Information("Address service Layer access in progress...");
-                var dbAddress= _addressRepository.GetSingleAsNoTrackingAsync(entity.AddressStr);
+                var dbAddress=await _addressRepository.GetSingleAsNoTrackingAsync(entity.AddressStr);
                 if (dbAddress != null)
                     return -1;
+                if (entity.OpeningHours == null)
+                    entity.OpeningHours = "none";
                 _addressRepository.Add(entity);
                 await _addressRepository.SaveChangesAsync();
                 _logger.Information($"Address table has been modified! Address:\n Id: {entity.Id}\n Address string: {entity.AddressStr}\n has been inserted.");
@@ -83,6 +86,8 @@ namespace CoffeeMapServer.Services
                 var address = await _addressRepository.GetSingleAsNoTrackingAsync(entity.AddressStr);
                 if (address!=null && !address.Id.Equals(entity.Id))
                     return -1;
+                if (entity.OpeningHours == null)
+                    entity.OpeningHours = "none";
                 _addressRepository.Update(entity);
                 await _addressRepository.SaveChangesAsync();
                 _logger.Information($"Address Table has been modified. Address:\n Address Id: {entity.Id} \n Address string: {entity.AddressStr}\n has been added.");

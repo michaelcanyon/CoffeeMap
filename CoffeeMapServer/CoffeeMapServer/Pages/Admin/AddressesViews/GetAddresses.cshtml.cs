@@ -36,11 +36,17 @@ namespace CoffeeMapServer.Views.Admin.Addresses
                 Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
                 Addresses = await _addressService.FetchAddressesAsync();
                 if (!string.IsNullOrEmpty(AddressIdFilter))
-                    Addresses = Addresses.Where(n => n.Id.ToString().Equals(AddressIdFilter)).ToList();
+                    Addresses = Addresses
+                                .Where(n => n.Id.ToString().Equals(AddressIdFilter))
+                                .ToList();
                 if (!string.IsNullOrEmpty(AddressStrFilter))
-                    Addresses = Addresses.Where(n => n.AddressStr.Contains(AddressStrFilter)).ToList();
+                    Addresses = Addresses
+                                .Where(n => n.AddressStr.Contains(AddressStrFilter))
+                                .ToList();
                 if (!string.IsNullOrEmpty(OpeningHoursFilter))
-                    Addresses = Addresses.Where(n => n.OpeningHours.Contains(OpeningHoursFilter)).ToList();
+                    Addresses = Addresses
+                                .Where(n => n.OpeningHours.Contains(OpeningHoursFilter))
+                                .ToList();
                 return Page();
             }
             catch

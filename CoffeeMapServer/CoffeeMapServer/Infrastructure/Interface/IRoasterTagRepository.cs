@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using CoffeeMapServer.Models;
 
@@ -7,9 +8,11 @@ namespace CoffeeMapServer.Infrastructures.IRepositories
 {
     public interface IRoasterTagRepository
     {
-        public Task<IList<RoasterTag>> GetPairsByRoasterIdAsync(Guid roasterId);
+        public Task<IList<RoasterTag>> GetPairsByRoasterIdAsync(Guid roasterId,
+                                                                [CallerMemberName] string methodName = "");
 
-        public Task<IList<RoasterTag>> GetPairsByTagIdAsync(Guid tagId);
+        public Task<IList<RoasterTag>> GetPairsByTagIdAsync(Guid tagId,
+                                                            [CallerMemberName] string methodName = "");
 
         public void Delete(RoasterTag entity);
 
@@ -17,7 +20,7 @@ namespace CoffeeMapServer.Infrastructures.IRepositories
 
         public void Add(RoasterTag entity);
 
-        public Task<IList<RoasterTag>> GetListAsync();
+        public Task<IList<RoasterTag>> GetListAsync([CallerMemberName] string methodName = "");
 
         public Task SaveChangesAsync();
     }

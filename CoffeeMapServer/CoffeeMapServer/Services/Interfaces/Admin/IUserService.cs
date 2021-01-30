@@ -7,7 +7,8 @@ namespace CoffeeMapServer.Services.Interfaces.Admin
 {
     public interface IUserService
     {
-        public Task<User> Login(string username, string hashedPassword);
+        public Task<User> Login(string username,
+                                string hashedPassword);
 
         public Task<int> AddUserAsync(User entity);
 

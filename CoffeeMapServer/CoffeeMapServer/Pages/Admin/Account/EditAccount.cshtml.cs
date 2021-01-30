@@ -44,7 +44,9 @@ namespace CoffeeMapServer.Pages.Admin.Account
                 if (Encryptions.Sha1Hash.GetHash(_User.Password) != getUser.Password)
                     return Redirect("602");
             var passwordHash = Encryptions.Sha1Hash.GetHash(NewPassword);
-            var respCode = await _accountService.UpdateAccountAsync(getUser, passwordHash, _User.Email);
+            var respCode = await _accountService.UpdateAccountAsync(getUser,
+                                                                    passwordHash,
+                                                                    _User.Email);
             if (respCode.Equals(0))
                 return getUser.Role == "Master" ? RedirectToPage("/Home/HomeMaster") : RedirectToPage("/Home/Home");
             else if (respCode.Equals(-1))

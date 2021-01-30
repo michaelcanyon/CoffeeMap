@@ -32,9 +32,9 @@ namespace CoffeeMapServer.Services
         }
 
         public async Task<int> AddRoasterAsync(Roaster roaster,
-                                          string tags,
-                                          Address address,
-                                          IFormFile picture)
+                                               string tags,
+                                               Address address,
+                                               IFormFile picture)
         {
             try
             {
@@ -43,6 +43,23 @@ namespace CoffeeMapServer.Services
                 var roasterByName = await _roasterRepository.GetRoasterByNameNonTrackableAsync(roaster.Name);
                 if (roasterByName != null)
                     return -1;
+
+                //Get and process tags string into tag entities
+                var _localTags = await RoasterAdminServiceBuilder.BuildTagsList(tags,
+                                                                                _tagRepository);
+
+                //process address entity
+                var _address = Address.New(address.AddressStr,
+                                           address.OpeningHours);
+                roaster.OfficeAddress = _address;
+                _addressReposiotry.Add(_address);
+                //add roasterTags  notes
+                RoasterTagsPairsBuilder.BuildRoasterTags(_localTags,
+                                                         roaster.Id,
+                                                         _roasterTagRepository);
+
+                //process picture
+                roaster.Picture = BytePictureBuilder.GetBytePicture(picture);
 
                 if (roaster.ContactEmail == null)
                     roaster.ContactEmail = "none";
@@ -57,18 +74,6 @@ namespace CoffeeMapServer.Services
                 if (address.OpeningHours == null)
                     address.OpeningHours = "none";
 
-                //Get and process tags string into tag entities
-                var _localTags = await RoasterAdminServiceBuilder.BuildTagsList(tags, _tagRepository);
-
-                //process address entity
-                var _address = Address.New(address.AddressStr, address.OpeningHours);
-                roaster.OfficeAddress = _address;
-                _addressReposiotry.Add(_address);
-                //add roasterTags  notes
-                RoasterTagsPairsBuilder.BuildRoasterTags(_localTags, roaster.Id, _roasterTagRepository);
-
-                //process picture
-                roaster.Picture = BytePictureBuilder.GetBytePicture(picture);
                 _roasterRepository.Add(roaster);
                 await _roasterRepository.SaveChangesAsync();
 
@@ -145,7 +150,10 @@ namespace CoffeeMapServer.Services
                                                         _roasterTagRepository,
                                                         entity.Id);
 
-                //TODO: remove when declare meanings additions with fluent api
+                entity.Picture = BytePictureBuilder.GetBytePicture(picture);
+                var roasterAddress = await _addressReposiotry.GetSingleAsync(entity.OfficeAddress.Id);
+                entity.OfficeAddress = roasterAddress;
+
                 if (entity.ContactEmail == null)
                     entity.ContactEmail = "none";
                 if (entity.InstagramProfileLink == null)
@@ -156,10 +164,9 @@ namespace CoffeeMapServer.Services
                     entity.VkProfileLink = "none";
                 if (entity.TelegramProfileLink == null)
                     entity.TelegramProfileLink = "none";
+                if (entity.OfficeAddress.OpeningHours == null)
+                    entity.OfficeAddress.OpeningHours = "none";
 
-                entity.Picture = BytePictureBuilder.GetBytePicture(picture);
-                var roasterAddress = await _addressReposiotry.GetSingleAsync(entity.OfficeAddress.Id);
-                entity.OfficeAddress = roasterAddress;
                 _roasterRepository.Update(entity);
                 await _roasterTagRepository.SaveChangesAsync();
                 _logger.Information($"Roaster, Tags, RoasterTags, Addresses tables have been modified. Updated roaster:\n Id: {entity.Id}\n Roaster name: {entity.Name}");

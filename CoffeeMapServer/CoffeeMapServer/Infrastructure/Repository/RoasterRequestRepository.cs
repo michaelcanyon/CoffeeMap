@@ -6,6 +6,7 @@ using CoffeeMapServer.EF;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace CoffeeMapServer.Infrastructures.Repositories
 {
@@ -13,7 +14,10 @@ namespace CoffeeMapServer.Infrastructures.Repositories
     {
         private readonly CoffeeDbContext _context;
 
-        public RoasterRequestRepository(CoffeeDbContext context)
+        private readonly ILogger _logger;
+
+        public RoasterRequestRepository(CoffeeDbContext context,
+                                        ILogger logger)
             => _context = context ?? throw new ArgumentNullException(nameof(CoffeeDbContext));
 
         public void Add(RoasterRequest entity)
@@ -25,16 +29,19 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         public void DeleteRoasterRequest(IList<RoasterRequest> range)
             => _context.RoasterRequests.RemoveRange(range);
 
-        public async Task<RoasterRequest> GetSingleAsync(Guid id/*, [CallerMemberName] string methodName = ""*/)
+        public async Task<RoasterRequest> GetSingleAsync(Guid id,
+                                                         [CallerMemberName] string methodName = "")
             => await _context.RoasterRequests
-            //.TagWith($"{nameof(RoasterRequestRepository)}.{methodName} ({id})")
+            .TagWith($"{nameof(RoasterRequestRepository)}.{methodName} ({id})")
             .FirstOrDefaultAsync(node => node.Id == id);
 
         public void Update(RoasterRequest entity)
             => _context.RoasterRequests.Update(entity);
 
-        public async Task<IList<RoasterRequest>> GetListAsync()
-            => await _context.RoasterRequests.ToListAsync();
+        public async Task<IList<RoasterRequest>> GetListAsync([CallerMemberName] string methodName = "")
+            => await _context.RoasterRequests
+               .TagWith($"{nameof(RoasterRequestRepository)}.{methodName}")
+               .ToListAsync();
 
         public async Task SaveChangesAsync()
             => await _context.SaveChangesAsync();
