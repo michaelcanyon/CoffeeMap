@@ -9,64 +9,139 @@
     <script type="text/javascript" src="~/dist/jquery-3.5.1.js"></script>
     <script type="text/javascript" src="~/dist/jquery.maskedInput.js"></script>
     <script>
-        $(function () {
-            $("#hours").mask('AA-AA 00:00-00:00', { 'translation': { A: { pattern: /[а-я]/ } }, 0: { pattern: /[0-9]/ } });
-        });
+
         $(document).ready(function () {
+            $("#hours").mask('AA-AA 00:00-00:00', { 'translation': { A: { pattern: /[а-я]/ } }, 0: { pattern: /[0-9]/ } });
             $("#filtrationbar").click(function () {
                 $("#filtration").toggle(500);
             });
         });
     </script>
 }
+
 <section class="content-header">
     <h1>
         Addresses
     </h1>
+    <br />
+    <div class="unused_description"><div class="u_square"></div><h4> - Unused addresses</h4></div>
 </section>
+
 <!-- Main content -->
 <section class="content container-fluid">
-    <form method="get" id="filtration" style="display:none;">
+
+    <form method="get"
+          id="filtration"
+          style="display:none;">
+
         <label for="id">Id</label>
-        <input type="text" class="form-control" asp-for="@Model.AddressIdFilter">
+        <input type="text"
+               class="form-control"
+               asp-for="@Model.AddressIdFilter">
+
         <label for="name">Address</label>
-        <input type="text" maxlength="30" class="form-control" asp-for="@Model.AddressStrFilter">
+        <input type="text"
+               maxlength="30"
+               class="form-control"
+               asp-for="@Model.AddressStrFilter">
+
         <label for="addressid">Opening hours</label>
-        <input type="text" id="hours" class="form-control" asp-for="@Model.OpeningHoursFilter">
+        <input type="text"
+               id="hours"
+               class="form-control"
+               asp-for="@Model.OpeningHoursFilter">
+
         <br />
-        <button type="submit" class="btn btn-primary">Filter notes</button>
+        <button type="submit"
+                class="btn btn-flat bg-primary button_style">
+            Filter notes
+        </button>
     </form>
     <br />
-    <button id="filtrationbar" class="btn btn-primary">Filtration</button>
-    <br />
-    <a asp-page="AddAddress" asp-route-StatusCode="0">Create address note</a>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    Id
-                </th>
-                <th>
-                    Address
-                </th>
-                <th>
-                    Opening hours
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var i in Model.Addresses)
-            {
-                <tr>
-                    <td>@Html.DisplayFor(item => i.Id)</td>
-                    <td>@Html.DisplayFor(item => i.AddressStr)</td>
-                    <td>@Html.DisplayFor(item => i.OpeningHours)</td>
-                    <td>
-                        <a asp-page="UpdateAddress" asp-route-id="@i.Id" asp-route-statusCode="0">Edit|</a>
-                        <a asp-page="DeleteAddress" asp-route-id="@i.Id">Delete|</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+
+    <button id="filtrationbar"
+            class="btn btn-flat bg-primary button_style">
+        Filtration
+    </button>
+
+    <a class="btn btn-flat bg-primary button_style"
+       asp-page="AddAddress"
+       asp-route-StatusCode="0">
+        Create address note
+    </a>
+    <ul class="list-group">
+
+        @foreach (var i in Model.Addresses)
+        {
+            <li class="list-group-item">
+                <button class="info_Toggler"
+                        @{ if (i.Roasters.Count() == 0) { <text> style="color: #81b5d4;" </text>  } }
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#@Html.DisplayFor(item => i.Id)"
+                        aria-expanded="false"
+                        aria-controls="Html.DisplayFor(item=>i.id)">
+                        @Html.DisplayFor(item => i.Id) -
+                        <span class="property_annotation">
+                            @Html.DisplayFor(item => i.AddressStr)
+                        </span>
+                </button>
+                <ul class="collapse multi-collapse info_list property_annotation" id="@Html.DisplayFor(item => i.Id)">
+                    <li>
+                        <span>Id: </span>
+                        @Html.DisplayFor(item => i.Id)
+                    </li>
+
+                    <li>
+                        <span>Address: </span>
+                        @Html.DisplayFor(item => i.AddressStr)
+                    </li>
+
+                    <li>
+                        <span>Opening hours: </span>
+                        @Html.DisplayFor(item => i.OpeningHours)
+                    </li>
+
+                    <li>
+                        <span>Latitude: </span>
+                        @Html.DisplayFor(item => i.Latitude)
+                    </li>
+
+                    <li>
+                        <span>Longitude: </span>
+                        @Html.DisplayFor(item => i.Longitude)
+                    </li>
+
+                    <li>
+                        <span>Bonded roasters: </span>
+                        <ul>
+                            @{var roasters = i.Roasters.Select(r => r.Name).ToList();
+                                foreach (var item in roasters)
+                                {
+                                    <li style="list-style-type:circle;">
+                                        <span>@Html.DisplayFor(n => item)</span>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </li>
+                    <li>
+                        <br />
+                        <a class="btn btn-flat bg-primary button_style"
+                           asp-page="UpdateAddress"
+                           asp-route-id="@i.Id"
+                           asp-route-statusCode="0">
+                            Edit
+                        </a>
+
+                        <a class="btn btn-flat bg-primary button_style"
+                           asp-page="DeleteAddress"
+                           asp-route-id="@i.Id">
+                            Delete
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        }
+    </ul>
 </section>

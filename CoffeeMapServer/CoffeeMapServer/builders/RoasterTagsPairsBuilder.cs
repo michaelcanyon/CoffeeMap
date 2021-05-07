@@ -9,8 +9,9 @@ namespace CoffeeMapServer.builders
     {
         public static void BuildRoasterTags(IList<Tag> tags, Guid roasterId, IRoasterTagRepository roasterTagRepository)
         {
-            foreach (var item in tags)
-                roasterTagRepository.Add(new RoasterTag(roasterId, item.Id));
+            if (tags != null)
+                foreach (var item in tags)
+                    roasterTagRepository.Add(new RoasterTag(roasterId, item.Id));
         }
     }
 }

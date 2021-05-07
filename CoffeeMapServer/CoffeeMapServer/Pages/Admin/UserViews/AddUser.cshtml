@@ -2,6 +2,8 @@
 @model CoffeeMapServer.Pages.Admin.UserViews.AddUserModel
 @section scripts{
     <script type="text/javascript" src="~/dist/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="~/CustomScripts/AddUser.js"></script>
+
 }
 @{
     Layout = "_MasterLayout";
@@ -11,25 +13,56 @@
         Create user
     </h1>
 </section>
+
 <!-- Main content -->
 <section class="content container-fluid">
+
     <form method="post">
-        <div class="form-group" id="editForm">
+        <div class="form-group"
+             id="editForm">
 
             <label for="login">Login</label>
-            <input type="text" maxlength="30" class="form-control" asp-for="@Model.Ruser.Login" required>
+            <input type="text"
+                   maxlength="30"
+                   id="login"
+                   class="form-control"
+                   asp-for="@Model.Ruser.Login"
+                   required>
+            <div id="login_mes"></div>
+
             <label for="mail">Email</label>
-            <input type="text" id="email" pattern="[^@@&%#(){}[]'|,.-`~$]@@[A-Za-z0-9].[a-z]" class="form-control" asp-for="@Model.Ruser.Email">
+            <input type="text"
+                   id="email"
+                   class="form-control"
+                   asp-for="@Model.Ruser.Email"
+                   required>
+            <div id="email_mes"></div>
+
             <label for="password">Password</label>
-            <input type="password" minlength="10" class="form-control" asp-for="@Model.Ruser.Password" required>
+            <input type="password"
+                   minlength="8"
+                   class="form-control"
+                   asp-for="@Model.Ruser.Password"
+                   required>
+
             <label for="role">Role</label>
-            <select class="form-control" asp-for="@Model.Ruser.Role">
+            <select class="form-control"
+                    asp-for="@Model.Ruser.Role"
+                    required>
+
                 <option value="Admin">Admin</option>
                 <option value="Master">Master</option>
             </select>
+
         </div>
-        <button type="submit" class="btn btn-primary">Create</button>
+
+        <button type="submit"
+                class="btn btn-flat bg-primary button_style">
+            Create
+        </button>
+
     </form>
+
     @if (Model.ErrorStatusCode.Equals("601"))
     {
         <span style="color:red;">Such user is already exist</span>

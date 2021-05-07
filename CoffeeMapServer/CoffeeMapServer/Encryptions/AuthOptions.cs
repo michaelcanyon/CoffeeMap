@@ -13,9 +13,7 @@ namespace CoffeeMapServer
 
         public const int LIFETIME = 30; // token lifetime
 
-        public static SymmetricSecurityKey GetSymmetricSecurityKey()
-        {
-            return new SymmetricSecurityKey(Encoding.ASCII.GetBytes(KEY));
-        }
+        public static SymmetricSecurityKey GetSymmetricSecurityKey() 
+            => new SymmetricSecurityKey(Encoding.ASCII.GetBytes(KEY));
     }
 }

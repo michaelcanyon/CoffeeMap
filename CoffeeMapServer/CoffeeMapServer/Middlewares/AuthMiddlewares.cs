@@ -14,7 +14,7 @@ namespace CoffeeMapServer.Middlewares
 
                 await next();
             });
-
+        // TODO: transform middleware methods into dynamic classes
         public static IApplicationBuilder UnauthorizedLogin(this IApplicationBuilder app)
             => app.UseStatusCodePages(async context =>
             {

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace CoffeeMapServer.Models
@@ -15,25 +12,40 @@ namespace CoffeeMapServer.Models
         { }
 
         public string AddressStr { get; set; }
-        
+
         public string OpeningHours { get; set; }
+
+        public double Latitude { get; set; }
+
+        public double Longitude { get; set; }
 
         public ICollection<Roaster> Roasters { get; set; }
 
         public Guid RoasterId { get; set; }
 
-        public static Address New(Guid id, string address, string openingHours)
+        public static Address New(Guid id,
+                                  string address,
+                                  string openingHours,
+                                  double latitude,
+                                  double longitude)
             => new Address(id)
             {
                 AddressStr = address,
-                OpeningHours = openingHours
+                OpeningHours = openingHours,
+                Latitude = latitude,
+                Longitude = longitude
             };
 
-        public static Address New(string address, string openingHours)
+        public static Address New(string address,
+                                  string openingHours,
+                                  double latitude,
+                                  double longitude)
             => new Address
             {
                 AddressStr = address,
-                OpeningHours = openingHours
+                OpeningHours = openingHours,
+                Latitude = latitude,
+                Longitude = longitude
             };
     }
 }

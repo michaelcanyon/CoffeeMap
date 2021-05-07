@@ -5,14 +5,12 @@
     @if (Model.Role == "Master")
         Layout = "_MasterLayout";
 }
-@section scripts{
+
+@section scripts
+{
     <script type="text/javascript" src="~/dist/jquery-3.5.1.js"></script>
     <script type="text/javascript" src="~/dist/jquery.maskedInput.js"></script>
-    <script>
-        $(function () {
-            $("#hours").mask('AA-AA 00:00-00:00', { 'translation': { A: { pattern: /[а-я]/ } }, 0: { pattern: /[0-9]/ } });
-        });
-    </script>
+    <script type="text/javascript" src="~/CustomScripts/AddAddress.js"></script>
 }
 <section class="content-header">
     <h1>
@@ -25,14 +23,52 @@
         <div class="form-group">
 
             <label for="Name">Address string</label>
-            <input type="text" maxlength="50" class="form-control" asp-for="@Model.Address.AddressStr" required>
-            <label for="phone">Opening hours</label>
-            <input type="text" id="hours" class="form-control" asp-for="@Model.Address.OpeningHours">
+            <input type="text"
+                   id="addressStr"
+                   maxlength="50"
+                   class="form-control"
+                   asp-for="@Model.Address.AddressStr"
+                   required>
+            <div id="address_waring_mes">
+            </div>
+            <div id="addressStr_mes">
+            </div>
+
+            <label for="hours">Opening hours</label>
+            <input type="text"
+                   id="hours"
+                   class="form-control"
+                   asp-for="@Model.Address.OpeningHours">
+            <div id="hours_mes">
+            </div>
+
+            <label for="latitude">Latitude</label>
+            <input type="text"
+                   id="latitude"
+                   class="form-control"
+                   asp-for="@Model.Latitude">
+            <div id="latitude_mes">
+            </div>
+
+            <label for="longitude">Longitude</label>
+            <input type="text"
+                   id="longitude"
+                   class="form-control"
+                   asp-for="@Model.Longitude">
+            <div id="longitude_mes">
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="submit"
+                id="confirm_button"
+                class="btn btn-flat bg-primary">
+            Create
+        </button>
     </form>
     @if (Model.RStatusCode == "601")
     {
-        <span style="color:red;">Such address already exist!</span>
+        <div class="alert alert-danger py-2">
+            Such address already exist!
+        </div>
     }
 </section>
+

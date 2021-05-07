@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using CoffeeMapServer.Models;
 using CoffeeMapServer.Services.Interfaces.Admin;
@@ -21,16 +22,17 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
         public Roaster Roaster { get; set; }
 
         [BindProperty]
-        public string TagsToAdd { get; set; }
+        public string Tags { get; set; }
 
-        [BindProperty]
-        public string TagsToDelete { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public string Latitude { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string Longitude { get; set; }
 
         public string Role { get; set; }
 
         public List<string> tagsList = new List<string>();
-
-        public List<string> DeletableTagsList = new List<string>();
 
         [BindProperty]
         public string RStatusCode { get; set; }
@@ -43,24 +45,36 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
             RStatusCode = statusCode;
             Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();
             Roaster = await _roasterAdminService.FetchSingleRoasterAsync(id);
-            tagsList.AddRange(Roaster.RoasterTags.Select(t => t.Tag.TagTitle).ToList());
-            if (Roaster == null)
-                return BadRequest();
-            return Page();
+            if (Roaster.OfficeAddress!=null)
+            {
+                Latitude = Roaster.OfficeAddress.Latitude.ToString();
+                Longitude = Roaster.OfficeAddress.Longitude.ToString();
+                tagsList.AddRange(Roaster.RoasterTags.Select(t => t.Tag.TagTitle).ToList());
+            }
+            return Roaster == null ? BadRequest() : (IActionResult)Page();
         }
 
         public async Task<IActionResult> OnPostProcessAsync()
         {
-           var respCode= await _roasterAdminService.UpdateRoasterAsync(Roaster,
-                                                                       TagsToAdd,
-                                                                       TagsToDelete,
+            if (!String.IsNullOrEmpty(Tags))
+            {
+                Tags = Regex.Replace(Tags, @"[{:}#]", "");
+                Tags = Tags.Replace("value", "")
+                           .Replace("[", "")
+                           .Replace("]", "")
+                           .Replace(@"\", string.Empty)
+                           .Replace("\"", string.Empty)
+                           .Replace(",", "#");
+            }
+
+            var respCode = await _roasterAdminService.UpdateRoasterAsync(Roaster,
+                                                                       Tags,
+                                                                       Latitude,
+                                                                       Longitude,
                                                                        Picture);
-            if (respCode.Equals(0))
-                return RedirectToPage("Roasters");
-            else if (respCode.Equals(-1))
-                return RedirectToPage("EditRoaster",new { id=Roaster.Id, statusCode="601" });
-            else
-                return BadRequest();
+            return respCode.Equals(0)
+                ? RedirectToPage("Roasters")
+                : respCode.Equals(-1) ? RedirectToPage("EditRoaster", new { id = Roaster.Id, statusCode = "601" }) : (IActionResult)BadRequest();
         }
     }
 }

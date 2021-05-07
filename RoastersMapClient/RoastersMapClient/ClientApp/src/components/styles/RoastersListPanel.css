@@ -1,25 +1,16 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Philosopher&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@800&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Philosopher&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap');
 
 .header-text {
-    font-family: 'Philosopher', sans-serif;
+    font-family: 'Roboto', sans-serif;
     display: block;
     font-size: 50px;
-
-    @media (min-width: 768px) {
-        .navbar-brand.abs {
-            position: absolute;
-            width: 100%;
-            left: 0;
-            text-align: center;
-        }
-    }
 }
 
 .nav-link {
     text-decoration: none;
-    font-family: 'Philosopher', sans-serif;
+    font-family: 'Roboto', sans-serif;
     color: #000000;
     font-size: 20px;
 }
@@ -27,7 +18,7 @@
 .nav-item {
     display: inline-block;
     margin: 0px 25px 0px 25px;
-    padding: 20px 0px 20x 25px;
+    padding: 20px 0px 20px 25px;
     border-radius: 20px 20px 20px 0px;
     transition: 0.8s;
 }
@@ -45,40 +36,47 @@ input {
     margin: auto;
     margin-top: 25px;
     background: transparent;
-    font-family: 'Philosopher', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 30px;
-    border-bottom: 1px solid transparent;
+    border-bottom: 1px solid #CDD0D4 !important;
     transition: 0.5s;
 }
 
     input:focus {
         outline: none;
-        border-bottom: 1px solid #000;
+        border-bottom: 1px solid #f7f7f7 !important;
         transition: 0.5s;
     }
 
-    input[class="Left-Var_search-field"]::placeholder {
-        color: #000;
-    }
-
 .Left-Bar_Search-form_buttons {
-    position: relative;
-    width: 85%;
-    margin: 10%;
+    display: flex;
+    justify-content:space-around;
+    align-items:center;
 }
 
     .Left-Bar_Search-form_buttons button {
-        width: 150px;
-        height: 30px;
+        position: relative;
+        text-align: center;
         border-color: transparent;
-        border-radius: 5px;
-        font-family: 'Philosopher', sans-serif;
-        font-size: 15px;
+        border-radius: 0px;
+        font-family: 'Roboto', sans-serif;
+        font-size: 20px;
+        font-weight: bold;
+        height: 50px;
     }
 
+.filter-buttons {
+width:100%;
+margin:10px;
+}
+button {
+background:#f7f7f7 !important;
+transition:0.5s !important;
+
+}
 button:hover {
-    background: #CDD0D4;
-    transition: 0.4s;
+    background: #CDD0D4 !important;
+    transition: 0.5s !important;
 }
 
 button:focus {
@@ -88,8 +86,8 @@ button:focus {
 }
 
 .Left-Bar_Search-field {
-    font-family: 'Philosopher', sans-serif;
-    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
     margin-left: 10px;
 }
 
@@ -111,84 +109,51 @@ button:focus {
     width: 100%;
 }
 
-.Left-Bar_RoastersList li {
-    list-style: none;
-    padding-top: 10px;
-    padding-left: 20px;
-}
+    .Left-Bar_RoastersList li {
+        list-style: none;
+        padding-top: 10px;
+        padding-left: 20px;
+    }
 
 .Left-Bar_RoastersList a {
     position: relative;
+    display: inline-block;
+    z-index: 1;
+    padding: 2em;
+    margin: -2em;
     top: 30%;
-    left: 20%;
+    left: 10%;
     text-decoration: none;
-    font-family: 'Philosopher', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 600;
     font-size: 25px;
     color: #000;
+    transition: 500ms;
 }
-
     .Left-Bar_RoastersList a:hover {
         text-decoration: none;
-        font-family: 'Philosopher', sans-serif;
+        font-family: 'Roboto', sans-serif;
         font-weight: 600;
         font-size: 25px;
-        color: #000;
+        color: #d9d9d9;
+        transition:500ms;
     }
 
 .row-no-padding {
     margin-left: -30px !important;
 }
-
-.footer-span {
-    float: left;
-    font-size: 15px;
-}
-
-.footer-block {
-    position: relative;
-    width: 90%;
-    border-top: 0.5px solid #d9d9d9;
-    margin: auto;
-}
-.footerText_block {
-    position: relative;
-    width: 70%;
-    left: 25px;
-    height: 100%;
-}
-@media (max-width:765px) {
-    .footer-block {
-        margin-bottom: 40px;
-    }
-
-    .fixed-button {
-        visibility: visible !important;
-    }
-}
-
 .copyright {
     float: left;
 }
-
-.fixed-button {
-    visibility: hidden !important;
-}
-
 .map-button {
     position: relative;
     width: 100%;
     height: 50px;
     outline: none;
     border: none;
-    font-family: 'Philosopher', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: bold;
     font-size: 20px;
-}
-
-.mapimage {
-    position: relative;
-    width: 100%;
 }
 
 .invisibility {

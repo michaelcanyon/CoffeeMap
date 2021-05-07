@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using CoffeeMapServer.Models;
 using CoffeeMapServer.Services.Interfaces.Admin;
@@ -20,6 +21,12 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
 
         [BindProperty]
         public Address Address { get; set; }
+
+        [BindProperty]
+        public string Latitude { get; set; }
+
+        [BindProperty]
+        public string Longitude { get; set; }
 
         [BindProperty]
         public string Tags { get; set; }
@@ -48,13 +55,27 @@ namespace CoffeeMapServer.Views.Admin.RoasterViews
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var respCode = await _roasterAdminService.AddRoasterAsync(Roaster, Tags, Address, Picture);
-            if (respCode == 0)
-                return RedirectToPage("Roasters");
-            else if (respCode == -1)
-                return Redirect("601");
-            else
-                return BadRequest();
+            Roaster.CreationDate = DateTime.UtcNow;
+            if (!String.IsNullOrEmpty(Tags))
+            {
+                Tags = Regex.Replace(Tags, @"[{:}#]", "");
+                Tags = Tags.Replace("value", "")
+                           .Replace("[", "")
+                           .Replace("]", "")
+                           .Replace(@"\", string.Empty)
+                           .Replace("\"", string.Empty)
+                           .Replace(",", "#");
+            }
+
+            var respCode = await _roasterAdminService.AddRoasterAsync(Roaster,
+                                                                      Tags,
+                                                                      Address,
+                                                                      Latitude,
+                                                                      Longitude,
+                                                                      Picture);
+
+            return respCode == 0 ? RedirectToPage("Roasters") :
+                   respCode == -1 ? Redirect("601") : (IActionResult)BadRequest();
         }
     }
 }

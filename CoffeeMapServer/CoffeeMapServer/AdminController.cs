@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CoffeeMapServer.Infrastructure.Interface;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using Microsoft.AspNetCore.Http;
@@ -13,12 +14,14 @@ namespace CoffeeMapServer
         private readonly IRoasterRepository _roasterRepository;
         private readonly IUserRepository _userRepository;
         private readonly IRoasterRequestRepository _roasterRequestRepository;
+        //private readonly IPictureRequestRepository _pictureRequestRepository;
         public AdminController(IRoasterRepository roasterRepository, IUserRepository userRepository,
-            IRoasterRequestRepository roasterRequestRepository)
+            IRoasterRequestRepository roasterRequestRepository/*, IPictureRequestRepository pictureRequestRepository*/)
         {
             _roasterRepository = roasterRepository;
             _userRepository = userRepository;
             _roasterRequestRepository = roasterRequestRepository;
+            //_pictureRequestRepository = pictureRequestRepository;
         }
 
         [HttpGet]
@@ -42,19 +45,24 @@ namespace CoffeeMapServer
         [Route("Roasters")]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> CreateRoaster(Roaster roaster)
+        public async Task<IActionResult> CreateRoaster(Roaster roaster, byte[] picture)
         {
             try
             {
-                var roaster1 = Roaster.New(roaster.Name,
+                var roastDate = DateTime.UtcNow;
+                var roaster1 = Roaster.New(roaster.ContactPersonName,
+                                           roaster.ContactPersonPhone,
+                                           roaster.Name,
                                            roaster.ContactNumber,
                                            roaster.ContactEmail,
                                            roaster.WebSiteLink,
                                            roaster.VkProfileLink,
                                            roaster.InstagramProfileLink,
                                            roaster.TelegramProfileLink,
-                                           roaster.Picture,
-                                           roaster.Description);
+                                           roaster.Description,
+                                           roastDate,
+                                           roaster.Priority
+                                           );
                 _roasterRepository.Add(roaster);
                 await _roasterRepository.SaveChangesAsync();
                 return Ok();
@@ -222,13 +230,14 @@ namespace CoffeeMapServer
             try
             {
                 var roasterrequest = RoasterRequest.New(roasterRequest.Roaster, roasterRequest.Address, roasterRequest.TagString);
+                roasterrequest.Picture = PictureRequest.New(roasterrequest.Picture.Bytes);
                 _roasterRequestRepository.Add(roasterRequest);
                 await _roasterRequestRepository.SaveChangesAsync();
                 return Ok();
             }
-            catch
+            catch(Exception e)
             {
-                return BadRequest("Unable to delete row! Wrong RoasterRequest format!");
+                return BadRequest($"{e.Message}");
 
             }
         }

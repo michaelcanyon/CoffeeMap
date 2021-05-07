@@ -3,14 +3,16 @@ using System.Collections.Generic;
 
 namespace CoffeeMapServer.Models
 {
+    //TODO: Add priority and registration date and time fields
     public class Roaster : Entity
     {
         public string Name { get; set; }
 
         public Address OfficeAddress { get; set; }
 
-        //Remove this shit
-        //public Guid OfficeAddressId { get; set; }
+        public string ContactPersonName { get; set; }
+
+        public string ContactPersonPhone { get; set; }
 
         public string ContactNumber { get; set; }
 
@@ -24,9 +26,15 @@ namespace CoffeeMapServer.Models
 
         public string TelegramProfileLink { get; set; }
 
-        public byte[] Picture { get; set; }
+        public Guid PictureId { get; set; }
+
+        public Picture Picture { get; set; }
 
         public string Description { get; set; }
+
+        public DateTime CreationDate { get; set; }
+        
+        public int Priority { get; set; }
 
         public ICollection<RoasterTag> RoasterTags { get; set; }
 
@@ -36,6 +44,8 @@ namespace CoffeeMapServer.Models
         { }
 
         public static Roaster New(Guid id,
+                                  string contactPersonName,
+                                  string contactPersonPhone,
                                   string name,
                                   string contactNumber,
                                   string contactEmail,
@@ -43,10 +53,13 @@ namespace CoffeeMapServer.Models
                                   string vkProfileLink,
                                   string igProfileLink,
                                   string tgProfileLink,
-                                  byte[] picture,
-                                  string description)
+                                  string description,
+                                  DateTime creationDate,
+                                  int priority)
             => new Roaster(id)
             {
+                ContactPersonName=contactPersonName,
+                ContactPersonPhone=contactPersonPhone,
                 Name = name,
                 ContactNumber = contactNumber,
                 ContactEmail = contactEmail,
@@ -54,21 +67,27 @@ namespace CoffeeMapServer.Models
                 VkProfileLink = vkProfileLink,
                 InstagramProfileLink = igProfileLink,
                 TelegramProfileLink = tgProfileLink,
-                Picture = picture,
-                Description = description
+                Description = description,
+                CreationDate=creationDate,
+                Priority=priority
             };
 
-        public static Roaster New(string name,
+        public static Roaster New(string contactPersonName,
+                                  string contactPersonPhone,
+                                  string name,
                                   string contactNumber,
                                   string contactEmail,
                                   string webSiteLink,
                                   string vkProfileLink,
                                   string igProfileLink,
                                   string tgProfileLink,
-                                  byte[] picture,
-                                  string description)
+                                  string description,
+                                  DateTime creationDate,
+                                  int priority)
             => new Roaster()
             {
+                ContactPersonName=contactPersonName,
+                ContactPersonPhone=contactPersonPhone,
                 Name = name,
                 ContactNumber = contactNumber,
                 ContactEmail = contactEmail,
@@ -76,8 +95,9 @@ namespace CoffeeMapServer.Models
                 VkProfileLink = vkProfileLink,
                 InstagramProfileLink = igProfileLink,
                 TelegramProfileLink = tgProfileLink,
-                Picture = picture,
-                Description = description
+                Description = description,
+                CreationDate=creationDate,
+                Priority=priority
             };
 
     }

@@ -1,71 +1,95 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using CoffeeMapServer.Services.Interfaces;
 using CoffeeMapServer.ViewModels;
-using Serilog;
+using CoffeeMapServer.ViewModels.DTO;
 
 namespace CoffeeMapServer.Services
 {
     public class RoasterService : IRoasterService
     {
         private readonly IRoasterRepository _roasterRepository;
-        private readonly ITagRepository _tagRepository;
         private readonly IRoasterTagRepository _roasterTagRepository;
-        private readonly IAddressRepository _addressRepository;
-        private readonly IRoasterRequestRepository _roasterRequestRepository;
-        private readonly ILogger _logger;
 
         public RoasterService(IRoasterRepository roasterRepository,
-                              ITagRepository tagRepository,
-                              IAddressRepository addressRepository,
-                              IRoasterTagRepository roasterTagRepository,
-                              IRoasterRequestRepository roasterRequestRepository,
-                              ILogger logger)
+                              IRoasterTagRepository roasterTagRepository)
         {
             _roasterRepository = roasterRepository ?? throw new ArgumentNullException(nameof(roasterRepository));
-            _tagRepository = tagRepository ?? throw new ArgumentNullException(nameof(tagRepository));
             _roasterTagRepository = roasterTagRepository ?? throw new ArgumentNullException(nameof(roasterTagRepository));
-            _addressRepository = addressRepository ?? throw new ArgumentNullException(nameof(addressRepository));
-            _roasterRequestRepository = roasterRequestRepository ?? throw new ArgumentNullException(nameof(roasterRequestRepository));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<IList<Roaster>> GetRoastersAsync()
-            => await _roasterRepository.GetListAsync();
+        public async Task<IList<RoasterInfoViewModel>> GetRoastersAsync()
+        {
+            var roasters = await _roasterRepository.GetListAsync();
+            var roastertags = await _roasterTagRepository.GetListAsync();
+            foreach (var i in roasters)
+                i.RoasterTags = roastertags.Where(rt => rt.RoasterId == i.Id).ToList();
+            var roastersViewModels = new List<RoasterInfoViewModel>();
+            foreach (var i in roasters)
+            {
+                var tags = i.RoasterTags == null ?
+                           new List<TagDT>() :
+                           i.RoasterTags.Select(t => TagDT.New(t.Tag.Id, t.Tag.TagTitle)).ToList();
+
+                roastersViewModels.Add(new RoasterInfoViewModel(RoasterDT.New(i.Id,
+                                                                              i.ContactPersonName,
+                                                                              i.ContactPersonPhone,
+                                                                              i.Name,
+                                                                              i.ContactNumber,
+                                                                              i.ContactEmail,
+                                                                              i.WebSiteLink,
+                                                                              i.VkProfileLink,
+                                                                              i.InstagramProfileLink,
+                                                                              i.TelegramProfileLink,
+                                                                              new byte[0],
+                                                                              i.Description),
+                                                                AddressDT.New(
+                                                                    i.OfficeAddress.Id,
+                                                                    i.OfficeAddress.AddressStr,
+                                                                    i.OfficeAddress.OpeningHours,
+                                                                    i.OfficeAddress.Latitude,
+                                                                    i.OfficeAddress.Longitude),
+                                                                tags));
+
+            }
+            return roastersViewModels;
+        }
 
         public async Task<RoasterInfoViewModel> GetRoasterViewModel(Guid id)
         {
             var roaster = await _roasterRepository.GetSingleAsync(id);
-            //TODO: check it out
-            var roasterAddress = await _addressRepository.GetSingleAsync(roaster.OfficeAddress.Id);
-            var roasterTagsId = (await _roasterTagRepository
-                                       .GetPairsByRoasterIdAsync(roaster.Id))
-                                       .Select(p => p.TagId)
-                                       .ToList();
-            var tags = new List<Tag>();
-            tags.AddRange(await _tagRepository.GetTagsByTagIds(roasterTagsId));
-            return new RoasterInfoViewModel(roaster, roasterAddress, tags);
-        }
+            var tags = roaster.RoasterTags == null ?
+                new List<TagDT>() :
+                roaster.RoasterTags.Select(t => TagDT.New(t.Tag.Id, t.Tag.TagTitle)).ToList();
 
-        public async Task SendRoasterRequest(RoasterRequest roasterRequest)
-        {
-            try
-            {
-                _logger.Information("Roaster service layer access in progress...");
+            if (roaster.Picture == null)
+                roaster.Picture = Picture.New(new byte[0]);
+            else if (roaster.Picture.Bytes == null)
+                roaster.Picture.Bytes = new byte[0];
 
-                _roasterRequestRepository.Add(roasterRequest);
-                await _roasterRequestRepository.SaveChangesAsync();
-
-                _logger.Information($"Roaster request table has been modified. Inserted request:\n Id:{roasterRequest.Id}");
-            }
-            catch (Exception e)
-            {
-                _logger.Error(e, "Roaster service layer error occured!");
-            }
+            return new RoasterInfoViewModel(RoasterDT.New(roaster.Id,
+                                                          roaster.ContactPersonName,
+                                                          roaster.ContactPersonPhone,
+                                                          roaster.Name,
+                                                          roaster.ContactNumber,
+                                                          roaster.ContactEmail,
+                                                          roaster.WebSiteLink,
+                                                          roaster.VkProfileLink,
+                                                          roaster.InstagramProfileLink,
+                                                          roaster.TelegramProfileLink,
+                                                          roaster.Picture.Bytes,
+                                                          roaster.Description),
+                                            AddressDT.New(roaster.OfficeAddress.Id,
+                                                          roaster.OfficeAddress.AddressStr,
+                                                          roaster.OfficeAddress.OpeningHours,
+                                                          roaster.OfficeAddress.Latitude,
+                                                          roaster.OfficeAddress.Longitude),
+                                            tags);
         }
     }
 }

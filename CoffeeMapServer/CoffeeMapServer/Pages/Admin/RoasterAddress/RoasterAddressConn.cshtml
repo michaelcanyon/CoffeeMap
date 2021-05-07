@@ -5,6 +5,8 @@
     @if (Model.Role == "Master")
         Layout = "_MasterLayout";
 }
+
+
 @section scripts{
     <script type="text/javascript" src="~/dist/jquery-3.5.1.js"></script>
     <script type="text/javascript" src="~/dist/jquery.maskedInput.js"></script>
@@ -13,95 +15,284 @@
             $("#filtrationbar").click(function () {
                 $("#filtration").toggle(500);
             });
+
+
         });
+
+        function push_roaster(roasterId) {
+            var roasterField = document.getElementById('roasterIdField');
+            var roasterFieldDis = document.getElementById('roasterIdFieldDis');
+            roasterField.value = roasterId;
+            roasterFieldDis.value = roasterId;
+            var rSpanNode = document.getElementById('roaster_message');
+            rSpanNode.innerHTML = "";
+            rSpanNode.className = "";
+        }
+
+        function push_address(addressId) {
+            var addressField = document.getElementById('addressIdField');
+            var addressFieldDis = document.getElementById('addressIdFieldDis');
+            addressField.value = addressId;
+            addressFieldDis.value = addressId;
+            var aSpanNode = document.getElementById('address_message');
+            aSpanNode.innerHTML = "";
+            aSpanNode.className = "";
+        }
+
+        function onConnectionClick() {
+            var roasterNode = document.getElementById('roasterIdField').value;
+            var addressNode = document.getElementById('addressIdField').value;
+            if ((roasterNode == '' || roasterNode == null) && (addressNode == '' || addressNode == null)) {
+                var rSpanNode = document.getElementById('roaster_message'); 
+                rSpanNode.innerHTML = "Некорректный или отсутсвтующий Id!";
+                rSpanNode.className = "alert alert-danger py-2";
+                var aSpanNode = document.getElementById('address_message');
+                aSpanNode.innerHTML = "Некорректный или отсутсвтующий Id!";
+                aSpanNode.className = "alert alert-danger py-2";
+                return;
+            }
+            else if (addressNode == '' || addressNode == null) {
+                var aSpanNode = document.getElementById('address_message');
+                aSpanNode.innerHTML = "Некорректный или отсутсвтующий Id!";
+                aSpanNode.className = "alert alert-danger py-2";
+                return;
+            }
+            else if (roasterNode == '' || roasterNode == null) {
+                var rSpanNode = document.getElementById('roaster_message');
+                rSpanNode.innerHTML = "Некорректный или отсутсвтующий Id!";
+                rSpanNode.className = "alert alert-danger py-2";
+                return;
+            }
+            $("#connection").submit();
+        }
     </script>
 }
+
 <section class="content-header">
     <h1>
         Roaster-Address connection creation page
     </h1>
 </section>
+
 <!-- Main content -->
 <section class="content container-fluid">
+
     <br />
-    <form method="post">
+    <form method="post" id="connection">
         <label>Roaster id</label>
-        <input type="text" class="form-control" asp-for="@Model.InsertRoasterId" required>
+        <input id="roasterIdField"
+               type="hidden"
+               class="form-control"
+               asp-for="@Model.InsertRoasterId"
+               required>
+
+        <input id="roasterIdFieldDis"
+               class="form-control"
+               disabled>
+        <div id="roaster_message">
+        </div>
+
         <label>Address id</label>
-        <input type="text" class="form-control" asp-for="@Model.InsertAddressId" required>
-        <button type="submit" class="btn btn-primary">Create Connection</button>
+        <input id="addressIdField"
+               type="hidden"
+               class="form-control"
+               asp-for="@Model.InsertAddressId"
+               required>
+
+        <input id="addressIdFieldDis"
+               class="form-control"
+               disabled>
+        <div id="address_message">
+        </div>
+
+        <button type="button"
+                onclick="onConnectionClick()"
+                class="btn btn-flat bg-primary button_style">
+            Create Connection
+        </button>
+
     </form>
+
     <br />
-    <form method="get" id="filtration" style="display:none;">
+    <form method="get"
+          id="filtration"
+          style="display:none;">
+
         <h4>
             Roasters
         </h4>
         <label for="id">Id</label>
-        <input type="text" class="form-control" asp-for="@Model.IdFilter">
+        <input type="text"
+               class="form-control"
+               asp-for="@Model.IdFilter">
+
         <label for="name">Name</label>
-        <input type="text" maxlength="30" class="form-control" asp-for="@Model.NameFilter">
+        <input type="text"
+               maxlength="30"
+               class="form-control"
+               asp-for="@Model.NameFilter">
+
         <br />
         <h4>
             Addresses
         </h4>
         <label for="id">Id</label>
-        <input type="text" class="form-control" asp-for="@Model.AddressIdFilter">
+        <input type="text"
+               class="form-control"
+               asp-for="@Model.AddressIdFilter">
+
         <label for="name">Address</label>
-        <input type="text" maxlength="30" class="form-control" asp-for="@Model.AddressStrFilter">
+        <input type="text"
+               maxlength="30"
+               class="form-control"
+               asp-for="@Model.AddressStrFilter">
+
         <br />
-        <button type="submit" class="btn btn-primary">Filter notes</button>
+        <button type="submit"
+                class="btn btn-flat bg-primary button_style">
+            Filter notes
+        </button>
+
     </form>
+
     <br />
-    <button id="filtrationbar" class="btn btn-primary">Filtration</button>
+    <button id="filtrationbar"
+            class="btn btn-flat bg-primary button_style">
+            Filtration
+    </button>
+
     <br />
     <h4>
         Roasters
     </h4>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    Id
-                </th>
-                <th>
-                    Name
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model.Roasters != null)
-                foreach (var i in Model.Roasters)
-                {
-                    <tr>
-                        <td>@Html.DisplayFor(item => i.Id)</td>
-                        <td>@Html.DisplayFor(item => i.Name)</td>
-                    </tr>
-                }
-        </tbody>
-    </table>
+    <ul class="list-group">
+        @if (Model.Roasters != null)
+            foreach (var i in Model.Roasters)
+            {
+                <li class="list-group-item">
+
+                    <button class="info_Toggler"
+                            type="button"
+                            data-toggle="collapse"
+                            data-target="#@Html.DisplayFor(item=> i.Id)"
+                            aria-expanded="false"
+                            aria-controls="@Html.DisplayFor(item=>i.Id)">
+                        @Html.DisplayFor(item => i.Id) -
+                        <span class="property_annotation">
+                            @Html.DisplayFor(item => i.Name)
+                        </span>
+                    </button>
+
+                    <ul id="@Html.DisplayFor(item=>i.Id)"
+                        class="collapse multi-collapse info_list property_annotation">
+
+                        <li>
+                            <span>Roaster Id: </span>
+                            @Html.DisplayFor(item => i.Id)
+                        </li>
+
+                        <li>
+                            <span>Name: </span>
+                            @Html.DisplayFor(item => i.Name)
+                        </li>
+
+                        <li>
+                            <span>Office address Id: </span>
+                            @Html.DisplayFor(item => i.OfficeAddress.Id)
+                        </li>
+
+                        <li>
+                            <span>Address: </span>
+                            @Html.DisplayFor(item => i.OfficeAddress.AddressStr)
+                        </li>
+
+                        <li>
+                            <span>Latitude: </span>
+                            @Html.DisplayFor(item => i.OfficeAddress.Latitude)
+                        </li>
+
+                        <li>
+                            <span>Longitude: </span>
+                            @Html.DisplayFor(item => i.OfficeAddress.Longitude)
+                        </li>
+
+                        <li>
+                            <span>Opening hours: </span>
+                            @Html.DisplayFor(item => i.OfficeAddress.OpeningHours)
+                        </li>
+
+                        <li>
+                            <button type="button"
+                                    id="push_roaster"
+                                    class="btn btn-flat bg-primary button_style"
+                                    onclick="push_roaster('@Html.DisplayFor(item=>i.Id)')">
+                                select this roaster
+                            </button>
+                        </li>
+
+                    </ul>
+
+                </li>
+            }
+    </ul>
+
     <h4>
         Addresses
     </h4>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    OfficeAddressId
-                </th>
-                <th>
-                    Address
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model.Addresses != null)
-                foreach (var g in Model.Addresses)
-                {
-                    <tr>
-                        <td>@Html.DisplayFor(item => g.Id)</td>
-                        <td>@Html.DisplayFor(item => g.AddressStr)</td>
-                    </tr>
-                }
-        </tbody>
-    </table>
+    <ul class="list-group">
+        @if (Model.Addresses != null)
+            foreach (var g in Model.Addresses)
+            {
+                <li class="list-group-item">
+                    <button class="info_Toggler"
+                            type="button"
+                            data-toggle="collapse"
+                            data-target="#@Html.DisplayFor(item => g.Id)"
+                            aria-expanded="false"
+                            aria-controls="@Html.DisplayFor(item => g.Id)">
+                        @Html.DisplayFor(item => g.Id) -
+                        <span class="property_annotation">
+                            @Html.DisplayFor(item => g.AddressStr)
+                        </span>
+                    </button>
+
+                    <ul id="@Html.DisplayFor(item=> g.Id)" class="collapse multi-collapse info_list property_annotation">
+
+                        <li>
+                            <span>Address Id: </span>
+                            @Html.DisplayFor(item => g.Id)
+                        </li>
+
+                        <li>
+                            <span>Address: </span>
+                            @Html.DisplayFor(item => g.AddressStr)
+                        </li>
+
+                        <li>
+                            <span>Bonded roasters: </span>
+                            <ul>
+                                @foreach (var r in g.Roasters)
+                                {
+                                    <li>
+                                        <span class="rt_id">@Html.DisplayFor(item => r.Id)</span>
+                                        -
+                                        @Html.DisplayFor(item => r.Name)
+                                    </li>
+                                }
+
+                            </ul>
+                        </li>
+
+                        <li>
+                            <button type="button"
+                                    id="push_address"
+                                    class="btn btn-flat bg-primary button_style"
+                                    onclick="push_address('@Html.DisplayFor(item=>g.Id)')">
+                                select this address
+                            </button>
+                        </li>
+                    </ul>
+                </li>
+            }
+    </ul>
 </section>

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using CoffeeMapServer.builders;
+using CoffeeMapServer.Infrastructure.Interface;
+using CoffeeMapServer.Infrastructure.Repository;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using CoffeeMapServer.Services.Interfaces.Admin;
@@ -14,11 +17,13 @@ namespace CoffeeMapServer.Services
     {
         private readonly IRoasterRepository _roasterRepository;
         private readonly IRoasterTagRepository _roasterTagRepository;
+        private readonly IPictureRepository _pictureRepository;
         private readonly ITagRepository _tagRepository;
         private readonly IAddressRepository _addressReposiotry;
         private readonly ILogger _logger;
 
         public RoasterAdminService(IRoasterRepository roasterRepository,
+                                   IPictureRepository pictureRepository,
                                    IRoasterTagRepository roasterTagRepository,
                                    ITagRepository tagRepository,
                                    IAddressRepository addressRepository,
@@ -26,6 +31,7 @@ namespace CoffeeMapServer.Services
         {
             _roasterRepository = roasterRepository ?? throw new ArgumentNullException(nameof(roasterRepository));
             _roasterTagRepository = roasterTagRepository ?? throw new ArgumentNullException(nameof(roasterTagRepository));
+            _pictureRepository = pictureRepository ?? throw new ArgumentNullException(nameof(pictureRepository));
             _tagRepository = tagRepository ?? throw new ArgumentNullException(nameof(tagRepository));
             _addressReposiotry = addressRepository ?? throw new ArgumentNullException(nameof(addressRepository));
             _logger = logger ?? throw new ArgumentNullException(nameof(addressRepository));
@@ -34,6 +40,8 @@ namespace CoffeeMapServer.Services
         public async Task<int> AddRoasterAsync(Roaster roaster,
                                                string tags,
                                                Address address,
+                                               string latitude,
+                                               string longitude,
                                                IFormFile picture)
         {
             try
@@ -45,12 +53,15 @@ namespace CoffeeMapServer.Services
                     return -1;
 
                 //Get and process tags string into tag entities
-                var _localTags = await RoasterAdminServiceBuilder.BuildTagsList(tags,
+                var _localTags = await RoasterAdminServiceBuilder.BuildTagsListAsync(tags,
                                                                                 _tagRepository);
 
                 //process address entity
                 var _address = Address.New(address.AddressStr,
-                                           address.OpeningHours);
+                                           address.OpeningHours,
+                                           address.Latitude,
+                                           address.Longitude);
+                address = AddressCoordinatesTransformer.ConvertCoordinates(address, latitude, longitude);
                 roaster.OfficeAddress = _address;
                 _addressReposiotry.Add(_address);
                 //add roasterTags  notes
@@ -58,21 +69,10 @@ namespace CoffeeMapServer.Services
                                                          roaster.Id,
                                                          _roasterTagRepository);
 
-                //process picture
-                roaster.Picture = BytePictureBuilder.GetBytePicture(picture);
+                var pictureBytes = BytePictureBuilder.GetBytePicture(picture);
+                BytePictureBuilder.BindPicture(roaster.Id, pictureBytes, _pictureRepository);
 
-                if (roaster.ContactEmail == null)
-                    roaster.ContactEmail = "none";
-                if (roaster.InstagramProfileLink == null)
-                    roaster.InstagramProfileLink = "none";
-                if (roaster.WebSiteLink == null)
-                    roaster.WebSiteLink = "none";
-                if (roaster.VkProfileLink == null)
-                    roaster.VkProfileLink = "none";
-                if (roaster.TelegramProfileLink == null)
-                    roaster.TelegramProfileLink = "none";
-                if (address.OpeningHours == null)
-                    address.OpeningHours = "none";
+                roaster = RoasterAdminServiceBuilder.AddRoasterNullPlugs(roaster);
 
                 _roasterRepository.Add(roaster);
                 await _roasterRepository.SaveChangesAsync();
@@ -94,8 +94,11 @@ namespace CoffeeMapServer.Services
                 _logger.Information("Roaster admin service layer access in progress...");
                 var roaster = await _roasterRepository.GetSingleAsync(id);
                 _roasterRepository.Delete(roaster);
-                var pairs = await _roasterTagRepository.GetPairsByRoasterIdAsync(id);
+                var pairs = await _roasterTagRepository.GetPairsByRoasterIdAsNoTrackingAsync(id);
                 _roasterTagRepository.DeleteRoasterTags(pairs);
+                var picture = await _pictureRepository.GetPictureByRoasterIdAsyncAsNoTracking(id);
+                if (picture != null)
+                    _pictureRepository.Delete(picture);
                 await _roasterRepository.SaveChangesAsync();
                 _logger.Information($"Roaster, Tags, RoasterTags, Addresses tables have been modified. Deleted roaster:\n Id: {roaster.Id}\n Roaster name: {roaster.Name}");
                 return 0;
@@ -108,21 +111,16 @@ namespace CoffeeMapServer.Services
         }
 
         public async Task<IList<Roaster>> FetchRoastersAsync()
-            => await _roasterRepository.GetListAsync();
+            {
+            //Don't change ANYTHING! Multiple includes within repository leads to long-lasting load
+            var roasters = await _roasterRepository.GetListAsync();
+            var roastertags = await _roasterTagRepository.GetListAsync();
+            foreach (var i in roasters)
+                i.RoasterTags = roastertags.Where(rt => rt.RoasterId == i.Id).ToList();
+            return roasters; 
+    }
 
-        public async Task<IList<RoasterTag>> FetchRoasterTagsAsync(Guid roasterId)
-            => await _roasterTagRepository.GetPairsByRoasterIdAsync(roasterId);
-
-        public async Task<IList<RoasterTag>> FetchRoasterTagsAsync()
-            => await _roasterTagRepository.GetListAsync();
-
-        public async Task<IList<Tag>> FetchTagsAsync()
-            => await _tagRepository.GetListAsync();
-
-        public async Task<Tag> FetchTagByIdAsync(Guid id)
-            => await _tagRepository.GetSingleAsync(id);
-
-        public async Task<int> UpdateRoasterAsync(Roaster entity, string newTags, string deletableTags, IFormFile picture)
+        public async Task<int> UpdateRoasterAsync(Roaster entity, string tags, string latitude, string longitude, IFormFile picture)
         { 
             _logger.Information("Roaster admin service layer access in progress...");
             try
@@ -130,43 +128,21 @@ namespace CoffeeMapServer.Services
                 var broast = await _roasterRepository.GetRoasterByNameNonTrackableAsync(entity.Name);
                 if (broast != null && !broast.Id.Equals(entity.Id))
                     return -1;
-                //fetch tags that already exists in current roaster note
-                var onGetTags = new List<string>();
-            onGetTags.AddRange(await RoasterAdminServiceBuilder.FetchRoasterTags(_roasterTagRepository,
-                                                                                 _tagRepository,
-                                                                                 entity.Id));
 
-            //Add new tags.
-            onGetTags.AddRange(await RoasterAdminServiceBuilder.BindTagsWithRoaster(newTags,
-                                                                                    onGetTags,
-                                                                                    _tagRepository,
-                                                                                    _roasterTagRepository,
-                                                                                    entity.Id));
+                await RoasterAdminServiceBuilder.UpdateRoasterTagsAsync(tags,
+                                        _tagRepository,
+                                        _roasterTagRepository,
+                                        entity.Id);
 
-            //Delete tags
-            await RoasterAdminServiceBuilder.DeleteTags(onGetTags,
-                                                        deletableTags,
-                                                        _tagRepository,
-                                                        _roasterTagRepository,
-                                                        entity.Id);
+                    await BytePictureBuilder.ReplacePicture(entity.Id, picture, _pictureRepository);
 
-                entity.Picture = BytePictureBuilder.GetBytePicture(picture);
+
                 var roasterAddress = await _addressReposiotry.GetSingleAsync(entity.OfficeAddress.Id);
-                entity.OfficeAddress = roasterAddress;
+                entity.OfficeAddress = AddressCoordinatesTransformer.ConvertCoordinates(entity.OfficeAddress, latitude, longitude);
+                entity.OfficeAddress = RoasterAdminServiceBuilder.UpdateRoasterAddress(roasterAddress, entity.OfficeAddress);
+                _addressReposiotry.Update(entity.OfficeAddress);
 
-                if (entity.ContactEmail == null)
-                    entity.ContactEmail = "none";
-                if (entity.InstagramProfileLink == null)
-                    entity.InstagramProfileLink = "none";
-                if (entity.WebSiteLink == null)
-                    entity.WebSiteLink = "none";
-                if (entity.VkProfileLink == null)
-                    entity.VkProfileLink = "none";
-                if (entity.TelegramProfileLink == null)
-                    entity.TelegramProfileLink = "none";
-                if (entity.OfficeAddress.OpeningHours == null)
-                    entity.OfficeAddress.OpeningHours = "none";
-
+                entity= RoasterAdminServiceBuilder.AddRoasterNullPlugs(entity);
                 _roasterRepository.Update(entity);
                 await _roasterTagRepository.SaveChangesAsync();
                 _logger.Information($"Roaster, Tags, RoasterTags, Addresses tables have been modified. Updated roaster:\n Id: {entity.Id}\n Roaster name: {entity.Name}");

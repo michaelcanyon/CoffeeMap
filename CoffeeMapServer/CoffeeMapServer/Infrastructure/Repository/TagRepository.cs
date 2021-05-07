@@ -36,6 +36,7 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         public async Task<IList<Tag>> GetListAsync([CallerMemberName] string methodName = "")
             => await Context.Tags
                .TagWith($"{nameof(TagRepository)}.{methodName}")
+               .Include(t=>t.RoasterTags)
                .ToListAsync();
 
         public async Task<Tag> GetSingleAsync(string title,

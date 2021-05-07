@@ -15,6 +15,12 @@ namespace CoffeeMapServer.Pages.Admin.AddressesViews
         public Address Address { get; set; }
 
         [BindProperty]
+        public string Latitude { get; set; }
+
+        [BindProperty]
+        public string Longitude { get; set; }
+
+        [BindProperty]
         public string RStatusCode { get; set; }
 
         public string Role { get; set; }
@@ -24,16 +30,12 @@ namespace CoffeeMapServer.Pages.Admin.AddressesViews
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var respCode = await _addressService.AddAddressAsync(Address);
-            if (respCode == 0)
-                return RedirectToPage("GetAddresses");
-            else if (respCode == -1)
-                return Redirect("601");
-            else
-                return StatusCode(400);
+            var respCode = await _addressService.AddAddressAsync(Address, Latitude, Longitude);
+            return respCode == 0 ? RedirectToPage("GetAddresses") :
+                   respCode == -1 ? Redirect("601") : (IActionResult)StatusCode(400);
         }
 
-        public async Task OnGetAsync(string statusCode)
+        public void OnGetAsync(string statusCode)
         {
             RStatusCode = statusCode;
             Role = HttpContext.Request.Cookies[".AspNetCore.Meta.Metadata.role"].ToString();

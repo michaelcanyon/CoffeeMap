@@ -2,44 +2,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Philosopher&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Mukta:wght@800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,200;0,400;0,500;0,800;1,200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap');
 
 body {
     min-width: 250px;
 }
-
-.header-text {
-    font-family: 'Philosopher', sans-serif;
-    display: block;
-    font-size: 50px;
-}
-@media (min-width: 768px) {
-    .navbar-brand.abs {
-        position: absolute;
-        width: 100%;
-        left: 0;
-        text-align: center;
-    }
-}
-
-.nav-link {
-    text-decoration: none;
-    font-family: 'Philosopher', sans-serif;
-    font-size: 20px;
-}
-.nav_button {
-    display: inline-block;
-    margin: 0px 25px 0px 25px;
-    padding: 20px 0px 0px 25px;
-    border-radius: 20px 20px 20px 0px;
-    border-bottom: none;
-    transition: 0.8s;
-    color: blue;
-}
-
-    .nav_button :hover {
-        background: #CDD0D4;
-        transition: 0.8s;
-    }
 
 button:hover {
     border-bottom: none;
@@ -53,41 +21,6 @@ button:focus {
     outline: none !important;
 }
 
-.row-no-padding {
-}
-
-.footer-span {
-    float: left;
-    font-size: 15px;
-}
-
-.footer-block {
-    position: relative;
-    width: 90%;
-    border-top: 0.5px solid #d9d9d9;
-    margin:auto;
-    
-}
-.footerText_block {
-    position: relative;
-    width: 70%;
-    left: 25px;
-    height:100%;
-}
-@media (max-width:765px) {
-    .footer-block {
-        margin-bottom: 40px;
-    }
-
-    .fixed-button {
-        visibility: visible !important;
-    }
-}
-
-.copyright {
-    float: left;
-}
-
 .fixed-button {
     visibility: hidden !important;
 }
@@ -98,14 +31,9 @@ button:focus {
     height: 50px;
     outline: none;
     border: none;
-    font-family: 'Philosopher', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     font-weight: bold;
     font-size: 20px;
-}
-
-.mapimage {
-    width: 100%;
-    margin-right: 0px;
 }
 
 .invisibility {
@@ -114,11 +42,6 @@ button:focus {
 
 .mobile-visibility {
     visibility: visible !important;
-}
-
-.Logo-image {
-    position: relative;
-    width: 100%;
 }
 
 .backToList_button {
@@ -132,7 +55,7 @@ button:focus {
         height: 50px;
         outline: none;
         border: none;
-        font-family: 'Philosopher', sans-serif;
+        font-family: 'Roboto', sans-serif;
         font-weight: bold;
         color: black;
         font-size: 20px;
@@ -140,7 +63,7 @@ button:focus {
         padding-left: 5%;
         padding-top: 10px;
     }
-@media(max-width:765px) {
+@media(max-width:965px) {
     .backToList_button a{ 
         padding-left:10%;
     }
@@ -200,7 +123,7 @@ margin-left:5%;
 
     .Tags_container span {
         position: relative;
-        font-family: 'Philosopher', sans-serif;
+        font-family: 'Fira Sans Condensed', sans-serif;
         font-weight: bold;
         font-size: 20px;
     }
@@ -209,7 +132,7 @@ margin-left:5%;
     display: block;
     width: 100%;
     margin: auto;
-    font-family: 'Philosopher', sans-serif;
+    font-family: 'Fira Sans Condensed', sans-serif;
     font-size: 17px;
     position: relative;
     margin-top: 10px;
@@ -234,7 +157,7 @@ margin-left:5%;
 
     .Contacts_container span {
         position: relative;
-        font-family: 'Philosopher', sans-serif;
+        font-family: 'Fira Sans Condensed', sans-serif;
         font-weight: bold;
         font-size: 20px;
     }
@@ -242,13 +165,13 @@ margin-left:5%;
 .Contact_list {
     position: relative;
     margin-top: 10px;
-    margin-left: 0px;
+    margin-left: 10%;
     list-style: none;
     font-weight: bold;
 }
 
     .Contact_list span {
-        font-size: 0.8em;
+        font-size: 20px;
     }
 
     .Contact_list li {
@@ -260,6 +183,7 @@ margin-left:5%;
     position: relative;
     width: 60%;
     word-wrap: break-word;
+
 }
 
 .icon_image {
@@ -267,7 +191,7 @@ margin-left:5%;
     top: 2px;
     right: 7px;
     display: inline-block;
-    background-image: url(https://www.flaticon.com/svg/static/icons/svg/723/723427.svg);
+    background-image: url(./tagBean.svg);
     height: 15px;
     width: 15px;
 }
@@ -277,7 +201,7 @@ margin-left:5%;
     display: inline-block;
     top: 13px;
     right: 15px;
-    background-image: url(https://www.flaticon.com/svg/static/icons/svg/15/15874.svg);
+    background-image: url(./cellPhoneIcon.svg);
     height: 35px;
     width: 35px;
 }
@@ -287,7 +211,7 @@ margin-left:5%;
     display: inline-block;
     top: 13px;
     right: 15px;
-    background-image: url(https://www.flaticon.com/svg/static/icons/svg/646/646094.svg);
+    background-image: url(./mailIcon.svg);
     height: 35px;
     width: 35px;
 }
@@ -301,7 +225,7 @@ margin-left:5%;
 
 .address_header {
     position: relative;
-    font-family: 'Philosopher', sans-serif;
+    font-family: 'Fira Sans Condensed', sans-serif;
     font-weight: bold;
     font-size: 20px;
     margin-left: auto;
@@ -316,7 +240,7 @@ margin-left:5%;
     margin-top: 20px;
     margin-left: 35px;
     padding-bottom: 15px;
-    font-family: 'Philosopher', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
     .address_string div {
@@ -326,9 +250,9 @@ margin-left:5%;
 .roasterLocationIcon {
     position: relative;
     display: inline-block;
-    background-image: url(https://www.flaticon.com/svg/static/icons/svg/1004/1004325.svg);
-    width: 35px;
-    height: 35px;
+    background-image: url(./markerSmall.svg);
+    width: 50px;
+    height: 50px;
     right: 10px;
 }
 
@@ -354,7 +278,7 @@ margin-left:5%;
 
 .social_header {
     position: relative;
-    font-family: 'Philosopher', sans-serif;
+    font-family: 'Fira Sans Condensed', sans-serif;
     font-size: 20px;
     font-weight: bold;
     top: 10px;

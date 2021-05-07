@@ -1,1 +1,114 @@
-﻿
+﻿.mapimage {
+    width: 100%;
+    margin-right: 0px;
+}
+
+.info_window_wraper {
+}
+
+.marker_name {
+    display: block;
+    text-align: center;
+    font-family: 'Fira Sans Condensed', sans-serif;
+    font-weight: bold;
+    font-size: 17px;
+    padding-bottom: 3px;
+}
+
+.marker_name_hover {
+    display: block;
+    text-align: center;
+    font-family: 'Fira Sans Condensed', sans-serif;
+    font-weight: bold;
+    font-size: 17px;
+    padding-bottom: 3px;
+    color: black !important;
+}
+
+    .marker_name_hover:hover {
+        color: #d9d9d9 !important;
+    }
+
+.marker_mail {
+    display: flex;
+    align-items: center;
+    border-top: 0.5px solid #d9d9d9;
+    padding: 10px;
+    padding-bottom: 3px;
+}
+
+    .marker_mail span {
+        font-family: 'Roboto', sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        margin-left: 10px;
+    }
+
+.mail_icon {
+    display: inline-block;
+    background-image: url(./mail.svg);
+    height: 24px;
+    width: 24px;
+}
+
+.marker_number {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    padding-top: 3px;
+    border-bottom: 0.5px solid #d9d9d9;
+}
+
+    .marker_number span {
+        font-family: 'Roboto', sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        margin-left: 10px;
+    }
+
+.phone_icon {
+    display: inline-block;
+    background-image: url(./smartphone-call.svg);
+    height: 24px;
+    width: 24px;
+}
+
+.tags_list {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    padding-left: 20px;
+    border-bottom: 0.5px solid #d9d9d9;
+}
+
+    .tags_list li {
+        font-family: 'Roboto', sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+.icon_image {
+}
+
+.address_str_info {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    padding-bottom: 2px;
+    width: 200px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.opening_hours_info {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    padding-top: 2px;
+    width: 200px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: #3b444b;
+}

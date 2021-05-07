@@ -26,7 +26,7 @@ namespace CoffeeMapServer.Services
             _logger.Information("User service layer access in progress...");
 
             var hash = Encryptions.Sha1Hash.GetHash(password);
-            return await _userRepository.GetSingleAsync(username, hash);
+            return await _userRepository.GetSingleAsync(username, hash, "Login");
         }
 
         public async Task<int> AddUserAsync(User entity)

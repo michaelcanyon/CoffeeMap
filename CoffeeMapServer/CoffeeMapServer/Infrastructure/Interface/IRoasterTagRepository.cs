@@ -8,7 +8,7 @@ namespace CoffeeMapServer.Infrastructures.IRepositories
 {
     public interface IRoasterTagRepository
     {
-        public Task<IList<RoasterTag>> GetPairsByRoasterIdAsync(Guid roasterId,
+        public Task<IList<RoasterTag>> GetPairsByRoasterIdAsNoTrackingAsync(Guid roasterId,
                                                                 [CallerMemberName] string methodName = "");
 
         public Task<IList<RoasterTag>> GetPairsByTagIdAsync(Guid tagId,

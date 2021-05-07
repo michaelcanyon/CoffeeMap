@@ -1,4 +1,6 @@
 using CoffeeMapServer.EF;
+using CoffeeMapServer.Infrastructure.Interface;
+using CoffeeMapServer.Infrastructure.Repository;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Infrastructures.Repositories;
 using CoffeeMapServer.Middlewares;
@@ -34,6 +36,8 @@ namespace CoffeeMapServer
             services.AddControllersWithViews();
             services.AddDbContext<CoffeeDbContext>(options => options.UseSqlServer(connection));
             services.AddTransient<IRoasterRepository, RoasterRepository>();
+            services.AddTransient<IPictureRepository, PictureRepository>();
+            services.AddTransient<IPictureRequestRepository, PictureRequestRepository>();
             services.AddTransient<IAddressRepository, AddressRepository>();
             services.AddTransient<ITagRepository, TagRepository>();
             services.AddTransient<IRoasterTagRepository, RoasterTagRepository>();
@@ -69,7 +73,7 @@ namespace CoffeeMapServer
 
             //app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseCors(origin => origin.AllowAnyOrigin());
+            app.UseCors(origin => origin.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseStaticFiles();
             app.UseSerilogRequestLogging();
             app.UnauthorizedLogin();

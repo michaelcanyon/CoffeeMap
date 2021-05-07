@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
+using CoffeeMapServer.builders;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using CoffeeMapServer.Services.Interfaces.Admin;
@@ -24,12 +24,14 @@ namespace CoffeeMapServer.Services
             _roasterRepository = roasterRepository ?? throw new ArgumentNullException(nameof(roasterRepository));
         }
 
-        public async Task<int> AddAddressAsync(Address entity)
+        public async Task<int> AddAddressAsync(Address entity, string latitude, string longitude)
         {
             try
             {
+
+                entity = AddressCoordinatesTransformer.ConvertCoordinates(entity, latitude, longitude);
                 _logger.Information("Address service Layer access in progress...");
-                var dbAddress=await _addressRepository.GetSingleAsNoTrackingAsync(entity.AddressStr);
+                var dbAddress = await _addressRepository.GetSingleAsNoTrackingAsync(entity.AddressStr);
                 if (dbAddress != null)
                     return -1;
                 if (entity.OpeningHours == null)
@@ -54,10 +56,18 @@ namespace CoffeeMapServer.Services
                 var address = await _addressRepository.GetSingleAsync(id);
                 _addressRepository.Delete(address);
 
+                Address plugAddress = await _addressRepository.GetSingleAsNoTrackingAsync("none");
+
+                if (plugAddress == null)
+                {
+                    plugAddress = Address.New("none", null, 0, 0);
+                    _addressRepository.Add(plugAddress);
+                }
+
                 var roasters = await _roasterRepository.FetchRoastersByAddressIdAsync(id);
                 foreach (var item in roasters)
                 {
-                    item.OfficeAddress = null;
+                    item.OfficeAddress = plugAddress;
                     _roasterRepository.Update(item);
                 }
 
@@ -78,13 +88,14 @@ namespace CoffeeMapServer.Services
         public async Task<Address> GetSingleAddressByIdAsync(Guid id)
             => await _addressRepository.GetSingleAsync(id);
 
-        public async Task<int> UpdateAddressAsync(Address entity)
+        public async Task<int> UpdateAddressAsync(Address entity, string latitude, string longitude)
         {
             try
             {
+                entity = AddressCoordinatesTransformer.ConvertCoordinates(entity, latitude, longitude);
                 _logger.Information("Address service Layer access in progress...");
                 var address = await _addressRepository.GetSingleAsNoTrackingAsync(entity.AddressStr);
-                if (address!=null && !address.Id.Equals(entity.Id))
+                if (address != null && !address.Id.Equals(entity.Id))
                     return -1;
                 if (entity.OpeningHours == null)
                     entity.OpeningHours = "none";
@@ -93,9 +104,9 @@ namespace CoffeeMapServer.Services
                 _logger.Information($"Address Table has been modified. Address:\n Address Id: {entity.Id} \n Address string: {entity.AddressStr}\n has been added.");
                 return 0;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                _logger.Error("Address service layer error occured! Error message:" +e.Message);
+                _logger.Error("Address service layer error occured! Error message:" + e.Message);
                 return -2;
             }
         }

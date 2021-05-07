@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using CoffeeMapServer.EF;
+using CoffeeMapServer.Infrastructure;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using Microsoft.EntityFrameworkCore;
@@ -44,9 +45,11 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         public void Update(Address entity)
             => _context.Addresses.Update(entity);
 
+        //TODO: fix this
         public async Task<IList<Address>> GetListAsync([CallerMemberName] string methodName = "")
             => await _context.Addresses
-               .TagWith($"{nameof(AddressRepository)}.{methodName}")
+               .Include(a => a.Roasters)
+               .CustomTagWith()
                .ToListAsync();
 
         public async Task SaveChangesAsync()

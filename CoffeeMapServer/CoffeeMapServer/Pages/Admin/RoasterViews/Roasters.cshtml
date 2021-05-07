@@ -21,116 +21,210 @@
         });
     </script>
 }
+
 <section class="content-header">
     <h1>
         Roasters
     </h1>
 </section>
+
 <!-- Main content -->
 <section class="content container-fluid">
-    <form method="get" id="filtration" style="display:none;">
+
+    <form method="get"
+          id="filtration"
+          style="display:none;">
+
         <label for="id">Id</label>
-        <input type="text" class="form-control" asp-for="@Model.IdFilter">
+        <input type="text"
+               class="form-control"
+               asp-for="@Model.IdFilter">
 
         <label for="name">Name</label>
-        <input type="text" maxlength="30" class="form-control" asp-for="@Model.NameFilter">
+        <input type="text"
+               maxlength="30"
+               class="form-control"
+               asp-for="@Model.NameFilter">
 
         <label for="addressid">office address:</label>
-        <input type="text" class="form-control" asp-for="@Model.OfficeAddressFilter">
+        <input type="text"
+               class="form-control"
+               asp-for="@Model.OfficeAddressFilter">
 
         <label for="phone">Contact number</label>
-        <input type="text" id="contactnumber" class="form-control" asp-for="@Model.ContactNumberFilter">
+        <input type="text"
+               id="contactnumber"
+               class="form-control"
+               asp-for="@Model.ContactNumberFilter">
 
         <label for="mail">Contact email</label>
-        <input type="text" class="form-control" asp-for="@Model.ContactEmailFilter">
+        <input type="text"
+               class="form-control"
+               asp-for="@Model.ContactEmailFilter">
 
         <label for="instagram">instagram link</label>
-        <input type="text" class="form-control" asp-for="@Model.InstagramProfileFilter">
+        <input type="text"
+               class="form-control"
+               asp-for="@Model.InstagramProfileFilter">
 
         <label for="telegram">telegram link</label>
-        <input type="text" class="form-control" asp-for="@Model.TelegramProfileFilter">
+        <input type="text"
+               class="form-control"
+               asp-for="@Model.TelegramProfileFilter">
 
         <label for="vk">vk link</label>
-        <input type="text" class="form-control" asp-for="@Model.VkProfileFilter">
+        <input type="text"
+               class="form-control"
+               asp-for="@Model.VkProfileFilter">
 
         <label for="website">website link</label>
-        <input type="text" class="form-control" asp-for="@Model.WebSiteFilter">
+        <input type="text"
+               class="form-control"
+               asp-for="@Model.WebSiteFilter">
 
         <label for="tag">Tag:</label>
-        <input type="text" class="form-control" asp-for="@Model.TagString">
+        <input type="text"
+               class="form-control"
+               asp-for="@Model.TagString">
+
         <br />
-        <button type="submit" class="btn btn-primary">Filter notes</button>
+        <button type="submit"
+                class="btn btn-flat bg-primary button_style">
+            Filter notes
+        </button>
 
     </form>
+
     <br />
-    <button id="filtrationbar" class="btn btn-primary">Filtration</button>
+    <button class="btn btn-flat bg-primary button_style"
+            id="filtrationbar">
+        Filtration
+    </button>
+
+    <a class="btn btn-flat bg-primary button_style"
+       asp-page="AddRoaster"
+       asp-route-StatusCode="0">
+        Create roaster note
+    </a>
+
     <br />
-    <a asp-page="AddRoaster" asp-route-StatusCode="0">Create roaster note</a>
-    <br />
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    Id
-                </th>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Office Address
-                </th>
-                <th>
-                    ContactNumber
-                </th>
-                <th>
-                    Tags
-                </th>
-                <th>
-                    ContactEmail
-                </th>
-                <th>
-                    InstagramProfileLink
-                </th>
-                <th>
-                    TelegramProfileLink
-                </th>
-                <th>
-                    VkProfileLink
-                </th>
-                <th>
-                    WebSiteLink
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var i in Model.Roasters)
-            {
-                <tr>
-                    <td>@Html.DisplayFor(item => i.Id)</td>
-                    <td>@Html.DisplayFor(item => i.Name)</td>
-                    <td>@Html.DisplayFor(item => i.OfficeAddress.AddressStr)</td>
-                    <td>@Html.DisplayFor(item => i.ContactNumber)</td>
-                    <td>
+    <ul class="list-group col-12">
+
+        @foreach (var i in Model.Roasters)
+        {
+            <li class="list-group-item window_style">
+                <button class="info_Toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#@Html.DisplayFor(item => i.Id)"
+                        aria-expanded="false"
+                        aria-controls="@Html.DisplayFor(item => i.Id)">
+                    @Html.DisplayFor(item => i.Id) -
+                    <span class="property_annotation">
+                        @Html.DisplayFor(item => i.Name)
+                    </span>
+                </button>
+                <ul class="collapse multi-collapse info_list property_annotation"
+                    id="@Html.DisplayFor(item=>i.Id)">
+
+                    <li>
+                        <span>Contact person name: </span>
+                        @Html.DisplayFor(item => i.ContactPersonName)
+                    </li>
+
+                    <li>
+                        <span>Contact person phone: </span>
+                        @Html.DisplayFor(item => i.ContactPersonPhone)
+                    </li>
+
+                    <li>
+                        <span>Priority: </span>
+                        @Html.DisplayFor(item => i.Priority)
+                    </li>
+
+                    <li>
+                        <span>Address: </span>
+                        @Html.DisplayFor(item => i.OfficeAddress.AddressStr)
+                    </li>
+
+                    <li>
+                        <span>Opening hours: </span>
+                        @Html.DisplayFor(item => i.OfficeAddress.OpeningHours)
+                    </li>
+
+                    <li>
+                        <span>Latitude: </span>
+                        @Html.DisplayFor(item => i.OfficeAddress.Latitude)
+                    </li>
+
+                    <li>
+                        <span>Longitude: </span>
+                        @Html.DisplayFor(item => i.OfficeAddress.Longitude)
+                    </li>
+
+                    <li>
+                        <span>Phone number: </span>
+                        @Html.DisplayFor(item => i.ContactNumber)
+                    </li>
+
+                    <li>
+                        <span class="property_annotation">Tags: </span>
                         <ul>
-                            @{ 
-                                foreach (var e in i.RoasterTags)
+                                @foreach (var e in i.RoasterTags)
                                 {
-                                    <li>@Html.DisplayFor(item=>e.Tag.TagTitle)</li>
+                                    <li style="list-style-type:circle;">
+                                        @Html.DisplayFor(item => e.Tag.TagTitle)
+                                    </li>
                                 }
-                            }
                         </ul>
-                    </td>
-                    <td>@Html.DisplayFor(item => i.ContactEmail)</td>
-                    <td>@Html.DisplayFor(item => i.InstagramProfileLink)</td>
-                    <td>@Html.DisplayFor(item => i.TelegramProfileLink)</td>
-                    <td>@Html.DisplayFor(item => i.VkProfileLink)</td>
-                    <td>@Html.DisplayFor(item => i.WebSiteLink)</td>
-                    <td>
-                        <a asp-page="EditRoaster" asp-route-id="@i.Id" asp-route-statusCode="0">Edit|</a>
-                        <a asp-page="DeleteRoaster" asp-route-id="@i.Id">Delete|</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+                    </li>
+
+                    <li>
+                        <span class="property_annotation">Email: </span>
+                        @Html.DisplayFor(item => i.ContactEmail)
+                    </li>
+
+                    <li>
+                        <span class="property_annotation">Instagram: </span>
+                        @Html.DisplayFor(item => i.InstagramProfileLink)
+                    </li>
+
+                    <li>
+                        <span class="property_annotation">Telegram: </span>
+                        @Html.DisplayFor(item => i.TelegramProfileLink)
+                    </li>
+
+                    <li>
+                        <span class="property_annotation">Vk: </span>
+                        @Html.DisplayFor(item => i.VkProfileLink)
+                    </li>
+
+                    <li>
+                        <span class="property_annotation">Web site: </span>
+                        @Html.DisplayFor(item => i.WebSiteLink)
+                    </li>
+
+                    <li>
+                        <span class="property_annotation">Creation date: </span>
+                        @Html.DisplayFor(item => i.CreationDate)
+                    </li>
+
+                    <li>
+                        <br />
+                        <a class="btn btn-flat bg-primary button_style"
+                           asp-page="EditRoaster"
+                           asp-route-id="@i.Id"
+                           asp-route-statusCode="0">
+                            Edit
+                        </a>
+                        <a class="btn btn-flat bg-primary button_style"
+                           asp-page="DeleteRoaster"
+                           asp-route-id="@i.Id">
+                            Delete
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        }
+    </ul>
 </section>

@@ -13,33 +13,44 @@
     <h1>
         Tags
     </h1>
+    <div class="unused_description"><div class="u_square"></div><h4> - Unused tags</h4></div>
 </section>
 <!-- Main content -->
 <section class="content container-fluid">
-    <br />
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    Id
-                </th>
-                <th>
-                    Tag name
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var i in Model.Tags)
-            {
-                <tr>
-                    <td>@Html.DisplayFor(item => i.Id)</td>
-                    <td>@Html.DisplayFor(item => i.TagTitle)</td>
-                    <td>
-                        <a asp-page="EditTag" asp-route-id="@i.Id" asp-route-statusCode="0">Edit|</a>
-                        <a asp-page="DeleteTag" asp-route-id="@i.Id">Delete|</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+
+    <ul class="list-group">
+        @foreach (var i in Model.Tags)
+        {
+            <li class="list-group-item">
+                <button  @{ if (i.RoasterTags.Count() == 0) { <text> style="color: #81b5d4;" </text>  } }
+                        class="info_Toggler"
+                        data-toggle="collapse"
+                        data-target="#@Html.DisplayFor(item=>i.Id)"
+                        aria-expanded="false"
+                        aria-controls="@Html.DisplayFor(item=>i.Id)">
+                        <span>    
+                        @Html.DisplayFor(item => i.Id) -
+                        </span>
+                        <span class="property_annotation">
+                        @Html.DisplayFor(item => i.TagTitle)
+                        </span>
+                </button>
+                <ul class="collapse multi-collapse info_list property_annotation" id="@Html.DisplayFor(item=>i.Id)">
+                    <li>
+                        <a class="btn btn-flat bg-primary button_style"
+                           asp-page="EditTag"
+                           asp-route-id="@i.Id"
+                           asp-route-statusCode="0">
+                            Edit
+                        </a>
+                        <a class="btn btn-flat bg-primary button_style"
+                           asp-page="DeleteTag"
+                           asp-route-id="@i.Id">
+                            Delete
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        }
+    </ul>
 </section>

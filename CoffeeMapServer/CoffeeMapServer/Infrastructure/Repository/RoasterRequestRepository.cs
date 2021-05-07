@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using CoffeeMapServer.EF;
@@ -13,8 +14,6 @@ namespace CoffeeMapServer.Infrastructures.Repositories
     public class RoasterRequestRepository : IRoasterRequestRepository
     {
         private readonly CoffeeDbContext _context;
-
-        private readonly ILogger _logger;
 
         public RoasterRequestRepository(CoffeeDbContext context,
                                         ILogger logger)
@@ -33,6 +32,7 @@ namespace CoffeeMapServer.Infrastructures.Repositories
                                                          [CallerMemberName] string methodName = "")
             => await _context.RoasterRequests
             .TagWith($"{nameof(RoasterRequestRepository)}.{methodName} ({id})")
+            .Include(rr=>rr.Picture)
             .FirstOrDefaultAsync(node => node.Id == id);
 
         public void Update(RoasterRequest entity)
@@ -40,6 +40,7 @@ namespace CoffeeMapServer.Infrastructures.Repositories
 
         public async Task<IList<RoasterRequest>> GetListAsync([CallerMemberName] string methodName = "")
             => await _context.RoasterRequests
+               .OrderBy(r => r.Roaster.CreationDate)
                .TagWith($"{nameof(RoasterRequestRepository)}.{methodName}")
                .ToListAsync();
 

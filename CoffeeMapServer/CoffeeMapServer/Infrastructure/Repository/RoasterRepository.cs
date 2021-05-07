@@ -26,9 +26,10 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         public async Task<Roaster> GetSingleAsync(Guid id,
                                                   [CallerMemberName] string methodName = "")
             => await _сontext.Roasters
-               .Include(r=>r.OfficeAddress)
-               .Include(r=>r.RoasterTags)
-               .ThenInclude(r=>r.Tag)
+               .Include(r => r.OfficeAddress)
+               .Include(r=>r.Picture)
+               .Include(r => r.RoasterTags)
+               .ThenInclude(r => r.Tag)
                .TagWith($"{nameof(RoasterRepository)}.{methodName} ({id})")
                .FirstOrDefaultAsync(e => e.Id == id);
 
@@ -38,8 +39,8 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         public async Task<IList<Roaster>> GetListAsync([CallerMemberName] string methodName = "")
             => await _сontext.Roasters
                .Include(r => r.OfficeAddress)
-               .Include(r=>r.RoasterTags)
-               .ThenInclude(r=>r.Tag)
+               .OrderByDescending(r => r.CreationDate)
+               .ThenBy(r => r.Priority)
                .TagWith($"{nameof(RoasterRepository)}.{methodName}")
                .ToListAsync();
 
@@ -47,8 +48,8 @@ namespace CoffeeMapServer.Infrastructures.Repositories
                                                                         [CallerMemberName] string methodName = "")
             => await _сontext.Roasters
                .Include(r => r.OfficeAddress)
-               .Include(r=>r.RoasterTags)
-               .ThenInclude(r=>r.Tag)
+               .Include(r => r.RoasterTags)
+               .ThenInclude(r => r.Tag)
                .Where(r => r.OfficeAddress.Id == id)
                .TagWith($"{nameof(RoasterRepository)}.{methodName} ({id})")
                .ToListAsync();
@@ -57,9 +58,9 @@ namespace CoffeeMapServer.Infrastructures.Repositories
                                                          [CallerMemberName] string methodName = "")
             => await _сontext.Roasters
                .Include(r => r.OfficeAddress)
+               .Include(r => r.Picture)
                .Include(r => r.RoasterTags)
                .ThenInclude(r => r.Tag)
-               .Include(r => r.OfficeAddress)
                .TagWith($"{nameof(RoasterRepository)}.{methodName} ({roasterName})")
                .FirstOrDefaultAsync(e => e.Name == roasterName);
 
@@ -68,9 +69,9 @@ namespace CoffeeMapServer.Infrastructures.Repositories
             => await _сontext.Roasters
                .AsNoTracking()
                .Include(r => r.OfficeAddress)
+               .Include(r => r.Picture)
                .Include(r => r.RoasterTags)
                .ThenInclude(r => r.Tag)
-               .Include(r => r.OfficeAddress)
                .TagWith($"{nameof(RoasterRepository)}.{methodName} ({roasterName}) No tracking")
                .FirstOrDefaultAsync(e => e.Name == roasterName);
 

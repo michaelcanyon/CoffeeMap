@@ -9,6 +9,10 @@ namespace CoffeeMapServer.EF
 
         public DbSet<Roaster> Roasters { get; set; }
 
+        public DbSet<Picture> Pictures { get; set; }
+
+        public DbSet<PictureRequest> PictureRequests { get; set; }
+
         public DbSet<Tag> Tags { get; set; }
 
         public DbSet<RoasterTag> RoasterTags { get; set; }

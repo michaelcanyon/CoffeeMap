@@ -18,56 +18,107 @@
         Users
     </h1>
 </section>
+
 <!-- Main content -->
 <section class="content container-fluid">
-    <form method="get" id="filtration" style="display:none;">
+
+    <form method="get"
+          id="filtration"
+          style="display:none;">
+
         <label for="id">Id</label>
-        <input type="text" class="form-control" asp-for="@Model.IdFilter">
+        <input type="text"
+               class="form-control"
+               asp-for="@Model.IdFilter">
+
         <label for="login">Login</label>
-        <input type="text" maxlength="30" class="form-control" asp-for="@Model.LoginFilter">
+        <input type="text"
+               maxlength="30"
+               class="form-control"
+               asp-for="@Model.LoginFilter">
+
         <label for="email">Email</label>
-        <input type="text" class="form-control" asp-for="@Model.EmailFilter">
+        <input type="text"
+               class="form-control"
+               asp-for="@Model.EmailFilter">
+
         <label for="role">role</label>
-        <input type="text" id="role" class="form-control" asp-for="@Model.RoleFilter">
+        <input type="text"
+               id="role"
+               class="form-control"
+               asp-for="@Model.RoleFilter">
         <br />
-        <button type="submit" class="btn btn-primary">Filter notes</button>
+
+        <button type="submit"
+                class="btn btn-flat bg-primary button_style">
+            Filter notes
+        </button>
 
     </form>
+
     <br />
-    <button id="filtrationbar" class="btn btn-primary">Filtration</button>
-    <br />
-    <a asp-page="AddUser" asp-route-StatusCode="0">Create user</a>
-    <br />
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    Id
-                </th>
-                <th>
-                    Login
-                </th>
-                <th>
-                    Email
-                </th>
-                <th>
-                    Role
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var i in Model.Users)
-            {
-                <tr>
-                    <td>@Html.DisplayFor(item => i.Id)</td>
-                    <td>@Html.DisplayFor(item => i.Login)</td>
-                    <td>@Html.DisplayFor(item => i.Email)</td>
-                    <td>@Html.DisplayFor(item => i.Role)</td>
-                    <td>
-                        <a asp-page="DeleteUser" asp-route-id="@i.Id">Delete|</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <button id="filtrationbar"
+            class="btn btn-flat bg-primary button_style">
+        Filtration
+    </button>
+
+    <a class="btn btn-flat bg-primary button_style"
+       asp-page="AddUser"
+       asp-route-StatusCode="0">
+        Create user
+    </a>
+
+    <ul class="list-group">
+        @foreach (var i in Model.Users)
+        {
+            <li class="list-group-item">
+                <button class="info_Toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#@Html.DisplayFor(item=> i.Id)"
+                        aria-expanded="false"
+                        aria-controls="@Html.DisplayFor(item=> i.Id)">
+                        @Html.DisplayFor(item => i.Id)
+                        -
+                        <span class="property_annotation">
+                            @Html.DisplayFor(item => i.Login)
+                        </span>
+                        -
+                        <span class="property_annotation">
+                            @Html.DisplayFor(item => i.Role)
+                        </span>
+                </button>
+                <ul id="@Html.DisplayFor(item => i.Id)" class="collapse multi-collapse info_list property_annotation">
+
+                    <li>
+                        <span>Id: </span>
+                        @Html.DisplayFor(item => i.Id)
+                    </li>
+
+                    <li>
+                        <span>Login: </span>
+                        @Html.DisplayFor(item => i.Login)
+                    </li>
+
+                    <li>
+                        <span>Email: </span>
+                        @Html.DisplayFor(item => i.Email)
+                    </li>
+
+                    <li>
+                        <span>Role:</span>
+                        @Html.DisplayFor(item => i.Role)
+                    </li>
+
+                    <li>
+                        <a class="btn btn-flat bg-primary button_style"
+                           asp-page="DeleteUser"
+                           asp-route-id="@i.Id">
+                            Delete
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        }
+    </ul>
 </section>

@@ -87,10 +87,7 @@ namespace CoffeeMapServer.Pages.Admin.RoasterAddress
             InsertableRoaster.OfficeAddress = InsertableAddress;
             var respCode = await _roasterAddressConnectionService.UpdateRoasterAsync(InsertableRoaster);
 
-            if (respCode.Equals(0))
-                return RedirectToPage("RoasterAddressConn");
-            else
-                return BadRequest();
+            return respCode.Equals(0) ? RedirectToPage("RoasterAddressConn") : (IActionResult)BadRequest();
         }
     }
 }

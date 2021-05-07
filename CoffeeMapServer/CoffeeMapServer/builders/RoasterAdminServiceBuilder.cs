@@ -9,81 +9,41 @@ namespace CoffeeMapServer.builders
 {
     public static class RoasterAdminServiceBuilder
     {
-        public static async Task<IList<string>> FetchRoasterTags(IRoasterTagRepository roasterTagRepository,
-                                                                  ITagRepository tagRepository,
-                                                                  Guid roasterId)
-        {
-            var pairs = await roasterTagRepository.GetPairsByRoasterIdAsync(roasterId);
-            var onGetTags = new List<string>();
-            foreach (var item in pairs)
-                onGetTags.Add((await tagRepository.GetSingleAsync(item.TagId)).TagTitle);
-            return onGetTags;
-        }
 
-        public static async Task<IList<string>> BindTagsWithRoaster(string newTags,
-                                                                    IList<string> currentTags,
+        public static async Task UpdateRoasterTagsAsync(string tags,
                                                                     ITagRepository tagRepository,
                                                                     IRoasterTagRepository roasterTagRepository,
                                                                     Guid roasterId)
         {
-            var newAddedTags = new List<string>();
-            if (newTags != null && newTags.Length > 0)
-            {
-                var addTagsList = newTags.Split("#");
-                foreach (var i in addTagsList)
-                    if (!currentTags.Contains(i))
-                    {
-                        if (i == "")
-                            continue;
-                        Tag tempTag = await tagRepository.GetSingleAsync(i);
-                        if (tempTag is null)
-                        {
-                            tempTag = Tag.New(i);
-                            tagRepository.Add(tempTag);
-                        }
-                        roasterTagRepository.Add(new RoasterTag(roasterId, tempTag.Id));
-                        newAddedTags.Add(i);
-                    }
-            }
-            return newAddedTags;
+            //TODO: check if it's work
+            var tagsList = await BuildTagsListAsync(tags, tagRepository);
+            var tagsIds = (await roasterTagRepository.GetPairsByRoasterIdAsNoTrackingAsync(roasterId)).Select(p => p.TagId);
+            var tagsToAdd = tagsList.Where(t => !tagsIds.Contains(t.Id)).ToList();
+            var tagsToDelete = tagsIds.Except(tagsList.Select(t => t.Id).ToList()).ToList();
+            foreach (var i in tagsToAdd)
+                roasterTagRepository.Add(new RoasterTag(roasterId, i.Id));
+            foreach (var i in tagsToDelete)
+                roasterTagRepository.Delete(new RoasterTag(roasterId, i));
         }
 
-        public static async Task DeleteTags(IList<string> currentTags, string tagsToDelete, ITagRepository tagRepository, IRoasterTagRepository roasterTagRepository, Guid roasterId)
+        public static async Task<IList<Tag>> BuildTagsListAsync(string tagsString, ITagRepository tagRepository)
         {
-            if (tagsToDelete != null && tagsToDelete.Length > 0)
-            {
-                var pairs = await roasterTagRepository.GetPairsByRoasterIdAsync(roasterId);
-                var delTags = tagsToDelete.Split("#");
-                foreach (var item in delTags)
-                    if (currentTags.Contains(item))
-                    {
-                        if (item == "")
-                            continue;
-                        var tag = await tagRepository.GetSingleAsync(item);
-                        var roasterTag = pairs.FirstOrDefault(n => n.TagId == tag.Id);
-                        roasterTagRepository.Delete(roasterTag);
-                        currentTags.Remove(item);
-                    }
-            }
-        }
-
-        public static async Task<IList<Tag>> BuildTagsList(string tagsString, ITagRepository tagRepository)
-        {
-            string[] tags_array;
+            List<string> tags_list;
             var _localTags = new List<Tag>();
-            if (tagsString.Length == 0)
-            {
-                tagsString = "none";
-                tags_array = tagsString.Split("#");
-            }
+            if (String.IsNullOrEmpty(tagsString))
+                return _localTags;
             else
             {
-                tags_array = tagsString.Split("#");
-                foreach (var i in tags_array)
+                tags_list = tagsString.ToLower()
+                                      .Split("#")
+                                      .Distinct()
+                                      .ToList();
+
+                foreach (var i in tags_list)
                 {
                     if (i == "")
                         continue;
-                    Tag tempTag = await tagRepository.GetSingleAsync(i);
+                    Tag tempTag = await tagRepository.GetSingleAsNoTrackingAsync(i);
                     if (tempTag is null)
                     {
                         var newTag = Tag.New(i);
@@ -95,6 +55,37 @@ namespace CoffeeMapServer.builders
                 }
             }
             return _localTags;
+        }
+
+        public static Roaster AddRoasterNullPlugs(Roaster entity)
+        {
+            if (entity.ContactPersonName == null)
+                entity.ContactPersonName = "none";
+            if (entity.ContactPersonPhone == null)
+                entity.ContactPersonPhone = "none";
+            if (entity.ContactEmail == null)
+                entity.ContactEmail = "none";
+            if (entity.InstagramProfileLink == null)
+                entity.InstagramProfileLink = "none";
+            if (entity.WebSiteLink == null)
+                entity.WebSiteLink = "none";
+            if (entity.VkProfileLink == null)
+                entity.VkProfileLink = "none";
+            if (entity.TelegramProfileLink == null)
+                entity.TelegramProfileLink = "none";
+
+            return entity;
+        }
+
+        public static Address UpdateRoasterAddress(Address old, Address newOne)
+        {
+            old.AddressStr = newOne.AddressStr;
+            old.OpeningHours = newOne.OpeningHours;
+            old.Latitude = newOne.Latitude;
+            old.Longitude = newOne.Longitude;
+            if (old.OpeningHours == null)
+                old.OpeningHours = "none";
+            return old;
         }
     }
 }

@@ -25,12 +25,14 @@ namespace CoffeeMapServer.Infrastructures.Repositories
 
         public async Task<IList<RoasterTag>> GetListAsync([CallerMemberName] string methodName = "")
             => await Context.RoasterTags
+               .Include(t=>t.Tag)
                .TagWith($"{nameof(RoasterTagRepository)}.{methodName}")
                .ToListAsync();
 
-        public async Task<IList<RoasterTag>> GetPairsByRoasterIdAsync(Guid roasterId,
+        public async Task<IList<RoasterTag>> GetPairsByRoasterIdAsNoTrackingAsync(Guid roasterId,
                                                                       [CallerMemberName] string methodName = "")
             => await Context.RoasterTags
+                .AsNoTracking()
                 .Where(node => node.RoasterId == roasterId)
                 .TagWith($"{nameof(RoasterTagRepository)}.{methodName} ({roasterId})")
                 .ToListAsync();

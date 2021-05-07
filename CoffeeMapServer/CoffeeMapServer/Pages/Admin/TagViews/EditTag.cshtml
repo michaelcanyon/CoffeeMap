@@ -5,10 +5,12 @@
     @if (Model.Role == "Master")
         Layout = "_MasterLayout";
 }
+
 @section scripts{
     <script type="text/javascript" src="~/dist/jquery-3.5.1.js"></script>
     <script type="text/javascript" src="~/dist/jquery.maskedInput.js"></script>
 }
+
 <section class="content-header">
     <h1>
         Edit Tag
@@ -18,17 +20,34 @@
         <span style="color:red">Such tag is already exists!</span>
     }
 </section>
+
 <!-- Main content -->
 <section class="content container-fluid">
     <form method="post">
+
         <div class="form-group">
+
             <label for="Id">Id</label>
-            <input type="hidden" class="form-control" asp-for="@Model.Tag.Id" value="@Model.Tag.Id">
+            <input type="hidden"
+                   class="form-control"
+                   asp-for="@Model.Tag.Id"
+                   value="@Model.Tag.Id">
         </div>
+
         <div class="form-group">
+
             <label for="Name">Title</label>
-            <input type="text" maxlength="30" class="form-control" asp-for="@Model.Tag.TagTitle" required>
+            <input type="text"
+                   maxlength="30"
+                   class="form-control"
+                   asp-for="@Model.Tag.TagTitle"
+                   required>
         </div>
-        <button type="submit" asp-page-handler="Process" class="btn btn-primary">Submit</button>
+
+        <button class="btn btn-flat bg-primary"
+                type="submit"
+                asp-page-handler="Process">
+                Submit
+        </button>
     </form>
 </section>
