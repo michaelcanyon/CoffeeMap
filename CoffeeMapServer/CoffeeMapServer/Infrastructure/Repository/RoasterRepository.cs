@@ -39,8 +39,8 @@ namespace CoffeeMapServer.Infrastructures.Repositories
         public async Task<IList<Roaster>> GetListAsync([CallerMemberName] string methodName = "")
             => await _сontext.Roasters
                .Include(r => r.OfficeAddress)
-               .OrderByDescending(r => r.CreationDate)
-               .ThenBy(r => r.Priority)
+               .OrderBy(r => r.Priority)
+               .ThenByDescending(r => r.CreationDate)
                .TagWith($"{nameof(RoasterRepository)}.{methodName}")
                .ToListAsync();
 

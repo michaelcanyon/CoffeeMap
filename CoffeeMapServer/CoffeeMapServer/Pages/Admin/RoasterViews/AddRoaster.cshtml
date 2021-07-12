@@ -8,17 +8,17 @@
 
 @section styles
 {
-    <link rel="stylesheet" href="~/tagify-master/dist/tagify.css" type="text/css">
+    <link rel="stylesheet" href="~/content_root/tagify-master/dist/tagify.css" type="text/css">
 }
 
 @section scripts{
 
-    <script type="text/javascript" src="~/dist/jquery-3.5.1.js"></script>
-    <script type="text/javascript" src="~/tagify-master/dist/jQuery.tagify.min.js"></script>
-    <script type="text/javascript" src="~/dist/jquery.maskedInput.js"></script>
-    <script type="text/javascript" src="~/CustomScripts/AddRoasterNotes.js">
+    <script type="text/javascript" src="~/content_root/dist/jquery-3.5.1.js" ></script>
+    <script type="text/javascript" src="~/content_root/CustomScripts/AddRoasterNotes.js" >
     </script>
-    <script>
+    <script type="text/javascript" src="~/content_root/tagify-master/dist/jQuery.tagify.min.js" ></script>
+    <script type="text/javascript" src="~/content_root/dist/jquery.maskedInput.js" ></script>
+    <script >
         $(document).ready(function () {
             $('[name=tags]').tagify({
                 duplicates: false,
@@ -32,7 +32,7 @@
 
 <section class="content-header">
     <h1>
-        Create roaster note
+        Добавление обжарщика
     </h1>
 </section>
 
@@ -41,10 +41,10 @@
 
     @if (Model.RStatusCode.Equals("601"))
     {
-        <span style="color:red;
+    <span style="color:red;
               font-weight:bold;">
-            Roaster with such name already exists
-        </span>
+        Обжарщик с таким именем уже существует!
+    </span>
     }
     <br />
 
@@ -53,14 +53,15 @@
 
         <div class="form-group">
 
-            <label for="personName">Contact Person Name</label>
+            <label for="personName">Имя контактного человека</label>
             <input type="text"
+                   id="contactPersonName"
                    class="form-control"
                    asp-for="@Model.Roaster.ContactPersonName"
                    placeholder="Иванов Иван"
                    required>
 
-            <label for="personPhone">Contact Person Phone</label>
+            <label for="personPhone">Телефон контактного человека</label>
             <input type="text"
                    id="contactPersonnumber"
                    class="form-control"
@@ -68,7 +69,7 @@
                    placeholder="+7-(800)-(555)-35-35"
                    required>
 
-            <label for="Name">Name</label>
+            <label for="Name">Название обжарщика</label>
             <input type="text"
                    id="title"
                    class="form-control"
@@ -78,9 +79,10 @@
             <div id="title_mes">
             </div>
 
-            <label for="priority">Priority</label>
+            <label for="priority">Приоритет</label>
             <input type="text"
-                   pattern="[0-9]{2}"
+                   pattern="[0-9]{1+}"
+                   id="priority"
                    class="form-control"
                    asp-for="@Model.Roaster.Priority"
                    placeholder="5"
@@ -88,7 +90,7 @@
             <div id="priority_mes">
             </div>
 
-            <label for="phone">Contact number</label>
+            <label for="phone">Контактный номер</label>
             <input type="text"
                    id="contactnumber"
                    class="form-control"
@@ -107,9 +109,9 @@
             <div id="email_mes">
             </div>
 
-            <label for="office">Office Address</label>
+            <label for="office">Адрес</label>
             <input type="text"
-                   id="AddressStr"
+                   id="addressStr"
                    minlength="10"
                    class="form-control"
                    placeholder="3-я Ул. Строителей, д.25"
@@ -120,7 +122,7 @@
             <div id="addressStr_mes">
             </div>
 
-            <label for="hours">Opening hours</label>
+            <label for="hours">Рабочие дни и часы</label>
             <input type="text"
                    id="hours"
                    class="form-control"
@@ -130,7 +132,7 @@
             <div id="hours_mes">
             </div>
 
-            <label for="latitude">Latitude</label>
+            <label for="latitude">Широта</label>
             <input type="text"
                    id="latitude"
                    class="form-control"
@@ -140,7 +142,7 @@
             <div id="latitude_mes">
             </div>
 
-            <label for="longitude">Longitude</label>
+            <label for="longitude">Долгота</label>
             <input type="text"
                    id="longitude"
                    class="form-control"
@@ -150,42 +152,42 @@
             <div id="longitude_mes">
             </div>
 
-            <label for="tags">Tags:</label>
+            <label for="tags">Теги:</label>
             <input name="tags"
                    type="text"
                    class="form-control"
                    asp-for="@Model.Tags">
 
             <br />
-            <label for="website">Web-site link</label>
+            <label for="website">веб-сайт</label>
             <input type="text"
                    id="web"
                    class="form-control"
                    placeholder="e.g www.roastersite.com"
                    asp-for="@Model.Roaster.WebSiteLink">
 
-            <label for="instagram">instagram link</label>
+            <label for="instagram">instagram</label>
             <input type="text"
                    id="iglink"
                    class="form-control"
                    placeholder="e.g instagram.com/account"
                    asp-for="@Model.Roaster.InstagramProfileLink">
 
-            <label for="vk">vk link</label>
+            <label for="vk">vk</label>
             <input type="text"
                    id="vklink"
                    class="form-control"
                    placeholder="e.g vk.com/id4738346343634634634"
                    asp-for="@Model.Roaster.VkProfileLink">
 
-            <label for="telegram">Telegram link</label>
+            <label for="telegram">Telegram</label>
             <input type="text"
                    id="tglink"
                    class="form-control"
                    placeholder="e.g t.me/group1234566"
                    asp-for="@Model.Roaster.TelegramProfileLink">
 
-            <label for="picture">Picture</label>
+            <label for="picture">Иллюстрация</label>
             <input type="file"
                    accept="image/jpeg,
                            image/png,
@@ -195,7 +197,7 @@
                    class="form-control"
                    asp-for="@Model.Picture">
 
-            <label for="description">Description</label>
+            <label for="description">Описание</label>
             <textarea type="text"
                       class="form-control"
                       placeholder="Описание организации"
@@ -205,9 +207,9 @@
         </div>
 
         <button type="submit"
-                 id="confirm_button"
-                class="btn btn-primary">
-            Create
+                id="confirm_button"
+                class="btn btn-flat bg-primary button_style">
+            Добавить
         </button>
     </form>
 </section>

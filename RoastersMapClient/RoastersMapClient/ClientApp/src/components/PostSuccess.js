@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import './styles/successPage/style.css';
+import * as restConsts from '../Constants.js';
 
 export class PostSuccess extends Component {
 
@@ -20,7 +21,7 @@ export class PostSuccess extends Component {
     render() {
 
         return this.state.redirect
-            ? <Redirect to='/' /> :
+            ? <Redirect to={'/'+ restConsts.APP_ROUTE_PREFIX} /> :
             <div className="banner_success">
 
                 <div className="site-header"

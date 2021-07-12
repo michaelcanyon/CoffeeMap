@@ -6,14 +6,14 @@
         Layout = "_MasterLayout";
 }
 @section scripts{
-    <script type="text/javascript" src="~/dist/jquery-3.5.1.js"></script>
-    <script type="text/javascript" src="~/dist/jquery.maskedInput.js"></script>
+    <script type="text/javascript" src="~/content_root/dist/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="~/content_root/dist/jquery.maskedInput.js"></script>
 }
 <section class="content-header">
     <h1>
-        Tags
+        Теги
     </h1>
-    <div class="unused_description"><div class="u_square"></div><h4> - Unused tags</h4></div>
+    <div class="unused_description"><div class="u_square"></div><h4> - неиспользуемые теги</h4></div>
 </section>
 <!-- Main content -->
 <section class="content container-fluid">
@@ -41,12 +41,12 @@
                            asp-page="EditTag"
                            asp-route-id="@i.Id"
                            asp-route-statusCode="0">
-                            Edit
+                            Редактировать
                         </a>
                         <a class="btn btn-flat bg-primary button_style"
                            asp-page="DeleteTag"
                            asp-route-id="@i.Id">
-                            Delete
+                            Удалить
                         </a>
                     </li>
                 </ul>

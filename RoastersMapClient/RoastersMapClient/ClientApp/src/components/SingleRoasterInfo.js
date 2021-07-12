@@ -6,10 +6,11 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import axios from 'axios';
 import singleBanner from './styles/SingleDefaultBanner.jpg';
 import telegramIco from './styles/telegram.svg';
-import webIco from './styles/web.svg';
+import webSiteIco from './styles/web.svg';
 import vkIco from './styles/vk.svg';
-import IgIco from './styles/instagram.svg';
+import instagramIco from './styles/instagram.svg';
 import * as restConsts from '../Constants.js';
+import { Header } from './Header';
 
 export class SingleRoasterInfo extends Component {
     state = {
@@ -34,211 +35,233 @@ export class SingleRoasterInfo extends Component {
         if (roast == null)
             return <div className="Roaster_title">Receiving data...</div>
 
+        const renderLinksBlock = () => {
+            var telegram = roast.roaster.telegramProfileLink;
+            var instagram = roast.roaster.instagramProfileLink;
+            var vk = roast.roaster.vkProfileLink;
+            var webSite = roast.roaster.webSiteLink;
+            if ((telegram == "" || telegram == "none" || telegram==null) &&
+                (instagram == "" || instagram == "none" || instagram == null) &&
+                (vk == "" || vk == "none" || vk== null) &&
+                (webSite == "" || webSite == "none" || webSite == null))
+                return "";
+            else
+                return <div className="SocialNetworks_block">
+
+                    <div className="social_header">
+                        Ссылки:
+                    </div>
+
+                    <div className="socialNetwork_icons">
+
+                        {this.renderSocialMediaImage(telegram, 'telegram')}
+
+                        {this.renderSocialMediaImage(instagram, 'instagram')}
+
+                        {this.renderSocialMediaImage(vk, 'vk')}
+
+                        {this.renderSocialMediaImage(webSite, 'webSite')}
+                    </div>
+
+                </div>;
+        }
+
         return (
+            <div>
+                <Header />
 
-            <div className="container-fluid px-0">
+                <div className="container-fluid px-0">
 
-                <div className="row row-no-padding no-gutters sticky-top">
+                    <div className="row row-no-padding no-gutters sticky-top">
 
-                    <div className="col-12 backToList_button">
+                        <div className="col-12 backToList_button">
 
-                        <a href="#">
-                            К обжарщикам
+                            <a href={'/' + restConsts.APP_ROUTE_PREFIX}>
+                                К обжарщикам
                         </a>
 
-                    </div>
-
-                </div>
-
-                <div className="row row-no-padding no-gutters row-no-padding">
-
-                    <div className={this.getStyleForPanel()} >
-
-                        <div>
-
-                            <img className="Logo-image"
-                                src={this.defineRoasterPicture(roast.roaster.picture)}>
-                            </img>
-
-                            <div className="Logo-text">
-
-                                <span className="Logo-text-style">
-                                </span>
-
-                            </div>
-
                         </div>
 
-                        <div>
+                    </div>
 
-                            < div className="Left-Bar_RoasterInformation" >
+                    <div className="row row-no-padding no-gutters row-no-padding">
 
-                                <div className="Roaster_title">
+                        <div className={this.getStyleForPanel()} >
 
-                                    <span>
-                                        {roast.roaster.name}
+                            <div>
+
+                                <img className="Logo-image"
+                                    src={this.defineRoasterPicture(roast.roaster.picture)}>
+                                </img>
+
+                                <div className="Logo-text">
+
+                                    <span className="Logo-text-style">
                                     </span>
-
-                                </div>
-
-                                <div className="Roaster_description">
-
-                                    <p>
-                                        {roast.roaster.description}
-                                    </p>
-
-                                </div>
-
-                                {this.renderTag(roast.tags)}
-
-                                <div className="Contacts_container">
-
-                                    <span>
-                                        Контакты:
-                                    </span>
-
-                                    <ul className="Contact_list">
-
-                                        <li>
-
-                                            <div className="phoneIcon_image">
-                                            </div>
-
-                                            <div className="roaster_breakWordContacts"
-                                                id="roaster_number">
-
-                                                <span>
-                                                    {roast.roaster.contactNumber}
-                                                </span>
-
-                                            </div>
-
-                                        </li>
-
-                                        <li>
-
-                                            <div className="mailIcon_image">
-                                            </div>
-
-                                            <div className="roaster_breakWordContacts"
-                                                id="roaster_mail">
-
-                                                <span>
-                                                    {roast.roaster.contactEmail}
-                                                </span>
-
-                                            </div>
-
-                                        </li>
-
-                                    </ul>
-
-                                </div>
-
-                                <div className="address_container">
-
-                                    <span className="address_header">
-                                        Адрес:
-                                    </span>
-
-                                    <br>
-                                    </br>
-
-                                    <div className="address_string">
-
-                                        <div className="roasterLocationIcon">
-                                        </div>
-
-                                        <div className="Roaster_locationString">
-
-                                            <span>
-                                                {roast.address.addressStr}
-                                            </span>
-
-                                            <br>
-                                            </br>
-
-                                            <span className="openingHours_string">
-                                                {roast.address.openingHours}
-                                            </span>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <div className="SocialNetworks_block">
-
-                                    <div className="social_header">
-                                        Ссылки:
-                                    </div>
-
-                                    <div className="socialNetwork_icons">
-
-                                        <a href={roast.roaster.telegramProfileLink}>
-
-                                            <img src={telegramIco}>
-                                            </img>
-
-                                        </a>
-
-                                        <a href={roast.roaster.instagramProfileLink}>
-
-                                            <img src={IgIco}>
-                                            </img>
-
-                                        </a>
-
-                                        <a href={roast.roaster.vkProfileLink}>
-
-                                            <img src={vkIco}>
-                                            </img>
-
-                                        </a>
-
-                                        <a href={roast.roaster.webSiteLink}>
-
-                                            <img src={webIco}>
-                                            </img>
-
-                                        </a>
-
-                                    </div>
 
                                 </div>
 
                             </div>
 
+                            <div>
+
+                                < div className="Left-Bar_RoasterInformation" >
+
+                                    <div className="Roaster_title">
+
+                                        <span>
+                                            {roast.roaster.name}
+                                        </span>
+
+                                    </div>
+
+                                    <div className="Roaster_description">
+
+                                        <p>
+                                            {roast.roaster.description}
+                                        </p>
+
+                                    </div>
+
+                                    {this.renderTag(roast.tags)}
+
+                                    <div className="Contacts_container">
+
+                                        <span>
+                                            Контакты:
+                                    </span>
+
+                                        <ul className="Contact_list">
+
+                                            <li>
+
+                                                <div className="phoneIcon_image">
+                                                </div>
+
+                                                <div className="roaster_breakWordContacts"
+                                                    id="roaster_number">
+
+                                                    <span>
+                                                        {roast.roaster.contactNumber}
+                                                    </span>
+
+                                                </div>
+
+                                            </li>
+
+                                            <li>
+
+                                                <div className="mailIcon_image">
+                                                </div>
+
+                                                <div className="roaster_breakWordContacts"
+                                                    id="roaster_mail">
+
+                                                    <span>
+                                                        {roast.roaster.contactEmail}
+                                                    </span>
+
+                                                </div>
+
+                                            </li>
+
+                                        </ul>
+
+                                    </div>
+
+                                    <div className="address_container">
+
+                                        <span className="address_header">
+                                            Адрес:
+                                    </span>
+
+                                        <br>
+                                        </br>
+
+                                        <div className="address_string">
+
+                                            <div className="roasterLocationIcon">
+                                            </div>
+
+                                            <div className="Roaster_locationString">
+
+                                                <span>
+                                                    {roast.address.addressStr}
+                                                </span>
+
+                                                <br>
+                                                </br>
+
+                                                <span className="openingHours_string">
+                                                    {roast.address.openingHours}
+                                                </span>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    {renderLinksBlock()}
+
+                                </div>
+
+                            </div>
+
+                            <Footer desktop={this.state.desktop} />
+
                         </div>
 
-                        <Footer desktop={this.state.desktop} />
+                        <div className={this.getStylesForMap()}>
 
-                    </div>
+                            <Map singleRoaster={this.state.roaster} />
 
-                    <div className={this.getStylesForMap()}>
+                        </div>
 
-                        <Map singleRoaster={this.state.roaster} />
+                        <div className={this.getStylesForMapButton()}
+                            id="mapButtonDiv">
 
-                    </div>
-
-                    <div className={this.getStylesForMapButton()}
-                        id="mapButtonDiv">
-
-                        <button id="mapButton"
-                            className="map-button"
-                            type="button"
-                            onClick={this.toggleMap}>
-                            Карта
+                            <button id="mapButton"
+                                className="map-button"
+                                type="button"
+                                onClick={this.toggleMap}>
+                                Карта
                         </button>
 
+                        </div>
+
                     </div>
 
                 </div>
-
             </div>
 
         );
+    }
+
+    renderSocialMediaImage = (social, socialTitle) => {
+        if (social == "" ||
+            social == "none" ||
+            social == null)
+            return;
+        var image;
+        switch (socialTitle) {
+            case 'instagram':
+                image = <a href={"https://" + social}><img src={instagramIco} /></a>;
+                return image;
+            case 'telegram':
+                image = <a href={"https://" + social}><img src={telegramIco} /></a>;
+                return image;
+            case 'vk':
+                image = <a href={"https://" + social}><img src={vkIco} /></a>;
+                return image;
+            case 'webSite':
+                image = <a href={ "https://"+social}><img src={webSiteIco} /></a>;
+                return image;
+        }
+    }
+
+    handleRedirect = (pathurl) => {
+        
     }
 
     renderTag(tags) {
@@ -286,7 +309,7 @@ export class SingleRoasterInfo extends Component {
                 });
     }
 
-    defineRoasterPicture=(picture) => picture.length == 0 ?
+    defineRoasterPicture = (picture) => picture.length == 0 ?
         singleBanner :
         ("data:image/jpg;base64," + picture);
 

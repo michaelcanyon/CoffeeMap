@@ -6,8 +6,8 @@
         Layout = "_MasterLayout";
 }
 @section scripts{
-    <script type="text/javascript" src="~/dist/jquery-3.5.1.js"></script>
-    <script type="text/javascript" src="~/dist/jquery.maskedInput.js"></script>
+    <script type="text/javascript" src="~/content_root/dist/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="~/content_root/dist/jquery.maskedInput.js"></script>
 
     <script>
         $(function () {
@@ -24,7 +24,7 @@
 
 <section class="content-header">
     <h1>
-        Roasters
+        Обжарщики
     </h1>
 </section>
 
@@ -40,34 +40,34 @@
                class="form-control"
                asp-for="@Model.IdFilter">
 
-        <label for="name">Name</label>
+        <label for="name">Название</label>
         <input type="text"
                maxlength="30"
                class="form-control"
                asp-for="@Model.NameFilter">
 
-        <label for="addressid">office address:</label>
+        <label for="addressid">Адрес:</label>
         <input type="text"
                class="form-control"
                asp-for="@Model.OfficeAddressFilter">
 
-        <label for="phone">Contact number</label>
+        <label for="phone">Контакный номер</label>
         <input type="text"
                id="contactnumber"
                class="form-control"
                asp-for="@Model.ContactNumberFilter">
 
-        <label for="mail">Contact email</label>
+        <label for="mail">Контактный email</label>
         <input type="text"
                class="form-control"
                asp-for="@Model.ContactEmailFilter">
 
-        <label for="instagram">instagram link</label>
+        <label for="instagram">instagram</label>
         <input type="text"
                class="form-control"
                asp-for="@Model.InstagramProfileFilter">
 
-        <label for="telegram">telegram link</label>
+        <label for="telegram">telegram</label>
         <input type="text"
                class="form-control"
                asp-for="@Model.TelegramProfileFilter">
@@ -77,12 +77,12 @@
                class="form-control"
                asp-for="@Model.VkProfileFilter">
 
-        <label for="website">website link</label>
+        <label for="website">веб-сайт</label>
         <input type="text"
                class="form-control"
                asp-for="@Model.WebSiteFilter">
 
-        <label for="tag">Tag:</label>
+        <label for="tag">Тег:</label>
         <input type="text"
                class="form-control"
                asp-for="@Model.TagString">
@@ -90,7 +90,7 @@
         <br />
         <button type="submit"
                 class="btn btn-flat bg-primary button_style">
-            Filter notes
+            Фильтровать
         </button>
 
     </form>
@@ -98,13 +98,13 @@
     <br />
     <button class="btn btn-flat bg-primary button_style"
             id="filtrationbar">
-        Filtration
+        Фильтрация
     </button>
 
     <a class="btn btn-flat bg-primary button_style"
        asp-page="AddRoaster"
        asp-route-StatusCode="0">
-        Create roaster note
+        Добавить обжарщика
     </a>
 
     <br />
@@ -128,47 +128,47 @@
                     id="@Html.DisplayFor(item=>i.Id)">
 
                     <li>
-                        <span>Contact person name: </span>
+                        <span>Имя контактного человека: </span>
                         @Html.DisplayFor(item => i.ContactPersonName)
                     </li>
 
                     <li>
-                        <span>Contact person phone: </span>
+                        <span>Телефон контактного человека: </span>
                         @Html.DisplayFor(item => i.ContactPersonPhone)
                     </li>
 
                     <li>
-                        <span>Priority: </span>
+                        <span>Приоритет: </span>
                         @Html.DisplayFor(item => i.Priority)
                     </li>
 
                     <li>
-                        <span>Address: </span>
+                        <span>Адрес: </span>
                         @Html.DisplayFor(item => i.OfficeAddress.AddressStr)
                     </li>
 
                     <li>
-                        <span>Opening hours: </span>
+                        <span>Рабочие дни и часы: </span>
                         @Html.DisplayFor(item => i.OfficeAddress.OpeningHours)
                     </li>
 
                     <li>
-                        <span>Latitude: </span>
+                        <span>Широта: </span>
                         @Html.DisplayFor(item => i.OfficeAddress.Latitude)
                     </li>
 
                     <li>
-                        <span>Longitude: </span>
+                        <span>Долгота: </span>
                         @Html.DisplayFor(item => i.OfficeAddress.Longitude)
                     </li>
 
                     <li>
-                        <span>Phone number: </span>
+                        <span>Контактный номер телефона: </span>
                         @Html.DisplayFor(item => i.ContactNumber)
                     </li>
 
                     <li>
-                        <span class="property_annotation">Tags: </span>
+                        <span class="property_annotation">Теги: </span>
                         <ul>
                                 @foreach (var e in i.RoasterTags)
                                 {
@@ -200,12 +200,12 @@
                     </li>
 
                     <li>
-                        <span class="property_annotation">Web site: </span>
+                        <span class="property_annotation">веб-сайт: </span>
                         @Html.DisplayFor(item => i.WebSiteLink)
                     </li>
 
                     <li>
-                        <span class="property_annotation">Creation date: </span>
+                        <span class="property_annotation">Дата добавления: </span>
                         @Html.DisplayFor(item => i.CreationDate)
                     </li>
 
@@ -215,12 +215,12 @@
                            asp-page="EditRoaster"
                            asp-route-id="@i.Id"
                            asp-route-statusCode="0">
-                            Edit
+                            Редактировать
                         </a>
                         <a class="btn btn-flat bg-primary button_style"
                            asp-page="DeleteRoaster"
                            asp-route-id="@i.Id">
-                            Delete
+                            Удалить
                         </a>
                     </li>
                 </ul>

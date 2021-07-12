@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeeMapServer.Controllers
 {
-    [Route("[controller]")]
+    [Route("/Admin/[controller]")]
     [ApiController]
     public class RoastersController : ControllerBase
     {

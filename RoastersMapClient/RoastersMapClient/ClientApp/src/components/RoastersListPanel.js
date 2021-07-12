@@ -6,6 +6,8 @@ import axios from 'axios';
 import { Footer } from './Footer';
 import listPageBanner from './styles/listPageBanner.jpg';
 import * as restConsts from '../Constants.js';
+import { Header } from './Header';
+import InputMask from 'react-input-mask';
 export class RoastersListPanel extends Component {
     constructor(props) {
         super(props);
@@ -13,7 +15,7 @@ export class RoastersListPanel extends Component {
             mapButton: false,
             desktop: false,
             data: [],
-            hoverRoaster:null,
+            hoverRoaster: null,
             buffData: [],
             isLoading: false,
             error: null,
@@ -41,7 +43,7 @@ export class RoastersListPanel extends Component {
 
         roasters = roasters.filter((roaster) => {
             if (this.state.phoneNumberFilter == "" ||
-                roaster.roaster.contactNumber.includes(this.state.phoneNumberFilter))
+                (roaster.roaster.contactNumber.replace(/[^0-9]/g, '')).includes(this.state.phoneNumberFilter.replace(/[^0-9]/g, '')))
                 return roaster;
         });
 
@@ -76,127 +78,131 @@ export class RoastersListPanel extends Component {
         });
 
         return (
-            <div className="container-fluid px-0">
+            <div>
+                <Header />
+                <div className="container-fluid px-0">
 
-                <div className="row row-no-padding no-gutters row-no-padding">
+                    <div className="row row-no-padding no-gutters row-no-padding">
 
-                    <div className={this.getStyleForPanel()}>
+                        <div className={this.getStyleForPanel()}>
 
-                        <div>
+                            <div>
 
-                            <img className="Logo-image" src={listPageBanner}>
-                            </img>
+                                <img className="Logo-image" src={listPageBanner}>
+                                </img>
 
-                            <div className="Logo-text">
+                                <div className="Logo-text">
 
-                                <span className="Logo-text-style">
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                        <div className="Left-Bar_Search-form-filter collapse multi-collapse"
-                            id="all-filters">
-
-                            <form className="Left-Bar_form">
-
-                                <input className="Left-Bar_Search-field"
-                                    value={this.state.addressFilter}
-                                    onChange={this.addressFilterUpd.bind(this)}
-                                    placeholder="Адрес">
-                                </input>
-
-                                <input className="Left-Bar_Search-field"
-                                    value={this.state.phoneNumberFilter}
-                                    onChange={this.phoneNumberFilterUpd.bind(this)}
-                                    placeholder="Номер телефона">
-                                </input>
-
-                                <input className="Left-Bar_Search-field"
-                                    value={this.state.emailFilter}
-                                    onChange={this.emailFilterUpd.bind(this)}
-                                    placeholder="Email">
-                                </input>
-
-                                <input className="Left-Bar_Search-field"
-                                    value={this.state.descriptionFilter}
-                                    onChange={this.descriptionFilterUpd.bind(this)}
-                                    placeholder="Описание">
-                                </input>
-
-                                <input className="Left-Bar_Search-field"
-                                    value={this.state.tagFilter}
-                                    onChange={this.tagFilterUpd.bind(this)}
-                                    placeholder="Тег">
-                                </input>
-
-                                <input className="Left-Bar_Search-field"
-                                    value={this.state.webSiteFilter}
-                                    onChange={this.webSiteFilterUpd.bind(this)}
-                                    placeholder="Сайт">
-                                </input>
-
-                                <div className="Left-Bar_Search-form_buttons btn-group-vertical">
-
-                                    <button className="filter-buttons"
-                                        onClick={this.clearFilters.bind(this)}>
-                                        Очистить фильтры
-                                    </button>
+                                    <span className="Logo-text-style">
+                                    </span>
 
                                 </div>
 
-                            </form>
+                            </div>
 
-                        </div>
+                            <div className="Left-Bar_Search-form-filter collapse multi-collapse"
+                                id="all-filters">
 
-                        <div className="Left-Bar_Search-form_buttons">
+                                <form className="Left-Bar_form">
 
-                            <button className="filter-buttons col-12"
-                                data-toggle="collapse"
-                                data-target="#all-filters"
-                                aria-expanded="false"
-                                aria-controls="all-filters">
-                                Фильтры
+                                    <input className="Left-Bar_Search-field"
+                                        value={this.state.addressFilter}
+                                        onChange={this.addressFilterUpd.bind(this)}
+                                        placeholder="Адрес">
+                                    </input>
+
+                                    <InputMask className="Left-Bar_Search-field"
+                                        mask="+7-(999)-999-99-99"
+                                        name="personPhone"
+                                        value={this.state.phoneNumberFilter}
+                                        onChange={this.phoneNumberFilterUpd.bind(this)}
+                                        placeholder="Номер телефона"/>
+
+                                    <input className="Left-Bar_Search-field"
+                                        value={this.state.emailFilter}
+                                        onChange={this.emailFilterUpd.bind(this)}
+                                        placeholder="Email">
+                                    </input>
+
+                                    <input className="Left-Bar_Search-field"
+                                        value={this.state.descriptionFilter}
+                                        onChange={this.descriptionFilterUpd.bind(this)}
+                                        placeholder="Описание">
+                                    </input>
+
+                                    <input className="Left-Bar_Search-field"
+                                        value={this.state.tagFilter}
+                                        onChange={this.tagFilterUpd.bind(this)}
+                                        placeholder="Тег">
+                                    </input>
+
+                                    <input className="Left-Bar_Search-field"
+                                        value={this.state.webSiteFilter}
+                                        onChange={this.webSiteFilterUpd.bind(this)}
+                                        placeholder="Сайт">
+                                    </input>
+
+                                    <div className="Left-Bar_Search-form_buttons btn-group-vertical">
+
+                                        <button className="filter-buttons"
+                                            onClick={this.clearFilters.bind(this)}>
+                                            Очистить фильтры
+                                    </button>
+
+                                    </div>
+
+                                </form>
+
+                            </div>
+
+                            <div className="Left-Bar_Search-form_buttons">
+
+                                <button className="filter-buttons col-12"
+                                    data-toggle="collapse"
+                                    data-target="#all-filters"
+                                    aria-expanded="false"
+                                    aria-controls="all-filters">
+                                    Фильтры
                             </button>
 
-                        </div>
+                            </div>
 
-                        <div className="Left-Bar_Roasters-List">
+                            <div className="Left-Bar_Roasters-List">
 
-                            <div className="Left-Bar_RoastersList">
-                                {
-                                    roasters.length ? roasters.map(
+                                <div className="Left-Bar_RoastersList">
+                                    {
+                                        roasters.length ? roasters.map(
                                             obj =>
-                                            (           
-                                                <div key={obj.roaster.id}>
-                                                    <a onMouseEnter={() => { this.setState({ hoverRoaster: obj.roaster.id }); }}
-                                                        onMouseLeave={() => { this.setState({ hoverRoaster: null }); }}
-                                                        href={this.redirectToSingle(obj.roaster.id)}>
+                                                (
+                                                    <div key={obj.roaster.id}>
+                                                        <a onMouseEnter={() => { this.setState({ hoverRoaster: obj.roaster.id }); }}
+                                                            onMouseLeave={() => { this.setState({ hoverRoaster: null }); }}
+                                                            href={this.redirectToSingle(obj.roaster.id)}>
                                                             {obj.roaster.name}
                                                         </a>
                                                     </div>
-                                            )
-                                   ) : ''
-                                }
+                                                )
+                                        ) : ''
+                                    }
+                                </div>
+
                             </div>
+
+                            <Footer desktop={this.state.desktop} />
 
                         </div>
 
-                        <Footer desktop={this.state.desktop} />
+                        <div className={this.getStylesForMap()}>
+
+                            <Map roasters={roasters} hovered={this.state.hoverRoaster} />
+
+                        </div>
+
+                        {this.getStylesForMapButton()}
 
                     </div>
-
-                    <div className={this.getStylesForMap()}>
-
-                        <Map roasters={roasters} hovered={this.state.hoverRoaster} />
-
-                    </div>
-
-                    {this.getStylesForMapButton()}
 
                 </div>
-
             </div>
         );
     }
@@ -248,7 +254,7 @@ export class RoastersListPanel extends Component {
     }
 
     redirectToSingle(id) {
-        return restConsts.CLIENT_CURRENT_DOMAIN +
+        return  restConsts.APP_ROUTE_PREFIX +
             restConsts.CLIENT_SINGLE_ROASTER_REDIRECT_PATH +
             id;
     }

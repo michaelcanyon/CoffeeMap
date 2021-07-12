@@ -4,6 +4,7 @@ import GoogleMapReact from 'google-map-react';
 import mapStyle from './styles/MapStyle.json';
 import MarkerIco from './styles/mapMarker.png';
 import * as API_KEYS from '../API_keys.js';
+import * as restConsts from '../Constants.js';
 
 const defaultDesktop = { lat: 60.25, lng: 74.15 };
 const defaultMobile = { lat: 55.558741, lng: 37.378847 };
@@ -214,7 +215,7 @@ export class Map extends Component {
     getInfoWindow=(roaster)=> {
         var link = null;
         link = this.props.roasters == null ? '<div class="marker_name"><span>' + roaster.roaster.name + '</span></div>' :
-            '<div><a class="marker_name_hover" href=' + '"SingleRoasterInfo/' + roaster.roaster.id + '">' + roaster.roaster.name + '</a></div>';
+            '<div><a class="marker_name_hover" href=' + '"' + restConsts.APP_ROUTE_PREFIX + 'SingleRoasterInfo/' + roaster.roaster.id + '">' + roaster.roaster.name + '</a></div>';
         return '<div class="info_window_wraper">' +
             link +
             '<div class="marker_mail">' +

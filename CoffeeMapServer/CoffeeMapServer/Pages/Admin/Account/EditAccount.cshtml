@@ -7,8 +7,8 @@
 }
 @section scripts{
 
-    <script type="text/javascript" src="~/dist/jquery-3.5.1.js"></script>
-    <script type="text/javascript" src="~/CustomScripts/EditUser.js"></script>
+    <script type="text/javascript" src="~/content_root/dist/jquery-3.5.1.js" ></script>
+    <script type="text/javascript" src="~/content_root/CustomScripts/EditUser.js" ></script>
     <script>
 
         var check = function () {
@@ -20,29 +20,28 @@
                 mes.className = "";
                 sumbitButton.disabled = false;
             }
-            else
-            {
+            else {
                 sumbitButton.disabled = true;
-                mes.innerHTML = "Passwords aren't matching!";
-                mes.className="alert alert-danger py-2"
+                mes.innerHTML = "Пароли не совпадают!";
+                mes.className = "alert alert-danger py-2"
             }
         }
     </script>
 }
 <section class="content-header">
     <h1>
-        Edit account
+        Редактирование профиля
     </h1>
     @if (Model.RStatusCode.Equals("601"))
     {
         <br />
-        <div class="alert alert-danger py-2">Email is already busy!</div>
+        <div class="alert alert-danger py-2">Этот Email уже используется!</div>
         <br />
     }
     else if (Model.RStatusCode.Equals("602"))
     {
         <br />
-        <div class="alert alert-danger py-2">Password change procedure failed! Old password incorrect or wasn't filled!</div>
+        <div class="alert alert-danger py-2">Ошибка при изменении пароля! Старый пароль введен неверно!</div>
         <br />
     }
 </section>
@@ -57,7 +56,7 @@
             <input type="hidden"
                    class="form-control"
                    asp-for="@Model._User.Login"
-                   value="@Model._User.Login" 
+                   value="@Model._User.Login"
                    required>
         </div>
         <div class="form-group">
@@ -69,14 +68,14 @@
                    asp-for="@Model._User.Email">
             <div id="email_mes"></div>
 
-            <label for="old_password">Old Passsword</label>
+            <label for="old_password">Старый пароль</label>
             <input type="password"
                    id="old_password"
                    class="form-control"
                    asp-for="@Model._User.Password"
                    value="">
 
-            <label for="new_password">New Password</label>
+            <label for="new_password">Новый пароль</label>
             <input type="password"
                    minlength="6"
                    id="new_password"
@@ -84,14 +83,21 @@
                    onkeyup="check();"
                    asp-for="@Model.NewPassword">
 
-            <label for="passwordConfirmation">Password Confirmation</label>
+            <label for="passwordConfirmation">Подтверждение пароля</label>
             <input type="password"
                    id="passconfirmation"
                    class="form-control"
                    onkeyup="check();">
             <div id="message"></div>
         </div>
-        <button type="submit" id="submit_button" asp-page-handler="Process" class="btn btn-primary">Submit</button>
+
+        <button type="submit"
+                id="submit_button"
+                asp-page-handler="Process"
+                class="btn btn-flat bg-primary button_style">
+            Сохранить
+        </button>
+
     </form>
-    
+
 </section>

@@ -3,28 +3,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Mukta:wght@800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,200;0,400;0,500;0,800;1,200&display=swap');
 
-    .aboutUs_container {
-        position: absolute;
-        height: 20%;
-        width: 100%;
-    }
+.aboutUs_container {
+    position: absolute;
+    height: 20%;
+    width: 100%;
+}
 
-    .aboutUs_banner {
-        position: relative;
-        display: block;
-        height: 200px;
-        background-size: 100%;
-    }
+.aboutUs_banner {
+    position: relative;
+    display: block;
+    height: 200px;
+    background-size: 100%;
+}
 
-    .aboutUs_banner-bg_image {
-        background-image: url(./aboutUsBanner.jfif);
-        filter: blur(2px);
-        -webkit-filter: blur(2px);
-        height: 100%;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
+.aboutUs_banner-bg_image {
+    background-image: url(./aboutUsBanner.jfif);
+    filter: blur(2px);
+    -webkit-filter: blur(2px);
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
 .aboutUs_banner-benner_text {
     background-color: rgb(0,0,0); /* Fallback color */
@@ -41,47 +41,53 @@
     padding: 20px;
     text-align: center;
     font-family: 'Fira Sans Condensed', sans-serif;
-    font-size:35px;
-    font-weight:bold;
-    letter-spacing:2px;
+    font-size: 35px;
+    font-weight: bold;
+    letter-spacing: 2px;
 }
 
-    .aboutUs_information-container {
-        font-family: 'Fira Sans Condensed', sans-serif;
-        display:block;
-        width:70%;
-        text-align: center;
-        margin-left:15%;
+.aboutUs_information-container {
+    font-family: 'Fira Sans Condensed', sans-serif;
+    display: block;
+    width: 70%;
+    text-align: center;
+    margin-left: 15%;
+}
 
+    .aboutUs_information-container span {
+        font-family: 'Fira Sans Condensed', sans-serif;
+        font-weight: bold;
+        font-size: 30px;
+        display: block;
+        align-items: center;
+        padding-top: 20px;
+        padding-bottom: 20px;
     }
-        .aboutUs_information-container span {
-            font-family: 'Fira Sans Condensed', sans-serif;
-            font-weight: bold;
-            font-size: 30px;
-            display: block;
-            align-items: center;
-            padding-top: 20px;
-            padding-bottom: 20px;
-        }
 
 .aboutUs_information-paragraph {
     letter-spacing: 1px;
     text-align: left;
     font-size: 20px !important;
+    text-align: left;
+    font-weight: 600;
 }
 
-    div[class*=box] {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+.description_list li {
+    padding: 10px 0px 10px 10px;
+}
 
-    .box-1 {
-        position: relative;
-        padding-top: 70px;
-        padding-bottom: 200px;
-    }
+div[class*=box] {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-1 {
+    position: relative;
+    padding-top: 70px;
+    padding-bottom: 200px;
+}
 
 .btn {
     position: relative;
@@ -95,9 +101,10 @@
     cursor: pointer;
     user-select: none;
 }
-.btn a{
-    color:black;
-}
+
+    .btn a {
+        color: black;
+    }
 
     .btn:before, .btn:after {
         content: '';
@@ -110,6 +117,7 @@
         color: white;
         transition-delay: .25s;
     }
+
         .btn:hover a {
             color: white !important;
             transition-delay: .25s;
@@ -124,7 +132,7 @@
             transition-delay: .25s;
         }
 
-        
+
 /* From Top */
 
 .from-top:before,
@@ -151,70 +159,71 @@
     height: 100%;
 }
 
-    /* 
+/* 
 ========================
       BUTTON ONE
 ========================
 */
-    .btn-one {
-        color: #FFF;
-        transition: all 0.3s;
+.btn-one {
+    color: #FFF;
+    transition: all 0.3s;
+    position: relative;
+}
+
+    .btn-one a {
         position: relative;
+        padding: 20px !important;
+        top: 10%;
+        font-family: 'Philosopher', sans-serif;
+        color: #000;
+        transition: all 0.3s;
     }
 
-        .btn-one a {
-            position: relative;
-            padding:20px !important;
-            top: 10%;
-            font-family: 'Philosopher', sans-serif;
-            color: #000;
-            transition: all 0.3s;
-        }
+    .btn-one::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        opacity: 0;
+        transition: all 0.3s;
+        border-top-width: 1px;
+        border-bottom-width: 1px;
+        border-top-style: solid;
+        border-bottom-style: solid;
+        border-top-color: #000;
+        border-bottom-color: #000;
+        transform: scale(0.1, 1);
+    }
 
-        .btn-one::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            opacity: 0;
-            transition: all 0.3s;
-            border-top-width: 1px;
-            border-bottom-width: 1px;
-            border-top-style: solid;
-            border-bottom-style: solid;
-            border-top-color: #000;
-            border-bottom-color: #000;
-            transform: scale(0.1, 1);
-        }
+    .btn-one:hover a {
+        letter-spacing: 2px;
+    }
 
-        .btn-one:hover a {
-            letter-spacing: 2px;
-        }
+    .btn-one:hover::before {
+        opacity: 1;
+        transform: scale(1, 1);
+    }
 
-        .btn-one:hover::before {
-            opacity: 1;
-            transform: scale(1, 1);
-        }
+    .btn-one::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        transition: all 0.3s;
+        background-color: rgba(255,255,255,0.1);
+    }
 
-        .btn-one::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            transition: all 0.3s;
-            background-color: rgba(255,255,255,0.1);
-        }
+    .btn-one:hover::after {
+        opacity: 0;
+        transform: scale(0.1, 1);
+    }
 
-        .btn-one:hover::after {
-            opacity: 0;
-            transform: scale(0.1, 1);
-        }
 .footer-block {
     position: relative;
     width: 97%;

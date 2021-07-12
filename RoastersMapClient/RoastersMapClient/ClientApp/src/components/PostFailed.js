@@ -2,6 +2,7 @@
 import './styles/ErrorPage/css/style.css';
 import './styles/ErrorPage/img/emoji.png';
 import { Redirect } from 'react-router-dom';
+import * as restConsts from '../Constants.js';
 export class PostFailed extends Component {
 	constructor() {
 		super();
@@ -17,8 +18,8 @@ export class PostFailed extends Component {
 	}
     render() {
 
-			 return this.state.redirect
-				 ? <Redirect to='/' />:
+		return this.state.redirect
+			? <Redirect to={'/'+restConsts.APP_ROUTE_PREFIX} /> :
 			<div id="notfound">
 
 					 <div className="notfound">

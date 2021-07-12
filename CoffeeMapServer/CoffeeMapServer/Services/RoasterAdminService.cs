@@ -63,8 +63,6 @@ namespace CoffeeMapServer.Services
                                            address.Longitude);
                 address = AddressCoordinatesTransformer.ConvertCoordinates(address, latitude, longitude);
                 roaster.OfficeAddress = _address;
-                _addressReposiotry.Add(_address);
-                //add roasterTags  notes
                 RoasterTagsPairsBuilder.BuildRoasterTags(_localTags,
                                                          roaster.Id,
                                                          _roasterTagRepository);
@@ -140,7 +138,6 @@ namespace CoffeeMapServer.Services
                 var roasterAddress = await _addressReposiotry.GetSingleAsync(entity.OfficeAddress.Id);
                 entity.OfficeAddress = AddressCoordinatesTransformer.ConvertCoordinates(entity.OfficeAddress, latitude, longitude);
                 entity.OfficeAddress = RoasterAdminServiceBuilder.UpdateRoasterAddress(roasterAddress, entity.OfficeAddress);
-                _addressReposiotry.Update(entity.OfficeAddress);
 
                 entity= RoasterAdminServiceBuilder.AddRoasterNullPlugs(entity);
                 _roasterRepository.Update(entity);

@@ -56,11 +56,11 @@ namespace CoffeeMapServer
                 .ConfigureAuth()
                 .ConfigRazorPagesAcess();
             services.AddSingleton(Log.Logger);
-            services.AddSwaggerGen();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
-            });
+            //services.AddSwaggerGen();
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,7 +79,7 @@ namespace CoffeeMapServer
             app.UnauthorizedLogin();
 
             // prepare token to insert into cookie
-            app.UseSwagger();
+            //app.UseSwagger();
             app.SupplyResponceWithToken();
             app.UseAuthentication();
             app.UseAuthorization();
@@ -90,10 +90,10 @@ namespace CoffeeMapServer
                 Secure = CookieSecurePolicy.Always
             });
 
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            });
+            //app.UseSwaggerUI(c =>
+            //{
+            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            //});
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();

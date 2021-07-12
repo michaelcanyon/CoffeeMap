@@ -6,8 +6,8 @@
         Layout = "_MasterLayout";
 }
 @section scripts{
-    <script type="text/javascript" src="~/dist/jquery-3.5.1.js"></script>
-    <script type="text/javascript" src="~/dist/jquery.maskedInput.js"></script>
+    <script type="text/javascript" src="~/content_root/dist/jquery-3.5.1.js" ></script>
+    <script type="text/javascript" src="~/content_root/dist/jquery.maskedInput.js"></script>
     <script>
 
         $(document).ready(function () {
@@ -21,10 +21,10 @@
 
 <section class="content-header">
     <h1>
-        Addresses
+        Адреса обжарщиков
     </h1>
     <br />
-    <div class="unused_description"><div class="u_square"></div><h4> - Unused addresses</h4></div>
+    <div class="unused_description"><div class="u_square"></div><h4> - Неиспользуемые адреса</h4></div>
 </section>
 
 <!-- Main content -->
@@ -39,13 +39,13 @@
                class="form-control"
                asp-for="@Model.AddressIdFilter">
 
-        <label for="name">Address</label>
+        <label for="name">Адрес</label>
         <input type="text"
                maxlength="30"
                class="form-control"
                asp-for="@Model.AddressStrFilter">
 
-        <label for="addressid">Opening hours</label>
+        <label for="addressid">Рабочие дни и часы</label>
         <input type="text"
                id="hours"
                class="form-control"
@@ -54,28 +54,30 @@
         <br />
         <button type="submit"
                 class="btn btn-flat bg-primary button_style">
-            Filter notes
+            Фильтровать
         </button>
     </form>
     <br />
 
     <button id="filtrationbar"
             class="btn btn-flat bg-primary button_style">
-        Filtration
+        Фильтрация
     </button>
 
     <a class="btn btn-flat bg-primary button_style"
        asp-page="AddAddress"
        asp-route-StatusCode="0">
-        Create address note
+        Добавить адрес
     </a>
     <ul class="list-group">
 
         @foreach (var i in Model.Addresses)
-        {
+        { var roastersCount = i.Roasters.Count();
+            if (roastersCount > 0 && i.AddressStr == "none")
+                continue;
             <li class="list-group-item">
                 <button class="info_Toggler"
-                        @{ if (i.Roasters.Count() == 0) { <text> style="color: #81b5d4;" </text>  } }
+                        @{ if (roastersCount== 0) { <text> style="color: #81b5d4;" </text>  } }
                         type="button"
                         data-toggle="collapse"
                         data-target="#@Html.DisplayFor(item => i.Id)"
@@ -93,27 +95,27 @@
                     </li>
 
                     <li>
-                        <span>Address: </span>
+                        <span>Адрес: </span>
                         @Html.DisplayFor(item => i.AddressStr)
                     </li>
 
                     <li>
-                        <span>Opening hours: </span>
+                        <span>Рабочие дни и часы: </span>
                         @Html.DisplayFor(item => i.OpeningHours)
                     </li>
 
                     <li>
-                        <span>Latitude: </span>
+                        <span>Широта: </span>
                         @Html.DisplayFor(item => i.Latitude)
                     </li>
 
                     <li>
-                        <span>Longitude: </span>
+                        <span>Долгота: </span>
                         @Html.DisplayFor(item => i.Longitude)
                     </li>
 
                     <li>
-                        <span>Bonded roasters: </span>
+                        <span>Связанные обжарщики: </span>
                         <ul>
                             @{var roasters = i.Roasters.Select(r => r.Name).ToList();
                                 foreach (var item in roasters)
@@ -131,13 +133,13 @@
                            asp-page="UpdateAddress"
                            asp-route-id="@i.Id"
                            asp-route-statusCode="0">
-                            Edit
+                            Редактировать
                         </a>
 
                         <a class="btn btn-flat bg-primary button_style"
                            asp-page="DeleteAddress"
                            asp-route-id="@i.Id">
-                            Delete
+                            Удалить
                         </a>
                     </li>
                 </ul>

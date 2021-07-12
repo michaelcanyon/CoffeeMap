@@ -5,6 +5,7 @@ import InputMask from 'react-input-mask';
 import ReCAPTCHA from 'react-google-recaptcha';
 import axios from 'axios';
 import { openingHoursMask } from './scripts/openingHoursMask';
+import { Header } from './Header';
 
 import "./styles/ContactForm/Images/icons/favicon.ico";
 import "./styles/ContactForm/vendor/bootstrap/css/bootstrap.min.css";
@@ -27,7 +28,7 @@ export class ContactForm extends Component {
         this.state = {
             followingAttempts: false,
             fileUploadMessage: 'Файл не выбран',
-            captchaVisible:false,
+            captchaVisible: false,
             RoasterRequestDT:
             {
                 OwnerDT: {
@@ -56,7 +57,7 @@ export class ContactForm extends Component {
                 },
                 Tags: []
             },
-            CharPicture:""
+            CharPicture: ""
         };
     }
 
@@ -77,7 +78,7 @@ export class ContactForm extends Component {
                 },
                 RoasterDT: {
                     ...prevState.RoasterRequestDT.RoasterDT,
-                    id: '00000000-0000-0000-0000-000000000000',
+                    id: restConsts.GUID_EMPTY,
                     Name: data.get("companyTitle"),
                     ContactEmail: data.get("email"),
                     ContactNumber: data.get("roasterPhone"),
@@ -89,7 +90,7 @@ export class ContactForm extends Component {
                 },
                 AddressDT: {
                     ...prevState.RoasterRequestDT.AddressDT,
-                    id: '00000000-0000-0000-0000-000000000000',
+                    id: restConsts.GUID_EMPTY,
                     AddressStr: data.get("address"),
                     OpeningHours: data.get("opening_hours")
                 }
@@ -99,7 +100,8 @@ export class ContactForm extends Component {
             () => {
                 Geocode.fromAddress(this.state.RoasterRequestDT.AddressDT.AddressStr).then(
                     (response) => {
-                        const { lat, lng } = response.results[0].geometry.location;
+                        var { lat, lng } = response.results[0].geometry.location;
+
                         this.setState(prevState => ({
                             ...prevState,
                             RoasterRequestDT: {
@@ -112,20 +114,19 @@ export class ContactForm extends Component {
                             }
                         }),
                             () => {
-                                if (!this.checkAnyFormFieldMismatches()) {
+                                if (!this.checkAnyFormFieldMismatches())
                                     return;
-                                }
-                                else {
-                                        this.setState({ captchaVisible: true });
-                                }
+                                else
+                                    this.setState({ captchaVisible: true });
                             }
                         );
                     },
                     (error) => {
                         console.log(error);
+                        window.scrollTo({ top: 200, behavior: 'smooth' });
                     }
-                )
-                if (!this.checkAnyFormFieldMismatches()) 
+                );
+                if (!this.checkAnyFormFieldMismatches())
                     window.scrollTo({ top: 200, behavior: 'smooth' });
             }
         );
@@ -155,7 +156,7 @@ export class ContactForm extends Component {
                 fileUploadMessage: "Файл: " + this.fileRef.current.files[0].name,
                 RoasterRequestDT: {
                     ...prevState.RoasterRequestDT,
-                    CharPicture:value
+                    CharPicture: value
                 }
 
             }));
@@ -209,339 +210,342 @@ export class ContactForm extends Component {
         axios.post(restConsts.SERVER_DOMAIN_URL + restConsts.SERVER_POST_SINGLE_ROASTER_PATH, (this.state.RoasterRequestDT))
             .then((response) => {
                 console.log(response);
-                this.props.history.push('/PostSuccess');
+                this.props.history.replace('/'+restConsts.APP_ROUTE_PREFIX + 'PostSuccess');
             },
                 (error) => {
                     console.log(error);
-                    this.props.history.push('/PostFailed');
+                    this.props.history.replace('/'+restConsts.APP_ROUTE_PREFIX +'PostFailed');
                 }
             );
     }
     render() {
         return (
             <div>
+                <Header />
+                <div>
 
-                <div className="container-contact100">
+                    <div className="container-contact100">
 
-                    <div className="wrap-contact100">
+                        <div className="wrap-contact100">
 
-                        <form className="contact100-form validate-form"
-                            onSubmit={this.handleForm}>
+                            <form className="contact100-form validate-form"
+                                onSubmit={this.handleForm}>
 
-                            <span className="contact100-form-title">
-                                Свяжитесь с нами
+                                <span className="contact100-form-title">
+                                    Свяжитесь с нами
 				            </span>
 
-                            <label className="label-input100"
-                                htmlFor="first-name"
-                                ref={this.toTopPageRef}>
-                                Как мы можем к Вам обращаться *
+                                <label className="label-input100"
+                                    htmlFor="first-name"
+                                    ref={this.toTopPageRef}>
+                                    Как мы можем к Вам обращаться *
                             </label>
 
-                            <div className={this.checkName()}
-                                data-validate="Введите Ваше имя">
+                                <div className={this.checkName()}
+                                    data-validate="Введите Ваше имя">
 
-                                <input id="firstname"
-                                    onKeyPress={(e) => this.keyPressHandler(e, /[a-zA-ZА-Яа-я\s]/)}
-                                    className="input100"
-                                    type="text"
-                                    name="first-name"
-                                    placeholder=" Имя">
-                                </input>
+                                    <input id="firstname"
+                                        onKeyPress={(e) => this.keyPressHandler(e, /[a-zA-ZА-Яа-я\s]/)}
+                                        className="input100"
+                                        type="text"
+                                        name="first-name"
+                                        placeholder=" Имя">
+                                    </input>
 
-                                <span className="focus-input100">
-                                </span>
+                                    <span className="focus-input100">
+                                    </span>
 
-                            </div>
+                                </div>
 
-                            <div className="wrap-input100 rs2-wrap-input100 validate-input"
-                                data-validate="Введите Вашу фамилию">
+                                <div className="wrap-input100 rs2-wrap-input100 validate-input"
+                                    data-validate="Введите Вашу фамилию">
 
-                                <input id="lastname"
-                                    className="input100"
-                                    type="text"
-                                    name="last-name"
-                                    placeholder=" Фамилия">
-                                </input>
+                                    <input id="lastname"
+                                        className="input100"
+                                        type="text"
+                                        name="last-name"
+                                        placeholder=" Фамилия">
+                                    </input>
 
-                                <span className="focus-input100">
-                                </span>
+                                    <span className="focus-input100">
+                                    </span>
 
-                            </div>
+                                </div>
 
-                            <label className="label-input100"
-                                htmlFor="personPhone">
-                                Контактный номер телефона для связи с Вами *
+                                <label className="label-input100"
+                                    htmlFor="personPhone">
+                                    Контактный номер телефона для связи с Вами *
                             </label>
 
-                            <div className={this.checkPersonContactNumber()}
-                                data-validate="Номер телефона введён некорректно">
+                                <div className={this.checkPersonContactNumber()}
+                                    data-validate="Номер телефона введён некорректно">
 
-                                <InputMask mask="+7-(999)-999-99-99"
-                                    id="personPhone"
-                                    className="input100"
-                                    type="text"
-                                    name="personPhone"
-                                    placeholder="+7 800 000000"
-                                />
+                                    <InputMask mask="+7-(999)-999-99-99"
+                                        id="personPhone"
+                                        className="input100"
+                                        type="text"
+                                        name="personPhone"
+                                        placeholder="+7 800 000000"
+                                    />
 
-                                <span className="focus-input100">
-                                </span>
+                                    <span className="focus-input100">
+                                    </span>
 
-                            </div>
+                                </div>
 
-                            <label className="label-input100"
-                                htmlFor="companyTitle">
-                                Название организации для отображения на карте *
+                                <label className="label-input100"
+                                    htmlFor="companyTitle">
+                                    Название организации для отображения на карте *
                             </label>
 
-                            <div className={this.checkRoasterName()}
-                                data-validate="Название обязательно">
+                                <div className={this.checkRoasterName()}
+                                    data-validate="Название обязательно">
 
-                                <input id="companyTitle"
-                                    onKeyPress={(e) => this.keyPressHandler(e, /[a-zA-ZА-Яа-я0-9\s]/)}
-                                    className="input100"
-                                    type="text"
-                                    name="companyTitle"
-                                    placeholder=" Coffee Beans Roaster">
-                                </input>
+                                    <input id="companyTitle"
+                                        onKeyPress={(e) => this.keyPressHandler(e, /[a-zA-ZА-Яа-я0-9\s]/)}
+                                        className="input100"
+                                        type="text"
+                                        name="companyTitle"
+                                        placeholder=" Coffee Beans Roaster">
+                                    </input>
 
-                                <span className=" focus-input100">
-                                </span>
+                                    <span className=" focus-input100">
+                                    </span>
 
-                            </div>
+                                </div>
 
-                            <label className="label-input100"
-                                htmlFor="email">
-                                Контактный email для отображения на карте *
+                                <label className="label-input100"
+                                    htmlFor="email">
+                                    Контактный email для отображения на карте *
                             </label>
 
-                            <div className={this.checkRoasterMail()}
-                                data-validate="Введите корректный email: ex@abc.xyz">
+                                <div className={this.checkRoasterMail()}
+                                    data-validate="Введите корректный email: ex@abc.xyz">
 
-                                <input id="email"
-                                    onKeyPress={(e) => { this.handleMail(e); }}
-                                    className="input100"
-                                    type="text"
-                                    name="email"
-                                    placeholder=" example@email.com">
-                                </input>
+                                    <input id="email"
+                                        onKeyPress={(e) => { this.handleMail(e); }}
+                                        className="input100"
+                                        type="text"
+                                        name="email"
+                                        placeholder=" example@email.com">
+                                    </input>
 
-                                <span className="focus-input100">
-                                </span>
+                                    <span className="focus-input100">
+                                    </span>
 
-                            </div>
+                                </div>
 
-                            <label className="label-input100"
-                                htmlFor="roasterPhone">
-                                Контактный номер телефона для отображения на карте *
+                                <label className="label-input100"
+                                    htmlFor="roasterPhone">
+                                    Контактный номер телефона для отображения на карте *
                             </label>
 
-                            <div className={this.checkRoasterNumber()}
-                                data-validate="Номер телефона введён некорректно">
+                                <div className={this.checkRoasterNumber()}
+                                    data-validate="Номер телефона введён некорректно">
 
-                                <InputMask mask="+7-(999)-999-99-99"
-                                    id="roasterPhone"
-                                    className="input100"
-                                    type="text"
-                                    name="roasterPhone"
-                                    placeholder="+7 800 000000"
-                                />
+                                    <InputMask mask="+7-(999)-999-99-99"
+                                        id="roasterPhone"
+                                        className="input100"
+                                        type="text"
+                                        name="roasterPhone"
+                                        placeholder="+7 800 000000"
+                                    />
 
-                                <span className="focus-input100">
-                                </span>
+                                    <span className="focus-input100">
+                                    </span>
 
-                            </div>
+                                </div>
 
-                            <label className="label-input100"
-                                htmlFor="address">
-                                Адрес Вашей организации для отображения на карте *
+                                <label className="label-input100"
+                                    htmlFor="address">
+                                    Адрес Вашей организации для отображения на карте *
                             </label>
 
-                            <div className={this.checkAddress()}
-                                data-validate="Адрес не может быть пустым и содержать менее 10 символов">
+                                <div className={this.checkAddress()}
+                                    data-validate="Адрес не может быть пустым и содержать менее 10 символов"
+                                    data-validatev2="Адрес не найден! Введите действительный адрес.">
 
-                                <input id="address"
-                                    onKeyPress={(e) => { this.keyPressHandler(e, /[.,-A-Za-zА-Яа-я0-9\s]/); }}
-                                    className="input100"
-                                    type="text"
-                                    name="address"
-                                    placeholder="г.Москва, 3-я ул.Строителей, д.25">
-                                </input>
+                                    <input id="address"
+                                        onKeyPress={(e) => { this.keyPressHandler(e, /[.,-A-Za-zА-Яа-я0-9\s]/); }}
+                                        className="input100"
+                                        type="text"
+                                        name="address"
+                                        placeholder="г.Москва, 3-я ул.Строителей, д.25">
+                                    </input>
 
-                                <span className="focus-input100">
-                                </span>
+                                    <span className="focus-input100">
+                                    </span>
 
-                            </div>
+                                </div>
 
-                            <label className="label-input100"
-                                htmlFor="opening_hours">
-                                Приемные часы работы
+                                <label className="label-input100"
+                                    htmlFor="opening_hours">
+                                    Приемные часы работы
                             </label>
 
-                            <div className="wrap-input100">
+                                <div className="wrap-input100">
 
-                                <input id="opening_hours"
-                                    onKeyDown={(e) => { openingHoursMask(e); }}
-                                    className="input100"
-                                    type="text"
-                                    name="opening_hours"
-                                    placeholder="пн-пт 10:00-19:00">
-                                </input>
+                                    <input id="opening_hours"
+                                        onKeyDown={(e) => { openingHoursMask(e); }}
+                                        className="input100"
+                                        type="text"
+                                        name="opening_hours"
+                                        placeholder="пн-пт 10:00-19:00">
+                                    </input>
 
-                                <span className="focus-input100">
-                                </span>
+                                    <span className="focus-input100">
+                                    </span>
 
-                            </div>
+                                </div>
 
-                            <label className="label-input100"
-                                htmlFor="tags">
-                                Теги (Клиентам будет легче найти Вас)
+                                <label className="label-input100"
+                                    htmlFor="tags">
+                                    Теги (Клиентам будет легче найти Вас)
                             </label>
 
-                            <TagsInput tagsList={this.extractTagsList} />
+                                <TagsInput tagsList={this.extractTagsList} />
 
-                            <label className="label-input100"
-                                htmlFor="description">
-                                Описание вашей организации для клиентов *
+                                <label className="label-input100"
+                                    htmlFor="description">
+                                    Описание вашей организации для клиентов *
                             </label>
 
-                            <div className={this.checkDescription()}
-                                data-validate="Заполните описание. (Не менее 10 символов)">
+                                <div className={this.checkDescription()}
+                                    data-validate="Заполните описание. (Не менее 10 символов)">
 
-                                <textarea id="message"
-                                    className="input100"
-                                    name="description"
-                                    placeholder=" Опишите Вашу орагизацию">
-                                </textarea>
+                                    <textarea id="message"
+                                        className="input100"
+                                        name="description"
+                                        placeholder=" Опишите Вашу орагизацию">
+                                    </textarea>
 
-                                <span className="focus-input100">
-                                </span>
+                                    <span className="focus-input100">
+                                    </span>
 
-                            </div>
+                                </div>
 
-                            <label className="label-input100"
-                                htmlFor="picture">
-                                Добавьте иллюстрацию, которая запомнится клиентам
+                                <label className="label-input100"
+                                    htmlFor="picture">
+                                    Добавьте иллюстрацию, которая запомнится клиентам
                             </label>
 
-                            <div className="wrap-input100">
+                                <div className="wrap-input100">
 
-                                <input id="picture"
-                                    className="input-file"
-                                    name="picture"
-                                    id="my-file"
-                                    type="file"
-                                    onChange={this.uploadPicture}
-                                    ref={this.fileRef}>
-                                </input>
+                                    <input id="picture"
+                                        className="input-file"
+                                        name="picture"
+                                        id="my-file"
+                                        type="file"
+                                        onChange={this.uploadPicture}
+                                        ref={this.fileRef}>
+                                    </input>
 
-                                <label tabIndex="0"
-                                    htmlFor="my-file"
-                                    className="input-file-trigger">
-                                    Выберите файл...
+                                    <label tabIndex="0"
+                                        htmlFor="my-file"
+                                        className="input-file-trigger">
+                                        Выберите файл...
                                 </label>
 
-                                <span className="file-input_info">
-                                    {this.state.fileUploadMessage}
-                                </span>
+                                    <span className="file-input_info">
+                                        {this.state.fileUploadMessage}
+                                    </span>
 
-                            </div>
+                                </div>
 
-                            <label className="label-input100"
-                                htmlFor="web_site">
-                                Веб-сайт Вашей организации
+                                <label className="label-input100"
+                                    htmlFor="web_site">
+                                    Веб-сайт Вашей организации
                             </label>
 
-                            <div className="wrap-input100">
+                                <div className="wrap-input100">
 
-                                <input id="message"
-                                    onKeyPress={(e) => { this.keyPressHandler(e, /[\/a-zA-ZА-Яа-я0-9.]/); }}
-                                    className="input100"
-                                    name="web_site"
-                                    type="text"
-                                    placeholder="e.g www.anyurl.com">
-                                </input>
+                                    <input id="message"
+                                        onKeyPress={(e) => { this.keyPressHandler(e, /[\/a-zA-ZА-Яа-я0-9.]/); }}
+                                        className="input100"
+                                        name="web_site"
+                                        type="text"
+                                        placeholder="e.g www.anyurl.com">
+                                    </input>
 
-                                <span className="focus-input100">
-                                </span>
+                                    <span className="focus-input100">
+                                    </span>
 
-                            </div>
+                                </div>
 
-                            <label className="label-input100"
-                                htmlFor="vk">
-                                Группа Вашей организаци ВКонтакте
+                                <label className="label-input100"
+                                    htmlFor="vk">
+                                    Группа Вашей организаци ВКонтакте
                             </label>
 
-                            <div className="wrap-input100">
+                                <div className="wrap-input100">
 
-                                <input id="message"
-                                    onKeyPress={(e) => { this.keyPressHandler(e, /[\/a-zA-ZА-Яа-я0-9.]/); }}
-                                    className="input100"
-                                    name="vk"
-                                    type="text"
-                                    placeholder="e.g vk.com/id4738346343634634634">
-                                </input>
+                                    <input id="message"
+                                        onKeyPress={(e) => { this.keyPressHandler(e, /[\/a-zA-ZА-Яа-я0-9.]/); }}
+                                        className="input100"
+                                        name="vk"
+                                        type="text"
+                                        placeholder="e.g vk.com/id4738346343634634634">
+                                    </input>
 
-                                <span className="focus-input100">
-                                </span>
+                                    <span className="focus-input100">
+                                    </span>
 
-                            </div>
+                                </div>
 
-                            <label className="label-input100"
-                                htmlFor="tg">
-                                Группа Вашей организаци в Telegram
+                                <label className="label-input100"
+                                    htmlFor="tg">
+                                    Группа Вашей организаци в Telegram
                             </label>
 
-                            <div className="wrap-input100">
+                                <div className="wrap-input100">
 
-                                <input id="message"
-                                    onKeyPress={(e) => { this.keyPressHandler(e, /[\/a-zA-ZА-Яа-я0-9.]/); }}
-                                    className="input100"
-                                    name="tg"
-                                    type="text"
-                                    placeholder="e.g t.me/group1234566">
-                                </input>
+                                    <input id="message"
+                                        onKeyPress={(e) => { this.keyPressHandler(e, /[\/a-zA-ZА-Яа-я0-9.]/); }}
+                                        className="input100"
+                                        name="tg"
+                                        type="text"
+                                        placeholder="e.g t.me/group1234566">
+                                    </input>
 
-                                <span className="focus-input100">
-                                </span>
+                                    <span className="focus-input100">
+                                    </span>
 
-                            </div>
+                                </div>
 
-                            <label className="label-input100"
-                                htmlFor="ig">
-                                Аккаунт Вашей организаци в Instagram
+                                <label className="label-input100"
+                                    htmlFor="ig">
+                                    Аккаунт Вашей организаци в Instagram
                             </label>
 
-                            <div className="wrap-input100">
+                                <div className="wrap-input100">
 
-                                <input id="message"
-                                    onKeyPress={(e) => { this.keyPressHandler(e, /[\/a-zA-ZА-Яа-я0-9.]/); }}
-                                    className="input100"
-                                    name="ig"
-                                    type="text"
-                                    placeholder="e.g instagram.com/youraccount">
-                                </input>
+                                    <input id="message"
+                                        onKeyPress={(e) => { this.keyPressHandler(e, /[\/a-zA-ZА-Яа-я0-9.]/); }}
+                                        className="input100"
+                                        name="ig"
+                                        type="text"
+                                        placeholder="e.g instagram.com/youraccount">
+                                    </input>
 
-                                <span className="focus-input100">
-                                </span>
+                                    <span className="focus-input100">
+                                    </span>
 
-                            </div>
+                                </div>
 
-                            <div className="container-contact100-form-btn">
+                                <div className="container-contact100-form-btn">
 
-                                <button className="contact100-form-btn">
-                                    Отправить заявку
+                                    <button className="contact100-form-btn">
+                                        Отправить заявку
 		                        </button>
 
-                            </div>
+                                </div>
 
-                            {this.renderCaptcha()}
+                                {this.renderCaptcha()}
 
-                        </form>
+                            </form>
 
-                        <div className="contact100-more flex-col-c-m bacground_picture">
-                            <div className="flex-w size1 p-b-47">
+                            <div className="contact100-more flex-col-c-m bacground_picture">
+                                {/*<div className="flex-w size1 p-b-47">
 
                                 <div className="txt1 p-r-25">
                                     <span className="lnr lnr-map-marker"></span>
@@ -559,66 +563,67 @@ export class ContactForm extends Component {
 
                                 </div>
 
-                            </div>
+                            </div>*/}
 
-                            <div className="dis-flex size1 p-b-47">
+                                <div className="dis-flex size1 p-b-47">
 
-                                <div className="txt1 p-r-25">
-                                    <span className="lnr lnr-phone-handset"></span>
+                                    <div className="txt1 p-r-25">
+                                        <span className="lnr lnr-phone-handset"></span>
+                                    </div>
+
+                                    <div className="flex-col size2">
+
+                                        <span className="txt1 p-b-20">
+                                            Свяжитесь с нами по телефону
+						            </span>
+
+                                        <span className="txt3">
+                                            {restConsts.OWNER_PHONE_NUMBER}
+                                        </span>
+
+                                    </div>
+
                                 </div>
 
-                                <div className="flex-col size2">
+                                <div className="dis-flex size1 p-b-47">
 
-                                    <span className="txt1 p-b-20">
-                                        Lets Talk
+                                    <div className="txt1 p-r-25">
+                                        <span className="lnr lnr-envelope"></span>
+                                    </div>
+
+                                    <div className="flex-col size2">
+
+                                        <span className="txt1 p-b-20">
+                                            Поддержка
 						            </span>
 
-                                    <span className="txt3">
-                                        +1 800 1236879
-						            </span>
+                                        <span className="txt3">
+                                            {restConsts.OWNER_MAIL}
+                                        </span>
 
-                                </div>
-
-                            </div>
-
-                            <div className="dis-flex size1 p-b-47">
-
-                                <div className="txt1 p-r-25">
-                                    <span className="lnr lnr-envelope"></span>
-                                </div>
-
-                                <div className="flex-col size2">
-
-                                    <span className="txt1 p-b-20">
-                                        General Support
-						            </span>
-
-                                    <span className="txt3">
-                                        contact@example.com
-						            </span>
-
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div id="dropDownSelect1">
-                </div>
+                    <div id="dropDownSelect1">
+                    </div>
 
+                </div>
             </div>
         )
     }
 
     renderCaptcha = () => {
-        if (this.state.captchaVisible==true)
-        return <div className="container-contact100-form-btn">
-            <ReCAPTCHA
-                ref={this.recaptchaRef}
-                sitekey={API_KEYS.GOOGLE_CAPTCHA_API_KEY}
-                onChange={this.sendRequest}
-            />
-        </div>
+        if (this.state.captchaVisible == true)
+            return <div className="container-contact100-form-btn">
+                <ReCAPTCHA
+                    ref={this.recaptchaRef}
+                    sitekey={API_KEYS.GOOGLE_CAPTCHA_API_KEY}
+                    onChange={this.sendRequest}
+                />
+            </div>
     }
     keyPressHandler = (e, regex) => {
         if (!regex.test(e.key))
@@ -643,7 +648,7 @@ export class ContactForm extends Component {
     extractTagsList = (tags) => {
         var TagsModel = [];
         tags.forEach(tag => {
-            TagsModel.push({ Id: '00000000-0000-0000-0000-000000000000', Name: tag })
+            TagsModel.push({ Id: restConsts.GUID_EMPTY, Name: tag })
         })
         this.setState(prevState => ({
             ...prevState,
@@ -673,6 +678,8 @@ export class ContactForm extends Component {
             this.state.RoasterRequestDT.RoasterDT.ContactNumber == "" ||
             this.state.RoasterRequestDT.AddressDT.AddressStr == "" ||
             this.state.RoasterRequestDT.AddressDT.AddressStr.length < 10 ||
+            this.state.RoasterRequestDT.AddressDT.AddressStr.Latitude == "" ||
+            this.state.RoasterRequestDT.AddressDT.AddressStr.Longitude == "" ||
             this.state.RoasterRequestDT.RoasterDT.Description == "" ||
             this.state.RoasterRequestDT.RoasterDT.Description.length < 10 ?
             false : true;
@@ -723,7 +730,11 @@ export class ContactForm extends Component {
         this.state.RoasterRequestDT.AddressDT.AddressStr.length < 10) &&
         this.state.followingAttempts ?
         "wrap-input100 validate-input alert-validate" :
-        "wrap-input100 validate-input";
+        (this.state.RoasterRequestDT.AddressDT.Latitude == "" ||
+            this.state.RoasterRequestDT.AddressDT.Longitude == "") &&
+            this.state.followingAttempts ?
+            "wrap-input100 validate-input alert-validate alert-validatev2" :
+            "wrap-input100 validate-input";
 
     checkDescription = () => (this.state.RoasterRequestDT.RoasterDT.Description == "" ||
         this.state.RoasterRequestDT.RoasterDT.Description.length < 10) &&

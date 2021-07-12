@@ -10,7 +10,7 @@ namespace CoffeeMapServer.Pages.Admin.Account
             try
             {
                 Encryptions.QueryCookiesEditor.ClearCookies(HttpContext);
-                return Redirect("~/Login");
+                return Redirect("~/Admin/Login");
             }
             catch
             {

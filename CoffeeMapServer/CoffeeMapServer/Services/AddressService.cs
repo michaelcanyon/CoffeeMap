@@ -56,18 +56,11 @@ namespace CoffeeMapServer.Services
                 var address = await _addressRepository.GetSingleAsync(id);
                 _addressRepository.Delete(address);
 
-                Address plugAddress = await _addressRepository.GetSingleAsNoTrackingAsync("none");
-
-                if (plugAddress == null)
-                {
-                    plugAddress = Address.New("none", null, 0, 0);
-                    _addressRepository.Add(plugAddress);
-                }
-
                 var roasters = await _roasterRepository.FetchRoastersByAddressIdAsync(id);
                 foreach (var item in roasters)
                 {
-                    item.OfficeAddress = plugAddress;
+                    item.OfficeAddress = Address.New(Guid.NewGuid(), "none", null, 0, 0);
+                    _addressRepository.Add(item.OfficeAddress);
                     _roasterRepository.Update(item);
                 }
 

@@ -50,12 +50,12 @@ namespace RoastersMapClient
 
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action=Index}/RoastersListPanel");
-            });
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllerRoute(
+            //        name: "default",
+            //        pattern: "{controller}/{action=Index}/RoastersListPanel");
+            //});
 
             app.UseSpa(spa =>
             {

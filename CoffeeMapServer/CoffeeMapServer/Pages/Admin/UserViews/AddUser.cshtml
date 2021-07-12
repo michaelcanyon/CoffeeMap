@@ -1,8 +1,8 @@
 ﻿@page "{StatusCode}"
 @model CoffeeMapServer.Pages.Admin.UserViews.AddUserModel
 @section scripts{
-    <script type="text/javascript" src="~/dist/jquery-3.5.1.js"></script>
-    <script type="text/javascript" src="~/CustomScripts/AddUser.js"></script>
+    <script type="text/javascript" src="~/content_root/dist/jquery-3.5.1.js" ></script>
+    <script type="text/javascript" src="~/content_root/CustomScripts/AddUser.js" ></script>
 
 }
 @{
@@ -10,7 +10,7 @@
 }
 <section class="content-header">
     <h1>
-        Create user
+        Добавить пользователя
     </h1>
 </section>
 
@@ -21,7 +21,7 @@
         <div class="form-group"
              id="editForm">
 
-            <label for="login">Login</label>
+            <label for="login">Логин</label>
             <input type="text"
                    maxlength="30"
                    id="login"
@@ -38,14 +38,14 @@
                    required>
             <div id="email_mes"></div>
 
-            <label for="password">Password</label>
+            <label for="password">Пароль</label>
             <input type="password"
                    minlength="8"
                    class="form-control"
                    asp-for="@Model.Ruser.Password"
                    required>
 
-            <label for="role">Role</label>
+            <label for="role">Роль</label>
             <select class="form-control"
                     asp-for="@Model.Ruser.Role"
                     required>
@@ -57,18 +57,19 @@
         </div>
 
         <button type="submit"
+                id="confirm_button"
                 class="btn btn-flat bg-primary button_style">
-            Create
+            Добавить
         </button>
 
     </form>
 
     @if (Model.ErrorStatusCode.Equals("601"))
     {
-        <span style="color:red;">Such user is already exist</span>
+        <span style="color:red;">Пользователь с таким именем уже зарегистрирован</span>
     }
     else if (Model.ErrorStatusCode.Equals("602"))
     {
-        <span style="color:red;">Such email is already registered</span>
+        <span style="color:red;">Данный email уже используется!</span>
     }
 </section>

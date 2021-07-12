@@ -3,21 +3,22 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Admin Panel</title>
+    <title>Панель администратора</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <link rel="stylesheet" href="~/bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="~/bower_components/font-awesome/css/font-awesome.min.css" type="text/css">
-        <!-- Ionicons -->
-        <link rel="stylesheet" href="~/bower_components/Ionicons/css/ionicons.min.css" type="text/css">
-        <!-- Theme style -->
-        <link rel="stylesheet" href="~/dist/css/AdminLTE.min.css" type="text/css">
-        <link rel="stylesheet" href="~/dist/css/CustomStyles.css" type="text/css">
-        <link rel="stylesheet" href="~/dist/css/skins/skin-blue.min.css" type="text/css">
-        <!-- Google Font -->
-        <link rel="stylesheet"
-              href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link rel="stylesheet" href="~/content_root/bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css">
+    <link rel="icon" type="image/svg" href="~/content_root/management.svg" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/content_root/bower_components/font-awesome/css/font-awesome.min.css" type="text/css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="~/content_root/bower_components/Ionicons/css/ionicons.min.css" type="text/css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/content_root/dist/css/AdminLTE.min.css" type="text/css">
+    <link rel="stylesheet" href="~/content_root/dist/css/CustomStyles.css" type="text/css">
+    <link rel="stylesheet" href="~/content_root/dist/css/skins/skin-blue.min.css" type="text/css">
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     @RenderSection("scripts", required: false)
     @RenderSection("styles", required: false)
 </head>
@@ -26,11 +27,11 @@
         <!-- Main Header -->
         <header class="main-header">
             <!-- Logo -->
-            <a href="index2.html" class="logo">
+            <a href="#" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>AP</b>T</span>
+                <span class="logo-mini"><b>ПА</b></span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>AdminPanel</b></span>
+                <span class="logo-lg"><b>Панель администратора</b></span>
             </a>
             <!-- Header Navbar -->
             <nav class="navbar navbar-static-top" role="navigation">
@@ -46,23 +47,21 @@
                             <!-- Menu Toggle Button -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <!-- The user image in the navbar-->
-                                <img src="~/dist/img/admin.png" class="user-image" alt="User Image">
+                                <img src="~/content_root/dist/img/admin.png" class="user-image" alt="User Image">
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                <span class="hidden-xs">Master</span>
+                                <span class="hidden-xs">Мастер</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
-                                    <img src="~/dist/img/admin.png" class="img-circle" alt="User Image">
+                                    <img src="~/content_root/dist/img/admin.png" class="img-circle" alt="User Image">
                                     <p>
-                                        <small>Member since Nov. 2012</small>
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
                                 <li class="user-body">
                                     <div class="row">
                                         <div class="col-xs-4 text-center">
-                                            <a href="#">Account</a>
                                         </div>
                                     </div>
                                     <!-- /.row -->
@@ -70,10 +69,10 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a asp-page="/Admin/Account/EditAccount" asp-route-statusCode="0"  class="btn btn-default btn-flat" >Edit account</a>
+                                        <a asp-page="/Admin/Account/EditAccount" asp-route-statusCode="0"  class="btn btn-default btn-flat" >Редактировать профиль</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a asp-page="/Admin/Account/Logout" class="btn btn-default btn-flat" >Sign out</a>
+                                        <a asp-page="/Admin/Account/Logout" class="btn btn-default btn-flat" >Выйти</a>
                                     </div>
                                 </li>
                             </ul>
@@ -89,35 +88,25 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="~/dist/img/admin.png" class="img-circle" alt="User Image">
+                        <img src="~/content_root/dist/img/admin.png" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p>Master</p>
+                        <p>Мастер</p>
                         <!-- Status -->
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>
                 <!-- search form (Optional) -->
-                <form action="#" method="get" class="sidebar-form">
-                    <div class="input-group">
-                        <input type="text" name="q" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
-                            <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
-                    </div>
-                </form>
                 <!-- /.search form -->
                 <!-- Sidebar Menu -->
                 <ul class="sidebar-menu" data-widget="tree">
-                    <li class="header">HEADER</li>
+                    <li class="header">СОДЕРЖИМОЕ</li>
                     <!-- Optionally, you can add icons to the links -->
-                    <li class="active"><a asp-page="/Admin/RoasterViews/Roasters"><i class="fa fa-link"></i> <span>Roasters</span></a></li>
-                    <li><a asp-page="/Admin/AddressesViews/GetAddresses"><i class="fa fa-link"></i> <span>Addresses</span></a></li>
-                    <li><a asp-page="/Admin/TagViews/Tags"><i class="fa fa-link"></i> <span>Tags</span></a></li>
-                    <li><a asp-page="/Admin/UserViews/Users"><i class="fa fa-link"></i> <span>Users</span></a></li>
-                    <li><a asp-page="/Admin/RoasterRequestViews/RoasterRequests"><i class="fa fa-link"></i> <span>Roaster requests</span></a></li>
+                    <li class="active"><a asp-page="/Admin/RoasterViews/Roasters"><i class="fa fa-link"></i> <span>Обжарщики</span></a></li>
+                    <li><a asp-page="/Admin/AddressesViews/GetAddresses"><i class="fa fa-link"></i> <span>Адреса</span></a></li>
+                    <li><a asp-page="/Admin/TagViews/Tags"><i class="fa fa-link"></i> <span>Теги</span></a></li>
+                    <li><a asp-page="/Admin/UserViews/Users"><i class="fa fa-link"></i> <span>Администраторы</span></a></li>
+                    <li><a asp-page="/Admin/RoasterRequestViews/RoasterRequests"><i class="fa fa-link"></i> <span>Заявки на участие</span></a></li>
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-link"></i>
@@ -126,12 +115,12 @@
                             </span>
                         </a>
                         <ul class="treeview-menu" id="TableList">
-                            <li><a asp-page="/Admin/RoasterViews/Roasters">Roasters</a></li>
-                            <li><a asp-page="/Admin/AddressesViews/GetAddresses">Addresses</a></li>
-                            <li><a asp-page="/Admin/TagViews/Tags">Tags</a></li>
-                            <li><a asp-page="/Admin/RoasterAddress/RoasterAddressConn">Entity connections creator</a></li>
-                            <li><a asp-page="/Admin/UserViews/Users">Users</a></li>
-                            <li><a asp-page="/Admin/RoasterRequestViews/RoasterRequests">Roaster requests</a></li>
+                            <li><a asp-page="/Admin/RoasterViews/Roasters">Обжарщики</a></li>
+                            <li><a asp-page="/Admin/AddressesViews/GetAddresses">Адреса</a></li>
+                            <li><a asp-page="/Admin/TagViews/Tags">Теги</a></li>
+                            <li><a asp-page="/Admin/RoasterAddress/RoasterAddressConn">Привязать обжарщика к адресу</a></li>
+                            <li><a asp-page="/Admin/UserViews/Users">Администраторы</a></li>
+                            <li><a asp-page="/Admin/RoasterRequestViews/RoasterRequests">Заявки на участие</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -150,16 +139,16 @@
         <!-- Main Footer -->
         <footer class="main-footer">
             <!-- Default to the left -->
-            <strong>Copyright © 2020 </strong>
+            <strong>Copyright © 2021 </strong>
         </footer>
     </div>
     <!-- ./wrapper -->
     <!-- REQUIRED JS SCRIPTS -->
     <!-- Bootstrap 3.3.7 -->
-    <script type="text/javascript" src="~/bower_components/jquery-slimscroll/jquery.slimscroll.js"></script>
-    <script type="text/javascript" src="~/bower_components/fastclick/lib/fastclick.js"></script>
-    <script type="text/javascript" src="~/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="~/content_root/bower_components/jquery-slimscroll/jquery.slimscroll.js"></script>
+    <script type="text/javascript" src="~/content_root/bower_components/fastclick/lib/fastclick.js"></script>
+    <script type="text/javascript" src="~/content_root/bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <!-- AdminLTE App -->
-    <script type="text/javascript" src="~/dist/js/adminlte.js"></script>
+    <script type="text/javascript" src="~/content_root/dist/js/adminlte.js"></script>
 </body>
 </html>

@@ -2,7 +2,10 @@
 
 # dependencies
 /node_modules
-/src/components/styles
+/src/components/styles/*.svg
+/src/components/styles/*.jfif
+
+/src/components/styles/
 
 # testing
 /coverage

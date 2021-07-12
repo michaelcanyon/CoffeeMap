@@ -62,7 +62,8 @@ namespace CoffeeMapServer.Services
 
                 roaster.OfficeAddress = address;
 
-                _addressRepository.Add(address);
+                //Раскоменти, если не заработает
+                //_addressRepository.Add(address);
 
                 BytePictureBuilder.BindPicture(roaster.Id, request.Picture.Bytes, _pictureRepository);
 

@@ -6,19 +6,19 @@
         Layout = "_MasterLayout";
 }
 @section scripts{
-    <script type="text/javascript" src="~/dist/jquery-3.5.1.js"></script>
-    <script type="text/javascript" src="~/dist/jquery.maskedInput.js"></script>
-    <script type="text/javascript" src="~/CustomScripts/EditAddress.js"></script>
+    <script type="text/javascript" src="~/content_root/dist/jquery-3.5.1.js" ></script>
+    <script type="text/javascript" src="~/content_root/dist/jquery.maskedInput.js"></script>
+    <script type="text/javascript" src="~/content_root/CustomScripts/EditAddress.js" ></script>
 }
 
 <section class="content-header">
     <h1>
-        Update address
+        Обновление адреса
     </h1>
     @if (Model.RStatusCode.Equals("601"))
     {
         <span style="color:red;">
-            Such address already exists!
+            Такой адрес уже существует!
         </span>
         <br />
     }
@@ -42,7 +42,7 @@
                    value="@Model.Address.Id">
         </div>
         <div class="form-group">
-            <label for="Name">Address string</label>
+            <label for="Name">Строка адреса</label>
             <input type="text"
                    id="addressStr"
                    maxlength="50"
@@ -54,7 +54,7 @@
             <div id="addressStr_mes">
             </div>
 
-            <label for="hours">Opening hours</label>
+            <label for="hours">Рабочие дни и часы</label>
             <input type="text"
                    id="hours"
                    class="form-control"
@@ -62,7 +62,7 @@
             <div id="hours_mes">
             </div>
 
-            <label for="latitude">Latitude</label>
+            <label for="latitude">Широта</label>
             <input type="text"
                    id="latitude"
                    class="form-control"
@@ -70,7 +70,7 @@
             <div id="latitude_mes">
             </div>
 
-            <label for="longitude">Longitude</label>
+            <label for="longitude">Долгота</label>
             <input type="text"
                    id="longitude"
                    class="form-control"
@@ -81,8 +81,8 @@
 
         <button type="submit" 
                  id="confirm_button"
-                class="btn btn-flat bg-primary">
-                Submit
+                class="btn btn-flat bg-primary button_style">
+                Сохранить
         </button>
     </form>
 </section>

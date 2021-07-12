@@ -1,7 +1,7 @@
 ﻿@page
 @model CoffeeMapServer.Pages.Admin.UserViews.UsersModel
 @section scripts{
-    <script type="text/javascript" src="~/dist/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="~/content_root/dist/jquery-3.5.1.js"></script>
     <script>
         $(document).ready(function () {
             $("#filtrationbar").click(function () {
@@ -15,7 +15,7 @@
 }
 <section class="content-header">
     <h1>
-        Users
+        Пользователи
     </h1>
 </section>
 
@@ -31,7 +31,7 @@
                class="form-control"
                asp-for="@Model.IdFilter">
 
-        <label for="login">Login</label>
+        <label for="login">Логин</label>
         <input type="text"
                maxlength="30"
                class="form-control"
@@ -42,7 +42,7 @@
                class="form-control"
                asp-for="@Model.EmailFilter">
 
-        <label for="role">role</label>
+        <label for="role">Роль</label>
         <input type="text"
                id="role"
                class="form-control"
@@ -51,7 +51,7 @@
 
         <button type="submit"
                 class="btn btn-flat bg-primary button_style">
-            Filter notes
+            Фильтровать
         </button>
 
     </form>
@@ -59,13 +59,13 @@
     <br />
     <button id="filtrationbar"
             class="btn btn-flat bg-primary button_style">
-        Filtration
+        Фильтрация
     </button>
 
     <a class="btn btn-flat bg-primary button_style"
        asp-page="AddUser"
        asp-route-StatusCode="0">
-        Create user
+        Добавить нового
     </a>
 
     <ul class="list-group">
@@ -96,7 +96,7 @@
                     </li>
 
                     <li>
-                        <span>Login: </span>
+                        <span>Логин: </span>
                         @Html.DisplayFor(item => i.Login)
                     </li>
 
@@ -106,7 +106,7 @@
                     </li>
 
                     <li>
-                        <span>Role:</span>
+                        <span>Роль:</span>
                         @Html.DisplayFor(item => i.Role)
                     </li>
 
@@ -114,7 +114,7 @@
                         <a class="btn btn-flat bg-primary button_style"
                            asp-page="DeleteUser"
                            asp-route-id="@i.Id">
-                            Delete
+                            Удалить
                         </a>
                     </li>
                 </ul>

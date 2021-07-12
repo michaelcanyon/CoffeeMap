@@ -1,7 +1,9 @@
 ﻿import React, { Component } from 'react';
 import './styles/Header.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import beanpic from './styles/main_bean.svg'
+import beanpic from './styles/main_bean.svg';
+import * as restConsts from '../Constants.js';
+
 export class Header extends Component {
 
     constructor(props) {
@@ -25,7 +27,7 @@ export class Header extends Component {
                     </img>
 
                     <div className="navbar-header header-text">
-                        RoasterSBase
+                        RoastersMap
                      </div>
 
                     <button className="navbar-toggler"
@@ -49,7 +51,7 @@ export class Header extends Component {
                             <li className={paddings}>
 
                                 <a className="nav-link"
-                                    href="/">
+                                    href={restConsts.APP_ROUTE_PREFIX}>
                                     обжарщики
                                     
                                     <span className="sr-only">
@@ -63,7 +65,7 @@ export class Header extends Component {
                             <li className={paddings}>
 
                                 <a className="nav-link"
-                                    href="AboutUs">
+                                    href={restConsts.APP_ROUTE_PREFIX +"AboutUs"}>
                                     о проекте
                                 </a>
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CoffeeMapServer.Encryptions;
 using CoffeeMapServer.Infrastructures.IRepositories;
 using CoffeeMapServer.Models;
 using CoffeeMapServer.Services.Interfaces.Admin;
@@ -42,6 +43,8 @@ namespace CoffeeMapServer.Services
                 userV = await _userRepository.GetSingleByMailAsync(entity.Email);
                 if (userV != null)
                     return 602;
+
+                entity.Password = Sha1Hash.GetHash(entity.Password);
 
                 _userRepository.Add(entity);
                 await _userRepository.SaveChangesAsync();

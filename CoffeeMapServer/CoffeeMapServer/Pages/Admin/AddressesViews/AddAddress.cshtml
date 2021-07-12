@@ -8,13 +8,13 @@
 
 @section scripts
 {
-    <script type="text/javascript" src="~/dist/jquery-3.5.1.js"></script>
-    <script type="text/javascript" src="~/dist/jquery.maskedInput.js"></script>
-    <script type="text/javascript" src="~/CustomScripts/AddAddress.js"></script>
+    <script type="text/javascript" src="~/content_root/dist/jquery-3.5.1.js" ></script>
+    <script type="text/javascript" src="~/content_root/dist/jquery.maskedInput.js"></script>
+    <script type="text/javascript" src="~/content_root/CustomScripts/AddAddress.js" ></script>
 }
 <section class="content-header">
     <h1>
-        Create Address note
+        Добавление нового адреса
     </h1>
 </section>
 <!-- Main content -->
@@ -22,7 +22,7 @@
     <form method="post">
         <div class="form-group">
 
-            <label for="Name">Address string</label>
+            <label for="Name">Строка адреса</label>
             <input type="text"
                    id="addressStr"
                    maxlength="50"
@@ -34,7 +34,7 @@
             <div id="addressStr_mes">
             </div>
 
-            <label for="hours">Opening hours</label>
+            <label for="hours">Рабочие дни и часы</label>
             <input type="text"
                    id="hours"
                    class="form-control"
@@ -42,7 +42,7 @@
             <div id="hours_mes">
             </div>
 
-            <label for="latitude">Latitude</label>
+            <label for="latitude">Широта</label>
             <input type="text"
                    id="latitude"
                    class="form-control"
@@ -50,7 +50,7 @@
             <div id="latitude_mes">
             </div>
 
-            <label for="longitude">Longitude</label>
+            <label for="longitude">Долгота</label>
             <input type="text"
                    id="longitude"
                    class="form-control"
@@ -60,14 +60,14 @@
         </div>
         <button type="submit"
                 id="confirm_button"
-                class="btn btn-flat bg-primary">
-            Create
+                class="btn btn-flat bg-primary button_style">
+            Добавить
         </button>
     </form>
     @if (Model.RStatusCode == "601")
     {
         <div class="alert alert-danger py-2">
-            Such address already exist!
+            Такой адрес уже существует!
         </div>
     }
 </section>

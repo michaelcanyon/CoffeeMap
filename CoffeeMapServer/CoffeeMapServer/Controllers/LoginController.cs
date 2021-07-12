@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CoffeeMapServer.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("/Admin/[controller]")]
     public class LoginController : Controller
     {
         private readonly IUserService userService;
@@ -46,7 +46,7 @@ namespace CoffeeMapServer.Controllers
                 var token = TokenGenerator.GenerateToken(identity);
                 var userSample = await userService.Login(login.Email, login.Password);
                 QueryCookiesEditor.SetUserCookies(userSample, token, HttpContext);
-                return userSample.Role == "Master" ? Redirect("~/Home/HomeMaster") : Redirect("~/Home/Home");
+                return userSample.Role == "Master" ? Redirect("~/Admin/Home/HomeMaster") : Redirect("~/Admin/Home/Home");
             }
             catch
             {

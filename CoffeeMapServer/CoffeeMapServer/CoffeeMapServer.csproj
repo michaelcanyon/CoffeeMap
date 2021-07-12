@@ -16,32 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="wwwroot\bower_components\bootstrap\dist\css\bootstrap.min.css" />
-    <Content Include="wwwroot\bower_components\bootstrap\dist\css\bootstrap.min.css.map" />
-    <Content Include="wwwroot\bower_components\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="wwwroot\bower_components\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="wwwroot\bower_components\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="wwwroot\bower_components\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="wwwroot\bower_components\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="wwwroot\bower_components\bootstrap\dist\js\bootstrap.js" />
-    <Content Include="wwwroot\bower_components\bootstrap\dist\js\bootstrap.min.js" />
-    <Content Include="wwwroot\bower_components\bootstrap\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="wwwroot\bower_components\bootstrap\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="wwwroot\bower_components\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="wwwroot\bower_components\bootstrap\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="wwwroot\bower_components\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="wwwroot\bower_components\font-awesome\css\font-awesome.min.css" />
-    <Content Include="wwwroot\bower_components\font-awesome\fonts\fontawesome-webfont.eot" />
-    <Content Include="wwwroot\bower_components\font-awesome\fonts\fontawesome-webfont.svg" />
-    <Content Include="wwwroot\bower_components\font-awesome\fonts\fontawesome-webfont.ttf" />
-    <Content Include="wwwroot\bower_components\font-awesome\fonts\fontawesome-webfont.woff" />
-    <Content Include="wwwroot\bower_components\font-awesome\fonts\fontawesome-webfont.woff2" />
-    <Content Include="wwwroot\bower_components\font-awesome\fonts\FontAwesome.otf" />
-    <Content Include="wwwroot\bower_components\Ionicons\css\ionicons.min.css" />
-    <Content Include="wwwroot\bower_components\jquery\dist\jquery.js" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="jQuery.MaskedInput" Version="1.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.6" />
@@ -60,33 +34,10 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="wwwroot\Pictures\" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\tagify-master\src\parts\defaults.js" />
-    <None Include="wwwroot\tagify-master\src\parts\dropdown.js" />
-    <None Include="wwwroot\tagify-master\src\parts\EventDispatcher.js" />
-    <None Include="wwwroot\tagify-master\src\parts\events.js" />
-    <None Include="wwwroot\tagify-master\src\parts\helpers.js" />
-    <None Include="wwwroot\tagify-master\src\parts\templates.js" />
-    <None Include="wwwroot\tagify-master\src\polyfills\Array.findIndex.js" />
-    <None Include="wwwroot\tagify-master\src\polyfills\Array.includes.js" />
-    <None Include="wwwroot\tagify-master\src\polyfills\Array.some.js" />
-    <None Include="wwwroot\tagify-master\src\polyfills\AutoUrlDetect.js" />
-    <None Include="wwwroot\tagify-master\src\polyfills\Element.classList.js" />
-    <None Include="wwwroot\tagify-master\src\polyfills\Element.closest.js" />
-    <None Include="wwwroot\tagify-master\src\polyfills\Element.matches.js" />
-    <None Include="wwwroot\tagify-master\src\polyfills\es6-promise.js" />
-    <None Include="wwwroot\tagify-master\src\polyfills\Event.js" />
-    <None Include="wwwroot\tagify-master\src\polyfills\NodeList.forEach.js" />
-    <None Include="wwwroot\tagify-master\src\polyfills\Object.assign.js" />
-    <None Include="wwwroot\tagify-master\src\polyfills\String.includes.js" />
-    <None Include="wwwroot\tagify-master\src\polyfills\String.trim.js" />
-    <None Include="wwwroot\tagify-master\src\react.tagify.js" />
-    <None Include="wwwroot\tagify-master\src\tagify.js" />
-    <None Include="wwwroot\tagify-master\src\tagify.polyfills.js" />
-    <None Include="wwwroot\tagify-master\src\tagify.scss" />
+    <None Include="wwwroot\*" />
   </ItemGroup>
 
 </Project>

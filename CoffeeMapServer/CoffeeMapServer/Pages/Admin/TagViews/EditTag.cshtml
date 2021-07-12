@@ -7,17 +7,17 @@
 }
 
 @section scripts{
-    <script type="text/javascript" src="~/dist/jquery-3.5.1.js"></script>
-    <script type="text/javascript" src="~/dist/jquery.maskedInput.js"></script>
+    <script type="text/javascript" src="~/content_root/dist/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="~/content_root/dist/jquery.maskedInput.js"></script>
 }
 
 <section class="content-header">
     <h1>
-        Edit Tag
+        Редактирование тега
     </h1>
     @if (Model.RStatusCode.Equals("601"))
     {
-        <span style="color:red">Such tag is already exists!</span>
+        <span style="color:red">Такой тег уже существует!</span>
     }
 </section>
 
@@ -36,7 +36,7 @@
 
         <div class="form-group">
 
-            <label for="Name">Title</label>
+            <label for="Name">Название</label>
             <input type="text"
                    maxlength="30"
                    class="form-control"
@@ -44,10 +44,10 @@
                    required>
         </div>
 
-        <button class="btn btn-flat bg-primary"
+        <button class="btn btn-flat bg-primary button_style"
                 type="submit"
                 asp-page-handler="Process">
-                Submit
+                Сохранить
         </button>
     </form>
 </section>

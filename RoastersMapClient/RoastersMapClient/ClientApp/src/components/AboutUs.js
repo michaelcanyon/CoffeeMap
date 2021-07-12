@@ -2,6 +2,8 @@
 import { Footer } from './Footer'
 import './styles/AboutUs.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Header } from './Header';
+import * as restConsts from '../Constants.js';
 
 export class AboutUs extends Component {
 
@@ -17,52 +19,72 @@ export class AboutUs extends Component {
     render() {
 
         return (
-            <div className="page">
+            <div>
+                <Header />
 
-                <div className="container-fluid px-0">
+                <div className="page">
 
-                    <div className="row row-no-padding no-gutters">
+                    <div className="container-fluid px-0">
 
-                        <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12 aboutUs_container">
+                        <div className="row row-no-padding no-gutters">
 
-                            <div className="aboutUs_banner">
+                            <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12 aboutUs_container">
 
-                                <div className="aboutUs_banner-bg_image">
-                                </div>
+                                <div className="aboutUs_banner">
 
-                                <div className="aboutUs_banner-benner_text">
+                                    <div className="aboutUs_banner-bg_image">
+                                    </div>
 
-                                    <span>
-                                        Подробнее о RoasteRsBase
+                                    <div className="aboutUs_banner-benner_text">
+
+                                        <span>
+                                            Подробнее о RoastersMap
                                     </span>
 
+                                    </div>
+
                                 </div>
 
-                            </div>
-
-                            <div className="aboutUs_information-container">
+                                <div className="aboutUs_information-container">
 
                                     <span>
-                                        Здесь какой-нибудь слоган
+                                        RoastersMap — это карта кофейных обжарщиков России.
                                     </span>
 
                                     <p className="aboutUs_information-paragraph">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                        ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                                        mollit anim id est laborum.
+                                        &nbsp;&nbsp;&nbsp;&nbsp;В последние годы кофе, обжаривающийся в нашей стране, высоко оценивается мировым спешелти сообществом.
+                                        Российские профессионалы нередко занимают первые места на мировых чемпионатах, разрабатывают новые стили обжарки и собирают линейки уникальных лотов.
+                                    <br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;С главными игроками на рынке Вы, совершенно точно, знакомы, а вот маленькие региональные проекты могли пройти мимо Вас.
+                                    Помочь потребителю и обжарщику найти друг друга — вот причина, по которой мы сделали RoastersMap.
+                                    Команда кофейных энтузиастов собрала на карте всех обжарщиков России, чтобы обеспечить:
+                                    <ul className="description_list">
+
+                                            <li>
+                                                - Быструю связь специалистов из вашего города или региона с Вами;
+                                        </li>
+
+                                            <li>
+                                                - Возможность изучить их ассортимент и выбрать тот кофе, который подходит именно Вам!
+                                        </li>
+
+                                        </ul>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;Карта будет постоянно обновляться, так что, информация всегда будет актуальна.
+                                    Делитесь картой с друзьями, чтобы как можно больше людей знали своих героев в лицо и пили вкусный свежеобжаренный кофе по всей стране!
+
                                     </p>
 
-                            </div>
+                                </div>
 
-                            <div className="box-1">
+                                <div className="box-1">
 
-                                <div className="btn from-top">
+                                    <div className="btn from-top">
 
-                                    <a href="/ContactForm">
-                                        Стать участником
+                                        <a href={restConsts.APP_ROUTE_PREFIX+"ContactForm"}>
+                                            Стать участником
                                     </a>
+
+                                    </div>
 
                                 </div>
 
@@ -70,21 +92,20 @@ export class AboutUs extends Component {
 
                         </div>
 
-                    </div>
+                        <div className="row row-no-padding no-gutters">
 
-                    <div className="row row-no-padding no-gutters">
+                            <div className="col-12">
 
-                        <div className="col-12">
+                                <Footer desktop={this.state.desktop}
+                                    aboutus={true} />
 
-                            <Footer desktop={this.state.desktop}
-                                aboutus={true} />
+                            </div>
 
                         </div>
 
                     </div>
 
                 </div>
-
             </div>
 
         )

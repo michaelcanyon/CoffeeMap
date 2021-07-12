@@ -12,7 +12,7 @@ export class Footer extends Component {
             < div className={this.getFooterPadding()} >
                 <div className="footerText_block">
                     <span className="footer-span">Карта обжарщиков</span><br></br>
-                    <span className="copyright">Сверстал:  ©michaelcanyon, 2020</span>
+                    <span className="copyright">Спроектировано:  ©michaelcanyon, 2021</span>
                 </div>
             </div >
         );

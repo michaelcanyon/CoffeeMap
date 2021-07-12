@@ -289,4 +289,8 @@ __pycache__/
 #js_files
 API_keys.js
 #front
-/CoffeeMapServer/CoffeeMapServer/wwwroot
+/CoffeeMapServer/CoffeeMapServer/wwwroot/content_root/AuthForm/
+/CoffeeMapServer/CoffeeMapServer/wwwroot/content_root/BowerComponents/
+/CoffeeMapServer/CoffeeMapServer/wwwroot/content_root/dist/
+/CoffeeMapServer/CoffeeMapServer/wwwroot/content_root/Pictures/
+/CoffeeMapServer/CoffeeMapServer/wwwroot/content_root/tagify-master/

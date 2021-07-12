@@ -20,7 +20,7 @@ namespace CoffeeMapServer.Middlewares
             {
                 var response = context.HttpContext.Response;
                 if (response.StatusCode == (int)System.Net.HttpStatusCode.Unauthorized)
-                    response.Redirect("/Login");
+                    response.Redirect("/Admin/Login");
             });
     }
 }

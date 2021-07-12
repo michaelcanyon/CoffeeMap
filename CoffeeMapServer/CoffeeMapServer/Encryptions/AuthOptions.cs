@@ -5,9 +5,9 @@ namespace CoffeeMapServer
 {
     public static class AuthOptions
     {
-        public const string ISSUER = "http://localhost:5000/"; // token producer
+        public const string ISSUER = "server"; // token producer
 
-        public const string AUDIENCE = "http://localhost:5000/"; // token consumer
+        public const string AUDIENCE = "user"; // token consumer
 
         const string KEY = "mysupersecret_secretkey!123";   // encryption key
 
